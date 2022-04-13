@@ -30,6 +30,8 @@ import DFTForSCN_v7 as DFT
 import scatteringTransformationModule_2D_v9 as ST
 import predictionModule_v2 as PM
  
+from os import listdir
+from os.path import isfile, join
 
 ###################################################################################################################
 
@@ -96,8 +98,8 @@ class matrixFilter:
 class resize:
    def __init__(self, name='resize' ):
       self.name = name   
-      self.fxG  = 3000
-      self.fyG  = 3000
+      self.fxG  = 1500
+      self.fyG  = 1500
 
 class preprocessing:
    def __init__(self, name='preprocessing' ):
@@ -556,7 +558,7 @@ def plotLineSeeking(boxL1, angle, mdict, orgin= (1500, 1500), width=3000, height
 
 ###################################################################################################################
 
-def removeSkewness(aL, boxL1, stepSize=20, origin=(1500,1500), a=0, b=3000):
+def removeSkewness(aL, boxL1, stepSize=20, origin=(1500,1500), a=0, b=1500):
 
    erg = []
    R   = tqdm(aL)
@@ -589,6 +591,97 @@ def makeBoxList(BOXLt):
    return(BOXL)
 
 ###################################################################################################################
+
+class JPGNPNGGenerator:
+
+   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
+      self.pathToPDF       = pathToPDF
+      self.pdfFilename     = pdfFilename
+      self.pageStart       = pageStart
+      self.pageEnd         = pageEnd
+      self.dpi             = dpi
+      self.outputFolder    = outputFolder
+      self.outputFile      = output_file
+      self.scanedDocument  = scanedDocument
+      self.generateJPGWith = generateJPGWith
+      self.L               = []
+      self.size            = size
+
+   ###################################################################################################################
+
+   def getsha256(self, path):
+      ss = "sha256sum " + path
+      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash').decode('utf-8')   
+      return(tt.split(' ')[0])
+
+   ###################################################################################################################
+
+   def getNumberOfPagesFromPDFFile(self): 
+      ss  = "pdfinfo " + self.pathToPDF + self.pdfFilename + ".pdf" + " | grep -i Pages"  
+      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
+      tt  = tt.decode('utf-8')
+      tt  = tt.replace(' ', '').replace('\n','')
+      aa  = tt.split(':')
+      nOP = int(aa[1]) 
+   
+      return(nOP)
+
+   ###################################################################################################################
+
+   def insertDataIntoDBGeneric(self, user, passwd, DB, table, A):
+      engine = create_engine('mysql+pymysql://' + user + ':' + passwd +'@localhost/' + DB)
+      con    = engine.connect()
+      SQL    = "DELETE FROM " + table + "_tmp"
+      rs     = con.execute(SQL)
+     
+      A.to_sql(table + '_tmp', engine, if_exists='replace', index=False)
+      COL   = list(con.execute('select * from ' + table+"_tmp").keys())
+      COLS  = ''
+      for col in COL:
+         COLS = COLS + col + ','
+      COLS = COLS[0:-1]           
+      
+      SQL0      = "select A.COLUMN_NAME from ( "
+      SQL1      = "select tab.table_schema as database_schema, sta.index_name as pk_name, sta.seq_in_index as column_id, sta.column_name, tab.table_name "
+      SQL2      = "from information_schema.tables as tab inner join information_schema.statistics as sta on sta.table_schema = tab.table_schema and sta.table_name = tab.table_name "
+      SQL3      = "and sta.index_name = 'primary' where tab.table_schema = 'TAO' and tab.table_type = 'BASE TABLE' "
+      SQL4      = ") A where A.TABLE_NAME = '" + table + "'"
+      SQL       = SQL0 + SQL1 + SQL2 + SQL3 + SQL4
+      
+      rs        = con.execute(SQL)
+      LLL       = list(rs)
+      
+      NB        = ""
+      NB_fields = list( map(lambda x: x[0], LLL))
+      for ii in range(len(NB_fields)):
+         name = NB_fields[ii]
+         NB = NB + "a."+ name + " = b." + name 
+         if ii< len(NB_fields)-1:   
+            NB = NB + ' AND '
+
+      print("updating on " + NB)
+   
+      SQL    = "UPDATE " + table + " a INNER JOIN " + table + "_tmp b on " + NB
+      SQL    = SQL + " SET " 
+      for ii in range(len(COL)):  
+         SQL    = SQL + "a." + COL[ii] + " = b." + COL[ii]  
+         if ii < len(COL)-1:
+            SQL = SQL + ","
+      rs     = con.execute(SQL)
+      
+      SQL    = "DELETE FROM " + table + "_tmp where hashValuePNGFile in (select hashValuePNGFile from " + table + ") and hashValueJPGFile in (select hashValueJPGFile from " + table + ");"
+      rs     = con.execute(SQL)
+           
+
+      SQL    = "INSERT INTO " + table + "(" + COLS + ") select " + COLS + " from " + table + "_tmp;"
+      rs     = con.execute(SQL)
+     
+      SQL    = "DELETE FROM " + table + "_tmp;"
+      rs     = con.execute(SQL)
+      
+      con.close()
+
+###################################################################################################################
 #################################################################################################
 #################################################################################################
 #################################################################################################
@@ -603,9 +696,11 @@ def makeBoxList(BOXLt):
 
 ######################################### initial part ############################################################
    
-path      = '/home/markus/Documents/grundbuchauszuegeAnnotation/'
-pathData  = '/home/markus/anaconda3/python/data/'
-makeCalcs = False
+pathSource = '/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/orginal/'
+pathDest   = '/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/'
+
+pathData   = '/home/markus/anaconda3/python/data/'
+makeCalcs  = False
 
 NL        = ['muenchen-trudering-bestandsverzichnis.jpg',
              'bonn-beuel-abteilung-1.jpg'               , 
@@ -621,17 +716,47 @@ NL        = ['muenchen-trudering-bestandsverzichnis.jpg',
              'goslar-bündheim-abteilung-2.png' ]
 
 
-try:
-   a= BOXL.name
-except:
-   print("except")
-   BOXL   = ALLABS()
-   for name in tqdm(NL): 
-      O      = LABEL(path, name)
+makeGrundbuch = True
+
+if makeGrundbuch:
+   onlyfilesSource = [f for f in listdir(pathSource) if isfile(join(pathSource, f))]
+
+   aL                = np.arange(-5, 5.5, 0.5) 
+   origin            = (750,750)
+   width, height     = 1500,1500
+
+   for name in tqdm(onlyfilesSource): 
+      O      = LABEL(pathSource, name)
       O.makeM2()
-      #O.calcAll()
+      M2             = O.JPG.M2[:,:,0]
+      Bt, M2t, boxL1 = makeTestMatrix(M2, 0, xb=[10,50], yb=[10, 50])
+      angle          = removeSkewness(aL, boxL1, stepSize=20, origin=(750,750), a=0, b=1500)
+      N              = rotateImage(M2t, angle=-angle, center=origin)
+
+      img = Image.fromarray(N)
+      rr  = name.split('.')
+      img.save(pathDest + rr[0] + '-vergroessert.jpg')
       O.size = (O.JPG.M2.shape[1], O.JPG.M2.shape[0])  
-      setattr(BOXL, name.split('.')[0], O)
+
+   onlyfilesDest = [f for f in listdir(pathDest) if isfile(join(pathDest, f))]
+
+   cc       ='pdftk '
+   PDFPAGES = []
+   for file in onlyfilesDest:
+      rr = file.split('.')
+      fn = pathDest + rr[0]
+      if rr[1]=='jpg':
+         ss = "convert " + fn +".jpg "  + fn + ".pdf"
+         tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
+         cc = cc + fn + '.pdf '
+         PDFPAGES.append( fn + '.pdf')
+         ss = "convert " + fn + ".jpg " + fn + ".png"
+         tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
+      
+   cc = cc + " output " + pathDest + "grundbuch.pdf"
+   tt  = subprocess.check_output(cc, shell=True,executable='/bin/bash')
+
+
 
 
 
@@ -659,24 +784,54 @@ SWO_2D.allLevels     = False   # wenn True dann werden nur Werte für m=2, anson
 
 ############################################  main  ###############################################################
 
+pathToPDF         = '/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/'
+pdfFilename       = 'grundbuch'
+outputFolder      = '/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/'
+output_file       = '/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/'
 
-nn         = 2
-O          = getattr(BOXL, NL[nn].split('.')[0]) 
-O.preprocessing.frontierBlackWhite = 200
-try:
-   a = getattr(O, 'calcAll')
-except:
-   O.calcAll()
+generator         = JPGNPNGGenerator(pathToPDF, pdfFilename, outputFolder, output_file, 1, 2, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(3000, 3000) )
+nOP               = generator.getNumberOfPagesFromPDFFile()
+atime             = datetime.now()
+dstr              = atime.strftime("%Y-%m-%d %H:%M:%S")
+generator.pageEnd = nOP
 
-O.makeM2()
 
-M2                = O.JPG.M2[:,:,0]
+putintoDB = True
+
+if putintoDB:
+   N=[]
+   for ii in range(1, len(PDFPAGES)+1):
+      page    = PDFPAGES[ii-1]
+      rr      = page.split('.')
+      if rr[1]=='pdf' and rr[0] != 'grundbuch':
+         pathPNG = rr[0] + '.png'
+         pathJPG = rr[0] + '.jpg'
+  
+         N.append([pathToPDF+'grundbuch', pathPNG , pathJPG, 'quadratic', 'original', str(ii), generator.getsha256(pathPNG), generator.getsha256(pathJPG), dstr])
+
+   A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'filenameJPG','format',  'what', 'page', 'hashValuePNGFile', 'hashValueJPGFile', 'timestamp'])
+
+   generator.insertDataIntoDBGeneric('markus', 'venTer4hh', 'TAO', 'TAO', A)
+
+   engine                   = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+   con                      = engine.connect()
+   SQL                      = "UPDATE TAO set  hasTable=1, numberOfColumns=1, col1='', col2='', col3='', pageConsistsOnlyTable=1, numberOfTables=1 where namePDFDocument='/home/markus/Documents/grundbuchauszuegeAnnotation/pdf/grundbuch'"
+   con.execute(SQL)
+   con.close()
+
+
+"""
+
+nn                = 2
+img               = Image.open(pathDest + PAGES[nn] + '-vergroessert.jpg')
+M2                = np.array(img)[:,:,0]
 aL                = np.arange(-5, 5.5, 0.5)
-origin            = (1500,1500)
-width, height     = 3000,3000
-
+origin            = (750,750)
+width, height     = 1500,1500
 Bt, M2t, boxL1    = makeTestMatrix(M2, 0, xb=[10,50], yb=[10, 50])
-angle             = removeSkewness(aL, boxL1)
+
+
+angle             = removeSkewness(aL, boxL1, stepSize=20, origin=(750,750), a=0, b=1500)
 
 N                 = rotateImage(M2t, angle=-angle, center=origin)
 N[999:1001, :]    = 0
@@ -714,7 +869,7 @@ if makeCraft:
 
 
 
-
+"""
 
 
 

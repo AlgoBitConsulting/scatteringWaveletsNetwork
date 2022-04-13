@@ -517,9 +517,11 @@ def extractTableCoordinates():
    fname, page, numberOfColumns = l[COLN.index('filenamePNG')], l[COLN.index('page')], l[COLN.index('numberOfColumns')]
    try:
       if checkVar.get()==1:
-         fname = l[COLN.index('filenameJPG')]
+         fname         = l[COLN.index('filenameJPG')]
+         
    except:
       print("No checkVar")
+      width, height = 3000, 3000
    
    Q = ENTRIES[findByName(ENTRIES, 'numberOfTables') ]
    O = ENTRIES[findByName(ENTRIES, 'hasTable') ]
@@ -534,6 +536,7 @@ def extractTableCoordinates():
       windowIMG      = tk.Toplevel()
       windowIMG.title("Seite " + str(page))
       image          = Image.open(fname)
+      image = image.resize((1000,1000))
       draw           = ImageDraw.Draw(image)
       canvas         = tk.Canvas(windowIMG, width=image.size[0], height=image.size[1])
       canvas.pack()
