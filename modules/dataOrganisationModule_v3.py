@@ -105,7 +105,7 @@ def pdfToBlackBlocksAndLines(pathPDFFilename, PDFfilename, pathOutput, page, wha
       return(list(map(float, x)))
 
    def f5(x):
-      return([x["xmin"], x["ymax"], x["xmax"], x["ymin"]])
+      return([x["xmin"], x["ymin"], x["xmax"], x["ymax"]])
 
    def tr_pdf2txt_png(C, alpha, beta):
       x1 = alpha*C[0]
@@ -150,17 +150,20 @@ def pdfToBlackBlocksAndLines(pathPDFFilename, PDFfilename, pathOutput, page, wha
    alpha = pngW/pdfW
    beta  = pngH/pdfH
 
-   a     = list(map(f5, whatList))
-   c     = list(map(f4, a))
+   BOXLIST = []
+   a       = list(map(f5, whatList))
+   c       = list(map(f4, a))
 
    for x in c:
-      draw.rectangle(tr_pdftotext_png(x, alpha, beta), fill=(0,0,0)) #, outline="#80FF00") # grün
+      box = tr_pdftotext_png(x, alpha, beta)
+      BOXLIST.append(box)
+      draw.rectangle(box, fill=(0,0,0)) #, outline="#80FF00") # grün
    
    if withSave:
       pngfn = PDFfilename + '-' + str(page) + '-'+format +'-' +what + '.png'
       img.save(pathOutput+pngfn)
 
-   return(img)
+   return([img, BOXLIST])
  
 ############################################################################# 
 
@@ -640,8 +643,263 @@ class PNGGenerator:
 
 
 
+
+
+
+
+
     
+class imageOperations:
+
+   def __init__(self, name='imageOperations'):
+      self.name = name
  
+   ###########################################################################
+
+   def nextRight(self, m, boxL):
+      x1,y1,x2,y2 = m 
+      y           = 0.5*(y1 + y2)
+      d           = 0.75*abs(y2-y1)
+      F1          = list( filter( lambda x: abs( y-x[1])<= d, boxL))
+      F1.sort( key=lambda x: x[0] - x1)
+      F2          = list( filter( lambda x: x[0] - x1 >0 , F1)) 
+      erg         = [] 
+      if len(F2)>0:
+         erg = F2[0]
+     
+      return([erg, F1, F2])
+  
+   ###########################################################################
+
+   def spaceBetweenWords(self, img, imgCheck, boxL, plotBoxes=False, fill=True, uB=20, plotAlsoTooBig= False, xmm=[], bb=10):
+
+      L    = []
+      MI   = np.array(imgCheck)[:,:,0]
+      SBWL = []
+      dd   = ImageDraw.Draw(img)
+
+      for ii in range(len(boxL)):      
+         m             = boxL[ii]
+         mnext, F1, F2 = self.nextRight(m, boxL)
+
+         if plotBoxes:
+            dd.rectangle(m,     width=1, outline="black")   
+            dd.rectangle(mnext, width=1, outline="black")         
+
+         if len(mnext)>0:
+            mspt     = x1,y1,x2,y2 = m[2], max(m[1], mnext[1]), mnext[0], min( m[3], mnext[3]) 
+            checkbox = MI[y1+1:y2-1, x1+1:x2-1]    
+            nr, nc   = checkbox.shape
+
+            if np.all(checkbox==255) and nr>0 and nc>0:
+               SBWL.append([x1,y1,x2,y2])
+            else:
+                L.append(mspt)    
+         
+      borders  = []
+      for ii in range(len(xmm)-1):
+         a,b = xmm[ii]
+         borders.append( [ b-bb,b+bb])      
+
+      DD = []
+      for ii in range(len(SBWL)):
+         x1,y1,x2,y2 = m = SBWL[ii]
+         for jj in range(len(borders)):
+            a,b = borders[jj]   
+            if x1 <= a <= b <= x2:
+               DD.append(ii)
+      DD       = list(set(DD))
+      SBWL_new = SBWL.copy()
+
+      for jj in range(len(DD)):
+         SBWL_new.remove(SBWL[DD[jj]])      
+
+      for ii in range(len(SBWL_new)):
+         x1,y1,x2,y2 = m = SBWL_new[ii]
+         if fill:
+            dd.rectangle([x1, y1, x2, y2], fill="#000000")
+         else:
+            dd.rectangle([x1, y1, x2, y2], width=3, outline="green")
+            
+      if plotAlsoTooBig:  
+         for ii in range(len(L)):   
+            x1,y1,x2,y2 = m = L[ii] 
+            dd.rectangle([x1, y1, x2, y2], width=3, outline="red")            
+                     
+      return([img, L, SBWL, SBWL_new, borders]) 
+
+   #############################################################################   
+
+   def calcSplitJPGs(self, img, noc):
+
+      C   = np.array(img)
+      C1  = np.array( 255*(np.array( C>180, dtype='int')), dtype='uint8')
+
+      xmm = []
+      for col in range(1, noc+1):
+         CC, col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
+         xmm.append([ col_x_min, col_x_max])
+
+      return(xmm)
+
+   ########################################################################
+
+   def getColumns(self, C, ws=50, st=3):
+
+      n,m       = C.shape
+      zz        = st
+      S         = np.zeros( (m))
+      while zz*ws + 150 <= n:
+         W = C[(zz-1)*ws:zz*ws, :]
+         w = np.round(W.sum(axis=0)/(255*ws),2)
+         S = S+w
+         zz = zz+1
+
+      S  = S/(zz-st)
+      S1 = np.round(S,1)
+
+      first = True
+      for ii in range(len(S1)):
+         if S1[ii] == 1 and first:
+            S1[ii] = 0
+         else:
+            if S1[ii] <1:
+               first = False
+
+      first = True
+      xx = m-1
+      while xx >0:
+         if S1[xx] == 1 and first:
+            S1[xx] = 0
+         else:
+            if S1[xx] <1:
+               first = False
+         xx = xx-1
+
+      lfB = True
+      xx = 0
+      L  = []
+      l  = []
+      while xx <= len(S1)-1:
+         if S1[xx] == 1 and lfB:
+            l= [xx]
+            lfB = False
+         else:
+            if S1[xx] <1 and not(lfB):
+               if xx-l[0] >=10:
+                  l.append(xx)
+                  L.append(l)
+               l = []
+               lfB=True
+
+         xx = xx+1      
+ 
+      L  = list( map( lambda x: int(0.5*(x[0] + x[1])),L ))
+
+      return(L)  
+      
+   #############################################################################      
+
+   def makeCopiesOfColumns(self, C, col, noc):
+
+      if (noc not in (2,3)) or (col not in list(range(1, noc+1))):
+         return(C)
+     
+      D  = np.ones(C.shape)*255   
+      dL = self.getColumns(C)        
+
+      if noc==2:
+         Cl, Cr        = D.copy(), D.copy()
+      
+         if col==1:
+            Cl[:, :dL[0]] = C[:, :dL[0]]
+            Cl_r = np.roll(Cl, dL[0]-30)
+            CC   = Cl*Cl_r/255   
+         else:
+            Cr[:, dL[0]:] = C[:, dL[0]:]
+            Cr_l = np.roll( Cr, -(dL[0]-30))
+            CC   = Cr*Cr_l/255 
+      
+      if noc==3:
+         shift              = dL[0]
+         Cl, Cm,  Cr        = D.copy(), D.copy(), D.copy()
+      
+         if col ==1:
+            Cl[:, :dL[0]]   = C[:, :dL[0]]
+            Cl_m            = np.roll(Cl, dL[0]-30)
+            Cl_r            = np.roll(Cl, dL[1]-20)
+            CC              = Cl*Cl_m*Cl_r/(255**2)
+         if col==2:
+            Cm[:, dL[0]:dL[1]] = C[:, dL[0]:dL[1]]
+            Cm_l               = np.roll(Cm, -(dL[0]-30))
+            Cm_r               = np.roll(Cm, dL[0]-30)
+            CC                 = Cm*Cm_l*Cm_r/(255**2)
+         if col==3:
+            Cr[:, dL[1]:]   = C[:, dL[1]:]
+            Cr_m            = np.roll(Cr, -(dL[0]-40))
+            Cr_l            = np.roll(Cr, -(dL[1]-30))
+            CC              = Cr*Cr_m*Cr_l/(255**2)   
+ 
+      return(CC)
+
+   #############################################################################
+
+   def getColMinMaxCC(self, noc, col, C):
+   
+      col_x_max = C.shape[1]
+      col_x_min = 0     
+         
+      if col>0:
+         dL        = self.getColumns(C)
+         
+         if noc>1:
+            if len(dL)>0:
+               CC        = self.makeCopiesOfColumns(C, col, noc)
+               if dL[0]> C.shape[1]/2:
+                  diff = int( dL[0]- (C.shape[1]/2))
+                  CC   = np.roll(CC, -diff)
+         else:
+            CC = C
+
+         if col ==1 and noc > 1:
+            col_x_max = dL[0]
+            col_x_min = 0
+         if col ==2 and noc ==2:
+            col_x_max = C.shape[1]
+            col_x_min = dL[0]
+         if col ==2 and noc ==3:
+            col_x_max = dL[1]
+            col_x_min = dL[0]
+         if col ==3:
+            col_x_max = C.shape[1]
+            col_x_min = dL[1]
+      else:
+         CC = C
+         print("CC = C")
+         
+      
+      return([CC, col_x_min, col_x_max])
+
+   #############################################################################
+
+   def getsha256(self, path):
+      ss = "sha256sum " + path
+      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash').decode('utf-8')   
+      return(tt.split(' ')[0])
+   
+   #############################################################################    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -709,9 +967,36 @@ class PDF:
          ss = 'rm ' + docName
          subprocess.check_output(ss, shell=True,executable='/bin/bash')
          
-#############################################################################      
+   #############################################################################      
 
-
+   def getFormatFromPDFPage(self, page):
+      ss = "pdfinfo -f " + str(page) + " -l " + str(page) + " " + self.pathPDFFilename + self.PDFFilename + ".pdf" + " | grep -i '" + str(page) + " size'"  
+      tt = subprocess.check_output(ss, shell=True,executable='/bin/bash')
+      tt = tt.decode('utf-8')
+      tt = tt.replace(' ', '')
+      aa = tt.split('x')
+      x = float(aa[0].split(':')[1])
+      y = float(aa[1].split('pts')[0]) 
+   
+      format = 'portrait'
+      if x > y:
+         format = 'landscape'
+      
+      return([x,y, format])
+   
+   #############################################################################     
+   
+   def getNumberOfPagesFromPDFFile(self): 
+      ss  = "pdfinfo " + self.pathPDFFilename + self.PDFFilename + ".pdf" + " | grep -i Pages"  
+      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
+      tt  = tt.decode('utf-8')
+      tt  = tt.replace(' ', '').replace('\n','')
+      aa  = tt.split(':')
+      nOP = int(aa[1]) 
+   
+      return(nOP)
+      
+   #############################################################################     
 
 
 
@@ -1340,7 +1625,7 @@ class stripe:
 
 
 
-class JPGNPNGGenerator:
+class JPGGenerator:
 
    def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
       self.pathToPDF       = pathToPDF
@@ -1354,44 +1639,11 @@ class JPGNPNGGenerator:
       self.generateJPGWith = generateJPGWith
       self.L               = []
       self.size            = size
+      self.IMOP            = imageOperations()
+      self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
+      self.onlyPNG         = False
 
-   #############################################################################     
-   
-   def getsha256(self, path):
-      ss = "sha256sum " + path
-      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash').decode('utf-8')   
-      return(tt.split(' ')[0])
-   
-   #############################################################################     
-   
-   def getFormatFromPDFPage(self, page):
-      ss = "pdfinfo -f " + str(page) + " -l " + str(page) + " " + self.pathToPDF + self.pdfFilename + ".pdf" + " | grep -i '" + str(page) + " size'"  
-      tt = subprocess.check_output(ss, shell=True,executable='/bin/bash')
-      tt = tt.decode('utf-8')
-      tt = tt.replace(' ', '')
-      aa = tt.split('x')
-      x = float(aa[0].split(':')[1])
-      y = float(aa[1].split('pts')[0]) 
-   
-      format = 'portrait'
-      if x > y:
-         format = 'landscape'
-      
-      return([x,y, format])
-   
-   #############################################################################     
-   
-   def getNumberOfPagesFromPDFFile(self): 
-      ss  = "pdfinfo " + self.pathToPDF + self.pdfFilename + ".pdf" + " | grep -i Pages"  
-      tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
-      tt  = tt.decode('utf-8')
-      tt  = tt.replace(' ', '').replace('\n','')
-      aa  = tt.split(':')
-      nOP = int(aa[1]) 
-   
-      return(nOP)
-      
-   #############################################################################     
+   #############################################################################      
    
    def makeMatrixFromImage(self, imgOrg, tolW= 0.3, tolH= 0.2, debug=False, W=595, H=842):
 
@@ -1647,80 +1899,6 @@ class JPGNPNGGenerator:
    
    ###########################################################################
 
-   def nextRight(self, m, boxL):
-      x1,y1,x2,y2 = m 
-      y           = 0.5*(y1 + y2)
-      d           = 0.75*abs(y2-y1)
-      F1          = list( filter( lambda x: abs( y-x[1])<= d, boxL))
-      F1.sort( key=lambda x: x[0] - x1)
-      F2          = list( filter( lambda x: x[0] - x1 >0 , F1)) 
-      erg         = [] 
-      if len(F2)>0:
-         erg = F2[0]
-     
-      return([erg, F1, F2])
-  
-   ###########################################################################
-
-   def spaceBetweenWordsJPG(self, img, imgCheck, boxL, plotBoxes=False, fill=True, uB=20, plotAlsoTooBig= False, xmm=[], bb=10):
-
-      L    = []
-      MI   = np.array(imgCheck)[:,:,0]
-      SBWL = []
-      dd   = ImageDraw.Draw(img)
-
-      for ii in range(len(boxL)):      
-         m             = boxL[ii]
-         mnext, F1, F2 = self.nextRight(m, boxL)
-
-         if plotBoxes:
-            dd.rectangle(m,     width=1, outline="black")   
-            dd.rectangle(mnext, width=1, outline="black")         
-
-         if len(mnext)>0:
-            mspt     = x1,y1,x2,y2 = m[2], max(m[1], mnext[1]), mnext[0], min( m[3], mnext[3]) #    m[2], m[1], mnext[0], mnext[3]
-            checkbox = MI[y1+1:y2-1, x1+1:x2-1]    
-            nr, nc   = checkbox.shape
-
-            if np.all(checkbox==255) and nr>0 and nc>0:
-               SBWL.append([x1,y1,x2,y2])
-            else:
-                L.append(mspt)    
-         
-      borders  = []
-      for ii in range(len(xmm)-1):
-         a,b = xmm[ii]
-         borders.append( [ b-bb,b+bb])      
-
-      DD = []
-      for ii in range(len(SBWL)):
-         x1,y1,x2,y2 = m = SBWL[ii]
-         for jj in range(len(borders)):
-            a,b = borders[jj]   
-            if x1 <= a <= b <= x2:
-               DD.append(ii)
-      DD       = list(set(DD))
-      SBWL_new = SBWL.copy()
-
-      for jj in range(len(DD)):
-         SBWL_new.remove(SBWL[DD[jj]])      
-
-      for ii in range(len(SBWL_new)):
-         x1,y1,x2,y2 = m = SBWL_new[ii]
-         if fill:
-            dd.rectangle([x1, y1, x2, y2], fill="#000000")
-         else:
-            dd.rectangle([x1, y1, x2, y2], width=3, outline="green")
-            
-      if plotAlsoTooBig:  
-         for ii in range(len(L)):   
-            x1,y1,x2,y2 = m = L[ii] 
-            dd.rectangle([x1, y1, x2, y2], width=3, outline="red")            
-                     
-      return([img, L, SBWL, SBWL_new, borders]) 
-
-   #############################################################################   
-
    def makeCheckMatrix(self, imgOrg, size, p=0.01, ws=25, bb=250):
 
       imgT   = imgOrg.resize(size)                
@@ -1827,6 +2005,27 @@ class JPGNPNGGenerator:
          fn  = img.name
          img.save(fn)
 
+   ###############################################################################
+
+   def cutMatrix(self, imgSBW, xmm, SBWL, fn, fileType, bbm=True):
+      C    = np.array(imgSBW)[:,:,0]
+      D    = np.array( 255*np.ones(C.shape), dtype='uint8')
+
+      for ii in range(len(xmm)):
+         a,b = xmm[ii]
+         c   = b-a
+         Ct  = D.copy()
+         n,m = C.shape
+         l   = int(0.5*(m-c))
+         Ct[:, l: l+(b-a)] = C[:, a:b]
+         img = Image.fromarray(Ct)
+         img.name = fn + '-' + str(ii) + fileType
+         if bbm:
+            img.name = fn + '-bbm-' + str(ii) + fileType
+         SBWL.append(img) 
+
+      return(SBWL)
+
    #############################################################################
 
    def generateSBW(self, q, img1, img3,  NNL, boxL2, noc, xmm, fn):
@@ -1836,138 +2035,24 @@ class JPGNPNGGenerator:
       
       if not(self.scanedDocument):
          if p3 < 0.7 and p1 >= p2:
-            imgSBW, L, SBWLL, SBWLL_new, b = self.spaceBetweenWordsJPG(img=imgSBW, imgCheck=img1, boxL=NNL,   plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+            imgSBW, L, SBWLL, SBWLL_new, b = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img1, boxL=NNL,   plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
          else:
-            imgSBW, L, SBWLL, SBWLL_new, b = self.spaceBetweenWordsJPG(img=imgSBW, imgCheck=img3, boxL=boxL2, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+            imgSBW, L, SBWLL, SBWLL_new, b = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img3, boxL=boxL2, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
       else:
          if p1>= p2:
-            imgSBW, L, SBWLL, SBWLL_new, b = self.spaceBetweenWordsJPG(img=imgSBW, imgCheck=img1, boxL=NNL,   plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+            imgSBW, L, SBWLL, SBWLL_new, b = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img1, boxL=NNL,   plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
          else:
-            imgSBW, L, SBWLL, SBWLL_new, b = self.spaceBetweenWordsJPG(img=imgSBW, imgCheck=img3, boxL=boxL2, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+            imgSBW, L, SBWLL, SBWLL_new, b = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img3, boxL=boxL2, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
 
       imgSBW.name = fn + '-bbm.jpg'    
       SBWL        = [imgSBW]
 
       if noc>1:
-         C    = np.array(imgSBW)[:,:,0]
-         D    = np.array( 255*np.ones(C.shape), dtype='uint8')
+         SBWL = self.cutMatrix(imgSBW, xmm, SBWL, fn, '.jpg')
 
-         for ii in range(len(xmm)):
-            a,b = xmm[ii]
-            c   = b-a
-            Ct  = D.copy()
-            n,m = C.shape
-            l   = int(0.5*(m-c))
-            Ct[:, l: l+(b-a)] = C[:, a:b]
-            img = Image.fromarray(Ct)
-            img.name = fn + '-bbm-' + str(ii) + '.jpg'
-            #img.show()
-            SBWL.append(img) 
-
-      #Image.fromarray(C).show()
       return(SBWL)
 
    #############################################################################    
-
-   def getColumns(self, C, ws=50, st=3):
-
-      n,m       = C.shape
-      zz        = st
-      S         = np.zeros( (m))
-      while zz*ws + 150 <= n:
-         W = C[(zz-1)*ws:zz*ws, :]
-         w = np.round(W.sum(axis=0)/(255*ws),2)
-         S = S+w
-         zz = zz+1
-
-      S  = S/(zz-st)
-      S1 = np.round(S,1)
-
-      first = True
-      for ii in range(len(S1)):
-         if S1[ii] == 1 and first:
-            S1[ii] = 0
-         else:
-            if S1[ii] <1:
-               first = False
-
-      first = True
-      xx = m-1
-      while xx >0:
-         if S1[xx] == 1 and first:
-            S1[xx] = 0
-         else:
-            if S1[xx] <1:
-               first = False
-         xx = xx-1
-
-      lfB = True
-      xx = 0
-      L  = []
-      l  = []
-      while xx <= len(S1)-1:
-         if S1[xx] == 1 and lfB:
-            l= [xx]
-            lfB = False
-         else:
-            if S1[xx] <1 and not(lfB):
-               if xx-l[0] >=10:
-                  l.append(xx)
-                  L.append(l)
-               l = []
-               lfB=True
-
-         xx = xx+1      
- 
-      L  = list( map( lambda x: int(0.5*(x[0] + x[1])),L ))
-
-      return(L)  
-      
-   #############################################################################      
-
-   def makeCopiesOfColumns(self, C, col, noc):
-
-      if (noc not in (2,3)) or (col not in list(range(1, noc+1))):
-         return(C)
-     
-      D  = np.ones(C.shape)*255   
-      dL = self.getColumns(C)        
-
-      if noc==2:
-         Cl, Cr        = D.copy(), D.copy()
-      
-         if col==1:
-            Cl[:, :dL[0]] = C[:, :dL[0]]
-            Cl_r = np.roll(Cl, dL[0]-30)
-            CC   = Cl*Cl_r/255   
-         else:
-            Cr[:, dL[0]:] = C[:, dL[0]:]
-            Cr_l = np.roll( Cr, -(dL[0]-30))
-            CC   = Cr*Cr_l/255 
-      
-      if noc==3:
-         shift              = dL[0]
-         Cl, Cm,  Cr        = D.copy(), D.copy(), D.copy()
-      
-         if col ==1:
-            Cl[:, :dL[0]]   = C[:, :dL[0]]
-            Cl_m            = np.roll(Cl, dL[0]-30)
-            Cl_r            = np.roll(Cl, dL[1]-20)
-            CC              = Cl*Cl_m*Cl_r/(255**2)
-         if col==2:
-            Cm[:, dL[0]:dL[1]] = C[:, dL[0]:dL[1]]
-            Cm_l               = np.roll(Cm, -(dL[0]-30))
-            Cm_r               = np.roll(Cm, dL[0]-30)
-            CC                 = Cm*Cm_l*Cm_r/(255**2)
-         if col==3:
-            Cr[:, dL[1]:]   = C[:, dL[1]:]
-            Cr_m            = np.roll(Cr, -(dL[0]-40))
-            Cr_l            = np.roll(Cr, -(dL[1]-30))
-            CC              = Cr*Cr_m*Cr_l/(255**2)   
- 
-      return(CC)
- 
-   ########################################################################
 
    def imageToSave(self, q):
  
@@ -1985,45 +2070,7 @@ class JPGNPNGGenerator:
  
    ########################################################################
 
-   def getColMinMaxCC(self, noc, col, C):
-   
-      col_x_max = C.shape[1]
-      col_x_min = 0     
-         
-      if col>0:
-         dL        = self.getColumns(C)
-         
-         if noc>1:
-            if len(dL)>0:
-               CC        = self.makeCopiesOfColumns(C, col, noc)
-               if dL[0]> C.shape[1]/2:
-                  diff = int( dL[0]- (C.shape[1]/2))
-                  CC   = np.roll(CC, -diff)
-         else:
-            CC = C
-
-         if col ==1 and noc > 1:
-            col_x_max = dL[0]
-            col_x_min = 0
-         if col ==2 and noc ==2:
-            col_x_max = C.shape[1]
-            col_x_min = dL[0]
-         if col ==2 and noc ==3:
-            col_x_max = dL[1]
-            col_x_min = dL[0]
-         if col ==3:
-            col_x_max = C.shape[1]
-            col_x_min = dL[1]
-      else:
-         CC = C
-         print("CC = C")
-         
-      
-      return([CC, col_x_min, col_x_max])
-
-   #############################################################################
-
-   def generateJPGSNPNGSOnePage(self, imgOrg, format, fn, page, noc):
+   def generateJPGOnePage(self, imgOrg, format, fn, page, noc):
 
       imgT                       = imgOrg.resize(self.size)
       img1, img1t, NN,  N_org    = self.makeBlackBox(imgT, radius_edge=1, radius_blur=3, sigma=0.15, hb=10, wb=20, hb2=4, wb2=8)                   
@@ -2036,53 +2083,65 @@ class JPGNPNGGenerator:
       draw3, boxL2               = self.addBox(draw3, M3, NN, boxL2)
       q                          = [page] + self.makeQualityCheck(img1, img2)  
      
-      img4                       = img1.copy()
+      img4,BOXLIST               = pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
+      BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
+      BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
 
-      if not(self.scanedDocument):
-         img4      = pdfToBlackBlocksAndLines( self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', format, False, False)  
-         img4.save(fn + '.png')       
-         q2        =  self.makeQualityCheck(img3, img4)
-         q.extend(q2)
-    
-      if len(q)==3:
-         q.extend([0,0])
-      self.Q.append(q)
+      img4.save(fn + '.png') 
+      img4.name                  = fn+'.png'
+      IMGL                       = [img4]
+  
+      xmm                        = self.IMOP.calcSplitJPGs(np.array(img4)[:,:,0], noc) 
+
+      imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
+      imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+      imgSBW.name                = fn + '-bbm.png'    
+      SBWL                       = [imgSBW] 
+
+      if noc>1:
+         SBWL = self.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
+         IMGL = self.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
+
+      for ii in range(len(SBWL)):
+         img = SBWL[ii]
+         img.save(img.name)
+
+      for ii in range(len(IMGL)):
+         img = IMGL[ii]
+         img.save(img.name)
+
+      if not(self.onlyPNG):
+         if len(q)==3:
+            q.extend([0,0])
+         self.Q.append(q)
       
-      xmm       = []
-      imgToSave = self.imageToSave(q)
-      if imgToSave == 'img3':
-         img3.name = fn + '.jpg'
-         IMGL      = [img3]
-         C         = np.array(img3)[:,:,0]
-      else:
-         img1.name = fn + '.jpg'
-         IMGL      = [img1]
-         C         = np.array(img1)[:,:,0]
+         xmm       = []
+         imgToSave = self.imageToSave(q)
+         if imgToSave == 'img3':
+            img3.name = fn + '.jpg'
+            IMGL      = [img3]
+            C         = np.array(img3)[:,:,0]
+         else:
+            img1.name = fn + '.jpg'
+            IMGL      = [img1]
+            C         = np.array(img1)[:,:,0]
    
-      if noc>1:         
-         D   = np.array( 255*np.ones(C.shape), dtype='uint8')
-         xmm = self.calcSplitJPGs(C, noc)
+         if noc>1:         
+            D   = np.array( 255*np.ones(C.shape), dtype='uint8')
+            xmm = self.IMOP.calcSplitJPGs(C, noc)
 
-         #if len(xmm)==0:
-         #   print(xmm)
-         #   print("error with page=" + str(page))
-         #else:
-         #   if xmm[0][1] == 0:
-         #      print(xmm)
-         #      print("error with page=" + str(page)) 
-
-         for ii in range(len(xmm)):
-            a,b = xmm[ii]
-            c   = b-a
-            Ct  = D.copy()
-            n,m = C.shape
-            l   = int(0.5*(m-c))
-            Ct[:, l: l+(b-a)] = C[:, a:b]
-            img = Image.fromarray(Ct)
-            img.name = fn + '-' + str(ii) + '.jpg'
-            IMGL.append(img) 
+            for ii in range(len(xmm)):
+               a,b = xmm[ii]
+               c   = b-a
+               Ct  = D.copy()
+               n,m = C.shape
+               l   = int(0.5*(m-c))
+               Ct[:, l: l+(b-a)] = C[:, a:b]
+               img = Image.fromarray(Ct)
+               img.name = fn + '-' + str(ii) + '.jpg'
+               IMGL.append(img) 
       
-      SBWL = self.generateSBW(q, img1, img3, NN, boxL2, noc, xmm, fn) 
+         SBWL = self.generateSBW(q, img1, img3, NN, boxL2, noc, xmm, fn) 
     
 
       return([IMGL, img1, img2, img3, img4, SBWL, NN, boxL2, q])
@@ -2100,21 +2159,7 @@ class JPGNPNGGenerator:
 
    #############################################################################
 
-   def calcSplitJPGs(self, img, noc):
-
-      C   = np.array(img)
-      C1  = np.array( 255*(np.array( C>180, dtype='int')), dtype='uint8')
-
-      xmm = []
-      for col in range(1, noc+1):
-         CC, col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
-         xmm.append([ col_x_min, col_x_max])
-
-      return(xmm)
-
-   #############################################################################
-
-   def generateJPGSNPNGS(self, getNOCfromDB=True, onlyScanned=False):
+   def generateJPG(self, getNOCfromDB=True, onlyScanned=False):
 
       N          = []
       self.Q     = []
@@ -2123,7 +2168,7 @@ class JPGNPNGGenerator:
       ss         = "rm -f " + self.outputFolder+ "tmp/*.jpg"
 
       if self.pageStart ==1 and self.pageEnd == 0:
-         self.pageEnd = self.getNumberOfPagesFromPDFFile()
+         self.pageEnd = self.PDF.getNumberOfPagesFromPDFFile()
       
       if len(self.L)==0:   
          R = tqdm(range(self.pageStart, self.pageEnd+1))
@@ -2151,28 +2196,33 @@ class JPGNPNGGenerator:
       for page in R:
          tt         = subprocess.check_output(ss, shell=True,executable='/bin/bash')  
          pages      = self.convertPDFToJPG(page, page)                                                       
-         x,y,format = self.getFormatFromPDFPage(page)   
+         x,y,format = self.PDF.getFormatFromPDFPage(page)   
             
          if format == 'portrait': 
-            noc                                                = self.findPageNOC(NOCL, page)
+            noc     = self.findPageNOC(NOCL, page)
             print("page=" + str(page) + " noc=" + str(noc))
-            imgOrg                                             = Image.open(pages[0]).convert('L')
-            fn                                                 = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
-            IMGL, img1, img2, img3, img4, SBWL, NN, boxL2, q   = self.generateJPGSNPNGSOnePage(imgOrg, format, fn, page, noc)
+            imgOrg  = Image.open(pages[0]).convert('L')
+            fn      = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
+
+            ### part for scaned documents
+            IMGL, img1, img2, img3, img4, SBWL, NN, boxL2, q   = self.generateJPGOnePage(imgOrg, format, fn, page, noc)
             self.saveImg(IMGL, SBWL)
+            ### here part for pdf non-scanned
 
             if not(self.scanedDocument):
-               hashJPG = self.getsha256(fn+ '.jpg')
-               hashPNG = self.getsha256(fn+ '.png')
+               hashPNG = self.IMOP.getsha256(fn+ '.png')
+               hashJPG  = None
+               if not(self.onlyPNG):
+                  hashJPG = self.IMOP.getsha256(fn+ '.jpg')
          
-               if not hashJPG in list(map(lambda x: x[7], N)) and not hashPNG in list(map( lambda x: x[6], N)):
+               if (not hashJPG in list(map(lambda x: x[7], N))) and (not hashPNG in list(map(lambda x: x[6], N))):
                   atime = datetime.now()
                   dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
-                  erg = [self.pathToPDF + self.pdfFilename, fn+ '.png', fn+ '.jpg', format, 'word', page, hashPNG, hashJPG, dstr]
+                  erg = [self.pathToPDF + self.pdfFilename, hashJPG, fn+ '.jpg', format, 'word', page, hashPNG, hashJPG, dstr]
                   N.append(erg)    
 
             else:
-               hashJPG = self.getsha256(jpgfn)
+               hashJPG = self.IMOP.getsha256(jpgfn)
                if not hashJPG in list(map(lambda x: x[7], N)) :
                   atime = datetime.now()
                   dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")

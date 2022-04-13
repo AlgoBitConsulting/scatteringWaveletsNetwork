@@ -97,6 +97,8 @@ def makeUnique(WL, usePercentageTreshold=False, pT=0.05, wBB=180):
 
 def makeAnnotations(STPE, INFO, L, COLN, con, des='annotations...', overRideColumnsDetection=False):
 
+   global train
+
    WL         = []
    R          = tqdm(1*L)
    R.set_description(des)
@@ -197,7 +199,7 @@ def gEOM(M):
 MAT                  = dOM.matrixGenerator('downsampling')
 MAT.description      = "TEST"
 C1                   = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train_hochkant/word/train_hochkant-21-portrait-word.png')
-train                = dOM.JPGNPNGGenerator('/home/markus/anaconda3/python/pngs/train/', 'train', '/home/markus/anaconda3/python/pngs/train/word/', 'train', 1, 0, False, 500, 'cv')     
+train                = dOM.JPGGenerator('/home/markus/anaconda3/python/pngs/train/', 'train', '/home/markus/anaconda3/python/pngs/train/word/', 'train', 1, 0, False, 500, 'cv')     
 Ct                   = MAT.downSampling(C1, 3)                
 dx,dy                = 0.15, 0.15
 SWO_2D               = MM.SWO_2D(Ct, round(Ct.shape[1]*0.5*dx,3), round(Ct.shape[0]*0.5*dy,3))
