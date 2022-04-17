@@ -70,8 +70,8 @@ class matrixGenerator:
 
    def __init__(self, compressMethod):
       self.compressMethod = compressMethod
-      self.errors         = []
-      self.warnings       = []
+      self.errors         = ""
+      self.warnings       = ""
    
    #############################################################################   
       
@@ -299,8 +299,8 @@ class imageOperations:
 
    def __init__(self, name='imageOperations'):
       self.name    = name
-      self.errors  = []
-      self.warning = []
+      self.errors  = ""
+      self.warning = ""
 
    ###########################################################################
 
@@ -439,7 +439,7 @@ class imageOperations:
 
       xmm = []
       for col in range(1, noc+1):
-         CC, col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
+         col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
          xmm.append([ col_x_min, col_x_max])
 
       return(xmm)
@@ -554,7 +554,7 @@ class imageOperations:
      
    ########################################################################
    
-   def getColumns2(self, C, white=255, windowSize=200, stepSize= 50, bound=0.95, part=12, debug=False):
+   def getColumnsCoordinates(self, C, white=255, windowSize=200, stepSize= 50, bound=0.95, part=12, debug=False):
       n,m           = C.shape
       erg           = []
       BL            = []
@@ -598,150 +598,94 @@ class imageOperations:
 
    ########################################################################
 
-   def getColumns(self, C, ws=50, st=3):
+   def getColumns(self, C, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
 
-      n,m       = C.shape
-      zz        = st
-      S         = np.zeros( (m))
-      while zz*ws + 150 <= n:
-         W = C[(zz-1)*ws:zz*ws, :]
-         w = np.round(W.sum(axis=0)/(255*ws),2)
-         S = S+w
-         zz = zz+1
+      error              = False
+      dLt, erg, BL, _, _ = self.getColumnsCoordinates(C,white=white, windowSize=windowSize, stepSize= stepSize, bound=bound, part=part, debug=debug)
+      dL                 = []      
+      n,m                = C.shape
 
-      S  = S/(zz-st)
-      S1 = np.round(S,1)
+      if len(dLt)==2:
+         a1,b1 = dLt[0]
+         a2,b2 = dLt[1]
+         dL    = [ min(m, int((a2+b1)*0.5))]
 
-      first = True
-      for ii in range(len(S1)):
-         if S1[ii] == 1 and first:
-            S1[ii] = 0
-         else:
-            if S1[ii] <1:
-               first = False
+      if len(dLt) == 3:
+         a1,b1 = dLt[0]
+         a2,b2 = dLt[1]
+         a3,b3 = dLt[2]
+         dL    = [ int((a2+b1)*0.5), min(m, int((b2+a3)*0.5)) ]
 
-      first = True
-      xx = m-1
-      while xx >0:
-         if S1[xx] == 1 and first:
-            S1[xx] = 0
-         else:
-            if S1[xx] <1:
-               first = False
-         xx = xx-1
-
-      lfB = True
-      xx = 0
-      L  = []
-      l  = []
-      while xx <= len(S1)-1:
-         if S1[xx] == 1 and lfB:
-            l= [xx]
-            lfB = False
-         else:
-            if S1[xx] <1 and not(lfB):
-               if xx-l[0] >=10:
-                  l.append(xx)
-                  L.append(l)
-               l = []
-               lfB=True
-
-         xx = xx+1      
- 
-      L  = list( map( lambda x: int(0.5*(x[0] + x[1])),L ))
-
-      return(L)  
+      return(dL)  
       
    #############################################################################      
 
-   def makeCopiesOfColumns(self, C, col, noc):
+   def makeCopiesOfColumns(self, C, col, noc, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
 
       if (noc not in (2,3)) or (col not in list(range(1, noc+1))):
          return(C)
      
       D                  = np.ones(C.shape)*255  
-      dLt, erg, BL, _, _ = self.getColumns2(C)
-      dL                 = []      
-      for ii in range(len(dLt)):
-         if len(dLt)>=2:
-            a1,b1 = dLt[0]
-            a2,b2 = dLt[1]
-            dL    = [ int((a2+b1)*0.5)]
-         if len(dLt) == 3:
-            a3,b3 = dLt[2]
-            dL    = [ int((a2+b1)*0.5), int((b2+a3)*0.5) ]
+      dL                 = self.getColumns(C, white=white, windowSize=windowSize, stepSize=stepSize, bound=bound, part=part, debug=debug)
+      CC                 = C
 
-      if noc==2:
-         Cl, Cr        = D.copy(), D.copy()
-      
-         if col==1:
-            Cl[:, :dL[0]] = C[:, :dL[0]]
-            Cl_r = np.roll(Cl, dL[0]-30)
-            CC   = Cl*Cl_r/255   
-         else:
-            Cr[:, dL[0]:] = C[:, dL[0]:]
-            Cr_l = np.roll( Cr, -(dL[0]-30))
-            CC   = Cr*Cr_l/255 
-      
-      if noc==3:
-         shift              = dL[0]
-         Cl, Cm,  Cr        = D.copy(), D.copy(), D.copy()
-      
-         if col ==1:
-            Cl[:, :dL[0]]   = C[:, :dL[0]]
-            Cl_m            = np.roll(Cl, dL[0]-30)
-            Cl_r            = np.roll(Cl, dL[1]-20)
-            CC              = Cl*Cl_m*Cl_r/(255**2)
-         if col==2:
-            Cm[:, dL[0]:dL[1]] = C[:, dL[0]:dL[1]]
-            Cm_l               = np.roll(Cm, -(dL[0]-30))
-            Cm_r               = np.roll(Cm, dL[0]-30)
-            CC                 = Cm*Cm_l*Cm_r/(255**2)
-         if col==3:
-            Cr[:, dL[1]:]   = C[:, dL[1]:]
-            Cr_m            = np.roll(Cr, -(dL[0]-40))
-            Cr_l            = np.roll(Cr, -(dL[1]-30))
-            CC              = Cr*Cr_m*Cr_l/(255**2)   
+      if len(dL)+1 != noc:
+         self.errors = "number of columns detected by getColumns() is not the same as given noc"
+      else:
+         if noc==2:
+            Cl, Cr        = D.copy(), D.copy()
+            
+            if col==1:
+               Cl[:, :dL[0]-1] = C[:, :dL[0]-1]
+               Cl_r = np.roll(Cl, dL[0]-30)
+               CC   = Cl*Cl_r/255   
+            else:
+               Cr[:, dL[0]:] = C[:, dL[0]:]
+               Cr_l = np.roll( Cr, -(dL[0]-30))
+               CC   = Cr*Cr_l/255 
+         if noc==3:
+            shift              = dL[0]
+            Cl, Cm,  Cr        = D.copy(), D.copy(), D.copy()
+            
+            if col ==1:
+               Cl[:, :dL[0]-1]   = C[:, :dL[0]-1]
+               Cl_m            = np.roll(Cl, dL[0]-30)
+               Cl_r            = np.roll(Cl, dL[1]-20)
+               CC              = Cl*Cl_m*Cl_r/(255**2)
+            if col==2:
+               Cm[:, dL[0]:dL[1]-1] = C[:, dL[0]:dL[1]-1]
+               Cm_l               = np.roll(Cm, -(dL[0]-30))
+               Cm_r               = np.roll(Cm, dL[0]-30)
+               CC                 = Cm*Cm_l*Cm_r/(255**2)
+            if col==3:
+               Cr[:, dL[1]:]   = C[:, dL[1]:]
+               Cr_m            = np.roll(Cr, -(dL[0]-40))
+               Cr_l            = np.roll(Cr, -(dL[1]-30))
+               CC              = Cr*Cr_m*Cr_l/(255**2)   
  
       return(CC)
 
    #############################################################################
 
-   def getColMinMaxCC(self, noc, col, C):
+   def getColMinMaxCC(self, noc, col, C, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
    
-      col_x_max = C.shape[1]
-      col_x_min = 0     
-         
-      if col>0:
-         dL        = self.getColumns2(C)
-          
-         if noc>1:
-            if len(dL)>0:
-               CC        = self.makeCopiesOfColumns(C, col, noc)
-               if dL[0]> C.shape[1]/2:
-                  diff = int( dL[0]- (C.shape[1]/2))
-                  CC   = np.roll(CC, -diff)
-         else:
-            CC = C
+      col_x_min, col_x_max = 0, C.shape[1]
+      dL                   = self.getColumns(C, white=white, windowSize=windowSize, stepSize= stepSize, bound=bound, part=part, debug=debug) 
+
+      if len(dL)+1 != noc:
+         self.errors = "number of columns detected by getColumns() is not the same as given noc"
+      else:
 
          if col ==1 and noc > 1:
-            col_x_max = dL[0]
-            col_x_min = 0
+            col_x_min,col_x_max   = 0, dL[0]
          if col ==2 and noc ==2:
-            col_x_max = C.shape[1]
-            col_x_min = dL[0]
+            col_x_min, col_x_max = dL[0], C.shape[1]
          if col ==2 and noc ==3:
-            col_x_max = dL[1]
-            col_x_min = dL[0]
+            col_x_min, col_x_max = dL[0], dL[1]             
          if col ==3:
-            col_x_max = C.shape[1]
-            col_x_min = dL[1]
-      else:
-         CC = C
-         print("CC = C")
-         
-      
-      return([CC, col_x_min, col_x_max])
+            col_x_min, col_x_max = dL[1], C.shape[1]
+     
+      return([col_x_min, col_x_max])
 
    #############################################################################
 
@@ -796,8 +740,8 @@ class PDF:
       self.pathPDFFilename = pathPDFFilename
       self.PDFFilename     = PDFFilename
       self.pathOutput      = pathOutput
-      self.errors          = []
-      self.warnings        = []
+      self.errors          = ""
+      self.warnings        = ""
    
    #############################################################################       
         
@@ -895,14 +839,14 @@ class PDF:
 
 class columns:
    def __init__(self, diff=10, lowB=8, up=100, down=100, white=255):
-      self.name  = 'column'
-      self.diff  = diff
-      self.lowB  = lowB
-      self.up    = up
-      self.down  = down
-      self.white = white
-      self.errors         = []
-      self.warnings       = [] 
+      self.name     = 'column'
+      self.diff     = diff
+      self.lowB     = lowB
+      self.up       = up
+      self.down     = down
+      self.white    = white
+      self.errors   = ""
+      self.warnings = "" 
    
    ################################################################################################
 
@@ -1304,22 +1248,20 @@ class stripe:
 
 class imageGeneratorPNG:
 
-   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
+   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, size=(595, 842) ):
       self.pathToPDF       = pathToPDF
       self.pdfFilename     = pdfFilename
       self.pageStart       = pageStart
       self.pageEnd         = pageEnd
-      self.dpi             = dpi
       self.outputFolder    = outputFolder
       self.outputFile      = output_file
       self.scanedDocument  = scanedDocument
-      self.generateJPGWith = generateJPGWith
       self.L               = []
       self.size            = size
       self.IMOP            = imageOperations()
       self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
-      self.errors          = []
-      self.warnings        = []
+      self.errors          = ""
+      self.warnings        = ""
 
    #############################################################################
 
@@ -1351,23 +1293,30 @@ class imageGeneratorPNG:
    def generateSinglePNG(self, page, fn, noc):
 
       img4,BOXLIST               = self.IMOP.pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
-      BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
-      BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
 
-      img4.save(fn + '.png') 
-      img4.name                  = fn+'.png'
-      IMGL                       = [img4]
-  
+      self.IMOP.errors           = "" 
       xmm                        = self.IMOP.calcSplitJPGs(np.array(img4)[:,:,0], noc) 
+      if self.IMOP.errors != "":
+         msg         = "; calculated columns differ from noc for page = " + str(page)  
+         print(msg)
+         self.errors = self.errors + msg
+         SBWL, IMGL = [], []
+      else:
+         BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
+         BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
 
-      imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
-      imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
-      imgSBW.name                = fn + '-bbm.png'    
-      SBWL                       = [imgSBW] 
+         img4.save(fn + '.png') 
+         img4.name                  = fn+'.png'
+         IMGL                       = [img4]
+      
+         imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
+         imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+         imgSBW.name                = fn + '-bbm.png'    
+         SBWL                       = [imgSBW] 
 
-      if noc>1:
-         SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
-         IMGL = self.IMOP.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
+         if noc>1:
+            SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
+            IMGL = self.IMOP.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
 
       return([SBWL, IMGL])
 
@@ -1451,11 +1400,11 @@ class imageGeneratorJPG:
       self.size            = size
       self.IMOP            = imageOperations()
       self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
-      self.errors          = []
-      self.warnings        = []
+      self.errors          = ""
+      self.warnings        = ""
 
       if not(scanedDocument):
-         self.imageGeneratorPNG = imageGeneratorPNG( pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) )
+         self.imageGeneratorPNG = imageGeneratorPNG( pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, size=(595, 842) )
 
    #############################################################################      
    
