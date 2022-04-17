@@ -49,237 +49,6 @@ inv     = np.linalg.inv
 diag    = np.diag
 imag,real = np.imag, np.real
 
-###########################################################################
-
-def printMat(A):
-   print('\n'.join([''.join(['|{:5}'.format(item) for item in row]) for row in A]))
-
-###########################################################################
-
-def evaluateCalibration(pred, labels):
-   r    = list(range(1, len(pred)+1))
-   erg  = list(1*(pred == labels)) 
-   M    = np.array([ list(r), list(pred), list(erg), list(labels)], dtype='int')
-   printMat(tp(M))
-   print(erg.count(0)/len(erg))
-
-#############################################################################
-
-def saveIt(ERG, fname):
-   
-   a     = datetime.now()
-   dstr  = a.strftime("%d.%m.%Y-%H:%M:%S") 
-   pickle_out = open(fname + '-'+dstr, 'wb')
-   pickle.dump(ERG, pickle_out)
-   pickle_out.close()
-   return(dstr)
-
-#############################################################################         
-        
-def loadIt(fname):
-   pickle_in   = open(fname,"rb")
-   CL          = pickle.load(pickle_in)   
-   return(CL)        
-          
-#############################################################################         
-
-def f(i):
-   def fi(x):
-      return(x[i])
-   return(fi)
- 
-f0 = f(0)
-f1 = f(1)
-f2 = f(2)
-f3 = f(3)
-f4 = f(4)
-f5 = f(5)
-
-#############################################################################  
-
-def pdfToBlackBlocksAndLines(pathPDFFilename, PDFfilename, pathOutput, page, what, format, withSave=True, useXML = True):   
-
-### what in ('block', 'line', 'word')
-
-   def f4(x):
-      return(list(map(float, x)))
-
-   def f5(x):
-      return([x["xmin"], x["ymin"], x["xmax"], x["ymax"]])
-
-   def tr_pdf2txt_png(C, alpha, beta):
-      x1 = alpha*C[0]
-      x2 = alpha*C[2]
-      y1 = beta*(pdfH-C[1])
-      y2 = beta*(pdfH-C[3])
-      return([x1,y1,x2,y2])
-
-   def tr_pdf2txt_png(C, alpha, beta):
-      x1 = alpha*C[0]
-      x2 = alpha*C[2]
-      y1 = beta*(pdfH-C[1])
-      y2 = beta*(pdfH-C[3])
-      return([x1,y1,x2,y2])
-
-   def tr_pdftotext_png(C, alpha, beta):  
-      x1 = alpha*C[0]
-      x2 = alpha*C[2]
-      y1 = beta*C[1]
-      y2 = beta*C[3]
-      return([x1, y1, x2, y2])
-
-   
-   inputfname      = PDFfilename + ".pdf"
-   outputfname     = PDFfilename + "-pdfToText-p" + str(page) + ".xml"
-   
-   if not(useXML):   
-      ss              = "pdftotext -q -bbox-layout -f " + str(page) + " -l " + str(page) + " -htmlmeta " + pathPDFFilename + inputfname + " " + pathOutput+outputfname; 
-      subprocess.check_output(ss, shell=True,executable='/bin/bash')
-
-   #print(ss)
-   soup_pdfToText  = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
-   whatList        = soup_pdfToText.find_all(what)
-   #lines           = soup_pdfToText.find_all('word')
-   pdfW            = float(soup_pdfToText.find_all('page')[0]["width"].encode())
-   pdfH            = float(soup_pdfToText.find_all('page')[0]["height"].encode())
-
-   img   = Image.new(mode="RGB",size=(round(pdfW), round(pdfH)), color=(255,255,255))
-   draw  = ImageDraw.Draw(img)
-   pngW  = img.size[0]
-   pngH  = img.size[1]
-   alpha = pngW/pdfW
-   beta  = pngH/pdfH
-
-   BOXLIST = []
-   a       = list(map(f5, whatList))
-   c       = list(map(f4, a))
-
-   for x in c:
-      box = tr_pdftotext_png(x, alpha, beta)
-      BOXLIST.append(box)
-      draw.rectangle(box, fill=(0,0,0)) #, outline="#80FF00") # grün
-   
-   if withSave:
-      pngfn = PDFfilename + '-' + str(page) + '-'+format +'-' +what + '.png'
-      img.save(pathOutput+pngfn)
-
-   return([img, BOXLIST])
- 
-############################################################################# 
-
-def getFormatFromPDFPage(pathPDFFilename, PDFFilename, page):
-
-   ss = "pdfinfo -f " + str(page) + " -l " + str(page) + " " + pathPDFFilename+ PDFFilename + ".pdf" + " | grep -i '" + str(page) + " size'"  
-   tt = subprocess.check_output(ss, shell=True,executable='/bin/bash')
-   tt = tt.decode('utf-8')
-   tt = tt.replace(' ', '')
-   aa = tt.split('x')
-   x = float(aa[0].split(':')[1])
-   y = float(aa[1].split('pts')[0]) 
-   
-   return([x,y])
-
-#############################################################################  
-  
-def getNumberOfPagesFromPDFFile(pathPDFFilename, PDFFilename):
-
-   ss  = "pdfinfo " + pathPDFFilename+ PDFFilename + ".pdf" + " | grep -i Pages"  
-   tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash')
-   tt  = tt.decode('utf-8')
-   tt  = tt.replace(' ', '').replace('\n','')
-   aa  = tt.split(':')
-   nOP = int(aa[1]) 
-   
-   return(nOP)
-   
-#############################################################################
-
-def getsha256(path, file):
-   ss = "sha256sum " + path+ file  
-   tt  = subprocess.check_output(ss, shell=True,executable='/bin/bash').decode('utf-8')   
-   return(tt.split(' ')[0])
-   
-#############################################################################
-
-def makeEven(x):
-   return( x + x%2)    
- 
-#############################################################################
-
-def makeIt(CL,SWO,description ):
-   
-   tt = tqdm(CL)
-   tt.set_description_str('calculation SWCs for ' + description  +'...')
-   
-   t1 = timeit.time.time() 
-   foo_ = partial(ST.deepScattering, SWO=SWO)
-   output = Parallel(mp.cpu_count())(delayed(foo_)(i) for i in tt)
-   t2 = timeit.time.time(); print(t2-t1)
-   return(output)            
-
-#############################################################################
-
-def findPos(l,L):
-   try:
-      pos = L.index(l)
-   except:
-      pos = -1   
-
-   return(pos) 
-
-#############################################################################
-
-def prepareDataForRF(whichLabelToPredict, SWC, SQL, con):
-
-   rs  = con.execute(SQL)
-   HL  = []
-   for row in rs:
-      rr = list(row)
-      for ii in range(len(rr)):
-         if rr[ii]==None:
-            rr[ii] = ''
-      HL.append(rr)
-   
-   AL = []
-   al = [] 
-   pl = []
-
-   DATA   = SWC.master.data
-   LABELS = SWC.master.labels 
-   O      = getattr(LABELS, whichLabelToPredict)
-
-   for ii in range(len(HL)):
-      h    = HL[ii][0]
-      spos = findPos(h, DATA.HL)
-      if spos>=0:
-         lpos = findPos(h, O.HL)
-         if lpos>=0:
-            AL.append(DATA.AL[spos]) 
-            al.append(O.LL[lpos])
-            pl.append(h)
-   
-   return([AL, al, pl])
-
-############################################################################# 
-
-def makeValidationSet(whichLabelToPredict, SWC):
-   AL_challenge = []
-   al_challenge = []
-   pl_challenge = []   
-   O            = getattr(SWC.challenge.labels, whichLabelToPredict)
-   
-   for ii in range(len(SWC.challenge.data.HL)):
-      h    = SWC.challenge.data.HL[ii] 
-      lpos = findPos(h, O.HL)
-      if lpos>=0:
-         AL_challenge.append(SWC.challenge.data.AL[ii])
-         al_challenge.append(O.LL[lpos])
-         pl_challenge.append(h)    
-
-   return([AL_challenge, al_challenge, pl_challenge])
-
-############################################################################# 
-#############################################################################  
 
 
 
@@ -301,6 +70,8 @@ class matrixGenerator:
 
    def __init__(self, compressMethod):
       self.compressMethod = compressMethod
+      self.errors         = []
+      self.warnings       = []
    
    #############################################################################   
       
@@ -498,146 +269,21 @@ class matrixGenerator:
             HL.append(r[hash_nn])
            
       return([LL, HL])
+
+   ###########################################################################
+
+   def printMat(A):
+      print('\n'.join([''.join(['|{:5}'.format(item) for item in row]) for row in A]))
+
+###########################################################################
           
-#############################################################################  
+  
 
 
 
 
 
 
-
-
-
-
-class PNGGenerator:
-
-   #############################################################################  
-   ###  generatePNGS          | inserDataIntoDB                             ####  
-   ###  extractSinglePages    |                                             ####  
-   ###  insertRawDataIntoDB   |                                             ####  
-   #############################################################################  
-
-   def __init__(self, pathPDFFilename, PDFFilename, DB='TAO', table='TAO', deleteXML = True):  # PDFFilename without ending .pdf, i.e. if your file is named "document.pdf" then PDFFilename='document'
-      self.PDFFilename     = PDFFilename
-      self.pathPDFFilename = pathPDFFilename
-      self.DB              = DB
-      self.table           = table
-      self.deleteXML       = deleteXML
-
-   #############################################################################
-
-   def generatePNGS(self, pathOutput, what, startPage=1, endPage=0 ) :
-      self.pathOutput = pathOutput
-      self.startPage  = startPage
-      self.endPage    = endPage
-      self.what       = what
-      
-      if endPage ==0:
-         endPage = getNumberOfPagesFromPDFFile(self.pathPDFFilename, self.PDFFilename)
-
-      self.pathOutputTotal = pathOutput + what + '/'
-      N = []
-      R = tqdm(range(startPage, endPage+1))
-      R.set_description('generating PNGS in ' + self.pathOutputTotal + ' ...')
-         
-      for page in R:
-      
-         [x,y] = getFormatFromPDFPage(self.pathPDFFilename, self.PDFFilename, page)   
-         format = 'portrait'
-         if x > y:
-            format = 'landscape'
-            
-         pngfn = self.pathOutputTotal + self.PDFFilename +'-' + str(page) +'-'+format + '-' + self.what + '.png'
-         pdfToBlackBlocksAndLines( self.pathPDFFilename, self.PDFFilename, self.pathOutputTotal, page, what, format, True, False)
-         
-         hash = getsha256(self.pathOutputTotal, self.PDFFilename +'-' + str(page) +'-'+format + '-' + self.what + '.png')
-         
-         if not hash in list(map(f5, N)):
-            atime = datetime.now()
-            dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
-            erg = [self.pathPDFFilename + self.PDFFilename, pngfn, format, self.what, page, hash, dstr]
-            N.append(erg)
-         else:
-            ss = 'rm ' +  pngfn
-            subprocess.check_output(ss, shell=True,executable='/bin/bash')
-              
-      self.A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'format',  'what', 'page', 'hashValuePNGFile', 'timestamp'])
-      
-      if self.deleteXML:
-         oldpath = os.getcwd()
-         os.chdir(self.pathOutputTotal)
-         ss = 'rm *.xml'
-         subprocess.check_output(ss, shell=True,executable='/bin/bash')
-         os.chdir(oldpath)
-      
-   #############################################################################   
-      
-   def insertRawDataIntoDB(self, user, passwd):
-      ss     = 'mysql+pymysql://' + user + ':' + passwd + '@localhost/' + self.DB
-      engine = create_engine(ss)
-      self.A.to_sql(self.table+'_tmp', engine, if_exists='append', index=False)
-      
-      con    = engine.connect()
-      COL   = list(con.execute('select * from ' + self.table).keys())
-      COLS  = ''
-      for col in COL:
-         COLS = COLS + col + ','
-      COLS = COLS[0:-1]    
-      
-       
-      SQL    = 'DELETE FROM ' + self.table+'_tmp where hashValuePNGFile in (select hashValuePNGFile from ' + self.table + ')' 
-      rs     = con.execute(SQL)
-      SQL    = "INSERT INTO " + self.table + "(" + COLS + ") select " + COLS + " from " + self.table + "_tmp"
-      rs     = con.execute(SQL)
-      SQL    = "DELETE FROM " + self.table+"_tmp"
-      rs     = con.execute(SQL)
-      con.close()
-      
-      #SQL    = "INSERT INTO " + self.table + "(namePDFDocument, filenamePNG, format, what, page, hashValuePNGFile, timestamp) select namePDFDocument, filenamePNG, format, what, min(page)," 
-      #SQL    = SQL + " hashValuePNGFile, timestamp from " + self.table + "_tmp group by namePDFDocument, filenamePNG, format, what, hashValuePNGFile, timestamp"
-      
-   #############################################################################   
-      
-   def insertDataIntoDB(self, user, passwd, DB, table, A):
-      engine = create_engine('mysql+pymysql://' + user + ':' + passwd +'@localhost/' + DB)
-      con    = engine.connect()
-
-      A.to_sql(table + '_tmp', engine, if_exists='replace', index=False)
-      COL   = list(con.execute('select * from ' + table).keys())
-      COLS  = ''
-      for col in COL:
-         COLS = COLS + col + ','
-      COLS = COLS[0:-1]           
-
-      SQL    = "UPDATE " + table + " INNER JOIN " + table + "_tmp on " + table + ".hashValuePNGFile = " + table + "_tmp.hashValuePNGFile SET " 
-      SQL    = SQL + table + ".hasTable              = "+ table + "_tmp.hasTable,"  
-      SQL    = SQL + table + ".numberOfColumns       = "+ table + "_tmp.numberOfColumns,"
-      SQL    = SQL + table + ".col1                  = "+ table + "_tmp.col1,"
-      SQL    = SQL + table + ".col2                  = "+ table + "_tmp.col2,"
-      SQL    = SQL + table + ".col3                  = "+ table + "_tmp.col3,"
-      SQL    = SQL + table + ".pageConsistsOnlyTable = "+ table + "_tmp.pageConsistsOnlyTable,"
-      SQL    = SQL + table + ".source                = "+ table + "_tmp.source,"
-      SQL    = SQL + table + ".timestamp             = "+ table + "_tmp.timestamp,"
-      SQL    = SQL + table + ".T1                    = "+ table + "_tmp.T1,"
-      SQL    = SQL + table + ".T2                    = "+ table + "_tmp.T2,"
-      SQL    = SQL + table + ".T3                    = "+ table + "_tmp.T3,"
-      SQL    = SQL + table + ".T4                    = "+ table + "_tmp.T4,"
-      SQL    = SQL + table + ".numberOfTables        = "+ table + "_tmp.numberOfTables;"
-      rs     = con.execute(SQL)
-     
-      SQL    = "DELETE FROM " + table + "_tmp where hashValuePNGFile in (select hashValuePNGFile from " + table + ");"
-      rs     = con.execute(SQL)
-     
-      SQL    = "INSERT INTO " + table + "(" + COLS + ") select " + COLS + " from " + table + "_tmp;"
-      rs     = con.execute(SQL)
-     
-      SQL    = "DELETE FROM " + table + "_tmp;"
-      rs     = con.execute(SQL)
-   
-      con.close()
-    
-    ############################################################################# 
 
 
 
@@ -652,9 +298,65 @@ class PNGGenerator:
 class imageOperations:
 
    def __init__(self, name='imageOperations'):
-      self.name = name
- 
+      self.name    = name
+      self.errors  = []
+      self.warning = []
+
    ###########################################################################
+
+   def pdfToBlackBlocksAndLines(self, pathPDFFilename, PDFfilename, pathOutput, page, what, format, withSave=True, useXML = True):   
+
+   ### what in ('block', 'line', 'word')
+
+      def f4(x):
+         return(list(map(float, x)))
+
+      def f5(x):
+         return([x["xmin"], x["ymin"], x["xmax"], x["ymax"]])
+
+      def tr_pdftotext_png(C, alpha, beta):  
+         x1 = alpha*C[0]
+         x2 = alpha*C[2]
+         y1 = beta*C[1]
+         y2 = beta*C[3]
+         return([x1, y1, x2, y2])
+
+   
+      inputfname      = PDFfilename + ".pdf"
+      outputfname     = PDFfilename + "-pdfToText-p" + str(page) + ".xml"
+   
+      if not(useXML):   
+         ss              = "pdftotext -q -bbox-layout -f " + str(page) + " -l " + str(page) + " -htmlmeta " + pathPDFFilename + inputfname + " " + pathOutput+outputfname; 
+         subprocess.check_output(ss, shell=True,executable='/bin/bash')
+
+      soup_pdfToText  = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
+      whatList        = soup_pdfToText.find_all(what)
+      pdfW            = float(soup_pdfToText.find_all('page')[0]["width"].encode())
+      pdfH            = float(soup_pdfToText.find_all('page')[0]["height"].encode())
+
+      img   = Image.new(mode="RGB",size=(round(pdfW), round(pdfH)), color=(255,255,255))
+      draw  = ImageDraw.Draw(img)
+      pngW  = img.size[0]
+      pngH  = img.size[1]
+      alpha = pngW/pdfW
+      beta  = pngH/pdfH
+
+      BOXLIST = []
+      a       = list(map(f5, whatList))
+      c       = list(map(f4, a))
+
+      for x in c:
+         box = tr_pdftotext_png(x, alpha, beta)
+         BOXLIST.append(box)
+         draw.rectangle(box, fill=(0,0,0)) #, outline="#80FF00") # grün
+   
+      if withSave:
+         pngfn = PDFfilename + '-' + str(page) + '-'+format +'-' +what + '.png'
+         img.save(pathOutput+pngfn)
+
+      return([img, BOXLIST])
+ 
+   ############################################################################# 
 
    def nextRight(self, m, boxL):
       x1,y1,x2,y2 = m 
@@ -742,6 +444,158 @@ class imageOperations:
 
       return(xmm)
 
+   #############################################################################  
+
+   def calcStartAndEnde(self, B, white=255):
+      b      = B.sum(axis=0)/(B.shape[0]*white)
+      zz     = 0
+      while b[zz] == 1 and zz<len(b)-1:
+         zz = zz+1
+
+      start = zz
+
+      xx    = len(b)-1
+      while b[xx] == 1 and xx>0:
+         xx = xx-1
+      ende = xx  
+
+      return([start, ende, b])
+
+   ########################################################################
+
+   def getColumnsWindow(self, B, start, ende,  white=255, debug=False, bound=0.95):
+
+      xmms           = []
+      mm             = -1
+      b              = B.sum(axis=0)/(B.shape[0]*white)
+      boxL           = []
+
+      #if ende <= start:
+      #   print("ende < start")    
+
+      if start < ende:     
+         mm   = max(b[start:ende])         
+         if mm > bound:
+            found = False
+            zz = start
+            box = [start]
+            while zz < ende:
+               if b[zz] == mm and not(found):
+                  found=True
+                  box.append(zz)
+                  boxL.append(box)
+                  box = []
+               if found and b[zz]<mm:
+                  found=False
+                  box = [zz]                               
+               zz=zz+1
+            if len(box)==1:
+               box.append(zz)
+               boxL.append(box)
+            boxL[-1][1]=ende      
+
+      return([boxL, start, ende, mm, b])
+ 
+   ########################################################################
+
+   def getBorders(self, t,C, start, ende):
+      n,m = C.shape
+      if len(t)==0:
+         t3 = [start, ende]
+         t2 = []
+      else:
+         t1  = list(map( lambda x: np.array(x), t))
+         t2  = list(np.median(t1, axis=0))
+         t3  = [start] + t2 + [ende]
+
+      return([t3,t2])
+
+   ########################################################################
+
+   def unique(self, L):
+      return(  [list(x) for x in set(tuple(x) for x in L)])
+
+   ########################################################################
+
+   def getAllIntersectionIntervals(self, iv, IL):
+      a,b = iv
+      erg = list(filter(lambda x: (x[0] <= a <= x[1]) or (x[0] <= b <= x[2]), IL))
+      return(erg)
+
+   ########################################################################
+
+   def unitedIntervals(self, L, ub=5):
+     
+      xL    = []
+      N     = []
+      zz    = 1
+      a,b   = L[0]
+      I     = [a]
+
+      while zz < len(L):
+         at,bt = L[zz]
+         if 0 <= at-b <= ub:
+            b = bt
+         else:
+            I.append(b)
+            N.append(I)
+            a,b = L[zz]
+            if zz==len(L)-1:
+               N.append([at,bt])
+            I = [a]
+
+         zz=zz+1
+
+      N.append([a, b])
+      N = self.unique(N)
+      N.sort(key=lambda x: x[0])
+      
+      return(N)
+     
+   ########################################################################
+   
+   def getColumns2(self, C, white=255, windowSize=200, stepSize= 50, bound=0.95, part=12, debug=False):
+      n,m           = C.shape
+      erg           = []
+      BL            = []
+      start,ende, b = self.calcStartAndEnde(C[int(n/part):int((part-1)*n/part), :])
+
+      for ii in range(int(n/part), int((part-1)*n/part)-windowSize, stepSize):
+         B    = C[ ii: ii+windowSize, :]
+         BL.append(B)
+         xmms, _, _, mm, b = self.getColumnsWindow(B, start=start, ende=ende, white=white, debug=debug, bound=bound)
+         if len(xmms)>0:
+            xmms              = self.unitedIntervals(xmms)
+         erg.append(xmms)
+
+      t1 = list(filter( lambda x: len(x)==1, erg))
+      t2 = list(filter( lambda x: len(x)==2, erg)) 
+      t3 = list(filter( lambda x: len(x)==3, erg))
+      
+      def f1(t):
+         return( list(map(lambda x: int(x), np.matrix(t).mean(axis=0).tolist()[0])))
+      
+      if len(t3)>0:
+         l1, l2, l3 = list(map(lambda x: x[0], t3)), list(map(lambda x: x[1], t3)), list(map(lambda x: x[2], t3))
+         c1, c2, c3 = f1(l1), f1(l2), f1(l3)
+         a1,b1   = c1
+         a2,b2   = c2
+         a3,b3   = c3
+
+         if (0.9 <= (b1-a1)/(b2-a2) <= 1.1) and (0.9 <= (b1-a1)/(b3-a3) <= 1.1) and (0.9 <= (b3-a3)/(b2-a2) <= 1.1) and ( ( (b1-a1) + (b2-a2) + (b3-a3))/(b3-a1) >= 0.8) :
+            return([[c1,c2,c3], erg, BL, start, ende])
+
+      if len(t2)>0:
+         l1, l2 = list(map(lambda x: x[0], t2)), list(map(lambda x: x[1], t2)) 
+         c1, c2 = f1(l1), f1(l2)
+         a1 ,b1 = c1
+         a2, b2 = c2
+         
+         if 0.8 <= (b1-a1)/(b2-a2) <= 1.2 and ( (b1-a1) + (b2-a2))/(b2-a1) >= 0.8:        
+            return([[c1,c2], erg, BL, start, ende])
+
+      return([ [[start, ende]], erg, BL, start, ende])
+
    ########################################################################
 
    def getColumns(self, C, ws=50, st=3):
@@ -805,8 +659,17 @@ class imageOperations:
       if (noc not in (2,3)) or (col not in list(range(1, noc+1))):
          return(C)
      
-      D  = np.ones(C.shape)*255   
-      dL = self.getColumns(C)        
+      D                  = np.ones(C.shape)*255  
+      dLt, erg, BL, _, _ = self.getColumns2(C)
+      dL                 = []      
+      for ii in range(len(dLt)):
+         if len(dLt)>=2:
+            a1,b1 = dLt[0]
+            a2,b2 = dLt[1]
+            dL    = [ int((a2+b1)*0.5)]
+         if len(dLt) == 3:
+            a3,b3 = dLt[2]
+            dL    = [ int((a2+b1)*0.5), int((b2+a3)*0.5) ]
 
       if noc==2:
          Cl, Cr        = D.copy(), D.copy()
@@ -850,8 +713,8 @@ class imageOperations:
       col_x_min = 0     
          
       if col>0:
-         dL        = self.getColumns(C)
-         
+         dL        = self.getColumns2(C)
+          
          if noc>1:
             if len(dL)>0:
                CC        = self.makeCopiesOfColumns(C, col, noc)
@@ -889,8 +752,26 @@ class imageOperations:
    
    #############################################################################    
 
+   def cutMatrix(self, imgSBW, xmm, SBWL, fn, fileType, bbm=True):
+      C    = np.array(imgSBW)[:,:,0]
+      D    = np.array( 255*np.ones(C.shape), dtype='uint8')
 
+      for ii in range(len(xmm)):
+         a,b = xmm[ii]
+         c   = b-a
+         Ct  = D.copy()
+         n,m = C.shape
+         l   = int(0.5*(m-c))
+         Ct[:, l: l+(b-a)] = C[:, a:b]
+         img = Image.fromarray(Ct)
+         img.name = fn + '-' + str(ii) + fileType
+         if bbm:
+            img.name = fn + '-bbm-' + str(ii) + fileType
+         SBWL.append(img) 
 
+      return(SBWL)
+
+   #############################################################################
 
 
 
@@ -915,6 +796,8 @@ class PDF:
       self.pathPDFFilename = pathPDFFilename
       self.PDFFilename     = PDFFilename
       self.pathOutput      = pathOutput
+      self.errors          = []
+      self.warnings        = []
    
    #############################################################################       
         
@@ -1005,213 +888,6 @@ class PDF:
 
 
 
-class RF:
-
-   #############################################################################  
-   ###  fitRF                  | standardize                                ####  
-   ###  shuffleDataRF          | normalize                                  ####  
-   ###  evaluateRF             |                                            ####
-   ###  getOverviewAnnotations |                                            ####  
-   #############################################################################
-   
-   def __init__(self, name, AL, al, pl, useStandardized=False, info='', verbose=0, numberOfTrees=500 ):
-      self.name            = name
-      self.AL_org          = AL
-      self.al              = al
-      self.pl              = pl
-      self.info            = info
-      self.useStandardized = useStandardized
-      self.verbose         = verbose
-      self.numberOfTrees   = numberOfTrees
-      self.standardize()
-      
-      if useStandardized:
-         self.AL = self.AL_st.copy()
-         if verbose>0:
-            print("using standardized data...")
-      else:
-         self.AL = self.AL_org.copy()
-         if verbose >0:
-            print("using non-standardized data ...")
-         
-      self.fitRF()
-      self.shuffleDataRF()
-      
-      
-   #############################################################################
-   
-   def fitRF(self):
-      self.rf          = RandomForestClassifier(n_estimators=self.numberOfTrees)
-      self.rf.fit(self.AL, self.al)
-      
-   #############################################################################
-      
-   def shuffleDataRF(self):
-      def f0(x):
-         return(x[0])   
-      def f1(x):
-         return(x[1])
-      def f2(x):
-         return(x[2])
-      
-      R  = []
-      for ii in range(len(self.AL)):
-         R.append([self.AL[ii], self.al[ii], self.pl[ii]])
-      np.random.shuffle(R)
-  
-      self.AL = list(map(f0, R))
-      self.al = list(map(f1, R))
-      self.pl = list(map(f2, R))
-   
-   ############################################################################# 
-        
-   def evaluateRF(self, V, v, asDict=False):
-   
-      print(self.name)
-      
-      Vt = V.copy()
-      if self.useStandardized:
-         Vt = self.normalize(V)
-         
-      ypred = self.rf.predict(Vt)
-      erg   = metrics.classification_report(ypred, v, output_dict= asDict)
-      
-      self.ypred = ypred
-      
-      if asDict:
-         return(erg)
-      else:
-         print(erg)   
-         print("length AL: " + str(len(self.AL)))
-         print("length V: " + str(len(V)))
-         return(erg)     
-     
-   #############################################################################  
-      
-   def getOverviewOfAnnotations(self):
-      al = self.al   
-      aa = list(set(al))
-      aa.append(max(aa)+1)
-      M  = np.matrix(np.histogram(al, aa))
-      m1 = list(M[0,1].flatten())
-      m2 = list(M[0,0].flatten())
-      m1.remove(max(m1))
-      M =  mat([m1,m2])
-      return(M)    
- 
-   #############################################################################  
- 
-   def standardize(self, vvr=0.001):
-      AL                 = np.matrix(self.AL_org)
-      v                  = tp(tp(AL).var(1))
-      z                  = np.array(v> vvr , dtype='int')
-      Z                  = np.zeros((AL.shape[1],AL.shape[1])); np.fill_diagonal(Z, z)
-      #idx                = np.argwhere(np.all(Z[..., :] == 0, axis=0))
-      #Zt                 = np.delete(Z, idx, axis=1)
-      #ALt                = AL.dot(Zt)
-      ALt                = AL
-      M                  = np.tile(tp(tp(ALt).mean(1)), (ALt.shape[0],1) )
-      vt                 = tp(tp(ALt).var(1))
-      c                  = list(np.array(vt).flatten())
-      V                  = 1/sqrt(np.tile(vt, (ALt.shape[0],1) ))
-      B                  = np.round( np.array((ALt-M))*np.array(V), 2)
-      T                  = list(map(list, list(B)))
-
-      mt                 = M[0, :]
-      self.mt            = mt
-      self.vt            = vt  
-      self.AL_st         = T
-      
-   ############################################################################# 
-   
-   def normalize(self, v):
-      erg = (v - self.mt)/sqrt(self.vt)
-      return(erg)   
-  
-#############################################################################  
-   
-
-
-
-
-
-   
-   
-   
-   
-class compressMethods:
-   def __init__(self, name, level, adaptMatrix, wavename='bior2.6'):
-      self.name            = name  
-      self.MAT             = matrixGenerator('downsampling')   
-      self.MAT.level       = level
-      self.MAT.aM          = adaptMatrix
-      self.wavename        = wavename
-      self.xroll           = -5
-      self.yroll           = -10
-   #############################################################################
-      
-   def downsampling(self,C):
-      MAT            = self.MAT
-      MAT.mm, MAT.nn = MAT.aM[0], MAT.aM[1]
-      C1 = MAT.downSampling(C, MAT.level)
-      C2 = MAT.adaptMatrix(C1, MAT.mm, MAT.nn)
-      
-      return(C2)
-      
-   #############################################################################   
-    
-   def pywt1(self, C):
-      coeffs   = pywt.wavedec2(C, self.wavename, level=3)
-      Ct       = np.roll(coeffs[0], self.xroll)
-      Ct       = np.roll(Ct,self.yroll, axis=0)
-      Ct       = self.MAT.adaptMatrix(Ct, 106, 76)
-   
-      return(Ct)
-      
-#############################################################################  
-
-
-
-
-
-
-
-
-
-
-class cnnModel:
-   def __init__(self, name, model, level, adaptMatrix):
-      self.name        = name
-      self.model       = model
-      self.level       = level
-      self.adaptMatrix = adaptMatrix
-      self.MAT         = matrixGenerator("gaga")
-        
-   #############################################################################     
-        
-   def prepareMatrix(self, C):
-      C1 = self.MAT.downSampling(C, self.level, padding=True)
-      C2 = self.MAT.adaptMatrix(C1, self.adaptMatrix[0], self.adaptMatrix[1])
-      CL  = list(np.array([C2])/255)
-      erg = np.array(CL).reshape([len(CL), self.adaptMatrix[0], self.adaptMatrix[1],1])
-      return(erg)
-
-   #############################################################################
-
-   def predictClass(self, C):
-      Ct  = self.prepareMatrix(C)
-      erg = self.model.predict_classes(Ct)
-      return(erg[0]) 
- 
-#############################################################################  
-
-
-
-
-
-
-
-
 
 
 
@@ -1225,6 +901,8 @@ class columns:
       self.up    = up
       self.down  = down
       self.white = white
+      self.errors         = []
+      self.warnings       = [] 
    
    ################################################################################################
 
@@ -1624,8 +1302,7 @@ class stripe:
 
 
 
-
-class JPGGenerator:
+class imageGeneratorPNG:
 
    def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
       self.pathToPDF       = pathToPDF
@@ -1641,7 +1318,144 @@ class JPGGenerator:
       self.size            = size
       self.IMOP            = imageOperations()
       self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
-      self.onlyPNG         = False
+      self.errors          = []
+      self.warnings        = []
+
+   #############################################################################
+
+   def saveImg(self, IMGL, SBWL):
+
+      for ii in range(len(IMGL)):
+         img = IMGL[ii]
+         fn  = img.name
+         img.save(fn)
+
+      for ii in range(len(SBWL)):
+         img = SBWL[ii]
+         fn  = img.name
+         img.save(fn)
+
+   ###############################################################################
+
+   def findPageNOC(self, NOCL, page):
+      noc = 0
+      for ii in range(len(NOCL)):
+         l = NOCL[ii]
+         if l[1] == page:
+            noc = l[2]
+      
+      return(noc)
+
+   #############################################################################
+
+   def generateSinglePNG(self, page, fn, noc):
+
+      img4,BOXLIST               = self.IMOP.pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
+      BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
+      BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
+
+      img4.save(fn + '.png') 
+      img4.name                  = fn+'.png'
+      IMGL                       = [img4]
+  
+      xmm                        = self.IMOP.calcSplitJPGs(np.array(img4)[:,:,0], noc) 
+
+      imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
+      imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+      imgSBW.name                = fn + '-bbm.png'    
+      SBWL                       = [imgSBW] 
+
+      if noc>1:
+         SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
+         IMGL = self.IMOP.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
+
+      return([SBWL, IMGL])
+
+   #############################################################################
+ 
+   def generatePNG(self, getNOCfromDB=True, onlyScanned=False):
+
+      N          = []
+      self.Q     = []
+      SQL        = "SELECT namePDFDocument, page, numberOfColumns FROM TAO where namePDFDocument='" + self.pathToPDF + self.pdfFilename  + "' and format='portrait' and what='word' and original='YES' and page in ("
+      NOCL       = []
+      ss         = "rm -f " + self.outputFolder+ "tmp/*.jpg"
+
+      if self.pageStart ==1 and self.pageEnd == 0:
+         self.pageEnd = self.PDF.getNumberOfPagesFromPDFFile()
+      
+      if len(self.L)==0:   
+         R = tqdm(range(self.pageStart, self.pageEnd+1))
+         for ii in range(self.pageStart, self.pageEnd+1):
+            SQL = SQL + str(ii) + ','
+      else :
+         for ii in range(len(self.L)):
+            SQL = SQL + str(self.L[ii]) + ','
+         R = tqdm(self.L) 
+
+      SQL = SQL[0:-1] + ') order by page'
+      
+      if getNOCfromDB:
+         rs   = self.con.execute(SQL)  
+         NOCL = list(rs)
+      else:
+         if len(self.L)>0:
+            NOCL = np.ones(len(self.L))
+         else:
+            NOCL = np.ones(self.pageEnd-self.pageStart)
+
+      R.set_description('generating PNGs in ' + self.outputFolder + ' ...')
+      
+      for page in R:
+         tt         = subprocess.check_output(ss, shell=True,executable='/bin/bash')                                                     
+         x,y,format = self.PDF.getFormatFromPDFPage(page)   
+            
+         if format == 'portrait': 
+            noc     = self.findPageNOC(NOCL, page)
+            #print("page=" + str(page) + " noc=" + str(noc))
+            fn         = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
+            SBWL, IMGL = self.generateSinglePNG(page, fn, noc)
+
+            self.saveImg(IMGL, SBWL)
+
+            hashPNG = self.IMOP.getsha256(fn+ '.png')
+            hashJPG = None
+         
+            if (not hashPNG in list(map(lambda x: x[6], N))):
+               atime = datetime.now()
+               dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
+               erg = [self.pathToPDF + self.pdfFilename, hashJPG, fn+ '.jpg', format, 'word', page, hashPNG, hashJPG, dstr]
+               N.append(erg)    
+
+         self.A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'filenameJPG','format',  'what', 'page', 'hashValuePNGFile', 'hashValueJPGFile', 'timestamp'])
+
+
+
+
+
+
+
+class imageGeneratorJPG:
+
+   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
+      self.pathToPDF       = pathToPDF
+      self.pdfFilename     = pdfFilename
+      self.pageStart       = pageStart
+      self.pageEnd         = pageEnd
+      self.dpi             = dpi
+      self.outputFolder    = outputFolder
+      self.outputFile      = output_file
+      self.scanedDocument  = scanedDocument
+      self.generateJPGWith = generateJPGWith
+      self.L               = []
+      self.size            = size
+      self.IMOP            = imageOperations()
+      self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
+      self.errors          = []
+      self.warnings        = []
+
+      if not(scanedDocument):
+         self.imageGeneratorPNG = imageGeneratorPNG( pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) )
 
    #############################################################################      
    
@@ -2007,27 +1821,6 @@ class JPGGenerator:
 
    ###############################################################################
 
-   def cutMatrix(self, imgSBW, xmm, SBWL, fn, fileType, bbm=True):
-      C    = np.array(imgSBW)[:,:,0]
-      D    = np.array( 255*np.ones(C.shape), dtype='uint8')
-
-      for ii in range(len(xmm)):
-         a,b = xmm[ii]
-         c   = b-a
-         Ct  = D.copy()
-         n,m = C.shape
-         l   = int(0.5*(m-c))
-         Ct[:, l: l+(b-a)] = C[:, a:b]
-         img = Image.fromarray(Ct)
-         img.name = fn + '-' + str(ii) + fileType
-         if bbm:
-            img.name = fn + '-bbm-' + str(ii) + fileType
-         SBWL.append(img) 
-
-      return(SBWL)
-
-   #############################################################################
-
    def generateSBW(self, q, img1, img3,  NNL, boxL2, noc, xmm, fn):
 
       pp, p1,p2, p3,p4 = q
@@ -2048,7 +1841,7 @@ class JPGGenerator:
       SBWL        = [imgSBW]
 
       if noc>1:
-         SBWL = self.cutMatrix(imgSBW, xmm, SBWL, fn, '.jpg')
+         SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.jpg')
 
       return(SBWL)
 
@@ -2083,68 +1876,39 @@ class JPGGenerator:
       draw3, boxL2               = self.addBox(draw3, M3, NN, boxL2)
       q                          = [page] + self.makeQualityCheck(img1, img2)  
      
-      img4,BOXLIST               = pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
-      BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
-      BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
-
-      img4.save(fn + '.png') 
-      img4.name                  = fn+'.png'
-      IMGL                       = [img4]
-  
-      xmm                        = self.IMOP.calcSplitJPGs(np.array(img4)[:,:,0], noc) 
-
-      imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
-      imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
-      imgSBW.name                = fn + '-bbm.png'    
-      SBWL                       = [imgSBW] 
-
-      if noc>1:
-         SBWL = self.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
-         IMGL = self.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
-
-      for ii in range(len(SBWL)):
-         img = SBWL[ii]
-         img.save(img.name)
-
-      for ii in range(len(IMGL)):
-         img = IMGL[ii]
-         img.save(img.name)
-
-      if not(self.onlyPNG):
-         if len(q)==3:
-            q.extend([0,0])
-         self.Q.append(q)
+      if len(q)==3:
+         q.extend([0,0])
+      self.Q.append(q)
       
-         xmm       = []
-         imgToSave = self.imageToSave(q)
-         if imgToSave == 'img3':
-            img3.name = fn + '.jpg'
-            IMGL      = [img3]
-            C         = np.array(img3)[:,:,0]
-         else:
-            img1.name = fn + '.jpg'
-            IMGL      = [img1]
-            C         = np.array(img1)[:,:,0]
+      xmm       = []
+      imgToSave = self.imageToSave(q)
+      if imgToSave == 'img3':
+         img3.name = fn + '.jpg'
+         IMGL      = [img3]
+         C         = np.array(img3)[:,:,0]
+      else:
+         img1.name = fn + '.jpg'
+         IMGL      = [img1]
+         C         = np.array(img1)[:,:,0]
    
-         if noc>1:         
-            D   = np.array( 255*np.ones(C.shape), dtype='uint8')
-            xmm = self.IMOP.calcSplitJPGs(C, noc)
+      if noc>1:         
+         D   = np.array( 255*np.ones(C.shape), dtype='uint8')
+         xmm = self.IMOP.calcSplitJPGs(C, noc)
 
-            for ii in range(len(xmm)):
-               a,b = xmm[ii]
-               c   = b-a
-               Ct  = D.copy()
-               n,m = C.shape
-               l   = int(0.5*(m-c))
-               Ct[:, l: l+(b-a)] = C[:, a:b]
-               img = Image.fromarray(Ct)
-               img.name = fn + '-' + str(ii) + '.jpg'
-               IMGL.append(img) 
+         for ii in range(len(xmm)):
+            a,b = xmm[ii]
+            c   = b-a
+            Ct  = D.copy()
+            n,m = C.shape
+            l   = int(0.5*(m-c))
+            Ct[:, l: l+(b-a)] = C[:, a:b]
+            img = Image.fromarray(Ct)
+            img.name = fn + '-' + str(ii) + '.jpg'
+            IMGL.append(img) 
       
-         SBWL = self.generateSBW(q, img1, img3, NN, boxL2, noc, xmm, fn) 
+      SBWL = self.generateSBW(q, img1, img3, NN, boxL2, noc, xmm, fn) 
     
-
-      return([IMGL, img1, img2, img3, img4, SBWL, NN, boxL2, q])
+      return([IMGL, img1, img2, img3, SBWL, NN, boxL2, q])
 
    #############################################################################
 
@@ -2191,7 +1955,7 @@ class JPGGenerator:
          else:
             NOCL = np.ones(self.pageEnd-self.pageStart)
 
-      R.set_description('generating JPGs and PNGs in ' + self.outputFolder + ' ...')
+      R.set_description('generating JPG in ' + self.outputFolder + ' ...')
       
       for page in R:
          tt         = subprocess.check_output(ss, shell=True,executable='/bin/bash')  
@@ -2204,16 +1968,14 @@ class JPGGenerator:
             imgOrg  = Image.open(pages[0]).convert('L')
             fn      = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
 
-            ### part for scaned documents
-            IMGL, img1, img2, img3, img4, SBWL, NN, boxL2, q   = self.generateJPGOnePage(imgOrg, format, fn, page, noc)
+            IMGL, img1, img2, img3, SBWL, NN, boxL2, q   = self.generateJPGOnePage(imgOrg, format, fn, page, noc)
             self.saveImg(IMGL, SBWL)
-            ### here part for pdf non-scanned
 
             if not(self.scanedDocument):
-               hashPNG = self.IMOP.getsha256(fn+ '.png')
-               hashJPG  = None
-               if not(self.onlyPNG):
-                  hashJPG = self.IMOP.getsha256(fn+ '.jpg')
+               _, IMGL    = self.imageGeneratorPNG.generateSinglePNG(page, fn, noc=1)
+               self.saveImg(IMGL, [])
+               hashPNG    = self.IMOP.getsha256(fn+ '.png')
+               hashJPG    = self.IMOP.getsha256(fn+ '.jpg')
          
                if (not hashJPG in list(map(lambda x: x[7], N))) and (not hashPNG in list(map(lambda x: x[6], N))):
                   atime = datetime.now()
@@ -2222,8 +1984,8 @@ class JPGGenerator:
                   N.append(erg)    
 
             else:
-               hashJPG = self.IMOP.getsha256(jpgfn)
-               if not hashJPG in list(map(lambda x: x[7], N)) :
+               hashJPG = self.IMOP.getsha256(fn + '.jpg')
+               if not hashJPG in list(map(lambda x: x[7], N)):
                   atime = datetime.now()
                   dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
                   erg = [self.pathToPDF + self.pdfFilename, None, fn + '.jpg', format, 'word', page, 'scanedDocument', hashJPG, dstr]
