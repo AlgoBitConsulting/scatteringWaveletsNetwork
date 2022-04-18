@@ -66,7 +66,7 @@ pathOutput3      = '/home/markus/anaconda3/python/pngs/train/test/'
 PDF              = dOM.PDF(pathPDFFilename1, PDFFilename1, pathOutput1)
 MAT              = dOM.matrixGenerator('downsampling')
 MAT.description  = "TEST"
-C1               = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/train-216-portrait-word.png')
+
 
 
 trainJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename1, 
@@ -147,87 +147,6 @@ challengePNG.generatePNG()
 
 
 
-"""
-C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/lf-gb2019finalg-2-columns-pages-with-at-least-one-table-' + str(20) + '-portrait-word.png')
-s, erg, BL, start, ende  = challengePNG.IMOP.getColumnsCoordinates(C)
-dL                       = challengePNG.IMOP.getColumns(C) 
-xmms, start, ende, mm, b =challengePNG.IMOP.getColumnsWindow(BL[0], start, ende)
-
-B = BL[0].copy()
-l = list(np.concatenate(xmms))
-for a in l:
-   B[:, a] = 0
-
-#Image.fromarray(B).show()
-
-
-#C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/challenge/word/challenge-' + str(6) + '-portrait-word.png')
-C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/lf-gb2019finalg-2-columns-pages-with-at-least-one-table-' + str(15) + '-portrait-word.png')
-xmm = trainPNG.IMOP.calcSplit(C,2)
-xmm2 = trainPNG.IMOP.getColumnsCoordinates(C)[0]
-
-
-
-
-SQL1 = "select namePDFDocument, page, numberOfColumns from TAO where namePDFDocument like '%%challenge%%' order by page"
-SQL2 = "select namePDFDocument, page, numberOfColumns from TAO where namePDFDocument like '%%train/train%%' order by page"
-rs             = challengePNG.con.execute(SQL1)
-COLN           = list(rs.keys())
-LLL            = list(rs)
-
-ERG = []
-R = tqdm(0*LLL)
-for l in R:
-   A, page, numberOfColumns = l
-   C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/challenge/word/challenge-' + str(page) + '-portrait-word.png')
-   s, erg, BL, _, _ = challengePNG.IMOP.getColumnsCoordinates(C)
- 
-   #C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/train-' + str(page) + '-portrait-word.png')
-   #s, erg, BL, _, _ = trainPNG.IMOP.getColumnsCoordinates(C)
-
-   ERG.append([page, numberOfColumns, len(s), s])
-
-challengePNG.con.close()
-
-E  = list(filter( lambda x: x[1] != x[2] , ERG))
-print("Fehler-Quote = " + str(round(len(E)/len(LLL),4)))
-
-
-pl = list(map(lambda x: x[0], E))
-ML = []
-for p in 0*pl:
-   C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/train-' + str(p) + '-portrait-word.png')   
-   ML.append(C)
-
-
-
-
-
-#CL = list(map(lambda x: trainPNG.IMOP.getColumns2( x, white=255, windowSize=200, stepSize= 50, bound=0.99, debug=False), ML))
-#[s, erg, BL, start, ende] = CL[2]
-#xmms, start, ende, mm, b =trainPNG.IMOP.getColumnsWindow(BL[2], start, ende)
-
-#ergt = list(map(lambda x: trainPNG.IMOP.getColumnsWindow(x, start, ende), BL))
-
-
-C = MAT.generateMatrixFromImage('/home/markus/anaconda3/python/pngs/train/word/train-' + str(855) + '-portrait-word.png')   
-s, erg, BL, start, ende = trainPNG.IMOP.getColumnsCoordinates( C, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False)
-
-
-nn =0
-xmms, start, ende, mm, b =trainPNG.IMOP.getColumnsWindow(BL[nn], start, ende)
-#L = [[43, 71], [72, 98], [134, 170], [171, 292], [294, 500], [550, 600]]
-#gg=trainPNG.IMOP.unitedIntervals(L)
-
-
-
-B = BL[nn].copy()
-l = list(np.concatenate(xmms))
-for a in l:
-   B[:, a] = 0
-
-Image.fromarray(B).show()
-
 
 
 
@@ -235,11 +154,11 @@ Image.fromarray(B).show()
 #*** MAIN PART
 #***
 #
-#  exec(open("testGeneral.py").read())
+#  exec(open("generatePNGsAndJPGs.py").read())
 #
 
 
 # 115, 518, 519, 664, 666, 717, 855, 880
 
-"""
+
 

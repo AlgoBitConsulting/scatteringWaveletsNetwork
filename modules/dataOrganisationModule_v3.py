@@ -297,10 +297,18 @@ class matrixGenerator:
     
 class imageOperations:
 
-   def __init__(self, name='imageOperations'):
-      self.name    = name
-      self.errors  = ""
-      self.warning = ""
+   def __init__(self, windowSize, stepSize, bound, part, ub):
+      self.name       = "imageOperations"
+      self.errors     = ""
+      self.warning    = ""
+      self.windowSize = windowSize
+      self.stepSize   = stepSize
+      self.bound      = bound
+      self.part       = part      
+      self.ub         = ub
+      self.white      = 255
+      self.colRatio   = [0.8, 1.2]
+      self.totalRatio = 0.8
 
    ###########################################################################
 
@@ -432,22 +440,40 @@ class imageOperations:
 
    #############################################################################   
 
-   def calcSplitJPGs(self, img, noc):
+   def calcSplit(self, img, noc):  # noc=0 gets results from getColMinMax and overrides noc
 
       C   = np.array(img)
       C1  = np.array( 255*(np.array( C>180, dtype='int')), dtype='uint8')
+      
+      s   = self.getColumnsCoordinates(C)[0]
 
-      xmm = []
-      for col in range(1, noc+1):
-         col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
-         xmm.append([ col_x_min, col_x_max])
+      if len(s)!= noc and noc>0:
+         msg         = "; calculated columns differ from noc for page"
+         self.errors          = self.errors + msg
+         _, _, _, start, ende = self.getColumnsCoordinates(C)
+         n,m                  = C.shape
+
+         if noc == 1:
+            xmm = [ [0, m]]
+         if noc == 2:
+            r = int((ende-start)/2)
+            xmm = [ [0, start + r], [start + r, m]]         
+         if noc == 3:
+            r = int((ende-start)/3)
+            xmm = [ [0, start + r], [start + r, start + 2*r], [start + 2*r, m]]
+      else:
+         xmm = []
+         for col in range(1, noc+1):
+            col_x_min, col_x_max = self.getColMinMaxCC(noc, col, C1)
+            xmm.append([ col_x_min, col_x_max])
 
       return(xmm)
 
    #############################################################################  
 
-   def calcStartAndEnde(self, B, white=255):
-      b      = B.sum(axis=0)/(B.shape[0]*white)
+   def calcStartAndEnde(self, B):
+
+      b      = B.sum(axis=0)/(B.shape[0]*self.white)
       zz     = 0
       while b[zz] == 1 and zz<len(b)-1:
          zz = zz+1
@@ -463,19 +489,16 @@ class imageOperations:
 
    ########################################################################
 
-   def getColumnsWindow(self, B, start, ende,  white=255, debug=False, bound=0.95):
+   def getColumnsWindow(self, B, start, ende):
 
       xmms           = []
       mm             = -1
-      b              = B.sum(axis=0)/(B.shape[0]*white)
+      b              = B.sum(axis=0)/(B.shape[0]*self.white)
       boxL           = []
-
-      #if ende <= start:
-      #   print("ende < start")    
 
       if start < ende:     
          mm   = max(b[start:ende])         
-         if mm > bound:
+         if mm > self.bound:
             found = False
             zz = start
             box = [start]
@@ -524,7 +547,7 @@ class imageOperations:
 
    ########################################################################
 
-   def unitedIntervals(self, L, ub=5):
+   def unitedIntervals(self, L):
      
       xL    = []
       N     = []
@@ -534,7 +557,7 @@ class imageOperations:
 
       while zz < len(L):
          at,bt = L[zz]
-         if 0 <= at-b <= ub:
+         if 0 <= at-b <= self.ub:
             b = bt
          else:
             I.append(b)
@@ -554,16 +577,16 @@ class imageOperations:
      
    ########################################################################
    
-   def getColumnsCoordinates(self, C, white=255, windowSize=200, stepSize= 50, bound=0.95, part=12, debug=False):
+   def getColumnsCoordinates(self, C):
       n,m           = C.shape
       erg           = []
       BL            = []
-      start,ende, b = self.calcStartAndEnde(C[int(n/part):int((part-1)*n/part), :])
+      start,ende, b = self.calcStartAndEnde(C[int(n/self.part):int((self.part-1)*n/self.part), :])
 
-      for ii in range(int(n/part), int((part-1)*n/part)-windowSize, stepSize):
-         B    = C[ ii: ii+windowSize, :]
+      for ii in range(int(n/self.part), int((self.part-1)*n/self.part)-self.windowSize, self.stepSize):
+         B    = C[ ii: ii + self.windowSize, :]
          BL.append(B)
-         xmms, _, _, mm, b = self.getColumnsWindow(B, start=start, ende=ende, white=white, debug=debug, bound=bound)
+         xmms, _, _, mm, b = self.getColumnsWindow(B, start=start, ende=ende)
          if len(xmms)>0:
             xmms              = self.unitedIntervals(xmms)
          erg.append(xmms)
@@ -575,6 +598,7 @@ class imageOperations:
       def f1(t):
          return( list(map(lambda x: int(x), np.matrix(t).mean(axis=0).tolist()[0])))
       
+      lb, ub = self.colRatio
       if len(t3)>0:
          l1, l2, l3 = list(map(lambda x: x[0], t3)), list(map(lambda x: x[1], t3)), list(map(lambda x: x[2], t3))
          c1, c2, c3 = f1(l1), f1(l2), f1(l3)
@@ -582,7 +606,7 @@ class imageOperations:
          a2,b2   = c2
          a3,b3   = c3
 
-         if (0.9 <= (b1-a1)/(b2-a2) <= 1.1) and (0.9 <= (b1-a1)/(b3-a3) <= 1.1) and (0.9 <= (b3-a3)/(b2-a2) <= 1.1) and ( ( (b1-a1) + (b2-a2) + (b3-a3))/(b3-a1) >= 0.8) :
+         if (lb <= (b1-a1)/(b2-a2) <= ub) and (lb <= (b1-a1)/(b3-a3) <= ub) and (lb <= (b3-a3)/(b2-a2) <= ub) and ( ( (b1-a1) + (b2-a2) + (b3-a3))/(b3-a1) >= self.totalRatio) :
             return([[c1,c2,c3], erg, BL, start, ende])
 
       if len(t2)>0:
@@ -591,17 +615,17 @@ class imageOperations:
          a1 ,b1 = c1
          a2, b2 = c2
          
-         if 0.8 <= (b1-a1)/(b2-a2) <= 1.2 and ( (b1-a1) + (b2-a2))/(b2-a1) >= 0.8:        
+         if lb <= (b1-a1)/(b2-a2) <= ub and ( (b1-a1) + (b2-a2))/(b2-a1) >= self.totalRatio:        
             return([[c1,c2], erg, BL, start, ende])
 
       return([ [[start, ende]], erg, BL, start, ende])
 
    ########################################################################
 
-   def getColumns(self, C, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
+   def getColumns(self, C):
 
       error              = False
-      dLt, erg, BL, _, _ = self.getColumnsCoordinates(C,white=white, windowSize=windowSize, stepSize= stepSize, bound=bound, part=part, debug=debug)
+      dLt, erg, BL, _, _ = self.getColumnsCoordinates(C)
       dL                 = []      
       n,m                = C.shape
 
@@ -620,13 +644,13 @@ class imageOperations:
       
    #############################################################################      
 
-   def makeCopiesOfColumns(self, C, col, noc, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
+   def makeCopiesOfColumns(self, C, col, noc):
 
       if (noc not in (2,3)) or (col not in list(range(1, noc+1))):
          return(C)
      
       D                  = np.ones(C.shape)*255  
-      dL                 = self.getColumns(C, white=white, windowSize=windowSize, stepSize=stepSize, bound=bound, part=part, debug=debug)
+      dL                 = self.getColumns(C)
       CC                 = C
 
       if len(dL)+1 != noc:
@@ -667,10 +691,10 @@ class imageOperations:
 
    #############################################################################
 
-   def getColMinMaxCC(self, noc, col, C, white=255, windowSize=450, stepSize= 50, bound=0.99, part=8, debug=False):
+   def getColMinMaxCC(self, noc, col, C):
    
       col_x_min, col_x_max = 0, C.shape[1]
-      dL                   = self.getColumns(C, white=white, windowSize=windowSize, stepSize= stepSize, bound=bound, part=part, debug=debug) 
+      dL                   = self.getColumns(C) 
 
       if len(dL)+1 != noc:
          self.errors = "number of columns detected by getColumns() is not the same as given noc"
@@ -1014,12 +1038,13 @@ class columns:
 
 
 class stripe:
-   def __init__(self, C, stepSize, windowSize, direction, SWO_2D):
+   def __init__(self, typeOfFile, C, stepSize, windowSize, direction, SWO_2D):
       self.stepSize   = stepSize
       self.windowSize = windowSize
       self.direction  = direction
       self.SWO_2D     = SWO_2D
       self.C          = C
+      self.typeOfFile = typeOfFile       
 
    ########################################################################### 
             
@@ -1080,12 +1105,12 @@ class stripe:
       #print("generating matrices for each column for method " + INFO.method + "...")
 
       MAT       = matrixGenerator("downsampling")
-      C         = np.matrix( MAT.generateMatrixFromImage(fname+'.jpg'), dtype='uint8')
-      xmm       = jpggen.calcSplitJPGs(C, noc)
+      C         = np.matrix( MAT.generateMatrixFromImage(fname + self.typeOfFile), dtype='uint8')
+      xmm       = jpggen.calcSplit(C, noc)
    
       if method=='bBHV':
          fname = fname + '-bbm'
-         C     = np.matrix( MAT.generateMatrixFromImage(fname+'.jpg'), dtype='uint8')     
+         C     = np.matrix( MAT.generateMatrixFromImage(fname+ self.typeOfFile), dtype='uint8')     
 
       CL  = []
       if noc==1:
@@ -1094,7 +1119,7 @@ class stripe:
          CL.append([C, 0,1] )
       else:   
          for col in range(0, noc):
-            C = np.matrix( MAT.generateMatrixFromImage(fname+ '-' + str(col) + '.jpg'), dtype='uint8')
+            C = np.matrix( MAT.generateMatrixFromImage(fname+ '-' + str(col) + self.typeOfFile), dtype='uint8')
             if onlyWhiteBlack:
                C = np.array( 255*np.array( C>= wBB, dtype='int'), dtype='uint8')
             CL.append([C, col, noc])
@@ -1175,9 +1200,15 @@ class stripe:
       WL, ergLabel = [], []
 
       if kindOfBox == 'TA':
-         SQL    = "select hashValueJPGFile, LUBOX_x, LUBOX_y, RLBOX_x, RLBOX_y from boxCoordinatesOfTables where hashValueJPGFile = '" + hashValue + "'"   
+         if self.typeOfFile == '.jpg':
+            SQL    = "select hashValueJPGFile, LUBOX_x, LUBOX_y, RLBOX_x, RLBOX_y from boxCoordinatesOfTables where hashValueJPGFile = '" + hashValue + "'"   
+         if self.typeOfFile == '.png':
+            SQL    = "select hashValueJPGFile, LUBOX_x, LUBOX_y, RLBOX_x, RLBOX_y from boxCoordinatesOfTables where hashValuePNGFile = '" + hashValue + "'"   
       else:   
-         SQL    = "select hashValueJPGFile, LUHL_x, LUHL_y, RLHL_x, RLHL_y     from boxCoordinatesOfTables where hashValueJPGFile = '" + hashValue + "' and LUHL_x is not NULL"   
+         if self.typeOfFile == '.jpg':
+            SQL    = "select hashValueJPGFile, LUHL_x, LUHL_y, RLHL_x, RLHL_y     from boxCoordinatesOfTables where hashValueJPGFile = '" + hashValue + "' and LUHL_x is not NULL"   
+         if self.typeOfFile == '.png':
+            SQL    = "select hashValueJPGFile, LUHL_x, LUHL_y, RLHL_x, RLHL_y     from boxCoordinatesOfTables where hashValuePNGFile = '" + hashValue + "' and LUHL_x is not NULL"   
 
       rs     = con.execute(SQL)
       K      = list(rs)   
@@ -1248,7 +1279,7 @@ class stripe:
 
 class imageGeneratorPNG:
 
-   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, size=(595, 842) ):
+   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, windowSize=450, stepSize=50, bound=0.99, part=8, ub=5, size=(595, 842) ):
       self.pathToPDF       = pathToPDF
       self.pdfFilename     = pdfFilename
       self.pageStart       = pageStart
@@ -1258,7 +1289,7 @@ class imageGeneratorPNG:
       self.scanedDocument  = scanedDocument
       self.L               = []
       self.size            = size
-      self.IMOP            = imageOperations()
+      self.IMOP            = imageOperations(windowSize, stepSize, bound, part, ub)
       self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
       self.errors          = ""
       self.warnings        = ""
@@ -1295,28 +1326,23 @@ class imageGeneratorPNG:
       img4,BOXLIST               = self.IMOP.pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
 
       self.IMOP.errors           = "" 
-      xmm                        = self.IMOP.calcSplitJPGs(np.array(img4)[:,:,0], noc) 
-      if self.IMOP.errors != "":
-         msg         = "; calculated columns differ from noc for page = " + str(page)  
-         print(msg)
-         self.errors = self.errors + msg
-         SBWL, IMGL = [], []
-      else:
-         BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
-         BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
-
-         img4.save(fn + '.png') 
-         img4.name                  = fn+'.png'
-         IMGL                       = [img4]
+      xmm                        = self.IMOP.calcSplit(np.array(img4)[:,:,0], noc) 
       
-         imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
-         imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
-         imgSBW.name                = fn + '-bbm.png'    
-         SBWL                       = [imgSBW] 
+      BOXLIST                    = list(map( lambda x: list(np.round(np.array(x),0)), BOXLIST))
+      BOXLIST                    = list(map( lambda x: list(map(lambda y: int(y) , x)), BOXLIST))
 
-         if noc>1:
-            SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
-            IMGL = self.IMOP.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
+      img4.save(fn + '.png') 
+      img4.name                  = fn+'.png'
+      IMGL                       = [img4]
+      
+      imgSBW                     = Image.new(mode="RGB",size=self.size, color=(255,255,255))
+      imgSBW, _, _, _, _         = self.IMOP.spaceBetweenWords(img=imgSBW, imgCheck=img4, boxL=BOXLIST, plotBoxes=False, fill=True, uB=800, plotAlsoTooBig=False, xmm= xmm)
+      imgSBW.name                = fn + '-bbm.png'    
+      SBWL                       = [imgSBW] 
+
+      if noc>1:
+         SBWL = self.IMOP.cutMatrix(imgSBW, xmm, SBWL, fn, '.png')
+         IMGL = self.IMOP.cutMatrix(img4, xmm, IMGL, fn, '.png', False)     
 
       return([SBWL, IMGL])
 
@@ -1328,7 +1354,6 @@ class imageGeneratorPNG:
       self.Q     = []
       SQL        = "SELECT namePDFDocument, page, numberOfColumns FROM TAO where namePDFDocument='" + self.pathToPDF + self.pdfFilename  + "' and format='portrait' and what='word' and original='YES' and page in ("
       NOCL       = []
-      ss         = "rm -f " + self.outputFolder+ "tmp/*.jpg"
 
       if self.pageStart ==1 and self.pageEnd == 0:
          self.pageEnd = self.PDF.getNumberOfPagesFromPDFFile()
@@ -1341,7 +1366,6 @@ class imageGeneratorPNG:
          for ii in range(len(self.L)):
             SQL = SQL + str(self.L[ii]) + ','
          R = tqdm(self.L) 
-
       SQL = SQL[0:-1] + ') order by page'
       
       if getNOCfromDB:
@@ -1355,28 +1379,25 @@ class imageGeneratorPNG:
 
       R.set_description('generating PNGs in ' + self.outputFolder + ' ...')
       
-      for page in R:
-         tt         = subprocess.check_output(ss, shell=True,executable='/bin/bash')                                                     
+      for page in R:                                                   
          x,y,format = self.PDF.getFormatFromPDFPage(page)   
             
          if format == 'portrait': 
             noc     = self.findPageNOC(NOCL, page)
-            #print("page=" + str(page) + " noc=" + str(noc))
-            fn         = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
-            SBWL, IMGL = self.generateSinglePNG(page, fn, noc)
+            if noc> 0:
+               fn         = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
+               SBWL, IMGL = self.generateSinglePNG(page, fn, noc)
+               self.saveImg(IMGL, SBWL)
 
-            self.saveImg(IMGL, SBWL)
-
-            hashPNG = self.IMOP.getsha256(fn+ '.png')
-            hashJPG = None
+               hashPNG = self.IMOP.getsha256(fn+ '.png')
          
-            if (not hashPNG in list(map(lambda x: x[6], N))):
-               atime = datetime.now()
-               dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
-               erg = [self.pathToPDF + self.pdfFilename, hashJPG, fn+ '.jpg', format, 'word', page, hashPNG, hashJPG, dstr]
-               N.append(erg)    
+               if (not hashPNG in list(map(lambda x: x[6], N))):
+                  atime = datetime.now()
+                  dstr  = atime.strftime("%Y-%m-%d %H:%M:%S")
+                  erg = [self.pathToPDF + self.pdfFilename, fn+ '.png', None, format, 'word', page, hashPNG, None, dstr]
+                  N.append(erg)    
 
-         self.A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'filenameJPG','format',  'what', 'page', 'hashValuePNGFile', 'hashValueJPGFile', 'timestamp'])
+      self.A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'filenameJPG','format',  'what', 'page', 'hashValuePNGFile', 'hashValueJPGFile', 'timestamp'])
 
 
 
@@ -1386,7 +1407,7 @@ class imageGeneratorPNG:
 
 class imageGeneratorJPG:
 
-   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', size=(595, 842) ):
+   def __init__(self, pathToPDF, pdfFilename, outputFolder, output_file, pageStart, pageEnd, scanedDocument = False, dpi=200, generateJPGWith='tesseract', windowSize=450, stepSize=50, bound=0.99, part=8, ub=5, size=(595, 842) ):
       self.pathToPDF       = pathToPDF
       self.pdfFilename     = pdfFilename
       self.pageStart       = pageStart
@@ -1398,7 +1419,7 @@ class imageGeneratorJPG:
       self.generateJPGWith = generateJPGWith
       self.L               = []
       self.size            = size
-      self.IMOP            = imageOperations()
+      self.IMOP            = imageOperations(windowSize, stepSize, bound, part, ub)
       self.PDF             = PDF(pathToPDF, pdfFilename, outputFolder)
       self.errors          = ""
       self.warnings        = ""
@@ -1842,7 +1863,7 @@ class imageGeneratorJPG:
    
       if noc>1:         
          D   = np.array( 255*np.ones(C.shape), dtype='uint8')
-         xmm = self.IMOP.calcSplitJPGs(C, noc)
+         xmm = self.IMOP.calcSplit(C, noc)
 
          for ii in range(len(xmm)):
             a,b = xmm[ii]
@@ -1913,7 +1934,6 @@ class imageGeneratorJPG:
             
          if format == 'portrait': 
             noc     = self.findPageNOC(NOCL, page)
-            print("page=" + str(page) + " noc=" + str(noc))
             imgOrg  = Image.open(pages[0]).convert('L')
             fn      = self.outputFolder + self.outputFile +'-' + str(page) +'-'+format + '-' + 'word'
 
