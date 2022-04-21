@@ -314,7 +314,7 @@ def sortInCols( KxL, midL):
 
 ################################################################################################
 
-def getColumnsOfTable(C, a, box, jump=2, d =1):
+def getColumnsOfTable(C, a, box, jump=2, d=1):
    b = np.sign(np.diff(a))
    l = np.where(b<0)[0]
    R = []
@@ -359,7 +359,6 @@ def MA(R, n):
 def countC(C, what):
   
    erg = []
-
    for ii in range(C.shape[1]):
       l = list(C[:, ii])
       e = l.count(what)
@@ -879,7 +878,7 @@ def scalePlots(draw,  noc, xmm, INFO, m, kindOfBox='TA', mm=2):
 ############################################################################ 
 
 def makeINFO():
-   print("creating INFO ...")
+   #print("creating INFO ...")
    INFO                      = boxMaster() 
    INFO.TA                   = boxMaster()
    INFO.TA.bB                = boxMaster()
@@ -954,11 +953,10 @@ SWO_2D.nang          = 8
 SWO_2D.ll            = 2
 SWO_2D.jmax          = SWO_2D.J
 SWO_2D.m             = 2   
-#SWO_2D.outer         = False
-#SWO_2D.allCoef       = True
-#SWO_2D.upScaling     = False
+SWO_2D.outer         = False
 SWO_2D.onlyCoef      = True
 SWO_2D.allLevels     = False
+SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
 
 white                = 255
 black                = 0 
@@ -975,15 +973,15 @@ try:
 except:
    print("loading data...")
    INFO              = makeINFO()
-   INFO.path         = '/home/markus/anaconda3/python/data/'
-   INFO.kindOfImages = 'JPG'  
+   INFO.path         = '/home/markus/anaconda3/python/data/SWC-18-04-2022/'
+   INFO.kindOfImages = 'PNG'  
    INFO.white        = 255
    INFO.black        = 0    
    INFO.copyHL       = True
    INFO.flatten      = True
-   date              = '25.01.2022-'
-   FL                = ['TA-bB-HpT-JPG-' , 'TA-bB-VpT-JPG-' , 'TA-bBHV-HpT-JPG-','TA-bBHV-VpT-JPG-' , 'HL-bB-HpT-JPG-'    , 'HL-bB-VpT-JPG-'   , 'HL-bBHV-HpT-JPG-' ,'HL-bBHV-VpT-JPG-'   ]
-   DL                = [date+'21:27:44'  , date+'21:46:53'  , date+ '22:18:47'  , date+ '22:43:32'  ,  date + '23:01:29'  , date + '23:20:09'  , date + '23:51:34'  , '26.01.2022-' + '00:16:21' ]
+   date              = '18-04-2022-'
+   FL                = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+   DL                = [date+'15:47:03'  , date+'16:12:09' , date+ '16:45:52', date+ '17:13:58' ,  date + '17:42:09'  , date + '18:06:56'  , date + '18:40:05' ,date + '19:07:48' ]
    
    INFO.KBOX         = ['TA','HL']
    INFO.MBOX         = ['bB', 'bBHV']
@@ -993,7 +991,7 @@ except:
       for method in INFO.MBOX:
          for direction in INFO.DBOX:
              
-            fname = kindOfBox + '-' + method + '-' + direction + 'pT-' + INFO.kindOfImages + '-'
+            fname = kindOfBox + '-' + method + '-' + direction + '-' + INFO.kindOfImages + '-'
             try:
                date  = DL[ FL.index(fname)]
             except:
@@ -1018,7 +1016,7 @@ except:
 
 ### STPE
 
-STPE                      = dOM.stripe(C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
+STPE                      = dOM.stripe('.png', C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
 STPE.dd                   = 0.20
 STPE.tol                  = 30
 
@@ -1038,7 +1036,7 @@ INFO.TA.bBHV.V.stepSize   = stepSize_V
 
 
 setattr(INFO.TA, 'correction-H', 0.45)  #0.35
-setattr(INFO.TA, 'correction-V', 0.3)
+setattr(INFO.TA, 'correction-V', 0.20)
 setattr(INFO.TA, 'weightbBHV-V', 0.5)
 setattr(INFO.TA, 'weightbB-V'  , 0.5)
 setattr(INFO.TA, 'weightbBHV-H', 0.5)
@@ -1057,42 +1055,81 @@ ss                        = input("calculate SWCs (Y/N) ?")
 calcSWCs                  = False
 if ss=='Y':
    calcSWCs = True
-#calcSWCs                  = False
 calculateJPGs             = True
 withScalePlot             = True
 
 np.set_printoptions(suppress=True)
 
 
-dpi              = 200
-challenge        = dOM.JPGNPNGGenerator('/home/markus/anaconda3/python/pngs/challenge/',  'challenge' , '/home/markus/anaconda3/python/pngs/challenge/word/' , 'challenge' , 1, 0, False, dpi, 'cv')   
-challenge.Q      = []
-challenge.engine = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
-challenge.con    = engine.connect() 
-train            = dOM.JPGNPNGGenerator('/home/markus/anaconda3/python/pngs/train/', 'train', '/home/markus/anaconda3/python/pngs/train/word/', 'train', 1, 0, False, dpi, 'cv')  
-columns          = dOM.columns()
-P                = [[1,0]]  
+pathPDFFilename1 = '/home/markus/anaconda3/python/pngs/train/'
+PDFFilename1     = 'train'
+pathJPGs1        = '/home/markus/anaconda3/python/pngs/train/test/'
+pathPNGs1        = '/home/markus/anaconda3/python/pngs/train/word/'
+pathOutput1      = '/home/markus/anaconda3/python/pngs/train/test/'
+
+
+pathPDFFilename2 = '/home/markus/anaconda3/python/pngs/challenge/'
+PDFFilename2     = 'challenge'
+pathJPGs2        = '/home/markus/anaconda3/python/pngs/challenge/test/'
+pathPNGs2        = '/home/markus/anaconda3/python/pngs/challenge/word/'
+pathOutput2      = '/home/markus/anaconda3/python/pngs/challenge/test/'
+
+trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1, 
+                                         pdfFilename     = PDFFilename1, 
+                                         outputFolder    = pathPNGs1, 
+                                         output_file     = 'train', 
+                                         pageStart       = 1,
+                                         pageEnd         = 0,  
+                                         scanedDocument  = False,
+                                         windowSize      = 450, 
+                                         stepSize        = 50, 
+                                         bound           = 0.99, 
+                                         part            = 8, 
+                                         ub              = 5, 
+                                         size            = (595, 842) )
+trainPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+trainPNG.con     = trainPNG.engine.connect()
+#trainPNG.generatePNG()
+
+challengePNG         = dOM.imageGeneratorPNG(pathToPDF   = pathPDFFilename2, 
+                                         pdfFilename     = PDFFilename2, 
+                                         outputFolder    = pathPNGs2, 
+                                         output_file     = 'challenge', 
+                                         pageStart       = 1,
+                                         pageEnd         = 0,  
+                                         scanedDocument  = False,
+                                         windowSize      = 450, 
+                                         stepSize        = 50, 
+                                         bound           = 0.99, 
+                                         part            = 8, 
+                                         ub              = 5, 
+                                         size            = (595, 842) )
+challengePNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+challengePNG.con     = challengePNG.engine.connect()
+#challengePNG.generatePNG()
+
+P                = [[23,1]]  
 #P                = [[267,1]]
 
-
-source           = challenge
+columns         = dOM.columns()
+source           = challengePNG
 
 for dd in 1*P:
    page, noc           = dd
    ## noc ist hier nur für den Fall, dass man eine Anzahl von Spalten erzwingen möchte
    fname               = source.outputFolder + source.outputFile + '-' + str(page) + '-portrait-word' 
    fname_bbm           = fname + '-bbm'
-   Corg                = np.matrix( MAT.generateMatrixFromImage(fname+'.jpg'), dtype='uint8')
+   Corg                = np.matrix( MAT.generateMatrixFromImage(fname+'.png'), dtype='uint8')
    noc, _,_,_,_        = columns.coltrane2(Corg)
 
    DATA.n, DATA.m      = Corg.shape
-   DATA.CL, DATA.xmm   = STPE.genMat(fname, noc, 'bB', challenge, INFO.onlyWhiteBlack, INFO.wBB)  
-   DATA.CL_bbm, _      = STPE.genMat(fname, noc, 'bBHV', challenge, INFO.onlyWhiteBlack, INFO.wBB)
+   DATA.CL, DATA.xmm   = STPE.genMat(fname, noc, 'bB',   challengePNG.IMOP, INFO.onlyWhiteBlack, INFO.wBB)  
+   DATA.CL_bbm, _      = STPE.genMat(fname, noc, 'bBHV', challengePNG.IMOP, INFO.onlyWhiteBlack, INFO.wBB)
   
    if calcSWCs:
-      INFO                = decomposeMatrices(DATA, STPE, INFO)
-      INFO                = calculateSWCs(DATA, STPE, INFO, des='')
-      INFO                = applyRF(DATA, INFO, des='')
+      INFO       = decomposeMatrices(DATA, STPE, INFO)
+      INFO       = calculateSWCs(DATA, STPE, INFO, des='')
+      INFO       = applyRF(DATA, INFO, des='')
    
    rLN_TA              = allBoxes('TA', noc, INFO, DATA.xmm, DATA.m, 2)
    rLN_HLt             = allBoxes('HL',noc, INFO, DATA.xmm, DATA.m)
@@ -1111,7 +1148,7 @@ for dd in 1*P:
      
    for ii in range(len(rLN_HL)):
       r = rLN_HL[ii][0]      
-      draw_TA.rectangle(r, outline ="blue",width=3)    
+      #draw_TA.rectangle(r, outline ="blue",width=3)    
 
    for ii in range(len(rLN_HLt)):
       r = rLN_HLt[ii][0]      
