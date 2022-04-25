@@ -69,12 +69,18 @@ MAT.description  = "TEST"
 
 
 
+# ****************************
+# *** begin JPG            ***
+# ****************************
+
+
+
 trainJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename1, 
                                          pdfFilename     = PDFFilename1, 
                                          outputFolder    = pathJPGs1, 
                                          output_file     = 'train', 
                                          pageStart       = 1,
-                                         pageEnd         = 5, 
+                                         pageEnd         = 0, 
                                          scanedDocument  = False, 
                                          dpi             = 200, 
                                          generateJPGWith = 'tesseract', 
@@ -91,6 +97,62 @@ trainJPG.con     = trainJPG.engine.connect()
 #trainJPG.generateJPG()
 
 
+lfgbJPG         = dOM.imageGeneratorJPG(pathToPDF        = pathPDFFilename3, 
+                                         pdfFilename     = PDFFilename3, 
+                                         outputFolder    = pathJPGs3, 
+                                         output_file     = 'lf-gb2019finalg-2-columns-pages-with-at-least-one-table', 
+                                         pageStart       = 1,
+                                         pageEnd         = 0, 
+                                         scanedDocument  = False, 
+                                         dpi             = 200, 
+                                         generateJPGWith = 'tesseract', 
+                                         windowSize      = 450, 
+                                         stepSize        = 50, 
+                                         bound           = 0.99, 
+                                         part            = 8, 
+                                         ub              = 5, 
+                                         size            = (595, 842) )
+    
+lfgbJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+lfgbJPG.con     = trainJPG.engine.connect()
+#lfgbJPG.L       = [113,115]  
+#lfgbJPG.generateJPG()
+
+
+challengeJPG         = dOM.imageGeneratorJPG(pathToPDF   = pathPDFFilename2, 
+                                         pdfFilename     = PDFFilename2, 
+                                         outputFolder    = pathJPGs2, 
+                                         output_file     = 'challenge', 
+                                         pageStart       = 1,
+                                         pageEnd         = 0, 
+                                         scanedDocument  = False, 
+                                         dpi             = 200, 
+                                         generateJPGWith = 'tesseract', 
+                                         windowSize      = 450, 
+                                         stepSize        = 50, 
+                                         bound           = 0.99, 
+                                         part            = 8, 
+                                         ub              = 5, 
+                                         size            = (595, 842) )
+    
+challengeJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+challengeJPG.con     = trainJPG.engine.connect()
+#challengeJPG.L       = [113,115]  
+#challengeJPG.generateJPG()
+
+
+# ****************************
+# *** end JPG              ***
+# ****************************
+
+
+
+
+
+# ****************************
+# *** begin PNG            ***
+# ****************************
+
 trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1, 
                                          pdfFilename     = PDFFilename1, 
                                          outputFolder    = pathPNGs1, 
@@ -106,7 +168,7 @@ trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1,
                                          size            = (595, 842) )
 trainPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 trainPNG.con     = trainPNG.engine.connect()
-trainPNG.generatePNG()
+#trainPNG.generatePNG()
 
 
 lfgbPNG          = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename3, 
@@ -124,7 +186,7 @@ lfgbPNG          = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename3,
                                          size            = (595, 842) )
 lfgbPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 lfgbPNG.con     = trainPNG.engine.connect()
-lfgbPNG.generatePNG()
+#lfgbPNG.generatePNG()
 
 
 
@@ -143,9 +205,12 @@ challengePNG         = dOM.imageGeneratorPNG(pathToPDF   = pathPDFFilename2,
                                          size            = (595, 842) )
 challengePNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 challengePNG.con     = challengePNG.engine.connect()
-challengePNG.generatePNG()
+#challengePNG.generatePNG()
 
 
+# ****************************
+# *** end PNG              ***
+# ****************************
 
 
 

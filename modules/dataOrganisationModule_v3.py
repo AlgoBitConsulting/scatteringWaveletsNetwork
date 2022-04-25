@@ -1399,58 +1399,124 @@ class imageGeneratorPNG:
 
       self.A = pd.DataFrame( N, columns=['namePDFDocument', 'filenamePNG', 'filenameJPG','format',  'what', 'page', 'hashValuePNGFile', 'hashValueJPGFile', 'timestamp'])
 
-      #############################################################################
+   ################################################################################################
 
-      def groupingInLine(pathPDFFilename, PDFFilename, pathOutput, page, worddist=15):
+   def wordsInLine(self, L, WL, worddist):
+    
+      CL = []
+      cl = [0] 
+      for ii in range(0,len(L)-1):
+         x1,y2,x2,y2 = box1 = L[ii][0]
+         s1,t1,s2,t2 = box2 = L[ii+1][0]
+         if s1-x2 < worddist:
+            cl.append(ii+1) 
+            if ii+1==len(L)-1:
+               CL.append(cl)
+         else:
+            CL.append(cl) 
+            cl = [ii+1]
+            if ii+1== len(L)-1:
+               CL.append(cl)
+ 
+      return(CL)
 
-         A, BOXLIST        = challengePNG.IMOP.pdfToBlackBlocksAndLines(pathPDFFilename, PDFFilename, pathOutput, page, 'word', 'portrait', withSave=True, useXML = True)
-         outputfname       = PDFFilename + "-pdfToText-p" + str(page) + ".xml"
-         soup_pdfToText    = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
-         whatList          = soup_pdfToText.find_all('word')
-         WL = []
-         for wl in whatList:
-            box1 = [ wl['xmin'], wl['ymin'], wl['xmax'], wl['ymax']]
-            box2 = list(map( lambda x: int(np.round(float(x),0)), box1))
-            WL.append( [box2, wl.text])
+   #############################################################################
 
-         lines = list(set(list(map(lambda x: x[0][3], WL))))
-         lines.sort()
-         LINES = []
-         for ll in lines:
-            L = list(filter(lambda x: x[0][3] ==ll , WL))
-            L.sort(key=lambda x: x[0])
-            T               = [ L[0]]
-            box, tt         = L[0]
-            s1,t1,s2,t2     = box
+   def concatString(self, ss):
+      erg = ""
+      for ii in range(len(ss)):
+         erg = erg + ss[ii] + " "
+      erg = erg[0:-1]
 
-            if len(L)==1:
-               LINES.append(L[0])
+      return(erg)     
+
+   ################################################################################################
+
+   def groupingInLine(self, pathPDFFilename, PDFFilename, pathOutput, page, worddist=6):
+
+      A, BOXLIST        = self.IMOP.pdfToBlackBlocksAndLines(pathPDFFilename, PDFFilename, pathOutput, page, 'word', 'portrait', withSave=True, useXML = False)
+      outputfname       = PDFFilename + "-pdfToText-p" + str(page) + ".xml"
+      soup_pdfToText    = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
+      whatList          = soup_pdfToText.find_all('word')
+      WL = []
+      for wl in whatList:
+         box1 = [ wl['xmin'], wl['ymin'], wl['xmax'], wl['ymax']]
+         box2 = list(map( lambda x: int(np.round(float(x),0)), box1))
+         WL.append( [box2, wl.text])
+
+      lines = list(set(list(map(lambda x: x[0][3], WL))))
+      lines.sort()
+      LINES = []
+      for ll in lines:
+         L = list(filter(lambda x: x[0][3] ==ll , WL))
+         L.sort(key=lambda x: x[0])
+         CL = self.wordsInLine(L, WL, worddist)
+         T  = []
+         for ii in range(len(CL)):
+            cl, cs = list(map(lambda x: L[x][0], CL[ii])), list(map(lambda x: L[x][1], CL[ii]))
+            if len(cl) >1:
+               T.append( [ [ cl[0][0], cl[0][1], cl[-1][2], cl[-1][3]], self.concatString(cs) ])
             else:
-               for ii in range(1, len(L)):
-                  box, ss         = L[ii] 
-                  x1,y1,x2,y2     = box
-                  if x1-s2 <= worddist:
-                     T.append(L[ii])
-                     box, tt         = L[ii]
-                     s1,t1,s2,t2     = box
-                  if x1-s2 > worddist or ii ==len(L)-1:
-                     tt = list(map(lambda x: x[1] , T))
-                     ss = ""
-                     for kk in range(len(tt)):
-                        ss = ss + tt[kk] + " "
-                     ss          = ss[0:-1]
-                     box,tt      = T[0]
-                     s1,t1,s2,t2 = box
-                     box, tt     = T[-1]
-                     x1,y1,x2,y2 = box
-                     LINES.append([[s1, t1, x2, y2], ss])
-                     T               = [ L[ii]]
+               T.append( [  cl[0], cs[0] ])
+         LINES.append(T)
+
+      return([LINES, WL])    
+
+################################################################################################
+
+"""
+   def groupingInLine(self, pathPDFFilename, PDFFilename, pathOutput, page, worddist=15):
+
+      A, BOXLIST        = self.IMOP.pdfToBlackBlocksAndLines(pathPDFFilename, PDFFilename, pathOutput, page, 'word', 'portrait', withSave=True, useXML = False)
+      outputfname       = PDFFilename + "-pdfToText-p" + str(page) + ".xml"
+      soup_pdfToText    = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
+      whatList          = soup_pdfToText.find_all('word')
+      WL = []
+      for wl in whatList:
+         box1 = [ wl['xmin'], wl['ymin'], wl['xmax'], wl['ymax']]
+         box2 = list(map( lambda x: int(np.round(float(x),0)), box1))
+         WL.append( [box2, wl.text])
+
+      lines = list(set(list(map(lambda x: x[0][3], WL))))
+      lines.sort()
+      LINES = []
+      for ll in lines:
+         L = list(filter(lambda x: x[0][3] ==ll , WL))
+         L.sort(key=lambda x: x[0])
+         T               = [ L[0]]
+         box, tt         = L[0]
+         s1,t1,s2,t2     = box
+
+         if len(L)==1:
+            LINES.append(L[0])
+         else:
+            for ii in range(1, len(L)):
+               box, ss         = L[ii] 
+               x1,y1,x2,y2     = box
+               if x1-s2 <= worddist:
+                  T.append(L[ii])
+                  box, tt         = L[ii]
+                  s1,t1,s2,t2     = box
+               if x1-s2 > worddist or ii ==len(L)-1:
+                  tt = list(map(lambda x: x[1] , T))
+                  ss = ""
+                  for kk in range(len(tt)):
+                     ss = ss + tt[kk] + " "
+                  ss          = ss[0:-1]
+                  box,tt      = T[0]
+                  s1,t1,s2,t2 = box
+                  box, tt     = T[-1]
+                  x1,y1,x2,y2 = box
+                  LINES.append([[s1, t1, x2, y2], ss])
+                  T               = [ L[ii]]
+                  if ii==len(L)-1:
+                     LINES.append(L[ii])      
 
       return([LINES, WL])    
 
       #############################################################################
 
-
+"""
 
 
 

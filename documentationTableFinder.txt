@@ -1,0 +1,42 @@
+
+
+1) decomposeMatrices(DATA, STPE, INFO)
+      decomposeMatricesForLeaf( DATA, STPE, INFO)  
+         STPE.makeWL([CL[ii]], [], xmm, page, 'noHashValueAvailable')
+
+
+
+2) calculateSWCs(DATA, STPE, INFO, des='')
+      calculateSWCsForLeaf( DATA, STPE, INFO, des='calculate SWC for '+ kindOfBox + '-' + method + '-' + direction)   
+         STPE.prepareData(WL, ss) 
+
+
+
+3) applyRF(DATA, INFO, des='')
+      applyRFForLeaf(DATA, INFO)  
+         getBoxCoordinatesUsingRF(O.rf, AL,flatten)
+            flattenP
+
+
+4) allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3)
+      findStartAndEnd(M_H[:, 3], WLH, lenErg), findStartAndEnd(M_V[:, 3], WLV, lenErg)   
+      getBoxes(boxL_H, boxL_V)
+         rectUnion
+         unionOfParallelBoxes
+      shiftBoxes(rLn, m, a, b)
+
+5) filterHL(rLN_TA, rLN_HL, d=20)
+      
+
+
+6) allColumnsOfTables(C2, img, rL, GEN, page, xmm, white=255)
+      GEN.groupingInLine
+      restrictBoxesJPG
+      getColumnsOfTable
+      sortInCols
+      removeEmptyColsFromMK
+      removeColsWithEntriesInNeighbour
+      mP 
+         moveBorder 
+         countC
+         MA
