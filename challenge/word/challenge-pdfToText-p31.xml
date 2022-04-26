@@ -1,0 +1,782 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<doc>
+  <page width="595.220000" height="842.000000">
+    <flow>
+      <block xMin="36.791787" yMin="33.627328" xMax="294.412192" yMax="76.411263">
+        <line xMin="36.791787" yMin="33.627328" xMax="266.404893" yMax="53.760945">
+          <word xMin="36.791787" yMin="33.627328" xMax="75.746739" yMax="53.760945">Deka</word>
+          <word xMin="80.744190" yMin="33.627328" xMax="121.694527" yMax="53.760945">MSCI</word>
+          <word xMin="126.638049" yMin="33.627328" xMax="159.606846" yMax="53.760945">USA</word>
+          <word xMin="164.604297" yMin="33.627328" xMax="184.576125" yMax="53.760945">LC</word>
+          <word xMin="189.519647" yMin="33.627328" xMax="235.467435" yMax="53.760945">UCITS</word>
+          <word xMin="240.446910" yMin="33.627329" xMax="266.404893" yMax="53.760945">ETF</word>
+        </line>
+        <line xMin="36.791787" yMin="55.936094" xMax="294.412192" yMax="76.411263">
+          <word xMin="36.791787" yMin="55.936094" xMax="103.700108" yMax="76.411263">Anhang</word>
+          <word xMin="108.697559" yMin="55.936094" xMax="150.654577" yMax="76.411263">gem.</word>
+          <word xMin="155.652028" yMin="55.936094" xMax="165.646930" yMax="76.411263">§</word>
+          <word xMin="170.590452" yMin="55.936094" xMax="180.585355" yMax="76.411263">7</word>
+          <word xMin="185.582806" yMin="55.936094" xMax="210.552085" yMax="76.411263">Nr.</word>
+          <word xMin="215.549536" yMin="55.936094" xMax="225.544439" yMax="76.411263">9</word>
+          <word xMin="230.487960" yMin="55.936094" xMax="294.412192" yMax="76.411263">KARBV.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="120.273065" xMax="156.514889" yMax="127.644125">
+        <line xMin="36.791787" yMin="120.273065" xMax="156.514889" yMax="127.644125">
+          <word xMin="36.791787" yMin="120.273065" xMax="64.476945" yMax="127.644125">Angaben</word>
+          <word xMin="66.334271" yMin="120.273065" xMax="80.713986" yMax="127.644125">nach</word>
+          <word xMin="82.564841" yMin="120.273065" xMax="92.634524" yMax="127.644125">der</word>
+          <word xMin="94.491850" yMin="120.273065" xMax="156.514889" yMax="127.644125">Derivateverordnung</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="134.174535" xMax="245.135870" yMax="141.545595">
+        <line xMin="36.791787" yMin="134.174535" xMax="245.135870" yMax="141.545595">
+          <word xMin="36.791787" yMin="134.174535" xMax="47.935743" yMax="141.545595">Das</word>
+          <word xMin="49.734825" yMin="134.174535" xMax="66.987895" yMax="141.545595">durch</word>
+          <word xMin="68.845221" yMin="134.174535" xMax="133.379208" yMax="141.545595">Wertpapier-Darlehen</word>
+          <word xMin="135.178290" yMin="134.174535" xMax="157.893322" yMax="141.545595">erzielte</word>
+          <word xMin="159.750648" yMin="134.174535" xMax="215.237452" yMax="141.545595">zugrundeliegende</word>
+          <word xMin="217.088306" yMin="134.174535" xMax="245.135870" yMax="141.545595">Exposure</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.451408" yMin="134.174535" xMax="333.394446" yMax="141.545595">
+        <line xMin="320.451408" yMin="134.174535" xMax="333.394446" yMax="141.545595">
+          <word xMin="320.451408" yMin="134.174535" xMax="333.394446" yMax="141.545595">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="523.405362" yMin="134.174535" xMax="555.840616" yMax="141.545595">
+        <line xMin="523.405362" yMin="134.174535" xMax="555.840616" yMax="141.545595">
+          <word xMin="523.405362" yMin="134.174535" xMax="555.840616" yMax="141.545595">325.776,63</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="191.939313" xMax="283.052500" yMax="215.309910">
+        <line xMin="36.791787" yMin="191.939313" xMax="283.052500" yMax="199.310373">
+          <word xMin="36.791787" yMin="191.939313" xMax="79.995648" yMax="199.310373">Gesamtbetrag</word>
+          <word xMin="81.846502" yMin="191.939313" xMax="91.916186" yMax="199.310373">der</word>
+          <word xMin="93.715268" yMin="191.939313" xMax="103.124857" yMax="199.310373">bei</word>
+          <word xMin="104.923939" yMin="191.939313" xMax="169.451455" yMax="199.310373">Wertpapier-Darlehen</word>
+          <word xMin="171.250537" yMin="191.939313" xMax="182.756898" yMax="199.310373">von</word>
+          <word xMin="184.607752" yMin="191.939313" xMax="206.235569" yMax="199.310373">Dritten</word>
+          <word xMin="208.034651" yMin="191.939313" xMax="241.531234" yMax="199.310373">gewährten</word>
+          <word xMin="243.382088" yMin="191.939313" xMax="283.052500" yMax="199.310373">Sicherheiten:</word>
+        </line>
+        <line xMin="36.791787" yMin="200.092133" xMax="55.494477" yMax="207.340234">
+          <word xMin="36.791787" yMin="200.092133" xMax="55.494477" yMax="207.340234">davon:</word>
+        </line>
+        <line xMin="36.791787" yMin="208.061808" xMax="100.607436" yMax="215.309910">
+          <word xMin="36.791787" yMin="208.061808" xMax="100.607436" yMax="215.309910">Schuldverschreibungen</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.438465" yMin="191.939313" xMax="333.381503" yMax="199.310373">
+        <line xMin="320.438465" yMin="191.939313" xMax="333.381503" yMax="199.310373">
+          <word xMin="320.438465" yMin="191.939313" xMax="333.381503" yMax="199.310373">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="458.639047" yMin="175.999962" xMax="555.828967" yMax="199.310373">
+        <line xMin="474.817845" yMin="175.999962" xMax="525.269807" yMax="183.371022">
+          <word xMin="474.817845" yMin="175.999962" xMax="502.865408" yMax="183.371022">Kurswert</word>
+          <word xMin="504.716263" yMin="175.999962" xMax="510.469443" yMax="183.371022">in</word>
+          <word xMin="512.268525" yMin="175.999962" xMax="525.269807" yMax="183.371022">USD</word>
+        </line>
+        <line xMin="458.639047" yMin="183.969638" xMax="484.531595" yMax="191.340698">
+          <word xMin="458.639047" yMin="183.969638" xMax="484.531595" yMax="191.340698">befristet</word>
+        </line>
+        <line xMin="511.550187" yMin="183.969638" xMax="545.402703" yMax="191.340698">
+          <word xMin="511.550187" yMin="183.969638" xMax="545.402703" yMax="191.340698">unbefristet</word>
+        </line>
+        <line xMin="466.463761" yMin="191.939313" xMax="498.899014" yMax="199.310373">
+          <word xMin="466.463761" yMin="191.939313" xMax="498.899014" yMax="199.310373">385.086,24</word>
+        </line>
+        <line xMin="523.400185" yMin="191.939313" xMax="555.828967" yMax="199.310373">
+          <word xMin="523.400185" yMin="191.939313" xMax="555.828967" yMax="199.310373">375.167,58</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="221.840967" xMax="275.105474" yMax="237.241240">
+        <line xMin="36.791787" yMin="221.840967" xMax="275.105474" yMax="229.212027">
+          <word xMin="36.791787" yMin="221.840967" xMax="59.092641" yMax="229.212027">Erträge</word>
+          <word xMin="60.943496" yMin="221.840967" xMax="71.369113" yMax="229.212027">aus</word>
+          <word xMin="73.168195" yMin="221.840967" xMax="137.708654" yMax="229.212027">Wertpapier-Darlehen</word>
+          <word xMin="139.559509" yMin="221.840967" xMax="180.245949" yMax="229.212027">einschließlich</word>
+          <word xMin="182.103275" yMin="221.840967" xMax="192.172958" yMax="229.212027">der</word>
+          <word xMin="193.972040" yMin="221.840967" xMax="233.998385" yMax="229.212027">angefallenen</word>
+          <word xMin="235.797468" yMin="221.840967" xMax="261.444098" yMax="229.212027">direkten</word>
+          <word xMin="263.243180" yMin="221.840967" xMax="275.105474" yMax="229.212027">und</word>
+        </line>
+        <line xMin="36.791787" yMin="229.870180" xMax="223.572768" yMax="237.241240">
+          <word xMin="36.791787" yMin="229.870180" xMax="68.133354" yMax="237.241240">indirekten</word>
+          <word xMin="69.932436" yMin="229.870180" xMax="91.210790" yMax="237.241240">Kosten</word>
+          <word xMin="93.009873" yMin="229.870180" xMax="104.923939" yMax="237.241240">und</word>
+          <word xMin="106.723021" yMin="229.870180" xMax="136.983844" yMax="237.241240">Gebühren</word>
+          <word xMin="138.782926" yMin="229.870180" xMax="169.464398" yMax="237.241240">(exklusive</word>
+          <word xMin="171.263480" yMin="229.870180" xMax="223.572768" yMax="237.241240">Ertragsausgleich)</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.462409" yMin="221.840967" xMax="333.405447" yMax="229.212027">
+        <line xMin="320.462409" yMin="221.840967" xMax="333.405447" yMax="229.212027">
+          <word xMin="320.462409" yMin="221.840967" xMax="333.405447" yMax="229.212027">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="154.068631" xMax="163.704746" yMax="169.409367">
+        <line xMin="36.791787" yMin="154.068631" xMax="163.704746" yMax="161.439691">
+          <word xMin="36.791787" yMin="154.068631" xMax="85.451138" yMax="161.439691">Vertragspartner</word>
+          <word xMin="87.250221" yMin="154.068631" xMax="97.319904" yMax="161.439691">der</word>
+          <word xMin="99.170759" yMin="154.068631" xMax="163.704746" yMax="161.439691">Wertpapier-Darlehen</word>
+        </line>
+        <line xMin="36.791787" yMin="162.161266" xMax="127.638971" yMax="169.409367">
+          <word xMin="36.791787" yMin="162.161266" xMax="64.541660" yMax="169.409367">DekaBank</word>
+          <word xMin="66.340743" yMin="162.161266" xMax="91.929129" yMax="169.409367">Deutsche</word>
+          <word xMin="93.786455" yMin="162.161266" xMax="127.638971" yMax="169.409367">Girozentrale</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.459821" yMin="208.061808" xMax="332.328587" yMax="215.309910">
+        <line xMin="320.459821" yMin="208.061808" xMax="332.328587" yMax="215.309910">
+          <word xMin="320.459821" yMin="208.061808" xMax="332.328587" yMax="215.309910">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="466.485764" yMin="208.061808" xMax="498.908074" yMax="215.309910">
+        <line xMin="466.485764" yMin="208.061808" xMax="498.908074" yMax="215.309910">
+          <word xMin="466.485764" yMin="208.061808" xMax="498.908074" yMax="215.309910">385.086,24</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="523.409245" yMin="208.061808" xMax="555.831555" yMax="215.309910">
+        <line xMin="523.409245" yMin="208.061808" xMax="555.831555" yMax="215.309910">
+          <word xMin="523.409245" yMin="208.061808" xMax="555.831555" yMax="215.309910">375.167,58</word>
+        </line>
+      </block>
+      <block xMin="536.055888" yMin="221.840967" xMax="555.845793" yMax="229.212027">
+        <line xMin="536.055888" yMin="221.840967" xMax="555.845793" yMax="229.212027">
+          <word xMin="536.055888" yMin="221.840967" xMax="555.845793" yMax="229.212027">218,20</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="243.895256" xMax="547.084003" yMax="251.143358">
+        <line xMin="36.791787" yMin="243.895256" xMax="547.084003" yMax="251.143358">
+          <word xMin="36.791787" yMin="243.895256" xMax="45.780727" yMax="251.143358">Die</word>
+          <word xMin="47.579809" yMin="243.895256" xMax="84.668085" yMax="251.143358">Bruttoerträge</word>
+          <word xMin="86.525411" yMin="243.895256" xMax="95.876755" yMax="251.143358">aus</word>
+          <word xMin="97.734081" yMin="243.895256" xMax="128.648528" yMax="251.143358">Wertpapier</word>
+          <word xMin="130.505854" yMin="243.895256" xMax="188.930727" yMax="251.143358">Darlehen-Geschäften</word>
+          <word xMin="190.729809" yMin="243.895256" xMax="215.962262" yMax="251.143358">betrugen</word>
+          <word xMin="217.819588" yMin="243.895256" xMax="224.647041" yMax="251.143358">im</word>
+          <word xMin="226.446123" yMin="243.895256" xMax="277.609952" yMax="251.143358">Geschäftszeitraum</word>
+          <word xMin="279.467278" yMin="243.895256" xMax="291.336044" yMax="251.143358">USD</word>
+          <word xMin="293.135126" yMin="243.895256" xMax="314.775886" yMax="251.143358">335,69.</word>
+          <word xMin="316.626740" yMin="243.895256" xMax="334.248686" yMax="251.143358">Davon</word>
+          <word xMin="336.106012" yMin="243.895256" xMax="353.359082" yMax="251.143358">erhielt</word>
+          <word xMin="355.158164" yMin="243.895256" xMax="363.428765" yMax="251.143358">die</word>
+          <word xMin="365.286091" yMin="243.895256" xMax="393.035965" yMax="251.143358">DekaBank</word>
+          <word xMin="394.893291" yMin="243.895256" xMax="406.399652" yMax="251.143358">eine</word>
+          <word xMin="408.198734" yMin="243.895256" xMax="474.525332" yMax="251.143358">Aufwandentschädigung</word>
+          <word xMin="476.324414" yMin="243.895256" xMax="481.404557" yMax="251.143358">in</word>
+          <word xMin="483.203639" yMin="243.895256" xMax="498.004003" yMax="251.143358">Höhe</word>
+          <word xMin="499.803085" yMin="243.895256" xMax="509.872769" yMax="251.143358">von</word>
+          <word xMin="511.723623" yMin="243.895256" xMax="523.644161" yMax="251.143358">USD</word>
+          <word xMin="525.443244" yMin="243.895256" xMax="547.084003" yMax="251.143358">117,49.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="257.733953" xMax="542.295079" yMax="265.105013">
+        <line xMin="36.791787" yMin="257.733953" xMax="542.295079" yMax="265.105013">
+          <word xMin="36.791787" yMin="257.733953" xMax="46.861471" yMax="265.105013">Die</word>
+          <word xMin="48.660553" yMin="257.733953" xMax="82.869002" yMax="265.105013">Auslastung</word>
+          <word xMin="84.726328" yMin="257.733953" xMax="94.796012" yMax="265.105013">der</word>
+          <word xMin="96.653338" yMin="257.733953" xMax="132.673813" yMax="265.105013">Obergrenze</word>
+          <word xMin="134.472895" yMin="257.733953" xMax="143.520078" yMax="265.105013">für</word>
+          <word xMin="145.319161" yMin="257.733953" xMax="155.744778" yMax="265.105013">das</word>
+          <word xMin="157.602104" yMin="257.733953" xMax="220.349952" yMax="265.105013">Marktrisikopotential</word>
+          <word xMin="222.149034" yMin="257.733953" xMax="241.925996" yMax="265.105013">wurde</word>
+          <word xMin="243.776851" yMin="257.733953" xMax="252.765791" yMax="265.105013">für</word>
+          <word xMin="254.564873" yMin="257.733953" xMax="273.319335" yMax="265.105013">dieses</word>
+          <word xMin="275.118417" yMin="257.733953" xMax="327.790110" yMax="265.105013">Sondervermögen</word>
+          <word xMin="329.589193" yMin="257.733953" xMax="350.505142" yMax="265.105013">gemäß</word>
+          <word xMin="352.304224" yMin="257.733953" xMax="362.373908" yMax="265.105013">der</word>
+          <word xMin="364.231234" yMin="257.733953" xMax="426.196028" yMax="265.105013">Derivateverordnung</word>
+          <word xMin="428.053354" yMin="257.733953" xMax="442.433069" yMax="265.105013">nach</word>
+          <word xMin="444.290395" yMin="257.733953" xMax="457.563481" yMax="265.105013">dem</word>
+          <word xMin="459.420807" yMin="257.733953" xMax="489.319225" yMax="265.105013">einfachen</word>
+          <word xMin="491.118307" yMin="257.733953" xMax="512.027785" yMax="265.105013">Ansatz</word>
+          <word xMin="513.826867" yMin="257.733953" xMax="542.295079" yMax="265.105013">ermittelt.</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="283.559843" xMax="92.640996" yMax="290.930904">
+        <line xMin="36.791787" yMin="283.559843" xMax="92.640996" yMax="290.930904">
+          <word xMin="36.791787" yMin="283.559843" xMax="63.040268" yMax="290.930904">Sonstige</word>
+          <word xMin="64.897594" yMin="283.559843" xMax="92.640996" yMax="290.930904">Angaben</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="297.461961" xMax="98.038243" yMax="312.802696">
+        <line xMin="36.791787" yMin="297.461961" xMax="69.576502" yMax="304.833021">
+          <word xMin="36.791787" yMin="297.461961" xMax="69.576502" yMax="304.833021">Anteilwert</word>
+        </line>
+        <line xMin="36.791787" yMin="305.431636" xMax="98.038243" yMax="312.802696">
+          <word xMin="36.791787" yMin="305.431636" xMax="74.242467" yMax="312.802696">Umlaufende</word>
+          <word xMin="76.041550" yMin="305.431636" xMax="98.038243" yMax="312.802696">Anteile</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.459821" yMin="297.461961" xMax="333.402859" yMax="312.802696">
+        <line xMin="320.459821" yMin="297.461961" xMax="333.402859" yMax="304.833021">
+          <word xMin="320.459821" yMin="297.461961" xMax="333.402859" yMax="304.833021">USD</word>
+        </line>
+        <line xMin="320.459821" yMin="305.431636" xMax="331.972653" yMax="312.802696">
+          <word xMin="320.459821" yMin="305.431636" xMax="331.972653" yMax="312.802696">STK</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="532.462253" yMin="297.461961" xMax="555.850323" yMax="312.802696">
+        <line xMin="536.054593" yMin="297.461961" xMax="555.844498" yMax="304.833021">
+          <word xMin="536.054593" yMin="297.461961" xMax="555.844498" yMax="304.833021">184,06</word>
+        </line>
+        <line xMin="532.462253" yMin="305.431636" xMax="555.850323" yMax="312.802696">
+          <word xMin="532.462253" yMin="305.431636" xMax="555.850323" yMax="312.802696">285.361</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="319.393291" xMax="195.402246" yMax="334.734027">
+        <line xMin="36.791787" yMin="319.393291" xMax="195.402246" yMax="326.764351">
+          <word xMin="36.791787" yMin="319.393291" xMax="61.241186" yMax="326.764351">Bestand</word>
+          <word xMin="63.092040" yMin="319.393291" xMax="73.161724" yMax="326.764351">der</word>
+          <word xMin="74.960806" yMin="319.393291" xMax="113.194540" yMax="326.764351">Wertpapiere</word>
+          <word xMin="114.993623" yMin="319.393291" xMax="124.403211" yMax="326.764351">am</word>
+          <word xMin="126.202294" yMin="319.393291" xMax="175.211107" yMax="326.764351">Fondsvermögen</word>
+          <word xMin="177.010189" yMin="319.393291" xMax="184.976629" yMax="326.764351">(in</word>
+          <word xMin="186.775711" yMin="319.393291" xMax="195.402246" yMax="326.764351">%)</word>
+        </line>
+        <line xMin="36.791787" yMin="327.362967" xMax="183.125775" yMax="334.734027">
+          <word xMin="36.791787" yMin="327.362967" xMax="61.241186" yMax="334.734027">Bestand</word>
+          <word xMin="63.092040" yMin="327.362967" xMax="73.161724" yMax="334.734027">der</word>
+          <word xMin="74.960806" yMin="327.362967" xMax="100.969841" yMax="334.734027">Derivate</word>
+          <word xMin="102.768923" yMin="327.362967" xMax="112.120268" yMax="334.734027">am</word>
+          <word xMin="113.919350" yMin="327.362967" xMax="162.992879" yMax="334.734027">Fondsvermögen</word>
+          <word xMin="164.791961" yMin="327.362967" xMax="172.700158" yMax="334.734027">(in</word>
+          <word xMin="174.499240" yMin="327.362967" xMax="183.125775" yMax="334.734027">%)</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="539.652758" yMin="319.393291" xMax="555.844498" yMax="334.734027">
+        <line xMin="539.652758" yMin="319.393291" xMax="555.844498" yMax="326.764351">
+          <word xMin="539.652758" yMin="319.393291" xMax="555.844498" yMax="326.764351">99,71</word>
+        </line>
+        <line xMin="543.248334" yMin="327.362967" xMax="555.841910" yMax="334.734027">
+          <word xMin="543.248334" yMin="327.362967" xMax="555.841910" yMax="334.734027">0,00</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="341.324622" xMax="531.552358" yMax="364.635033">
+        <line xMin="36.791787" yMin="341.324622" xMax="250.584889" yMax="348.695682">
+          <word xMin="36.791787" yMin="341.324622" xMax="60.522847" yMax="348.695682">Angabe</word>
+          <word xMin="62.373702" yMin="341.324622" xMax="69.563559" yMax="348.695682">zu</word>
+          <word xMin="71.362641" yMin="341.324622" xMax="82.869002" yMax="348.695682">den</word>
+          <word xMin="84.726328" yMin="341.324622" xMax="115.356028" yMax="348.695682">Verfahren</word>
+          <word xMin="117.155110" yMin="341.324622" xMax="126.914161" yMax="348.695682">zur</word>
+          <word xMin="128.713243" yMin="341.324622" xMax="162.630474" yMax="348.695682">Bewertung</word>
+          <word xMin="164.429556" yMin="341.324622" xMax="174.499240" yMax="348.695682">der</word>
+          <word xMin="176.298322" yMin="341.324622" xMax="250.584889" yMax="348.695682">Vermögensgegenstände</word>
+        </line>
+        <line xMin="36.791787" yMin="349.417257" xMax="531.552358" yMax="356.665358">
+          <word xMin="36.791787" yMin="349.417257" xMax="45.780727" yMax="356.665358">Die</word>
+          <word xMin="47.579809" yMin="349.417257" xMax="77.847104" yMax="356.665358">Bewertung</word>
+          <word xMin="79.704429" yMin="349.417257" xMax="88.693369" yMax="356.665358">der</word>
+          <word xMin="90.492452" yMin="349.417257" xMax="157.550332" yMax="356.665358">Vermögensgegenstände</word>
+          <word xMin="159.401186" yMin="349.417257" xMax="180.970759" yMax="356.665358">erfolgte</word>
+          <word xMin="182.821613" yMin="349.417257" xMax="207.335727" yMax="356.665358">während</word>
+          <word xMin="209.134809" yMin="349.417257" xMax="218.486154" yMax="356.665358">des</word>
+          <word xMin="220.337009" yMin="349.417257" xMax="263.534398" yMax="356.665358">Geschäftsjahres</word>
+          <word xMin="265.333480" yMin="349.417257" xMax="281.266360" yMax="356.665358">sowie</word>
+          <word xMin="283.065443" yMin="349.417257" xMax="294.927737" yMax="356.665358">zum</word>
+          <word xMin="296.726819" yMin="349.417257" xMax="340.040696" yMax="356.665358">Berichtsstichtag</word>
+          <word xMin="341.839778" yMin="349.417257" xMax="350.828718" yMax="356.665358">per</word>
+          <word xMin="352.627800" yMin="349.417257" xMax="385.114826" yMax="356.665358">31.01.2018</word>
+          <word xMin="386.913908" yMin="349.417257" xMax="423.704493" yMax="356.665358">grundsätzlich</word>
+          <word xMin="425.555348" yMin="349.417257" xMax="437.417642" yMax="356.665358">zum</word>
+          <word xMin="439.216724" yMin="349.417257" xMax="458.029430" yMax="356.665358">letzten</word>
+          <word xMin="459.828513" yMin="349.417257" xMax="494.405839" yMax="356.665358">gehandelten</word>
+          <word xMin="496.256693" yMin="349.417257" xMax="517.166171" yMax="356.665358">Börsen-</word>
+          <word xMin="518.965253" yMin="349.417257" xMax="531.552358" yMax="356.665358">oder</word>
+        </line>
+        <line xMin="36.791787" yMin="357.386932" xMax="196.127056" yMax="364.635033">
+          <word xMin="36.791787" yMin="357.386932" xMax="66.631961" yMax="364.635033">Marktkurs,</word>
+          <word xMin="68.489287" yMin="357.386932" xMax="77.478227" yMax="364.635033">der</word>
+          <word xMin="79.277309" yMin="357.386932" xMax="90.841914" yMax="364.635033">eine</word>
+          <word xMin="92.640996" yMin="357.386932" xMax="123.257752" yMax="364.635033">verlässliche</word>
+          <word xMin="125.115078" yMin="357.386932" xMax="155.382373" yMax="364.635033">Bewertung</word>
+          <word xMin="157.239699" yMin="357.386932" xMax="196.127056" yMax="364.635033">gewährleistet.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="371.348587" xMax="538.347453" yMax="394.595578">
+        <line xMin="36.791787" yMin="371.348587" xMax="532.581329" yMax="378.596689">
+          <word xMin="36.791787" yMin="371.348587" xMax="105.648749" yMax="378.596689">Vermögensgegenstände,</word>
+          <word xMin="107.447831" yMin="371.348587" xMax="115.718433" yMax="378.596689">die</word>
+          <word xMin="117.517515" yMin="371.348587" xMax="134.828828" yMax="378.596689">weder</word>
+          <word xMin="136.627911" yMin="371.348587" xMax="148.548449" yMax="378.596689">zum</word>
+          <word xMin="150.347531" yMin="371.348587" xMax="169.820332" yMax="378.596689">Handel</word>
+          <word xMin="171.619414" yMin="371.348587" xMax="178.453338" yMax="378.596689">an</word>
+          <word xMin="180.304192" yMin="371.348587" xMax="199.006882" yMax="378.596689">Börsen</word>
+          <word xMin="200.864208" yMin="371.348587" xMax="230.769098" yMax="378.596689">zugelassen</word>
+          <word xMin="232.568180" yMin="371.348587" xMax="243.718607" yMax="378.596689">sind</word>
+          <word xMin="245.569461" yMin="371.348587" xMax="259.237310" yMax="378.596689">noch</word>
+          <word xMin="261.036392" yMin="371.348587" xMax="266.123006" yMax="378.596689">in</word>
+          <word xMin="267.922088" yMin="371.348587" xMax="284.877468" yMax="378.596689">einem</word>
+          <word xMin="286.676550" yMin="371.348587" xMax="309.385110" yMax="378.596689">anderen</word>
+          <word xMin="311.184193" yMin="371.348587" xMax="347.256440" yMax="378.596689">organisierten</word>
+          <word xMin="349.055522" yMin="371.348587" xMax="365.590253" yMax="378.596689">Markt</word>
+          <word xMin="367.389335" yMin="371.348587" xMax="397.345997" yMax="378.596689">zugelassen</word>
+          <word xMin="399.203323" yMin="371.348587" xMax="411.790427" yMax="378.596689">oder</word>
+          <word xMin="413.589509" yMin="371.348587" xMax="418.624351" yMax="378.596689">in</word>
+          <word xMin="420.423433" yMin="371.348587" xMax="438.090680" yMax="378.596689">diesen</word>
+          <word xMin="439.889762" yMin="371.348587" xMax="472.007911" yMax="378.596689">einbezogen</word>
+          <word xMin="473.806994" yMin="371.348587" xMax="485.009193" yMax="378.596689">sind</word>
+          <word xMin="486.808275" yMin="371.348587" xMax="499.395380" yMax="378.596689">oder</word>
+          <word xMin="501.246234" yMin="371.348587" xMax="509.154430" yMax="378.596689">für</word>
+          <word xMin="510.953513" yMin="371.348587" xMax="519.224114" yMax="378.596689">die</word>
+          <word xMin="521.074968" yMin="371.348587" xMax="532.581329" yMax="378.596689">kein</word>
+        </line>
+        <line xMin="36.791787" yMin="379.318263" xMax="538.347453" yMax="386.566364">
+          <word xMin="36.791787" yMin="379.318263" xMax="69.932436" yMax="386.566364">handelbarer</word>
+          <word xMin="71.731518" yMin="379.318263" xMax="83.956217" yMax="386.566364">Kurs</word>
+          <word xMin="85.813543" yMin="379.318263" xMax="112.482673" yMax="386.566364">verfügbar</word>
+          <word xMin="114.281756" yMin="379.318263" xMax="122.189952" yMax="386.566364">ist,</word>
+          <word xMin="124.047278" yMin="379.318263" xMax="144.963227" yMax="386.566364">werden</word>
+          <word xMin="146.762309" yMin="379.318263" xMax="153.233828" yMax="386.566364">zu</word>
+          <word xMin="155.084683" yMin="379.318263" xMax="167.309382" yMax="386.566364">dem</word>
+          <word xMin="169.108464" yMin="379.318263" xMax="194.334446" yMax="386.566364">aktuellen</word>
+          <word xMin="196.133528" yMin="379.318263" xMax="232.917642" yMax="386.566364">Verkehrswert</word>
+          <word xMin="234.716724" yMin="379.318263" xMax="261.379382" yMax="386.566364">bewertet,</word>
+          <word xMin="263.236708" yMin="379.318263" xMax="272.225648" yMax="386.566364">der</word>
+          <word xMin="274.082974" yMin="379.318263" xMax="282.353575" yMax="386.566364">bei</word>
+          <word xMin="284.152658" yMin="379.318263" xMax="315.487753" yMax="386.566364">sorgfältiger</word>
+          <word xMin="317.286835" yMin="379.318263" xMax="353.727959" yMax="386.566364">Einschätzung</word>
+          <word xMin="355.527041" yMin="379.318263" xMax="368.884256" yMax="386.566364">nach</word>
+          <word xMin="370.683338" yMin="379.318263" xMax="401.714272" yMax="386.566364">geeigneten</word>
+          <word xMin="403.513354" yMin="379.318263" xMax="461.944699" yMax="386.566364">Bewertungsmodellen</word>
+          <word xMin="463.743782" yMin="379.318263" xMax="478.485902" yMax="386.566364">unter</word>
+          <word xMin="480.336756" yMin="379.318263" xMax="527.559430" yMax="386.566364">Berücksichtigung</word>
+          <word xMin="529.358513" yMin="379.318263" xMax="538.347453" yMax="386.566364">der</word>
+        </line>
+        <line xMin="36.791787" yMin="387.347477" xMax="167.671787" yMax="394.595578">
+          <word xMin="36.791787" yMin="387.347477" xMax="61.959524" yMax="394.595578">aktuellen</word>
+          <word xMin="63.816850" yMin="387.347477" xMax="121.827547" yMax="394.595578">Marktgegebenheiten</word>
+          <word xMin="123.684873" yMin="387.347477" xMax="157.906265" yMax="394.595578">angemessen</word>
+          <word xMin="159.763591" yMin="387.347477" xMax="167.671787" yMax="394.595578">ist.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="401.248946" xMax="518.266329" yMax="408.497048">
+        <line xMin="36.791787" yMin="401.248946" xMax="518.266329" yMax="408.497048">
+          <word xMin="36.791787" yMin="401.248946" xMax="43.619240" yMax="408.497048">Im</word>
+          <word xMin="45.418322" yMin="401.248946" xMax="82.862531" yMax="408.497048">Geschäftsjahr</word>
+          <word xMin="84.661613" yMin="401.248946" xMax="100.594493" yMax="408.497048">sowie</word>
+          <word xMin="102.393575" yMin="401.248946" xMax="114.255869" yMax="408.497048">zum</word>
+          <word xMin="116.054952" yMin="401.248946" xMax="159.368828" yMax="408.497048">Berichtsstichtag</word>
+          <word xMin="161.167911" yMin="401.248946" xMax="170.156851" yMax="408.497048">per</word>
+          <word xMin="171.955933" yMin="401.248946" xMax="204.442958" yMax="408.497048">31.01.2018</word>
+          <word xMin="206.242040" yMin="401.248946" xMax="227.572167" yMax="408.497048">wurden</word>
+          <word xMin="229.371249" yMin="401.248946" xMax="237.641851" yMax="408.497048">die</word>
+          <word xMin="239.440933" yMin="401.248946" xMax="267.604984" yMax="408.497048">folgenden</word>
+          <word xMin="269.404066" yMin="401.248946" xMax="336.513718" yMax="408.497048">Vermögensgegenstände</word>
+          <word xMin="338.312800" yMin="401.248946" xMax="351.974177" yMax="408.497048">nicht</word>
+          <word xMin="353.773259" yMin="401.248946" xMax="365.687326" yMax="408.497048">zum</word>
+          <word xMin="367.486408" yMin="401.248946" xMax="386.227927" yMax="408.497048">letzten</word>
+          <word xMin="388.027009" yMin="401.248946" xMax="422.688465" yMax="408.497048">gehandelten</word>
+          <word xMin="424.487547" yMin="401.248946" xMax="445.403497" yMax="408.497048">Börsen-</word>
+          <word xMin="447.202579" yMin="401.248946" xMax="459.841456" yMax="408.497048">oder</word>
+          <word xMin="461.640538" yMin="401.248946" xMax="489.739873" yMax="408.497048">Marktkurs</word>
+          <word xMin="491.538956" yMin="401.248946" xMax="518.266329" yMax="408.497048">bewertet:</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="415.210602" xMax="176.718971" yMax="430.428379">
+        <line xMin="36.791787" yMin="415.210602" xMax="176.718971" yMax="422.458703">
+          <word xMin="36.791787" yMin="415.210602" xMax="77.128765" yMax="422.458703">Bankguthaben</word>
+          <word xMin="78.979619" yMin="415.210602" xMax="89.774113" yMax="422.458703">und</word>
+          <word xMin="91.573195" yMin="415.210602" xMax="107.874952" yMax="422.458703">sonst.</word>
+          <word xMin="109.674034" yMin="415.210602" xMax="176.718971" yMax="422.458703">Vermögensgegenstände</word>
+        </line>
+        <line xMin="36.791787" yMin="423.180277" xMax="84.674556" yMax="430.428379">
+          <word xMin="36.791787" yMin="423.180277" xMax="84.674556" yMax="430.428379">Verbindlichkeiten</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="320.459821" yMin="415.210602" xMax="390.035122" yMax="430.428379">
+        <line xMin="320.463704" yMin="415.210602" xMax="361.506077" yMax="422.458703">
+          <word xMin="320.463704" yMin="415.210602" xMax="332.325998" yMax="422.458703">zum</word>
+          <word xMin="334.125080" yMin="415.210602" xMax="361.506077" yMax="422.458703">Nennwert</word>
+        </line>
+        <line xMin="320.459821" yMin="423.180277" xMax="390.035122" yMax="430.428379">
+          <word xMin="320.459821" yMin="423.180277" xMax="332.322115" yMax="430.428379">zum</word>
+          <word xMin="334.121197" yMin="423.180277" xMax="390.035122" yMax="430.428379">Rückzahlungsbetrag</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="436.959435" xMax="535.817089" yMax="460.329385">
+        <line xMin="36.791787" yMin="436.959435" xMax="118.585316" yMax="444.330496">
+          <word xMin="36.791787" yMin="436.959435" xMax="98.452420" yMax="444.330496">Gesamtkostenquote</word>
+          <word xMin="100.251502" yMin="436.959435" xMax="108.159699" yMax="444.330496">(in</word>
+          <word xMin="109.958781" yMin="436.959435" xMax="118.585316" yMax="444.330496">%)</word>
+        </line>
+        <line xMin="36.791787" yMin="445.111608" xMax="535.817089" yMax="452.359709">
+          <word xMin="36.791787" yMin="445.111608" xMax="45.780727" yMax="452.359709">Die</word>
+          <word xMin="47.579809" yMin="445.111608" xMax="103.480790" yMax="452.359709">Gesamtkostenquote</word>
+          <word xMin="105.279873" yMin="445.111608" xMax="122.895347" yMax="452.359709">drückt</word>
+          <word xMin="124.694430" yMin="445.111608" xMax="150.684050" yMax="452.359709">sämtliche</word>
+          <word xMin="152.483132" yMin="445.111608" xMax="164.397199" yMax="452.359709">vom</word>
+          <word xMin="166.196281" yMin="445.111608" xMax="213.418955" yMax="452.359709">Sondervermögen</word>
+          <word xMin="215.218037" yMin="445.111608" xMax="222.103734" yMax="452.359709">im</word>
+          <word xMin="223.902816" yMin="445.111608" xMax="259.547942" yMax="452.359709">Jahresverlauf</word>
+          <word xMin="261.347025" yMin="445.111608" xMax="293.102769" yMax="452.359709">getragenen</word>
+          <word xMin="294.901851" yMin="445.111608" xMax="314.018718" yMax="452.359709">Kosten</word>
+          <word xMin="315.817800" yMin="445.111608" xMax="326.657595" yMax="452.359709">und</word>
+          <word xMin="328.456677" yMin="445.111608" xMax="357.649699" yMax="452.359709">Zahlungen</word>
+          <word xMin="359.500553" yMin="445.111608" xMax="375.329889" yMax="452.359709">(ohne</word>
+          <word xMin="377.187215" yMin="445.111608" xMax="431.981566" yMax="452.359709">Transaktionskosten)</word>
+          <word xMin="433.780649" yMin="445.111608" xMax="440.608101" yMax="452.359709">im</word>
+          <word xMin="442.458956" yMin="445.111608" xMax="469.839952" yMax="452.359709">Verhältnis</word>
+          <word xMin="471.639035" yMin="445.111608" xMax="483.501329" yMax="452.359709">zum</word>
+          <word xMin="485.358655" yMin="445.111608" xMax="535.817089" yMax="452.359709">durchschnittlichen</word>
+        </line>
+        <line xMin="36.791787" yMin="453.081284" xMax="162.999351" yMax="460.329385">
+          <word xMin="36.791787" yMin="453.081284" xMax="87.179034" yMax="460.329385">Nettoinventarwert</word>
+          <word xMin="89.042831" yMin="453.081284" xMax="98.452420" yMax="460.329385">des</word>
+          <word xMin="100.251502" yMin="453.081284" xMax="149.991597" yMax="460.329385">Sondervermögens</word>
+          <word xMin="151.790680" yMin="453.081284" xMax="162.999351" yMax="460.329385">aus.</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="543.248334" yMin="436.959435" xMax="555.841910" yMax="444.330496">
+        <line xMin="543.248334" yMin="436.959435" xMax="555.841910" yMax="444.330496">
+          <word xMin="543.248334" yMin="436.959435" xMax="555.841910" yMax="444.330496">0,30</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="466.919980" xMax="555.834144" yMax="498.259605">
+        <line xMin="36.791787" yMin="466.919980" xMax="96.232689" yMax="474.291040">
+          <word xMin="36.791787" yMin="466.919980" xMax="96.232689" yMax="474.291040">Transaktionskosten</word>
+        </line>
+        <line xMin="320.459821" yMin="466.919980" xMax="333.402859" yMax="474.291040">
+          <word xMin="320.459821" yMin="466.919980" xMax="333.402859" yMax="474.291040">USD</word>
+        </line>
+        <line xMin="530.601691" yMin="466.919980" xMax="555.834144" yMax="474.291040">
+          <word xMin="530.601691" yMin="466.919980" xMax="555.834144" yMax="474.291040">1.275,24</word>
+        </line>
+        <line xMin="36.791787" yMin="475.012614" xMax="395.210395" yMax="482.260716">
+          <word xMin="36.791787" yMin="475.012614" xMax="57.643021" yMax="482.260716">Summe</word>
+          <word xMin="59.442103" yMin="475.012614" xMax="68.482816" yMax="482.260716">der</word>
+          <word xMin="70.281898" yMin="475.012614" xMax="106.716550" yMax="482.260716">Nebenkosten</word>
+          <word xMin="108.515632" yMin="475.012614" xMax="117.866977" yMax="482.260716">des</word>
+          <word xMin="119.666059" yMin="475.012614" xMax="141.656281" yMax="482.260716">Erwerbs</word>
+          <word xMin="143.507135" yMin="475.012614" xMax="220.692942" yMax="482.260716">(Anschaffungsnebenkosten)</word>
+          <word xMin="222.492025" yMin="475.012614" xMax="233.286518" yMax="482.260716">und</word>
+          <word xMin="235.085601" yMin="475.012614" xMax="244.074541" yMax="482.260716">der</word>
+          <word xMin="245.931867" yMin="475.012614" xMax="265.048734" yMax="482.260716">Kosten</word>
+          <word xMin="266.847816" yMin="475.012614" xMax="275.836756" yMax="482.260716">der</word>
+          <word xMin="277.687610" yMin="475.012614" xMax="313.708085" yMax="482.260716">Veräußerung</word>
+          <word xMin="315.507167" yMin="475.012614" xMax="324.547879" yMax="482.260716">der</word>
+          <word xMin="326.346962" yMin="475.012614" xMax="395.210395" yMax="482.260716">Vermögensgegenstände.</word>
+        </line>
+        <line xMin="36.791787" yMin="482.982290" xMax="543.731756" yMax="490.230391">
+          <word xMin="36.791787" yMin="482.982290" xMax="46.499065" yMax="490.230391">Der</word>
+          <word xMin="48.298148" yMin="482.982290" xMax="64.476945" yMax="490.230391">Anteil</word>
+          <word xMin="66.334271" yMin="482.982290" xMax="75.323211" yMax="490.230391">der</word>
+          <word xMin="77.122293" yMin="482.982290" xMax="147.830110" yMax="490.230391">Wertpapiertransaktionen,</word>
+          <word xMin="149.629192" yMin="482.982290" xMax="157.899794" yMax="490.230391">die</word>
+          <word xMin="159.750648" yMin="482.982290" xMax="166.578101" yMax="490.230391">im</word>
+          <word xMin="168.377183" yMin="482.982290" xMax="214.143765" yMax="490.230391">Berichtszeitraum</word>
+          <word xMin="215.942847" yMin="482.982290" xMax="223.915759" yMax="490.230391">für</word>
+          <word xMin="225.714841" yMin="482.982290" xMax="253.464715" yMax="490.230391">Rechnung</word>
+          <word xMin="255.263797" yMin="482.982290" xMax="264.673386" yMax="490.230391">des</word>
+          <word xMin="266.472468" yMin="482.982290" xMax="316.206091" yMax="490.230391">Sondervermögens</word>
+          <word xMin="318.005174" yMin="482.982290" xMax="330.650522" yMax="490.230391">über</word>
+          <word xMin="332.449604" yMin="482.982290" xMax="350.485727" yMax="490.230391">Broker</word>
+          <word xMin="352.284810" yMin="482.982290" xMax="382.183228" yMax="490.230391">ausgeführt</word>
+          <word xMin="384.040554" yMin="482.982290" xMax="407.117990" yMax="490.230391">wurden,</word>
+          <word xMin="408.917073" yMin="482.982290" xMax="417.187674" yMax="490.230391">die</word>
+          <word xMin="418.967342" yMin="482.982290" xMax="429.464145" yMax="490.230391">eng</word>
+          <word xMin="431.263228" yMin="482.982290" xMax="464.093244" yMax="490.230391">verbundene</word>
+          <word xMin="465.892326" yMin="482.982290" xMax="504.113117" yMax="490.230391">Unternehmen</word>
+          <word xMin="505.912199" yMin="482.982290" xMax="516.706693" yMax="490.230391">und</word>
+          <word xMin="518.557547" yMin="482.982290" xMax="543.731756" yMax="490.230391">Personen</word>
+        </line>
+        <line xMin="36.791787" yMin="491.011504" xMax="254.914335" yMax="498.259605">
+          <word xMin="36.791787" yMin="491.011504" xMax="49.741297" yMax="498.259605">sind,</word>
+          <word xMin="51.540379" yMin="491.011504" xMax="69.938907" yMax="498.259605">betrug</word>
+          <word xMin="71.737990" yMin="491.011504" xMax="84.383338" yMax="498.259605">0,00</word>
+          <word xMin="86.182420" yMin="491.011504" xMax="94.453021" yMax="498.259605">%.</word>
+          <word xMin="96.252104" yMin="491.011504" xMax="103.500205" yMax="498.259605">Ihr</word>
+          <word xMin="105.299287" yMin="491.011504" xMax="127.645442" yMax="498.259605">Umfang</word>
+          <word xMin="129.444525" yMin="491.011504" xMax="144.542578" yMax="498.259605">belief</word>
+          <word xMin="146.393433" yMin="491.011504" xMax="156.819050" yMax="498.259605">sich</word>
+          <word xMin="158.669904" yMin="491.011504" xMax="177.366123" yMax="498.259605">hierbei</word>
+          <word xMin="179.165205" yMin="491.011504" xMax="188.205917" yMax="498.259605">auf</word>
+          <word xMin="190.004999" yMin="491.011504" xMax="217.748401" yMax="498.259605">insgesamt</word>
+          <word xMin="219.599256" yMin="491.011504" xMax="239.389161" yMax="498.259605">184,09</word>
+          <word xMin="241.246487" yMin="491.011504" xMax="254.914335" yMax="498.259605">USD.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="504.790662" xMax="548.514209" yMax="528.160611">
+        <line xMin="36.791787" yMin="504.790662" xMax="109.952309" yMax="512.161722">
+          <word xMin="36.791787" yMin="504.790662" xMax="64.476945" yMax="512.161722">Angaben</word>
+          <word xMin="66.334271" yMin="504.790662" xMax="73.524129" yMax="512.161722">zu</word>
+          <word xMin="75.323211" yMin="504.790662" xMax="86.881344" yMax="512.161722">den</word>
+          <word xMin="88.680426" yMin="504.790662" xMax="109.952309" yMax="512.161722">Kosten</word>
+        </line>
+        <line xMin="36.791787" yMin="512.883296" xMax="548.514209" yMax="520.131398">
+          <word xMin="36.791787" yMin="512.883296" xMax="45.780727" yMax="520.131398">Die</word>
+          <word xMin="47.579809" yMin="512.883296" xMax="132.304936" yMax="520.131398">Kapitalverwaltungsgesellschaft</word>
+          <word xMin="134.104018" yMin="512.883296" xMax="149.978654" yMax="520.131398">erhält</word>
+          <word xMin="151.777737" yMin="512.883296" xMax="166.584572" yMax="520.131398">keine</word>
+          <word xMin="168.383654" yMin="512.883296" xMax="217.049477" yMax="520.131398">Rückvergütungen</word>
+          <word xMin="218.906803" yMin="512.883296" xMax="227.895743" yMax="520.131398">der</word>
+          <word xMin="229.694825" yMin="512.883296" xMax="239.046170" yMax="520.131398">aus</word>
+          <word xMin="240.845253" yMin="512.883296" xMax="253.121724" yMax="520.131398">dem</word>
+          <word xMin="254.920806" yMin="512.883296" xMax="302.149952" yMax="520.131398">Sondervermögen</word>
+          <word xMin="304.007278" yMin="512.883296" xMax="310.841202" yMax="520.131398">an</word>
+          <word xMin="312.640284" yMin="512.883296" xMax="320.910886" yMax="520.131398">die</word>
+          <word xMin="322.761740" yMin="512.883296" xMax="360.205949" yMax="520.131398">Verwahrstelle</word>
+          <word xMin="362.005031" yMin="512.883296" xMax="372.857769" yMax="520.131398">und</word>
+          <word xMin="374.656851" yMin="512.883296" xMax="381.490775" yMax="520.131398">an</word>
+          <word xMin="383.348101" yMin="512.883296" xMax="398.860332" yMax="520.131398">Dritte</word>
+          <word xMin="400.659414" yMin="512.883296" xMax="430.525474" yMax="520.131398">geleisteten</word>
+          <word xMin="432.324557" yMin="512.883296" xMax="468.759209" yMax="520.131398">Vergütungen</word>
+          <word xMin="470.558291" yMin="512.883296" xMax="481.404557" yMax="520.131398">und</word>
+          <word xMin="483.203639" yMin="512.883296" xMax="548.514209" yMax="520.131398">Aufwandserstattungen.</word>
+        </line>
+        <line xMin="36.791787" yMin="520.912510" xMax="235.072658" yMax="528.160611">
+          <word xMin="36.791787" yMin="520.912510" xMax="45.780727" yMax="528.160611">Die</word>
+          <word xMin="47.579809" yMin="520.912510" xMax="132.304936" yMax="528.160611">Kapitalverwaltungsgesellschaft</word>
+          <word xMin="134.104018" yMin="520.912510" xMax="147.402990" yMax="528.160611">zahlt</word>
+          <word xMin="149.260316" yMin="520.912510" xMax="164.067151" yMax="528.160611">keine</word>
+          <word xMin="165.866233" yMin="520.912510" xMax="195.415189" yMax="528.160611">Vergütung</word>
+          <word xMin="197.214271" yMin="520.912510" xMax="204.106439" yMax="528.160611">an</word>
+          <word xMin="205.905522" yMin="520.912510" xMax="235.072658" yMax="528.160611">Vermittler.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="534.691021" xMax="196.127056" yMax="558.060971">
+        <line xMin="36.791787" yMin="534.691021" xMax="111.388987" yMax="542.062081">
+          <word xMin="36.791787" yMin="534.691021" xMax="64.476945" yMax="542.062081">Angaben</word>
+          <word xMin="66.334271" yMin="534.691021" xMax="75.323211" yMax="542.062081">für</word>
+          <word xMin="77.122293" yMin="534.691021" xMax="111.388987" yMax="542.062081">Indexfonds</word>
+        </line>
+        <line xMin="36.791787" yMin="542.843194" xMax="196.127056" yMax="550.091295">
+          <word xMin="36.791787" yMin="542.843194" xMax="51.540379" yMax="550.091295">Höhe</word>
+          <word xMin="53.339461" yMin="542.843194" xMax="62.749050" yMax="550.091295">des</word>
+          <word xMin="64.548132" yMin="542.843194" xMax="87.975031" yMax="550.091295">Tracking</word>
+          <word xMin="89.774113" yMin="542.843194" xMax="105.655221" yMax="550.091295">Errors</word>
+          <word xMin="107.454303" yMin="542.843194" xMax="119.316597" yMax="550.091295">zum</word>
+          <word xMin="121.115680" yMin="542.843194" xMax="134.835300" yMax="550.091295">Ende</word>
+          <word xMin="136.634382" yMin="542.843194" xMax="146.043971" yMax="550.091295">des</word>
+          <word xMin="147.843053" yMin="542.843194" xMax="196.127056" yMax="550.091295">Berichtszeitraums</word>
+        </line>
+        <line xMin="36.791787" yMin="550.812869" xMax="139.501265" yMax="558.060971">
+          <word xMin="36.791787" yMin="550.812869" xMax="51.540379" yMax="558.060971">Höhe</word>
+          <word xMin="53.339461" yMin="550.812869" xMax="62.328401" yMax="558.060971">der</word>
+          <word xMin="64.185727" yMin="550.812869" xMax="84.020933" yMax="558.060971">Annual</word>
+          <word xMin="85.820015" yMin="550.812869" xMax="109.246914" yMax="558.060971">Tracking</word>
+          <word xMin="111.045996" yMin="550.812869" xMax="139.501265" yMax="558.060971">Difference</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="541.090729" yMin="542.843194" xMax="555.841910" yMax="558.060971">
+        <line xMin="543.248334" yMin="542.843194" xMax="555.841910" yMax="550.091295">
+          <word xMin="543.248334" yMin="542.843194" xMax="555.841910" yMax="550.091295">0,16</word>
+        </line>
+        <line xMin="541.090729" yMin="550.812869" xMax="555.839321" yMax="558.060971">
+          <word xMin="541.090729" yMin="550.812869" xMax="555.839321" yMax="558.060971">-0,59</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="36.791787" yMin="564.714986" xMax="555.658766" yMax="587.961977">
+        <line xMin="36.791787" yMin="564.714986" xMax="555.658766" yMax="571.963088">
+          <word xMin="36.791787" yMin="564.714986" xMax="46.499065" yMax="571.963088">Der</word>
+          <word xMin="48.298148" yMin="564.714986" xMax="55.125600" yMax="571.963088">im</word>
+          <word xMin="56.924683" yMin="564.714986" xMax="94.427135" yMax="571.963088">Geschäftsjahr</word>
+          <word xMin="96.284461" yMin="564.714986" xMax="126.927104" yMax="571.963088">2017/2018</word>
+          <word xMin="128.726186" yMin="564.714986" xMax="155.019968" yMax="571.963088">realisierte</word>
+          <word xMin="156.877294" yMin="564.714986" xMax="180.245949" yMax="571.963088">Tracking</word>
+          <word xMin="182.045031" yMin="564.714986" xMax="195.402246" yMax="571.963088">Error</word>
+          <word xMin="197.201328" yMin="564.714986" xMax="209.121866" yMax="571.963088">liegt</word>
+          <word xMin="210.920949" yMin="564.714986" xMax="236.871740" yMax="571.963088">innerhalb</word>
+          <word xMin="238.670822" yMin="564.714986" xMax="247.711534" yMax="571.963088">der</word>
+          <word xMin="249.510617" yMin="564.714986" xMax="279.480221" yMax="571.963088">Bandbreite</word>
+          <word xMin="281.279303" yMin="564.714986" xMax="290.630648" yMax="571.963088">des</word>
+          <word xMin="292.429731" yMin="564.714986" xMax="337.490917" yMax="571.963088">prognostizierten</word>
+          <word xMin="339.348243" yMin="564.714986" xMax="362.716898" yMax="571.963088">Tracking</word>
+          <word xMin="364.574224" yMin="564.714986" xMax="379.672278" yMax="571.963088">Error.</word>
+          <word xMin="381.471360" yMin="564.714986" xMax="391.223940" yMax="571.963088">Der</word>
+          <word xMin="393.023022" yMin="564.714986" xMax="434.492516" yMax="571.963088">prognostizierte</word>
+          <word xMin="436.291598" yMin="564.714986" xMax="459.718497" yMax="571.963088">Tracking</word>
+          <word xMin="461.575823" yMin="564.714986" xMax="474.874794" yMax="571.963088">Error</word>
+          <word xMin="476.673876" yMin="564.714986" xMax="494.354066" yMax="571.963088">wurde</word>
+          <word xMin="496.153149" yMin="564.714986" xMax="523.592389" yMax="571.963088">abgeleitet</word>
+          <word xMin="525.391471" yMin="564.714986" xMax="534.742816" yMax="571.963088">aus</word>
+          <word xMin="536.541899" yMin="564.714986" xMax="548.824842" yMax="571.963088">dem</word>
+          <word xMin="550.623924" yMin="564.714986" xMax="555.658766" yMax="571.963088">in</word>
+        </line>
+        <line xMin="36.791787" yMin="572.744200" xMax="552.707753" yMax="579.992301">
+          <word xMin="36.791787" yMin="572.744200" xMax="47.223876" yMax="579.992301">den</word>
+          <word xMin="49.022958" yMin="572.744200" xMax="85.101676" yMax="579.992301">vergangenen</word>
+          <word xMin="86.900759" yMin="572.744200" xMax="131.243607" yMax="579.992301">Geschäftsjahren</word>
+          <word xMin="133.042689" yMin="572.744200" xMax="139.870142" yMax="579.992301">im</word>
+          <word xMin="141.669224" yMin="572.744200" xMax="176.647784" yMax="579.992301">Durchschnitt</word>
+          <word xMin="178.446866" yMin="572.744200" xMax="208.345284" yMax="579.992301">realisierten</word>
+          <word xMin="210.202610" yMin="572.744200" xMax="233.629509" yMax="579.992301">Tracking</word>
+          <word xMin="235.428591" yMin="572.744200" xMax="248.727563" yMax="579.992301">Error</word>
+          <word xMin="250.591360" yMin="572.744200" xMax="265.333480" yMax="579.992301">unter</word>
+          <word xMin="267.190806" yMin="572.744200" xMax="314.407009" yMax="579.992301">Berücksichtigung</word>
+          <word xMin="316.206091" yMin="572.744200" xMax="329.925712" yMax="579.992301">einer</word>
+          <word xMin="331.724794" yMin="572.744200" xMax="361.629683" yMax="579.992301">Bandbreite</word>
+          <word xMin="363.428765" yMin="572.744200" xMax="373.556693" yMax="579.992301">von</word>
+          <word xMin="375.355775" yMin="572.744200" xMax="383.192785" yMax="579.992301">+/-</word>
+          <word xMin="384.991867" yMin="572.744200" xMax="398.717959" yMax="579.992301">50%</word>
+          <word xMin="400.575285" yMin="572.744200" xMax="409.564224" yMax="579.992301">um</word>
+          <word xMin="411.363307" yMin="572.744200" xMax="421.795395" yMax="579.992301">den</word>
+          <word xMin="423.652721" yMin="572.744200" xMax="454.263006" yMax="579.992301">Mittelwert.</word>
+          <word xMin="456.120332" yMin="572.744200" xMax="465.109272" yMax="579.992301">Die</word>
+          <word xMin="466.908354" yMin="572.744200" xMax="496.806772" yMax="579.992301">Bandbreite</word>
+          <word xMin="498.664098" yMin="572.744200" xMax="518.855237" yMax="579.992301">beträgt</word>
+          <word xMin="520.654320" yMin="572.744200" xMax="543.654098" yMax="579.992301">maximal</word>
+          <word xMin="545.511424" yMin="572.744200" xMax="552.707753" yMax="579.992301">40</word>
+        </line>
+        <line xMin="36.791787" yMin="580.713876" xMax="71.369113" yMax="587.961977">
+          <word xMin="36.791787" yMin="580.713876" xMax="71.369113" yMax="587.961977">Basispunkte.</word>
+        </line>
+      </block>
+      <block xMin="36.791787" yMin="594.552572" xMax="554.584494" yMax="633.861873">
+        <line xMin="36.791787" yMin="594.552572" xMax="193.253702" yMax="601.923632">
+          <word xMin="36.791787" yMin="594.552572" xMax="80.364524" yMax="601.923632">Erläuterungen</word>
+          <word xMin="82.221850" yMin="594.552572" xMax="91.929129" yMax="601.923632">zur</word>
+          <word xMin="93.728211" yMin="594.552572" xMax="117.517515" yMax="601.923632">Ertrags-</word>
+          <word xMin="119.316597" yMin="594.552572" xMax="131.237135" yMax="601.923632">und</word>
+          <word xMin="133.036218" yMin="594.552572" xMax="193.253702" yMax="601.923632">Aufwandsrechnung</word>
+        </line>
+        <line xMin="36.791787" yMin="602.645206" xMax="533.655601" yMax="609.893308">
+          <word xMin="36.791787" yMin="602.645206" xMax="45.780727" yMax="609.893308">Die</word>
+          <word xMin="47.579809" yMin="602.645206" xMax="76.397483" yMax="609.893308">Ermittlung</word>
+          <word xMin="78.196566" yMin="602.645206" xMax="87.243749" yMax="609.893308">der</word>
+          <word xMin="89.042831" yMin="602.645206" xMax="139.507737" yMax="609.893308">Nettoveränderung</word>
+          <word xMin="141.365063" yMin="602.645206" xMax="150.354002" yMax="609.893308">der</word>
+          <word xMin="152.153085" yMin="602.645206" xMax="195.771123" yMax="609.893308">nichtrealisierten</word>
+          <word xMin="197.570205" yMin="602.645206" xMax="222.498496" yMax="609.893308">Gewinne</word>
+          <word xMin="224.297579" yMin="602.645206" xMax="235.092072" yMax="609.893308">und</word>
+          <word xMin="236.891154" yMin="602.645206" xMax="259.230838" yMax="609.893308">Verluste</word>
+          <word xMin="261.088164" yMin="602.645206" xMax="279.486693" yMax="609.893308">erfolgt</word>
+          <word xMin="281.285775" yMin="602.645206" xMax="305.799889" yMax="609.893308">dadurch,</word>
+          <word xMin="307.598971" yMin="602.645206" xMax="319.519509" yMax="609.893308">dass</word>
+          <word xMin="321.318591" yMin="602.645206" xMax="326.353433" yMax="609.893308">in</word>
+          <word xMin="328.152515" yMin="602.645206" xMax="345.107895" yMax="609.893308">jedem</word>
+          <word xMin="346.906977" yMin="602.645206" xMax="384.409430" yMax="609.893308">Geschäftsjahr</word>
+          <word xMin="386.208512" yMin="602.645206" xMax="394.543829" yMax="609.893308">die</word>
+          <word xMin="396.323497" yMin="602.645206" xMax="401.358338" yMax="609.893308">in</word>
+          <word xMin="403.157421" yMin="602.645206" xMax="413.589509" yMax="609.893308">den</word>
+          <word xMin="415.440364" yMin="602.645206" xMax="447.131392" yMax="609.893308">Anteilspreis</word>
+          <word xMin="448.930475" yMin="602.645206" xMax="486.439399" yMax="609.893308">einfließenden</word>
+          <word xMin="488.238481" yMin="602.645206" xMax="522.867579" yMax="609.893308">Wertansätze</word>
+          <word xMin="524.666661" yMin="602.645206" xMax="533.655601" yMax="609.893308">der</word>
+        </line>
+        <line xMin="36.791787" yMin="610.614882" xMax="554.584494" yMax="617.862983">
+          <word xMin="36.791787" yMin="610.614882" xMax="103.849667" yMax="617.862983">Vermögensgegenstände</word>
+          <word xMin="105.648749" yMin="610.614882" xMax="114.631218" yMax="617.862983">mit</word>
+          <word xMin="116.430300" yMin="610.614882" xMax="126.914161" yMax="617.862983">den</word>
+          <word xMin="128.713243" yMin="610.614882" xMax="156.456645" yMax="617.862983">jeweiligen</word>
+          <word xMin="158.307499" yMin="610.614882" xMax="191.085743" yMax="617.862983">historischen</word>
+          <word xMin="192.884825" yMin="610.614882" xMax="249.154683" yMax="617.862983">Anschaffungskosten</word>
+          <word xMin="250.953765" yMin="610.614882" xMax="279.104873" yMax="617.862983">verglichen</word>
+          <word xMin="280.903955" yMin="610.614882" xMax="303.612515" yMax="617.862983">werden,</word>
+          <word xMin="305.411598" yMin="610.614882" xMax="313.682199" yMax="617.862983">die</word>
+          <word xMin="315.539525" yMin="610.614882" xMax="330.288117" yMax="617.862983">Höhe</word>
+          <word xMin="332.087199" yMin="610.614882" xMax="341.127911" yMax="617.862983">der</word>
+          <word xMin="342.926993" yMin="610.614882" xMax="367.428164" yMax="617.862983">positiven</word>
+          <word xMin="369.227247" yMin="610.614882" xMax="401.338924" yMax="617.862983">Differenzen</word>
+          <word xMin="403.138006" yMin="610.614882" xMax="408.172848" yMax="617.862983">in</word>
+          <word xMin="409.971930" yMin="610.614882" xMax="418.242531" yMax="617.862983">die</word>
+          <word xMin="420.112800" yMin="610.614882" xMax="440.964035" yMax="617.862983">Summe</word>
+          <word xMin="442.821361" yMin="610.614882" xMax="451.810300" yMax="617.862983">der</word>
+          <word xMin="453.667626" yMin="610.614882" xMax="497.227421" yMax="617.862983">nichtrealisierten</word>
+          <word xMin="499.026503" yMin="610.614882" xMax="523.961266" yMax="617.862983">Gewinne</word>
+          <word xMin="525.760348" yMin="610.614882" xMax="554.584494" yMax="617.862983">einfließen,</word>
+        </line>
+        <line xMin="36.791787" yMin="618.644096" xMax="523.954794" yMax="625.892197">
+          <word xMin="36.791787" yMin="618.644096" xMax="45.062388" yMax="625.892197">die</word>
+          <word xMin="46.861471" yMin="618.644096" xMax="61.610062" yMax="625.892197">Höhe</word>
+          <word xMin="63.467388" yMin="618.644096" xMax="72.456328" yMax="625.892197">der</word>
+          <word xMin="74.255410" yMin="618.644096" xMax="101.338718" yMax="625.892197">negativen</word>
+          <word xMin="103.137800" yMin="618.644096" xMax="135.184762" yMax="625.892197">Differenzen</word>
+          <word xMin="136.983844" yMin="618.644096" xMax="142.018686" yMax="625.892197">in</word>
+          <word xMin="143.882483" yMin="618.644096" xMax="152.153085" yMax="625.892197">die</word>
+          <word xMin="153.952167" yMin="618.644096" xMax="174.861645" yMax="625.892197">Summe</word>
+          <word xMin="176.660727" yMin="618.644096" xMax="185.649667" yMax="625.892197">der</word>
+          <word xMin="187.506993" yMin="618.644096" xMax="231.118560" yMax="625.892197">nichtrealisierten</word>
+          <word xMin="232.917642" yMin="618.644096" xMax="255.270268" yMax="625.892197">Verluste</word>
+          <word xMin="257.069351" yMin="618.644096" xMax="284.146186" yMax="625.892197">einfließen</word>
+          <word xMin="285.945268" yMin="618.644096" xMax="296.739762" yMax="625.892197">und</word>
+          <word xMin="298.538844" yMin="618.644096" xMax="307.948433" yMax="625.892197">aus</word>
+          <word xMin="309.747515" yMin="618.644096" xMax="322.030458" yMax="625.892197">dem</word>
+          <word xMin="323.829541" yMin="618.644096" xMax="349.411455" yMax="625.892197">Vergleich</word>
+          <word xMin="351.210538" yMin="618.644096" xMax="360.199478" yMax="625.892197">der</word>
+          <word xMin="361.998560" yMin="618.644096" xMax="415.395063" yMax="625.892197">Summenpositionen</word>
+          <word xMin="417.194145" yMin="618.644096" xMax="429.101740" yMax="625.892197">zum</word>
+          <word xMin="430.900823" yMin="618.644096" xMax="444.620443" yMax="625.892197">Ende</word>
+          <word xMin="446.419525" yMin="618.644096" xMax="455.770870" yMax="625.892197">des</word>
+          <word xMin="457.628196" yMin="618.644096" xMax="500.825585" yMax="625.892197">Geschäftsjahres</word>
+          <word xMin="502.624668" yMin="618.644096" xMax="511.671851" yMax="625.892197">mit</word>
+          <word xMin="513.470934" yMin="618.644096" xMax="523.954794" yMax="625.892197">den</word>
+        </line>
+        <line xMin="36.791787" yMin="626.613771" xMax="301.425142" yMax="633.861873">
+          <word xMin="36.791787" yMin="626.613771" xMax="90.130047" yMax="633.861873">Summenpositionen</word>
+          <word xMin="91.929129" yMin="626.613771" xMax="103.849667" yMax="633.861873">zum</word>
+          <word xMin="105.648749" yMin="626.613771" xMax="126.208765" yMax="633.861873">Anfang</word>
+          <word xMin="128.007847" yMin="626.613771" xMax="137.359192" yMax="633.861873">des</word>
+          <word xMin="139.216518" yMin="626.613771" xMax="182.407436" yMax="633.861873">Geschäftsjahres</word>
+          <word xMin="184.264762" yMin="626.613771" xMax="192.535363" yMax="633.861873">die</word>
+          <word xMin="194.334446" yMin="626.613771" xMax="251.691518" yMax="633.861873">Nettoveränderungen</word>
+          <word xMin="253.490601" yMin="626.613771" xMax="276.904556" yMax="633.861873">ermittelt</word>
+          <word xMin="278.768354" yMin="626.613771" xMax="301.425142" yMax="633.861873">werden.</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.959212" yMin="812.006529" xMax="557.755236" yMax="819.991845">
+        <line xMin="549.959212" yMin="812.006529" xMax="557.755236" yMax="819.991845">
+          <word xMin="549.959212" yMin="812.006529" xMax="557.755236" yMax="819.991845">26</word>
+        </line>
+      </block>
+    </flow>
+  </page>
+</doc>
+</body>
+</html>

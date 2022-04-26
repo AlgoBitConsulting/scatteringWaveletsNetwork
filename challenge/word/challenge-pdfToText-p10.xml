@@ -1,0 +1,1417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<doc>
+  <page width="612.000000" height="792.000000">
+    <flow>
+      <block xMin="171.360000" yMin="25.896104" xMax="439.922028" yMax="40.063770">
+        <line xMin="171.360000" yMin="25.896104" xMax="439.922028" yMax="40.063770">
+          <word xMin="171.360000" yMin="25.896104" xMax="179.863036" yMax="40.063770">C</word>
+          <word xMin="181.422332" yMin="25.896104" xMax="248.898430" yMax="40.063770">ARMIGNAC</word>
+          <word xMin="253.600682" yMin="25.896104" xMax="319.018022" yMax="40.063770">PORTFOLIO</word>
+          <word xMin="323.330450" yMin="25.896104" xMax="378.610562" yMax="40.063770">Emerging</word>
+          <word xMin="382.386982" yMin="25.896104" xMax="439.922028" yMax="40.063770">Discovery</word>
+        </line>
+      </block>
+      <block xMin="244.560000" yMin="40.651210" xMax="381.975098" yMax="54.516218">
+        <line xMin="244.560000" yMin="40.651210" xMax="381.975098" yMax="54.516218">
+          <word xMin="244.560000" yMin="40.651210" xMax="322.675206" yMax="54.516218">Wertpapierbestand</word>
+          <word xMin="324.958366" yMin="40.651210" xMax="342.974574" yMax="54.516218">zum</word>
+          <word xMin="345.361514" yMin="40.651210" xMax="381.975098" yMax="54.516218">30.06.18</word>
+        </line>
+      </block>
+      <block xMin="276.000000" yMin="55.392850" xMax="337.666935" yMax="65.369150">
+        <line xMin="276.000000" yMin="55.392850" xMax="337.666935" yMax="65.369150">
+          <word xMin="276.000000" yMin="55.392850" xMax="313.887605" yMax="65.369150">Ausgedrückt</word>
+          <word xMin="315.592510" yMin="55.392850" xMax="321.503840" yMax="65.369150">in</word>
+          <word xMin="323.513990" yMin="55.392850" xMax="337.666935" yMax="65.369150">EUR</word>
+        </line>
+      </block>
+      <block xMin="52.801000" yMin="70.618245" xMax="71.658703" yMax="79.357021">
+        <line xMin="52.801000" yMin="70.618245" xMax="71.658703" yMax="79.357021">
+          <word xMin="52.801000" yMin="70.618245" xMax="71.658703" yMax="79.357021">Anzahl</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="377.519000" yMin="69.659245" xMax="408.978153" yMax="87.757021">
+        <line xMin="377.519000" yMin="69.659245" xMax="408.978153" yMax="78.398021">
+          <word xMin="377.519000" yMin="69.659245" xMax="408.978153" yMax="78.398021">Notierungs-</word>
+        </line>
+        <line xMin="381.601000" yMin="79.018245" xMax="404.788845" yMax="87.757021">
+          <word xMin="381.601000" yMin="79.018245" xMax="404.788845" yMax="87.757021">währung</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="102.721912" yMin="70.618245" xMax="136.957506" yMax="79.357021">
+        <line xMin="102.721912" yMin="70.618245" xMax="136.957506" yMax="79.357021">
+          <word xMin="102.721912" yMin="70.618245" xMax="136.957506" yMax="79.357021">Bezeichnung</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="52.560000" yMin="97.971040" xMax="328.605710" yMax="126.549575">
+        <line xMin="52.560000" yMin="97.971040" xMax="328.605710" yMax="106.629575">
+          <word xMin="52.560000" yMin="97.971040" xMax="63.772170" yMax="106.629575">Zur</word>
+          <word xMin="65.268615" yMin="97.971040" xMax="101.510875" yMax="106.629575">amtlichen</word>
+          <word xMin="103.521025" yMin="97.971040" xMax="138.922000" yMax="106.629575">Notierung</word>
+          <word xMin="141.393740" yMin="97.971040" xMax="145.950080" yMax="106.629575">a</word>
+          <word xMin="146.716915" yMin="97.971040" xMax="151.429600" yMax="106.629575">n</word>
+          <word xMin="153.432305" yMin="97.971040" xMax="172.029915" yMax="106.629575">einer</word>
+          <word xMin="173.556140" yMin="97.971040" xMax="234.173330" yMax="106.629575">Wertpapierbörse</word>
+          <word xMin="236.615290" yMin="97.971040" xMax="280.622685" yMax="106.629575">zugelassene</word>
+          <word xMin="283.287995" yMin="97.971040" xMax="328.605710" yMax="106.629575">Wertpapiere</word>
+        </line>
+        <line xMin="86.400000" yMin="108.052040" xMax="110.156995" yMax="116.710575">
+          <word xMin="86.400000" yMin="108.052040" xMax="110.156995" yMax="116.710575">Aktien</word>
+        </line>
+        <line xMin="119.519000" yMin="117.891040" xMax="165.253400" yMax="126.549575">
+          <word xMin="119.519000" yMin="117.891040" xMax="165.253400" yMax="126.549575">Deutschland</word>
+        </line>
+      </block>
+      <block xMin="77.758999" yMin="125.340247" xMax="166.180237" yMax="134.079023">
+        <line xMin="77.758999" yMin="125.340247" xMax="166.180237" yMax="134.079023">
+          <word xMin="77.758999" yMin="125.340247" xMax="99.265807" yMax="134.079023">151.612</word>
+          <word xMin="102.719455" yMin="125.340247" xMax="135.496406" yMax="134.079023">DELIVERY</word>
+          <word xMin="137.013918" yMin="125.340247" xMax="154.916635" yMax="134.079023">HERO</word>
+          <word xMin="156.663082" yMin="125.340247" xMax="166.180237" yMax="134.079023">AG</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="138.052040" xMax="161.646685" yMax="146.710575">
+        <line xMin="119.519000" yMin="138.052040" xMax="161.646685" yMax="146.710575">
+          <word xMin="119.519000" yMin="138.052040" xMax="161.646685" yMax="146.710575">Argentinien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="77.756998" yMin="145.500247" xMax="250.112348" yMax="163.118026">
+        <line xMin="77.759000" yMin="145.500247" xMax="192.965633" yMax="154.239023">
+          <word xMin="77.759000" yMin="145.500247" xMax="99.265808" yMax="154.239023">739.964</word>
+          <word xMin="102.719456" yMin="145.500247" xMax="128.523701" yMax="154.239023">CRESUD</word>
+          <word xMin="130.067377" yMin="145.500247" xMax="137.386756" yMax="154.239023">SP</word>
+          <word xMin="139.159367" yMin="145.500247" xMax="152.908549" yMax="154.239023">ADR</word>
+          <word xMin="154.543799" yMin="145.500247" xMax="171.138316" yMax="154.239023">REPR</word>
+          <word xMin="172.538090" yMin="145.500247" xMax="179.124877" yMax="154.239023">10</word>
+          <word xMin="180.897488" yMin="145.500247" xMax="192.965633" yMax="154.239023">SHS</word>
+        </line>
+        <line xMin="77.756998" yMin="154.379250" xMax="250.112348" yMax="163.118026">
+          <word xMin="77.756998" yMin="154.379250" xMax="99.263806" yMax="163.118026">701.552</word>
+          <word xMin="102.717454" yMin="154.379250" xMax="151.061985" yMax="163.118026">TRANSPORT.DE</word>
+          <word xMin="153.056990" yMin="154.379250" xMax="166.047416" yMax="163.118026">GAS</word>
+          <word xMin="167.597633" yMin="154.379250" xMax="180.555354" yMax="163.118026">DEL</word>
+          <word xMin="182.105571" yMin="154.379250" xMax="194.834357" yMax="163.118026">SUR</word>
+          <word xMin="196.705083" yMin="154.379250" xMax="210.421560" yMax="163.118026">ADR</word>
+          <word xMin="211.971777" yMin="154.379250" xMax="215.242277" yMax="163.118026">5</word>
+          <word xMin="216.792494" yMin="154.379250" xMax="228.886803" yMax="163.118026">SHS</word>
+          <word xMin="230.764070" yMin="154.379250" xMax="235.126917" yMax="163.118026">B</word>
+          <word xMin="236.677134" yMin="154.379250" xMax="250.112348" yMax="163.118026">REG</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="167.332040" xMax="148.194570" yMax="175.990575">
+        <line xMin="119.519000" yMin="167.332040" xMax="148.194570" yMax="175.990575">
+          <word xMin="119.519000" yMin="167.332040" xMax="148.194570" yMax="175.990575">Brasilien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959999" yMin="174.779247" xMax="229.584244" yMax="192.398026">
+        <line xMin="72.959999" yMin="174.779247" xMax="229.584244" yMax="183.518023">
+          <word xMin="72.959999" yMin="174.779247" xMax="99.267901" yMax="183.518023">3.094.051</word>
+          <word xMin="102.721549" yMin="174.779247" xMax="128.898631" yMax="183.518023">ALUPAR</word>
+          <word xMin="130.475012" yMin="174.779247" xMax="179.362446" yMax="183.518023">INVESTIMENTO</word>
+          <word xMin="181.121975" yMin="174.779247" xMax="189.677603" yMax="183.518023">SA</word>
+          <word xMin="191.253984" yMin="174.779247" xMax="210.406032" yMax="183.518023">UNITS</word>
+          <word xMin="211.982413" yMin="174.779247" xMax="229.584244" yMax="183.518023">CONS</word>
+        </line>
+        <line xMin="77.756998" yMin="183.659250" xMax="226.204993" yMax="192.398026">
+          <word xMin="77.756998" yMin="183.659250" xMax="99.263806" yMax="192.398026">770.203</word>
+          <word xMin="102.717454" yMin="183.659250" xMax="114.870632" yMax="192.398026">SUL</word>
+          <word xMin="116.623620" yMin="183.659250" xMax="146.986942" yMax="192.398026">AMERICA</word>
+          <word xMin="148.504454" yMin="183.659250" xMax="166.773467" yMax="192.398026">CDAC</word>
+          <word xMin="168.402176" yMin="183.659250" xMax="176.826984" yMax="192.398026">OF</word>
+          <word xMin="178.226758" yMin="183.659250" xMax="181.497258" yMax="192.398026">1</word>
+          <word xMin="183.263328" yMin="183.659250" xMax="198.680465" yMax="192.398026">SH+2</word>
+          <word xMin="200.511945" yMin="183.659250" xMax="212.665123" yMax="192.398026">PFD</word>
+          <word xMin="214.182635" yMin="183.659250" xMax="226.204993" yMax="192.398026">SHS</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="196.611040" xMax="140.856370" yMax="205.269575">
+        <line xMin="119.519000" yMin="196.611040" xMax="140.856370" yMax="205.269575">
+          <word xMin="119.519000" yMin="196.611040" xMax="124.715610" yMax="205.269575">C</word>
+          <word xMin="125.757910" yMin="196.611040" xMax="140.856370" yMax="205.269575">hina</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="69.599998" yMin="204.059247" xMax="244.257780" yMax="212.798023">
+        <line xMin="69.599998" yMin="204.059247" xMax="244.257780" yMax="212.798023">
+          <word xMin="69.599998" yMin="204.059247" xMax="99.256892" yMax="212.798023">35.002.495</word>
+          <word xMin="102.717081" yMin="204.059247" xMax="123.268903" yMax="212.798023">CHINA</word>
+          <word xMin="125.021891" yMin="204.059247" xMax="182.595773" yMax="212.798023">COMMUNICATION</word>
+          <word xMin="183.779694" yMin="204.059247" xMax="214.528935" yMax="212.798023">SERCICES</word>
+          <word xMin="216.164185" yMin="204.059247" xMax="233.484753" yMax="212.798023">CORP</word>
+          <word xMin="234.891068" yMin="204.059247" xMax="244.257780" yMax="212.798023">-H-</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="216.532040" xMax="158.017095" yMax="225.190575">
+        <line xMin="119.519000" yMin="216.532040" xMax="158.017095" yMax="225.190575">
+          <word xMin="119.519000" yMin="216.532040" xMax="158.017095" yMax="225.190575">Kolumbien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="77.756997" yMin="224.220247" xMax="209.690969" yMax="241.839026">
+        <line xMin="77.758999" yMin="224.220247" xMax="209.690969" yMax="232.959023">
+          <word xMin="77.758999" yMin="224.220247" xMax="99.265807" yMax="232.959023">617.685</word>
+          <word xMin="102.719455" yMin="224.220247" xMax="125.658742" yMax="232.959023">BANCO</word>
+          <word xMin="127.176254" yMin="224.220247" xMax="168.822801" yMax="232.959023">DAVIVIENDA</word>
+          <word xMin="170.575789" yMin="224.220247" xMax="179.131417" yMax="232.959023">SA</word>
+          <word xMin="180.406912" yMin="224.220247" xMax="196.262296" yMax="232.959023">PREF</word>
+          <word xMin="197.662070" yMin="224.220247" xMax="209.690969" yMax="232.959023">SHS</word>
+        </line>
+        <line xMin="77.756997" yMin="233.100250" xMax="136.691407" yMax="241.839026">
+          <word xMin="77.756997" yMin="233.100250" xMax="99.263805" yMax="241.839026">160.000</word>
+          <word xMin="102.717453" yMin="233.100250" xMax="126.611726" yMax="241.839026">TERPEL</word>
+          <word xMin="128.135779" yMin="233.100250" xMax="136.691407" yMax="241.839026">SA</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="245.812040" xMax="153.311855" yMax="254.470575">
+        <line xMin="119.519000" yMin="245.812040" xMax="153.311855" yMax="254.470575">
+          <word xMin="119.519000" yMin="245.812040" xMax="153.311855" yMax="254.470575">Südkorea</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="77.759000" yMin="253.500247" xMax="179.654698" yMax="271.118026">
+        <line xMin="77.759000" yMin="253.500247" xMax="179.654698" yMax="262.239023">
+          <word xMin="77.759000" yMin="253.500247" xMax="99.265808" yMax="262.239023">205.915</word>
+          <word xMin="102.719456" yMin="253.500247" xMax="136.955050" yMax="262.239023">INNOCEAN</word>
+          <word xMin="138.472562" yMin="253.500247" xMax="179.654698" yMax="262.239023">WORLDWIDE</word>
+        </line>
+        <line xMin="81.117999" yMin="262.379250" xMax="126.394801" yMax="271.118026">
+          <word xMin="81.117999" yMin="262.379250" xMax="99.262733" yMax="271.118026">50.411</word>
+          <word xMin="102.716381" yMin="262.379250" xMax="126.394801" yMax="271.118026">KAKAO</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="274.611040" xMax="149.142655" yMax="283.269575">
+        <line xMin="119.519000" yMin="274.611040" xMax="149.142655" yMax="283.269575">
+          <word xMin="119.519000" yMin="274.611040" xMax="149.142655" yMax="283.269575">Spanien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959998" yMin="282.779247" xMax="195.891552" yMax="291.518023">
+        <line xMin="72.959998" yMin="282.779247" xMax="195.891552" yMax="291.518023">
+          <word xMin="72.959998" yMin="282.779247" xMax="99.267900" yMax="291.518023">1.950.839</word>
+          <word xMin="102.721548" yMin="282.779247" xMax="125.667376" yMax="291.518023">CEMEX</word>
+          <word xMin="127.184888" yMin="282.779247" xMax="150.281159" yMax="291.518023">LATAM</word>
+          <word xMin="152.132262" yMin="282.779247" xMax="185.772625" yMax="291.518023">HOLDINGS</word>
+          <word xMin="187.447121" yMin="282.779247" xMax="195.891552" yMax="291.518023">SA</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="294.772040" xMax="170.003545" yMax="303.430575">
+        <line xMin="119.519000" yMin="294.772040" xMax="170.003545" yMax="303.430575">
+          <word xMin="119.519000" yMin="294.772040" xMax="170.003545" yMax="303.430575">Kaiman-Inseln</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959999" yMin="302.699244" xMax="234.607732" yMax="329.918025">
+        <line xMin="72.959999" yMin="302.699244" xMax="203.936983" yMax="311.438020">
+          <word xMin="72.959999" yMin="302.699244" xMax="99.267901" yMax="311.438020">5.487.100</word>
+          <word xMin="102.721549" yMin="302.699244" xMax="121.206415" yMax="311.438020">YIHAI</word>
+          <word xMin="122.802419" yMin="302.699244" xMax="137.650489" yMax="311.438020">INTL</word>
+          <word xMin="139.652035" yMin="302.699244" xMax="169.066912" yMax="311.438020">UNITARY</word>
+          <word xMin="170.662916" yMin="302.699244" xMax="203.936983" yMax="311.438020">144A/REGS</word>
+        </line>
+        <line xMin="72.959999" yMin="311.580247" xMax="234.607732" yMax="320.319023">
+          <word xMin="72.959999" yMin="311.580247" xMax="99.267901" yMax="320.319023">8.788.451</word>
+          <word xMin="102.721549" yMin="311.580247" xMax="121.343776" yMax="320.319023">YIXIN</word>
+          <word xMin="122.763173" yMin="311.580247" xMax="135.603156" yMax="320.319023">GRP</word>
+          <word xMin="137.029094" yMin="311.580247" xMax="155.147664" yMax="320.319023">REGD</word>
+          <word xMin="156.567061" yMin="311.580247" xMax="168.687534" yMax="320.319023">SHS</word>
+          <word xMin="170.564801" yMin="311.580247" xMax="200.215154" yMax="320.319023">UNITARY</word>
+          <word xMin="201.490649" yMin="311.580247" xMax="234.607732" yMax="320.319023">144A/REGS</word>
+        </line>
+        <line xMin="77.759000" yMin="321.179249" xMax="224.048465" yMax="329.918025">
+          <word xMin="77.759000" yMin="321.179249" xMax="99.265808" yMax="329.918025">174.850</word>
+          <word xMin="102.719456" yMin="321.179249" xMax="112.001135" yMax="329.918025">YY</word>
+          <word xMin="113.747582" yMin="321.179249" xMax="125.056971" yMax="329.918025">INC</word>
+          <word xMin="126.489450" yMin="321.179249" xMax="135.587981" yMax="329.918025">-A-</word>
+          <word xMin="137.242854" yMin="321.179249" xMax="157.657315" yMax="329.918025">SPONS</word>
+          <word xMin="159.534582" yMin="321.179249" xMax="173.257600" yMax="329.918025">ADR</word>
+          <word xMin="174.886309" yMin="321.179249" xMax="191.467744" yMax="329.918025">REPR</word>
+          <word xMin="193.096453" yMin="321.179249" xMax="199.722486" yMax="329.918025">20</word>
+          <word xMin="201.253080" yMin="321.179249" xMax="213.281979" yMax="329.918025">SHS</word>
+          <word xMin="214.917229" yMin="321.179249" xMax="224.048465" yMax="329.918025">-A-</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="333.652040" xMax="202.806215" yMax="342.310575">
+        <line xMin="119.519000" yMin="333.652040" xMax="202.806215" yMax="342.310575">
+          <word xMin="119.519000" yMin="333.652040" xMax="148.829965" yMax="342.310575">Britische</word>
+          <word xMin="151.137915" yMin="333.652040" xMax="153.326745" yMax="342.310575">J</word>
+          <word xMin="154.488165" yMin="333.652040" xMax="202.806215" yMax="342.310575">ungferninseln</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959998" yMin="341.338244" xMax="212.760791" yMax="350.077020">
+        <line xMin="72.959998" yMin="341.338244" xMax="212.760791" yMax="350.077020">
+          <word xMin="72.959998" yMin="341.338244" xMax="99.267900" yMax="350.077020">1.004.058</word>
+          <word xMin="102.721548" yMin="341.338244" xMax="124.346094" yMax="350.077020">ARCOS</word>
+          <word xMin="126.164492" yMin="341.338244" xMax="157.685571" yMax="350.077020">DORADOS</word>
+          <word xMin="159.503969" yMin="341.338244" xMax="193.294775" yMax="350.077020">HOLDINGS</word>
+          <word xMin="194.844992" yMin="341.338244" xMax="205.925446" yMax="350.077020">INC</word>
+          <word xMin="208.038189" yMin="341.338244" xMax="212.760791" yMax="350.077020">A</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="353.332040" xMax="141.690210" yMax="361.990575">
+        <line xMin="119.519000" yMin="353.332040" xMax="141.690210" yMax="361.990575">
+          <word xMin="119.519000" yMin="353.332040" xMax="141.690210" yMax="361.990575">Indien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.958997" yMin="361.259244" xMax="177.973660" yMax="379.118021">
+        <line xMin="77.758999" yMin="361.259244" xMax="177.973660" yMax="369.998020">
+          <word xMin="77.758999" yMin="361.259244" xMax="99.265807" yMax="369.998020">356.586</word>
+          <word xMin="102.719455" yMin="361.259244" xMax="113.230842" yMax="369.998020">DR.</word>
+          <word xMin="114.996912" yMin="361.259244" xMax="127.876141" yMax="369.998020">LAL</word>
+          <word xMin="129.354407" yMin="361.259244" xMax="163.217164" yMax="369.998020">PATHLABS</word>
+          <word xMin="165.087890" yMin="361.259244" xMax="177.973660" yMax="369.998020">LTD</word>
+        </line>
+        <line xMin="72.958997" yMin="370.379242" xMax="177.945549" yMax="379.118021">
+          <word xMin="72.958997" yMin="370.379242" xMax="99.266899" yMax="379.118018">6.405.000</word>
+          <word xMin="102.719000" yMin="370.379245" xMax="130.804562" yMax="379.118021">NIYOGIN</word>
+          <word xMin="132.223959" yMin="370.379245" xMax="160.206357" yMax="379.118021">FINTECH</word>
+          <word xMin="161.723869" yMin="370.379245" xMax="177.945549" yMax="379.118021">LTD*</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="383.091040" xMax="159.193405" yMax="391.749575">
+        <line xMin="119.519000" yMin="383.091040" xMax="159.193405" yMax="391.749575">
+          <word xMin="119.519000" yMin="383.091040" xMax="159.193405" yMax="391.749575">Indonesien</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="69.598997" yMin="390.539247" xMax="216.351800" yMax="408.397021">
+        <line xMin="72.959998" yMin="390.539247" xMax="216.351800" yMax="399.278023">
+          <word xMin="72.959998" yMin="390.539247" xMax="99.267900" yMax="399.278023">4.651.378</word>
+          <word xMin="102.721548" yMin="390.539247" xMax="146.062214" yMax="399.278023">INDOCEMENT</word>
+          <word xMin="147.828284" yMin="390.539247" xMax="179.414773" yMax="399.278023">TUNGGAL</word>
+          <word xMin="180.938826" yMin="390.539247" xMax="216.351800" yMax="399.278023">PRAKARSA</word>
+        </line>
+        <line xMin="69.598997" yMin="399.658245" xMax="208.928838" yMax="408.397021">
+          <word xMin="69.598997" yMin="399.658245" xMax="99.255891" yMax="408.397021">12.300.000</word>
+          <word xMin="102.716080" yMin="399.658245" xMax="120.167468" yMax="408.397021">PROD</word>
+          <word xMin="121.920456" yMin="399.658245" xMax="167.190717" yMax="408.397021">WIDYAHUSAD</word>
+          <word xMin="168.708229" yMin="399.658245" xMax="208.928838" yMax="408.397021">REGISTERED</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="412.371040" xMax="139.419485" yMax="421.029575">
+        <line xMin="119.519000" yMin="412.371040" xMax="139.419485" yMax="421.029575">
+          <word xMin="119.519000" yMin="412.371040" xMax="139.419485" yMax="421.029575">Kenia</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="69.598997" yMin="420.060247" xMax="170.028438" yMax="437.678026">
+        <line xMin="72.959998" yMin="420.060247" xMax="170.028438" yMax="428.799023">
+          <word xMin="72.959998" yMin="420.060247" xMax="99.267900" yMax="428.799023">1.478.074</word>
+          <word xMin="102.721548" yMin="420.060247" xMax="118.936687" yMax="428.799023">EAST</word>
+          <word xMin="120.696216" yMin="420.060247" xMax="149.391583" yMax="428.799023">AFRICAN</word>
+          <word xMin="151.151112" yMin="420.060247" xMax="170.028438" yMax="428.799023">BREW</word>
+        </line>
+        <line xMin="69.598997" yMin="428.939250" xMax="140.693126" yMax="437.678026">
+          <word xMin="69.598997" yMin="428.939250" xMax="99.255891" yMax="437.678026">25.699.672</word>
+          <word xMin="102.716080" yMin="428.939250" xMax="140.693126" yMax="437.678026">SAFARICOM</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="441.892040" xMax="144.936230" yMax="450.550575">
+        <line xMin="119.519000" yMin="441.892040" xMax="144.936230" yMax="450.550575">
+          <word xMin="119.519000" yMin="441.892040" xMax="144.936230" yMax="450.550575">Mexiko</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.958998" yMin="449.339247" xMax="254.583946" yMax="466.959026">
+        <line xMin="72.959999" yMin="449.339247" xMax="254.583946" yMax="458.078023">
+          <word xMin="72.959999" yMin="449.339247" xMax="99.267901" yMax="458.078023">7.622.820</word>
+          <word xMin="102.721549" yMin="449.339247" xMax="121.376481" yMax="458.078023">BKNY</word>
+          <word xMin="122.638894" yMin="449.339247" xMax="150.143799" yMax="458.078023">MELLON</word>
+          <word xMin="151.811754" yMin="449.339247" xMax="185.635265" yMax="458.078023">MEX-CERT</word>
+          <word xMin="186.917301" yMin="449.339247" xMax="227.000549" yMax="458.078023">BURSATILES</word>
+          <word xMin="228.400323" yMin="449.339247" xMax="239.343416" yMax="458.078023">FID</word>
+          <word xMin="240.860928" yMin="449.339247" xMax="254.583946" yMax="458.078023">IMM</word>
+        </line>
+        <line xMin="72.958998" yMin="458.220250" xMax="201.882108" yMax="466.959026">
+          <word xMin="72.958998" yMin="458.220250" xMax="99.266900" yMax="466.959026">1.312.705</word>
+          <word xMin="102.720548" yMin="458.220250" xMax="124.933784" yMax="466.959026">UNIFIN</word>
+          <word xMin="126.209279" yMin="458.220250" xMax="166.410265" yMax="466.959026">FINANCIERA</word>
+          <word xMin="167.679219" yMin="458.220250" xMax="180.676186" yMax="466.959026">SAB</word>
+          <word xMin="182.298354" yMin="458.220250" xMax="190.853982" yMax="466.959026">DE</word>
+          <word xMin="192.848987" yMin="458.220250" xMax="201.882108" yMax="466.959026">CV</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="470.692040" xMax="150.452975" yMax="479.350575">
+        <line xMin="119.519000" yMin="470.692040" xMax="150.452975" yMax="479.350575">
+          <word xMin="119.519000" yMin="470.692040" xMax="150.452975" yMax="479.350575">Panama</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="77.758999" yMin="478.619244" xMax="181.407685" yMax="487.358020">
+        <line xMin="77.758999" yMin="478.619244" xMax="181.407685" yMax="487.358020">
+          <word xMin="77.758999" yMin="478.619244" xMax="99.265807" yMax="487.358020">182.242</word>
+          <word xMin="102.719455" yMin="478.619244" xMax="144.261346" yMax="487.358020">INTERGROUP</word>
+          <word xMin="145.661120" yMin="478.619244" xMax="181.407685" yMax="487.358020">FINANCIAL</word>
+        </line>
+      </block>
+      <block xMin="69.599998" yMin="498.779247" xMax="99.271577" yMax="544.477026">
+        <line xMin="69.599998" yMin="498.779247" xMax="99.256892" yMax="507.518023">
+          <word xMin="69.599998" yMin="498.779247" xMax="99.256892" yMax="507.518023">73.409.756</word>
+        </line>
+        <line xMin="69.599998" yMin="507.660250" xMax="99.256892" yMax="516.399026">
+          <word xMin="69.599998" yMin="507.660250" xMax="99.256892" yMax="516.399026">15.926.085</word>
+        </line>
+        <line xMin="72.959999" yMin="517.019250" xMax="99.267901" yMax="525.758026">
+          <word xMin="72.959999" yMin="517.019250" xMax="99.267901" yMax="525.758026">3.360.289</word>
+        </line>
+        <line xMin="92.639003" yMin="526.379250" xMax="99.271577" yMax="535.118026">
+          <word xMin="92.639003" yMin="526.379250" xMax="99.271577" yMax="535.118026">50</word>
+        </line>
+        <line xMin="72.958998" yMin="535.738250" xMax="99.266900" yMax="544.477026">
+          <word xMin="72.958998" yMin="535.738250" xMax="99.266900" yMax="544.477026">5.011.046</word>
+        </line>
+      </block>
+      <block xMin="72.959999" yMin="555.899247" xMax="99.267901" yMax="592.237019">
+        <line xMin="72.959999" yMin="555.899247" xMax="99.267901" yMax="564.638023">
+          <word xMin="72.959999" yMin="555.899247" xMax="99.267901" yMax="564.638023">4.224.919</word>
+        </line>
+        <line xMin="77.759000" yMin="565.019245" xMax="99.265808" yMax="573.758021">
+          <word xMin="77.759000" yMin="565.019245" xMax="99.265808" yMax="573.758021">575.880</word>
+        </line>
+        <line xMin="72.959999" yMin="574.138243" xMax="99.267901" yMax="582.877019">
+          <word xMin="72.959999" yMin="574.138243" xMax="99.267901" yMax="582.877019">5.355.443</word>
+        </line>
+        <line xMin="72.959999" yMin="583.498243" xMax="99.267901" yMax="592.237019">
+          <word xMin="72.959999" yMin="583.498243" xMax="99.267901" yMax="592.237019">1.604.170</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="490.611040" xMax="158.962610" yMax="499.269575">
+        <line xMin="119.519000" yMin="490.611040" xMax="158.962610" yMax="499.269575">
+          <word xMin="119.519000" yMin="490.611040" xMax="158.962610" yMax="499.269575">Philippinen</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="102.717081" yMin="498.779247" xMax="260.026058" yMax="544.477026">
+        <line xMin="102.717081" yMin="498.779247" xMax="200.792835" yMax="507.518023">
+          <word xMin="102.717081" yMin="498.779247" xMax="125.656368" yMax="507.518023">CEMEX</word>
+          <word xMin="127.173880" yMin="498.779247" xMax="160.532980" yMax="507.518023">HOLDINGS</word>
+          <word xMin="162.403706" yMin="498.779247" xMax="200.792835" yMax="507.518023">PHILIPPINES</word>
+        </line>
+        <line xMin="102.717081" yMin="507.660250" xMax="160.107815" yMax="516.399026">
+          <word xMin="102.717081" yMin="507.660250" xMax="128.207358" yMax="516.399026">HOLCIM</word>
+          <word xMin="129.829526" yMin="507.660250" xMax="146.646437" yMax="516.399026">(PHP)</word>
+          <word xMin="148.307851" yMin="507.660250" xMax="160.107815" yMax="516.399026">SHS</word>
+        </line>
+        <line xMin="102.721549" yMin="517.019250" xMax="260.026058" yMax="525.758026">
+          <word xMin="102.721549" yMin="517.019250" xMax="156.004535" yMax="525.758026">INTERNATIONAL</word>
+          <word xMin="157.430473" yMin="517.019250" xMax="195.374814" yMax="525.758026">CONTAINER</word>
+          <word xMin="197.245540" yMin="517.019250" xMax="231.330691" yMax="525.758026">TERMINAL</word>
+          <word xMin="232.750088" yMin="517.019250" xMax="260.026058" yMax="525.758026">SERVICE</word>
+        </line>
+        <line xMin="102.718684" yMin="526.379250" xMax="147.354468" yMax="535.118026">
+          <word xMin="102.718684" yMin="526.379250" xMax="110.783737" yMax="535.118026">LT</word>
+          <word xMin="112.307790" yMin="526.379250" xMax="134.409829" yMax="535.118026">GROUP</word>
+          <word xMin="136.280555" yMin="526.379250" xMax="147.354468" yMax="535.118026">INC</word>
+        </line>
+        <line xMin="102.720548" yMin="535.738250" xMax="207.749385" yMax="544.477026">
+          <word xMin="102.720548" yMin="535.738250" xMax="137.394389" yMax="544.477026">PHILIPPINE</word>
+          <word xMin="139.389394" yMin="535.738250" xMax="173.108249" yMax="544.477026">NATIONAL</word>
+          <word xMin="174.625761" yMin="535.738250" xMax="193.476923" yMax="544.477026">BANK</word>
+          <word xMin="195.000976" yMin="535.738250" xMax="207.749385" yMax="544.477026">PNB</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="548.452040" xMax="145.308480" yMax="557.110575">
+        <line xMin="119.519000" yMin="548.452040" xMax="145.308480" yMax="557.110575">
+          <word xMin="119.519000" yMin="548.452040" xMax="145.308480" yMax="557.110575">Taiwan</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="102.719456" yMin="555.899247" xMax="201.508179" yMax="592.237019">
+        <line xMin="102.721549" yMin="555.899247" xMax="178.505575" yMax="564.638023">
+          <word xMin="102.721549" yMin="555.899247" xMax="132.600837" yMax="564.638023">CHICONY</word>
+          <word xMin="133.876332" yMin="555.899247" xMax="178.505575" yMax="564.638023">ELECTRONICS</word>
+        </line>
+        <line xMin="102.719456" yMin="565.019245" xMax="201.508179" yMax="573.758021">
+          <word xMin="102.719456" yMin="565.019245" xMax="137.877331" yMax="573.758021">PRESIDENT</word>
+          <word xMin="139.630319" yMin="565.019245" xMax="160.411076" yMax="573.758021">CHAIN</word>
+          <word xMin="162.007080" yMin="565.019245" xMax="182.689722" yMax="573.758021">STORE</word>
+          <word xMin="184.442710" yMin="565.019245" xMax="201.508179" yMax="573.758021">CORP</word>
+        </line>
+        <line xMin="102.721549" yMin="574.138243" xMax="159.497429" yMax="582.877019">
+          <word xMin="102.721549" yMin="574.138243" xMax="128.081006" yMax="582.877019">PRIMAX</word>
+          <word xMin="129.605059" yMin="574.138243" xMax="159.497429" yMax="582.877019">ELECTRO</word>
+        </line>
+        <line xMin="102.721549" yMin="583.498243" xMax="198.069706" yMax="592.237019">
+          <word xMin="102.721549" yMin="583.498243" xMax="126.380346" yMax="592.237019">TRIPOD</word>
+          <word xMin="127.891317" yMin="583.498243" xMax="172.893397" yMax="592.237019">TECHNOLOGY</word>
+          <word xMin="174.567893" yMin="583.498243" xMax="183.686047" yMax="592.237019">CO</word>
+          <word xMin="185.367084" yMin="583.498243" xMax="198.069706" yMax="592.237019">LTD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="596.452040" xMax="140.275660" yMax="605.110575">
+        <line xMin="119.519000" yMin="596.452040" xMax="140.275660" yMax="605.110575">
+          <word xMin="119.519000" yMin="596.452040" xMax="140.275660" yMax="605.110575">Türkei</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959998" yMin="603.899247" xMax="158.614393" yMax="612.638023">
+        <line xMin="72.959998" yMin="603.899247" xMax="158.614393" yMax="612.638023">
+          <word xMin="72.959998" yMin="603.899247" xMax="99.267900" yMax="612.638023">1.018.117</word>
+          <word xMin="102.721548" yMin="603.899247" xMax="132.142966" yMax="612.638023">AVIVASA</word>
+          <word xMin="133.653937" yMin="603.899247" xMax="158.614393" yMax="612.638023">EMEKLI</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="616.372040" xMax="150.668880" yMax="625.030575">
+        <line xMin="119.519000" yMin="616.372040" xMax="150.668880" yMax="625.030575">
+          <word xMin="119.519000" yMin="616.372040" xMax="150.668880" yMax="625.030575">Vietnam</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="77.758999" yMin="623.820247" xMax="135.744964" yMax="632.559023">
+        <line xMin="77.758999" yMin="623.820247" xMax="135.744964" yMax="632.559023">
+          <word xMin="77.758999" yMin="623.820247" xMax="99.265807" yMax="632.559023">691.200</word>
+          <word xMin="102.719455" yMin="623.820247" xMax="135.744964" yMax="632.559023">VINAMILK</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959999" yMin="654.299247" xMax="252.968691" yMax="681.277019">
+        <line xMin="72.959999" yMin="654.299247" xMax="247.539289" yMax="663.038023">
+          <word xMin="72.959999" yMin="654.299247" xMax="99.267901" yMax="663.038023">8.709.019</word>
+          <word xMin="102.721549" yMin="654.299247" xMax="131.384211" yMax="663.038023">MERRILL</word>
+          <word xMin="133.143740" yMin="654.299247" xMax="155.841010" yMax="663.038023">LYNCH</word>
+          <word xMin="157.116505" yMin="654.299247" xMax="187.970402" yMax="663.038023">(ARAMEX</word>
+          <word xMin="189.487914" yMin="654.299247" xMax="206.043185" yMax="663.038023">PJSC)</word>
+          <word xMin="207.698058" yMin="654.299247" xMax="230.846657" yMax="663.038023">14.03.19</word>
+          <word xMin="232.606186" yMin="654.299247" xMax="247.539289" yMax="663.038023">WAR</word>
+        </line>
+        <line xMin="81.116998" yMin="663.418245" xMax="252.968691" yMax="672.157021">
+          <word xMin="81.116998" yMin="663.418245" xMax="99.261732" yMax="672.157021">17.320</word>
+          <word xMin="102.721921" yMin="663.418245" xMax="131.430370" yMax="672.157021">MERRILL</word>
+          <word xMin="133.196440" yMin="663.418245" xMax="155.821759" yMax="672.157021">LYNCH</word>
+          <word xMin="157.188828" yMin="663.418245" xMax="180.134656" yMax="672.157021">(SHREE</word>
+          <word xMin="182.129661" yMin="663.418245" xMax="210.949307" yMax="672.157021">CEMENT)</word>
+          <word xMin="212.610721" yMin="663.418245" xMax="236.066747" yMax="672.157021">07.07.20</word>
+          <word xMin="237.832817" yMin="663.418245" xMax="252.968691" yMax="672.157021">WAR</word>
+        </line>
+        <line xMin="77.756998" yMin="672.538243" xMax="177.265231" yMax="681.277019">
+          <word xMin="77.756998" yMin="672.538243" xMax="99.263806" yMax="681.277019">174.208</word>
+          <word xMin="102.717454" yMin="672.538243" xMax="112.463544" yMax="681.277019">ML</word>
+          <word xMin="113.981056" yMin="672.538243" xMax="125.296986" yMax="681.277019">(DR</word>
+          <word xMin="126.925695" yMin="672.538243" xMax="139.778760" yMax="681.277019">LAL</word>
+          <word xMin="141.296272" yMin="672.538243" xMax="177.265231" yMax="681.277019">PATHLABS)</word>
+        </line>
+        <line xMin="199.916714" yMin="672.538243" xMax="239.555174" yMax="681.277019">
+          <word xMin="199.916714" yMin="672.538243" xMax="223.104559" yMax="681.277019">11.12.20</word>
+          <word xMin="224.628612" yMin="672.538243" xMax="239.555174" yMax="681.277019">WAR</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="119.519000" yMin="685.492040" xMax="200.394035" yMax="694.150575">
+        <line xMin="119.519000" yMin="685.492040" xMax="200.394035" yMax="694.150575">
+          <word xMin="119.519000" yMin="685.492040" xMax="160.764300" yMax="694.150575">Vereinigtes</word>
+          <word xMin="162.126735" yMin="685.492040" xMax="200.394035" yMax="694.150575">Königreich</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="72.959998" yMin="692.940247" xMax="239.552727" yMax="710.798021">
+        <line xMin="72.959998" yMin="692.940247" xMax="176.333962" yMax="701.679023">
+          <word xMin="72.959998" yMin="692.940247" xMax="99.267900" yMax="701.679023">5.828.675</word>
+          <word xMin="102.721548" yMin="692.940247" xMax="111.643472" yMax="701.679023">DB</word>
+          <word xMin="113.272181" yMin="692.940247" xMax="132.371901" yMax="701.679023">(JOHN</word>
+          <word xMin="133.889413" yMin="692.940247" xMax="154.303874" yMax="701.679023">KELLS</word>
+          <word xMin="155.945665" yMin="692.940247" xMax="176.333962" yMax="701.679023">HLDG)</word>
+        </line>
+        <line xMin="199.920808" yMin="692.940247" xMax="239.552727" yMax="701.679023">
+          <word xMin="199.920808" yMin="692.940247" xMax="223.102112" yMax="701.679023">05.07.19</word>
+          <word xMin="224.632706" yMin="692.940247" xMax="239.552727" yMax="701.679023">WAR</word>
+        </line>
+        <line xMin="77.757992" yMin="702.059245" xMax="228.959748" yMax="710.798021">
+          <word xMin="77.757992" yMin="702.059245" xMax="99.264800" yMax="710.798021">687.060</word>
+          <word xMin="102.718448" yMin="702.059245" xMax="111.640372" yMax="710.798021">DB</word>
+          <word xMin="113.478393" yMin="702.059245" xMax="126.880902" yMax="710.798021">LDN</word>
+          <word xMin="128.391873" yMin="702.059245" xMax="145.581621" yMax="710.798021">(VIET</word>
+          <word xMin="147.426183" yMin="702.059245" xMax="162.274253" yMax="710.798021">NAM</word>
+          <word xMin="164.373914" yMin="702.059245" xMax="187.175840" yMax="710.798021">DAIRY)</word>
+          <word xMin="188.837254" yMin="702.059245" xMax="212.018558" yMax="710.798021">08.07.19</word>
+          <word xMin="213.856579" yMin="702.059245" xMax="228.959748" yMax="710.798021">WAR</word>
+        </line>
+      </block>
+      <block xMin="52.556990" yMin="717.898244" xMax="305.942248" yMax="726.637020">
+        <line xMin="52.556990" yMin="717.898244" xMax="305.942248" yMax="726.637020">
+          <word xMin="52.556990" yMin="717.898244" xMax="55.827490" yMax="726.637020">*</word>
+          <word xMin="57.534691" yMin="717.898244" xMax="67.208830" yMax="726.637020">Der</word>
+          <word xMin="68.916031" yMin="717.898244" xMax="81.965326" yMax="726.637020">Wert</word>
+          <word xMin="83.672527" yMin="717.898244" xMax="99.717600" yMax="726.637020">dieses</word>
+          <word xMin="101.424801" yMin="717.898244" xMax="133.508406" yMax="726.637020">Wertpapiers</word>
+          <word xMin="135.052082" yMin="717.898244" xMax="161.307656" yMax="726.637020">entspricht</word>
+          <word xMin="163.014857" yMin="717.898244" xMax="174.415820" yMax="726.637020">dem</word>
+          <word xMin="175.809053" yMin="717.898244" xMax="206.643327" yMax="726.637020">geschätzten</word>
+          <word xMin="208.350528" yMin="717.898244" xMax="254.111364" yMax="726.637020">wahrscheinlichen</word>
+          <word xMin="255.818565" yMin="717.898244" xMax="305.942248" yMax="726.637020">Veräußerungswert.</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="299.040000" yMin="743.387552" xMax="313.323395" yMax="750.471385">
+        <line xMin="299.040000" yMin="743.387552" xMax="313.323395" yMax="750.471385">
+          <word xMin="299.040000" yMin="743.387552" xMax="313.323395" yMax="750.471385">Seite</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="302.160000" yMin="750.649952" xMax="309.917626" yMax="758.257135">
+        <line xMin="302.160000" yMin="750.649952" xMax="309.917626" yMax="758.257135">
+          <word xMin="302.160000" yMin="750.649952" xMax="309.917626" yMax="758.257135">22</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="542.878999" yMin="67.979245" xMax="567.976737" yMax="91.838027">
+        <line xMin="552.240000" yMin="67.979245" xMax="567.973663" yMax="76.718021">
+          <word xMin="552.240000" yMin="67.979245" xMax="557.688653" yMax="76.718021">%</word>
+          <word xMin="559.101509" yMin="67.979245" xMax="567.973663" yMax="76.718021">des</word>
+        </line>
+        <line xMin="542.878999" yMin="75.420247" xMax="567.832914" yMax="84.159023">
+          <word xMin="542.878999" yMin="75.420247" xMax="567.832914" yMax="84.159023">Nettover-</word>
+        </line>
+        <line xMin="547.437997" yMin="83.099251" xMax="567.976737" yMax="91.838027">
+          <word xMin="547.437997" yMin="83.099251" xMax="567.976737" yMax="91.838027">mögens</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="492.959000" yMin="96.300245" xMax="534.154218" yMax="105.039021">
+        <line xMin="492.959000" yMin="96.300245" xMax="534.154218" yMax="105.039021">
+          <word xMin="492.959000" yMin="96.300245" xMax="534.154218" yMax="105.039021">237.738.816,34</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="545.999969" yMin="96.300245" xMax="566.564873" yMax="105.039021">
+        <line xMin="545.999969" yMin="96.300245" xMax="566.564873" yMax="105.039021">
+          <word xMin="545.999969" yMin="96.300245" xMax="566.564873" yMax="105.039021">83,46%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478001" yMin="125.340247" xMax="397.232951" yMax="134.079023">
+        <line xMin="384.478001" yMin="125.340247" xMax="397.232951" yMax="134.079023">
+          <word xMin="384.478001" yMin="125.340247" xMax="397.232951" yMax="134.079023">EUR</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="492.959000" yMin="107.168162" xMax="534.154218" yMax="134.079023">
+        <line xMin="492.959000" yMin="107.168162" xMax="534.154218" yMax="116.711481">
+          <word xMin="492.959000" yMin="107.168162" xMax="534.154218" yMax="116.711481">204.565.295,04</word>
+        </line>
+        <line xMin="499.439000" yMin="117.082130" xMax="534.152087" yMax="125.847070">
+          <word xMin="499.439000" yMin="117.082130" xMax="534.152087" yMax="125.847070">6.910.474,96</word>
+        </line>
+        <line xMin="499.436998" yMin="125.340247" xMax="534.150085" yMax="134.079023">
+          <word xMin="499.436998" yMin="125.340247" xMax="534.150085" yMax="134.079023">6.910.474,96</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="544.796425" yMin="107.168162" xMax="566.608529" yMax="134.079023">
+        <line xMin="544.796425" yMin="107.168162" xMax="566.499463" yMax="116.711481">
+          <word xMin="544.796425" yMin="107.168162" xMax="566.499463" yMax="116.711481">71,81%</word>
+        </line>
+        <line xMin="549.359912" yMin="117.082130" xMax="566.608529" yMax="125.847070">
+          <word xMin="549.359912" yMin="117.082130" xMax="566.608529" yMax="125.847070">2,43%</word>
+        </line>
+        <line xMin="549.357910" yMin="125.340247" xMax="566.606527" yMax="134.079023">
+          <word xMin="549.357910" yMin="125.340247" xMax="566.606527" yMax="134.079023">2,43%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.477995" yMin="145.499247" xMax="397.363772" yMax="163.118026">
+        <line xMin="384.478002" yMin="145.499247" xMax="397.363772" yMax="154.238023">
+          <word xMin="384.478002" yMin="145.499247" xMax="397.363772" yMax="154.238023">USD</word>
+        </line>
+        <line xMin="384.477995" yMin="154.379250" xMax="397.363765" yMax="163.118026">
+          <word xMin="384.477995" yMin="154.379250" xMax="397.363765" yMax="163.118026">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="137.242130" xMax="534.193407" yMax="163.118026">
+        <line xMin="496.079000" yMin="137.242130" xMax="534.193407" yMax="146.007070">
+          <word xMin="496.079000" yMin="137.242130" xMax="534.193407" yMax="146.007070">16.687.172,07</word>
+        </line>
+        <line xMin="499.436999" yMin="145.499247" xMax="534.150086" yMax="154.238023">
+          <word xMin="499.436999" yMin="145.499247" xMax="534.150086" yMax="154.238023">9.392.545,48</word>
+        </line>
+        <line xMin="499.436992" yMin="154.379250" xMax="534.150079" yMax="163.118026">
+          <word xMin="499.436992" yMin="154.379250" xMax="534.150079" yMax="163.118026">7.294.626,59</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357904" yMin="137.242130" xMax="566.610603" yMax="163.118026">
+        <line xMin="549.361986" yMin="137.242130" xMax="566.610603" yMax="146.007070">
+          <word xMin="549.361986" yMin="137.242130" xMax="566.610603" yMax="146.007070">5,86%</word>
+        </line>
+        <line xMin="549.357911" yMin="145.499247" xMax="566.606528" yMax="154.238023">
+          <word xMin="549.357911" yMin="145.499247" xMax="566.606528" yMax="154.238023">3,30%</word>
+        </line>
+        <line xMin="549.357904" yMin="154.379250" xMax="566.606521" yMax="163.118026">
+          <word xMin="549.357904" yMin="154.379250" xMax="566.606521" yMax="163.118026">2,56%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.477995" yMin="174.779247" xMax="397.115214" yMax="192.398026">
+        <line xMin="384.478002" yMin="174.779247" xMax="397.115214" yMax="183.518023">
+          <word xMin="384.478002" yMin="174.779247" xMax="397.115214" yMax="183.518023">BRL</word>
+        </line>
+        <line xMin="384.477995" yMin="183.659250" xMax="397.115207" yMax="192.398026">
+          <word xMin="384.477995" yMin="183.659250" xMax="397.115207" yMax="192.398026">BRL</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.076998" yMin="166.521130" xMax="534.193407" yMax="192.398026">
+        <line xMin="496.079000" yMin="166.521130" xMax="534.193407" yMax="175.286070">
+          <word xMin="496.079000" yMin="166.521130" xMax="534.193407" yMax="175.286070">13.603.785,81</word>
+        </line>
+        <line xMin="496.076998" yMin="174.779247" xMax="534.191405" yMax="183.518023">
+          <word xMin="496.076998" yMin="174.779247" xMax="534.191405" yMax="183.518023">10.469.512,85</word>
+        </line>
+        <line xMin="499.436992" yMin="183.659250" xMax="534.150079" yMax="192.398026">
+          <word xMin="499.436992" yMin="183.659250" xMax="534.150079" yMax="192.398026">3.134.272,96</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357904" yMin="166.521130" xMax="566.610603" yMax="192.398026">
+        <line xMin="549.361986" yMin="166.521130" xMax="566.610603" yMax="175.286070">
+          <word xMin="549.361986" yMin="166.521130" xMax="566.610603" yMax="175.286070">4,78%</word>
+        </line>
+        <line xMin="549.359984" yMin="174.779247" xMax="566.608601" yMax="183.518023">
+          <word xMin="549.359984" yMin="174.779247" xMax="566.608601" yMax="183.518023">3,68%</word>
+        </line>
+        <line xMin="549.357904" yMin="183.659250" xMax="566.606521" yMax="192.398026">
+          <word xMin="549.357904" yMin="183.659250" xMax="566.606521" yMax="192.398026">1,10%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.758995" yMin="204.060247" xMax="397.835227" yMax="212.799023">
+        <line xMin="383.758995" yMin="204.060247" xMax="397.835227" yMax="212.799023">
+          <word xMin="383.758995" yMin="204.060247" xMax="397.835227" yMax="212.799023">HKD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.077993" yMin="195.801130" xMax="534.193407" yMax="212.799023">
+        <line xMin="496.079000" yMin="195.801130" xMax="534.193407" yMax="204.566070">
+          <word xMin="496.079000" yMin="195.801130" xMax="534.193407" yMax="204.566070">18.991.632,07</word>
+        </line>
+        <line xMin="496.077993" yMin="204.060247" xMax="534.192400" yMax="212.799023">
+          <word xMin="496.077993" yMin="204.060247" xMax="534.192400" yMax="212.799023">18.991.632,07</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.360979" yMin="195.801130" xMax="566.610603" yMax="212.799023">
+        <line xMin="549.361986" yMin="195.801130" xMax="566.610603" yMax="204.566070">
+          <word xMin="549.361986" yMin="195.801130" xMax="566.610603" yMax="204.566070">6,66%</word>
+        </line>
+        <line xMin="549.360979" yMin="204.060247" xMax="566.609596" yMax="212.799023">
+          <word xMin="549.360979" yMin="204.060247" xMax="566.609596" yMax="212.799023">6,66%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.477995" yMin="224.220247" xMax="396.990934" yMax="241.838026">
+        <line xMin="384.478001" yMin="224.220247" xMax="396.990934" yMax="232.959023">
+          <word xMin="384.478001" yMin="224.220247" xMax="396.990934" yMax="232.959023">COP</word>
+        </line>
+        <line xMin="384.477995" yMin="233.099250" xMax="396.990928" yMax="241.838026">
+          <word xMin="384.477995" yMin="233.099250" xMax="396.990928" yMax="241.838026">COP</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436998" yMin="215.962130" xMax="534.152087" yMax="241.838026">
+        <line xMin="499.439000" yMin="215.962130" xMax="534.152087" yMax="224.727070">
+          <word xMin="499.439000" yMin="215.962130" xMax="534.152087" yMax="224.727070">7.224.772,73</word>
+        </line>
+        <line xMin="499.436998" yMin="224.220247" xMax="534.150085" yMax="232.959023">
+          <word xMin="499.436998" yMin="224.220247" xMax="534.150085" yMax="232.959023">6.664.856,27</word>
+        </line>
+        <line xMin="504.477997" yMin="233.099250" xMax="534.147973" yMax="241.838026">
+          <word xMin="504.477997" yMin="233.099250" xMax="534.147973" yMax="241.838026">559.916,46</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.355798" yMin="215.962130" xMax="566.610956" yMax="241.838026">
+        <line xMin="549.359912" yMin="215.962130" xMax="566.608529" yMax="224.727070">
+          <word xMin="549.359912" yMin="215.962130" xMax="566.608529" yMax="224.727070">2,54%</word>
+        </line>
+        <line xMin="549.357910" yMin="224.220247" xMax="566.606527" yMax="232.959023">
+          <word xMin="549.357910" yMin="224.220247" xMax="566.606527" yMax="232.959023">2,34%</word>
+        </line>
+        <line xMin="549.355798" yMin="233.099250" xMax="566.610956" yMax="241.838026">
+          <word xMin="549.355798" yMin="233.099250" xMax="566.610956" yMax="241.838026">0,20%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.278997" yMin="253.499247" xMax="398.565314" yMax="271.118026">
+        <line xMin="383.278997" yMin="253.499247" xMax="398.565314" yMax="262.238023">
+          <word xMin="383.278997" yMin="253.499247" xMax="398.565314" yMax="262.238023">KRW</word>
+        </line>
+        <line xMin="383.278997" yMin="262.379250" xMax="398.565314" yMax="271.118026">
+          <word xMin="383.278997" yMin="262.379250" xMax="398.565314" yMax="271.118026">KRW</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="245.242130" xMax="534.193407" yMax="271.118026">
+        <line xMin="496.079000" yMin="245.242130" xMax="534.193407" yMax="254.007070">
+          <word xMin="496.079000" yMin="245.242130" xMax="534.193407" yMax="254.007070">13.835.638,77</word>
+        </line>
+        <line xMin="499.438000" yMin="253.499247" xMax="534.151087" yMax="262.238023">
+          <word xMin="499.438000" yMin="253.499247" xMax="534.151087" yMax="262.238023">9.399.805,34</word>
+        </line>
+        <line xMin="499.438000" yMin="262.379250" xMax="534.151087" yMax="271.118026">
+          <word xMin="499.438000" yMin="262.379250" xMax="534.151087" yMax="271.118026">4.435.833,43</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.358912" yMin="245.242130" xMax="566.610603" yMax="271.118026">
+        <line xMin="549.361986" yMin="245.242130" xMax="566.610603" yMax="254.007070">
+          <word xMin="549.361986" yMin="245.242130" xMax="566.610603" yMax="254.007070">4,86%</word>
+        </line>
+        <line xMin="549.358912" yMin="253.499247" xMax="566.607529" yMax="262.238023">
+          <word xMin="549.358912" yMin="253.499247" xMax="566.607529" yMax="262.238023">3,30%</word>
+        </line>
+        <line xMin="549.358912" yMin="262.379250" xMax="566.607529" yMax="271.118026">
+          <word xMin="549.358912" yMin="262.379250" xMax="566.607529" yMax="271.118026">1,56%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478001" yMin="282.780247" xMax="396.990934" yMax="291.519023">
+        <line xMin="384.478001" yMin="282.780247" xMax="396.990934" yMax="291.519023">
+          <word xMin="384.478001" yMin="282.780247" xMax="396.990934" yMax="291.519023">COP</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436998" yMin="274.521130" xMax="534.152087" yMax="291.519023">
+        <line xMin="499.439000" yMin="274.521130" xMax="534.152087" yMax="283.286070">
+          <word xMin="499.439000" yMin="274.521130" xMax="534.152087" yMax="283.286070">4.721.951,59</word>
+        </line>
+        <line xMin="499.436998" yMin="282.780247" xMax="534.150085" yMax="291.519023">
+          <word xMin="499.436998" yMin="282.780247" xMax="534.150085" yMax="291.519023">4.721.951,59</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357910" yMin="274.521130" xMax="566.608529" yMax="291.519023">
+        <line xMin="549.359912" yMin="274.521130" xMax="566.608529" yMax="283.286070">
+          <word xMin="549.359912" yMin="274.521130" xMax="566.608529" yMax="283.286070">1,66%</word>
+        </line>
+        <line xMin="549.357910" yMin="282.780247" xMax="566.606527" yMax="291.519023">
+          <word xMin="549.357910" yMin="282.780247" xMax="566.606527" yMax="291.519023">1,66%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.759002" yMin="302.700244" xMax="397.835234" yMax="329.918025">
+        <line xMin="383.759002" yMin="302.700244" xMax="397.835234" yMax="311.439020">
+          <word xMin="383.759002" yMin="302.700244" xMax="397.835234" yMax="311.439020">HKD</word>
+        </line>
+        <line xMin="383.759002" yMin="311.580247" xMax="397.835234" yMax="320.319023">
+          <word xMin="383.759002" yMin="311.580247" xMax="397.835234" yMax="320.319023">HKD</word>
+        </line>
+        <line xMin="384.478002" yMin="321.179249" xMax="397.363772" yMax="329.918025">
+          <word xMin="384.478002" yMin="321.179249" xMax="397.363772" yMax="329.918025">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.076998" yMin="294.682130" xMax="534.193407" yMax="329.918025">
+        <line xMin="496.079000" yMin="294.682130" xMax="534.193407" yMax="303.447070">
+          <word xMin="496.079000" yMin="294.682130" xMax="534.193407" yMax="303.447070">27.164.271,72</word>
+        </line>
+        <line xMin="499.439001" yMin="302.700244" xMax="534.152088" yMax="311.439020">
+          <word xMin="499.439001" yMin="302.700244" xMax="534.152088" yMax="311.439020">8.961.513,55</word>
+        </line>
+        <line xMin="499.439001" yMin="311.580247" xMax="534.152088" yMax="320.319023">
+          <word xMin="499.439001" yMin="311.580247" xMax="534.152088" yMax="320.319023">3.156.567,86</word>
+        </line>
+        <line xMin="496.076998" yMin="321.179249" xMax="534.191405" yMax="329.918025">
+          <word xMin="496.076998" yMin="321.179249" xMax="534.191405" yMax="329.918025">15.046.190,31</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.359913" yMin="294.682130" xMax="566.610603" yMax="329.918025">
+        <line xMin="549.361986" yMin="294.682130" xMax="566.610603" yMax="303.447070">
+          <word xMin="549.361986" yMin="294.682130" xMax="566.610603" yMax="303.447070">9,53%</word>
+        </line>
+        <line xMin="549.359913" yMin="302.700244" xMax="566.608530" yMax="311.439020">
+          <word xMin="549.359913" yMin="302.700244" xMax="566.608530" yMax="311.439020">3,15%</word>
+        </line>
+        <line xMin="549.359913" yMin="311.580247" xMax="566.608530" yMax="320.319023">
+          <word xMin="549.359913" yMin="311.580247" xMax="566.608530" yMax="320.319023">1,11%</word>
+        </line>
+        <line xMin="549.359984" yMin="321.179249" xMax="566.608601" yMax="329.918025">
+          <word xMin="549.359984" yMin="321.179249" xMax="566.608601" yMax="329.918025">5,27%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478001" yMin="341.340244" xMax="397.363771" yMax="350.079020">
+        <line xMin="384.478001" yMin="341.340244" xMax="397.363771" yMax="350.079020">
+          <word xMin="384.478001" yMin="341.340244" xMax="397.363771" yMax="350.079020">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436998" yMin="333.321130" xMax="534.152087" yMax="350.079020">
+        <line xMin="499.439000" yMin="333.321130" xMax="534.152087" yMax="342.086070">
+          <word xMin="499.439000" yMin="333.321130" xMax="534.152087" yMax="342.086070">5.976.791,66</word>
+        </line>
+        <line xMin="499.436998" yMin="341.340244" xMax="534.150085" yMax="350.079020">
+          <word xMin="499.436998" yMin="341.340244" xMax="534.150085" yMax="350.079020">5.976.791,66</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357910" yMin="333.321130" xMax="566.608529" yMax="350.079020">
+        <line xMin="549.359912" yMin="333.321130" xMax="566.608529" yMax="342.086070">
+          <word xMin="549.359912" yMin="333.321130" xMax="566.608529" yMax="342.086070">2,10%</word>
+        </line>
+        <line xMin="549.357910" yMin="341.340244" xMax="566.606527" yMax="350.079020">
+          <word xMin="549.357910" yMin="341.340244" xMax="566.606527" yMax="350.079020">2,10%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="385.198996" yMin="361.260244" xMax="396.514928" yMax="379.118021">
+        <line xMin="385.198996" yMin="361.260244" xMax="396.514926" yMax="369.999020">
+          <word xMin="385.198996" yMin="361.260244" xMax="396.514926" yMax="369.999020">INR</word>
+        </line>
+        <line xMin="385.198998" yMin="370.379245" xMax="396.514928" yMax="379.118021">
+          <word xMin="385.198998" yMin="370.379245" xMax="396.514928" yMax="379.118021">INR</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.437999" yMin="353.242130" xMax="534.152087" yMax="379.118021">
+        <line xMin="499.439000" yMin="353.242130" xMax="534.152087" yMax="362.007070">
+          <word xMin="499.439000" yMin="353.242130" xMax="534.152087" yMax="362.007070">8.272.453,20</word>
+        </line>
+        <line xMin="499.437999" yMin="361.260244" xMax="534.151086" yMax="369.999020">
+          <word xMin="499.437999" yMin="361.260244" xMax="534.151086" yMax="369.999020">4.269.062,98</word>
+        </line>
+        <line xMin="499.438001" yMin="370.379245" xMax="534.151088" yMax="379.118021">
+          <word xMin="499.438001" yMin="370.379245" xMax="534.151088" yMax="379.118021">4.003.390,22</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.358911" yMin="353.242130" xMax="566.608529" yMax="379.118021">
+        <line xMin="549.359912" yMin="353.242130" xMax="566.608529" yMax="362.007070">
+          <word xMin="549.359912" yMin="353.242130" xMax="566.608529" yMax="362.007070">2,90%</word>
+        </line>
+        <line xMin="549.358911" yMin="361.260244" xMax="566.607528" yMax="369.999020">
+          <word xMin="549.358911" yMin="361.260244" xMax="566.607528" yMax="369.999020">1,49%</word>
+        </line>
+        <line xMin="549.358913" yMin="370.379245" xMax="566.607530" yMax="379.118021">
+          <word xMin="549.358913" yMin="370.379245" xMax="566.607530" yMax="379.118021">1,41%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="385.198996" yMin="390.539247" xMax="396.514926" yMax="408.399021">
+        <line xMin="385.198996" yMin="390.539247" xMax="396.514926" yMax="399.278023">
+          <word xMin="385.198996" yMin="390.539247" xMax="396.514926" yMax="399.278023">IDR</word>
+        </line>
+        <line xMin="385.198996" yMin="399.660245" xMax="396.514926" yMax="408.399021">
+          <word xMin="385.198996" yMin="399.660245" xMax="396.514926" yMax="408.399021">IDR</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.437999" yMin="382.281130" xMax="534.152087" yMax="408.399021">
+        <line xMin="499.439000" yMin="382.281130" xMax="534.152087" yMax="391.046070">
+          <word xMin="499.439000" yMin="382.281130" xMax="534.152087" yMax="391.046070">6.110.594,52</word>
+        </line>
+        <line xMin="499.437999" yMin="390.539247" xMax="534.151086" yMax="399.278023">
+          <word xMin="499.437999" yMin="390.539247" xMax="534.151086" yMax="399.278023">3.794.832,29</word>
+        </line>
+        <line xMin="499.437999" yMin="399.660245" xMax="534.151086" yMax="408.399021">
+          <word xMin="499.437999" yMin="399.660245" xMax="534.151086" yMax="408.399021">2.315.762,23</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.358911" yMin="382.281130" xMax="566.608529" yMax="408.399021">
+        <line xMin="549.359912" yMin="382.281130" xMax="566.608529" yMax="391.046070">
+          <word xMin="549.359912" yMin="382.281130" xMax="566.608529" yMax="391.046070">2,15%</word>
+        </line>
+        <line xMin="549.358911" yMin="390.539247" xMax="566.607528" yMax="399.278023">
+          <word xMin="549.358911" yMin="390.539247" xMax="566.607528" yMax="399.278023">1,34%</word>
+        </line>
+        <line xMin="549.358911" yMin="399.660245" xMax="566.607528" yMax="408.399021">
+          <word xMin="549.358911" yMin="399.660245" xMax="566.607528" yMax="408.399021">0,81%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.718998" yMin="420.059247" xMax="396.754438" yMax="437.678026">
+        <line xMin="384.718998" yMin="420.059247" xMax="396.754438" yMax="428.798023">
+          <word xMin="384.718998" yMin="420.059247" xMax="396.754438" yMax="428.798023">KES</word>
+        </line>
+        <line xMin="384.718998" yMin="428.939250" xMax="396.754438" yMax="437.678026">
+          <word xMin="384.718998" yMin="428.939250" xMax="396.754438" yMax="437.678026">KES</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.437999" yMin="411.802130" xMax="534.152087" yMax="437.678026">
+        <line xMin="499.439000" yMin="411.802130" xMax="534.152087" yMax="420.567070">
+          <word xMin="499.439000" yMin="411.802130" xMax="534.152087" yMax="420.567070">9.127.674,31</word>
+        </line>
+        <line xMin="499.437999" yMin="420.059247" xMax="534.151086" yMax="428.798023">
+          <word xMin="499.437999" yMin="420.059247" xMax="534.151086" yMax="428.798023">2.756.176,15</word>
+        </line>
+        <line xMin="499.437999" yMin="428.939250" xMax="534.151086" yMax="437.678026">
+          <word xMin="499.437999" yMin="428.939250" xMax="534.151086" yMax="437.678026">6.371.498,16</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.358911" yMin="411.802130" xMax="566.608529" yMax="437.678026">
+        <line xMin="549.359912" yMin="411.802130" xMax="566.608529" yMax="420.567070">
+          <word xMin="549.359912" yMin="411.802130" xMax="566.608529" yMax="420.567070">3,20%</word>
+        </line>
+        <line xMin="549.358911" yMin="420.059247" xMax="566.607528" yMax="428.798023">
+          <word xMin="549.358911" yMin="420.059247" xMax="566.607528" yMax="428.798023">0,97%</word>
+        </line>
+        <line xMin="549.358911" yMin="428.939250" xMax="566.607528" yMax="437.678026">
+          <word xMin="549.358911" yMin="428.939250" xMax="566.607528" yMax="437.678026">2,23%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.278997" yMin="449.340247" xMax="398.565314" yMax="466.959026">
+        <line xMin="383.278997" yMin="449.340247" xMax="398.565314" yMax="458.079023">
+          <word xMin="383.278997" yMin="449.340247" xMax="398.565314" yMax="458.079023">MXN</word>
+        </line>
+        <line xMin="383.278997" yMin="458.220250" xMax="398.565314" yMax="466.959026">
+          <word xMin="383.278997" yMin="458.220250" xMax="398.565314" yMax="466.959026">MXN</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="441.081130" xMax="534.193407" yMax="466.959026">
+        <line xMin="496.079000" yMin="441.081130" xMax="534.193407" yMax="449.846070">
+          <word xMin="496.079000" yMin="441.081130" xMax="534.193407" yMax="449.846070">12.054.068,86</word>
+        </line>
+        <line xMin="499.438000" yMin="449.340247" xMax="534.151087" yMax="458.079023">
+          <word xMin="499.438000" yMin="449.340247" xMax="534.151087" yMax="458.079023">8.994.967,79</word>
+        </line>
+        <line xMin="499.438000" yMin="458.220250" xMax="534.151087" yMax="466.959026">
+          <word xMin="499.438000" yMin="458.220250" xMax="534.151087" yMax="466.959026">3.059.101,07</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.358912" yMin="441.081130" xMax="566.610603" yMax="466.959026">
+        <line xMin="549.361986" yMin="441.081130" xMax="566.610603" yMax="449.846070">
+          <word xMin="549.361986" yMin="441.081130" xMax="566.610603" yMax="449.846070">4,23%</word>
+        </line>
+        <line xMin="549.358912" yMin="449.340247" xMax="566.607529" yMax="458.079023">
+          <word xMin="549.358912" yMin="449.340247" xMax="566.607529" yMax="458.079023">3,16%</word>
+        </line>
+        <line xMin="549.358912" yMin="458.220250" xMax="566.607529" yMax="466.959026">
+          <word xMin="549.358912" yMin="458.220250" xMax="566.607529" yMax="466.959026">1,07%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478001" yMin="478.619244" xMax="397.363771" yMax="487.358020">
+        <line xMin="384.478001" yMin="478.619244" xMax="397.363771" yMax="487.358020">
+          <word xMin="384.478001" yMin="478.619244" xMax="397.363771" yMax="487.358020">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436998" yMin="470.602130" xMax="534.152087" yMax="487.358020">
+        <line xMin="499.439000" yMin="470.602130" xMax="534.152087" yMax="479.367070">
+          <word xMin="499.439000" yMin="470.602130" xMax="534.152087" yMax="479.367070">6.235.765,41</word>
+        </line>
+        <line xMin="499.436998" yMin="478.619244" xMax="534.150085" yMax="487.358020">
+          <word xMin="499.436998" yMin="478.619244" xMax="534.150085" yMax="487.358020">6.235.765,41</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357910" yMin="470.602130" xMax="566.608529" yMax="487.358020">
+        <line xMin="549.359912" yMin="470.602130" xMax="566.608529" yMax="479.367070">
+          <word xMin="549.359912" yMin="470.602130" xMax="566.608529" yMax="479.367070">2,19%</word>
+        </line>
+        <line xMin="549.357910" yMin="478.619244" xMax="566.606527" yMax="487.358020">
+          <word xMin="549.357910" yMin="478.619244" xMax="566.606527" yMax="487.358020">2,19%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.959001" yMin="498.780247" xMax="396.510407" yMax="544.478026">
+        <line xMin="384.959001" yMin="498.780247" xMax="396.510407" yMax="507.519023">
+          <word xMin="384.959001" yMin="498.780247" xMax="396.510407" yMax="507.519023">PHP</word>
+        </line>
+        <line xMin="384.959001" yMin="507.660250" xMax="396.510407" yMax="516.399026">
+          <word xMin="384.959001" yMin="507.660250" xMax="396.510407" yMax="516.399026">PHP</word>
+        </line>
+        <line xMin="384.959001" yMin="517.020250" xMax="396.510407" yMax="525.759026">
+          <word xMin="384.959001" yMin="517.020250" xMax="396.510407" yMax="525.759026">PHP</word>
+        </line>
+        <line xMin="384.959001" yMin="526.379250" xMax="396.510407" yMax="535.118026">
+          <word xMin="384.959001" yMin="526.379250" xMax="396.510407" yMax="535.118026">PHP</word>
+        </line>
+        <line xMin="384.959001" yMin="535.739250" xMax="396.510407" yMax="544.478026">
+          <word xMin="384.959001" yMin="535.739250" xMax="396.510407" yMax="544.478026">PHP</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="490.521130" xMax="534.193407" yMax="544.478026">
+        <line xMin="496.079000" yMin="490.521130" xMax="534.193407" yMax="499.286070">
+          <word xMin="496.079000" yMin="490.521130" xMax="534.193407" yMax="499.286070">13.633.913,27</word>
+        </line>
+        <line xMin="499.439001" yMin="498.780247" xMax="534.152088" yMax="507.519023">
+          <word xMin="499.439001" yMin="498.780247" xMax="534.152088" yMax="507.519023">3.722.959,74</word>
+        </line>
+        <line xMin="499.439001" yMin="507.660250" xMax="534.152088" yMax="516.399026">
+          <word xMin="499.439001" yMin="507.660250" xMax="534.152088" yMax="516.399026">1.865.861,34</word>
+        </line>
+        <line xMin="499.439001" yMin="517.020250" xMax="534.152088" yMax="525.759026">
+          <word xMin="499.439001" yMin="517.020250" xMax="534.152088" yMax="525.759026">4.168.728,39</word>
+        </line>
+        <line xMin="516.718000" yMin="526.379250" xMax="531.742677" yMax="535.118026">
+          <word xMin="516.718000" yMin="526.379250" xMax="531.742677" yMax="535.118026">14,51</word>
+        </line>
+        <line xMin="499.439001" yMin="535.739250" xMax="534.152088" yMax="544.478026">
+          <word xMin="499.439001" yMin="535.739250" xMax="534.152088" yMax="544.478026">3.876.349,29</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357590" yMin="490.521130" xMax="566.610603" yMax="544.478026">
+        <line xMin="549.361986" yMin="490.521130" xMax="566.610603" yMax="499.286070">
+          <word xMin="549.361986" yMin="490.521130" xMax="566.610603" yMax="499.286070">4,79%</word>
+        </line>
+        <line xMin="549.359913" yMin="498.780247" xMax="566.608530" yMax="507.519023">
+          <word xMin="549.359913" yMin="498.780247" xMax="566.608530" yMax="507.519023">1,31%</word>
+        </line>
+        <line xMin="549.359913" yMin="507.660250" xMax="566.608530" yMax="516.399026">
+          <word xMin="549.359913" yMin="507.660250" xMax="566.608530" yMax="516.399026">0,66%</word>
+        </line>
+        <line xMin="549.359913" yMin="517.020250" xMax="566.608530" yMax="525.759026">
+          <word xMin="549.359913" yMin="517.020250" xMax="566.608530" yMax="525.759026">1,46%</word>
+        </line>
+        <line xMin="549.357590" yMin="526.379250" xMax="566.606207" yMax="535.118026">
+          <word xMin="549.357590" yMin="526.379250" xMax="566.606207" yMax="535.118026">0,00%</word>
+        </line>
+        <line xMin="549.359913" yMin="535.739250" xMax="566.608530" yMax="544.478026">
+          <word xMin="549.359913" yMin="535.739250" xMax="566.608530" yMax="544.478026">1,36%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.519000" yMin="555.900247" xMax="398.321283" yMax="592.239019">
+        <line xMin="383.519000" yMin="555.900247" xMax="398.321283" yMax="564.639023">
+          <word xMin="383.519000" yMin="555.900247" xMax="398.321283" yMax="564.639023">TWD</word>
+        </line>
+        <line xMin="383.519000" yMin="565.019245" xMax="398.321283" yMax="573.758021">
+          <word xMin="383.519000" yMin="565.019245" xMax="398.321283" yMax="573.758021">TWD</word>
+        </line>
+        <line xMin="383.519000" yMin="574.139243" xMax="398.321283" yMax="582.878019">
+          <word xMin="383.519000" yMin="574.139243" xMax="398.321283" yMax="582.878019">TWD</word>
+        </line>
+        <line xMin="383.519000" yMin="583.500243" xMax="398.321283" yMax="592.239019">
+          <word xMin="383.519000" yMin="583.500243" xMax="398.321283" yMax="592.239019">TWD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="547.641130" xMax="534.193407" yMax="592.239019">
+        <line xMin="496.079000" yMin="547.641130" xMax="534.193407" yMax="556.406070">
+          <word xMin="496.079000" yMin="547.641130" xMax="534.193407" yMax="556.406070">26.817.381,28</word>
+        </line>
+        <line xMin="499.439001" yMin="555.900247" xMax="534.152088" yMax="564.639023">
+          <word xMin="499.439001" yMin="555.900247" xMax="534.152088" yMax="564.639023">8.153.865,73</word>
+        </line>
+        <line xMin="499.439001" yMin="565.019245" xMax="534.152088" yMax="573.758021">
+          <word xMin="499.439001" yMin="565.019245" xMax="534.152088" yMax="573.758021">5.589.442,32</word>
+        </line>
+        <line xMin="499.439001" yMin="574.139243" xMax="534.152088" yMax="582.878019">
+          <word xMin="499.439001" yMin="574.139243" xMax="534.152088" yMax="582.878019">9.297.631,04</word>
+        </line>
+        <line xMin="499.439001" yMin="583.500243" xMax="534.152088" yMax="592.239019">
+          <word xMin="499.439001" yMin="583.500243" xMax="534.152088" yMax="592.239019">3.776.442,19</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.359913" yMin="547.641130" xMax="566.610603" yMax="592.239019">
+        <line xMin="549.361986" yMin="547.641130" xMax="566.610603" yMax="556.406070">
+          <word xMin="549.361986" yMin="547.641130" xMax="566.610603" yMax="556.406070">9,40%</word>
+        </line>
+        <line xMin="549.359913" yMin="555.900247" xMax="566.608530" yMax="564.639023">
+          <word xMin="549.359913" yMin="555.900247" xMax="566.608530" yMax="564.639023">2,86%</word>
+        </line>
+        <line xMin="549.359913" yMin="565.019245" xMax="566.608530" yMax="573.758021">
+          <word xMin="549.359913" yMin="565.019245" xMax="566.608530" yMax="573.758021">1,96%</word>
+        </line>
+        <line xMin="549.359913" yMin="574.139243" xMax="566.608530" yMax="582.878019">
+          <word xMin="549.359913" yMin="574.139243" xMax="566.608530" yMax="582.878019">3,25%</word>
+        </line>
+        <line xMin="549.359913" yMin="583.500243" xMax="566.608530" yMax="592.239019">
+          <word xMin="549.359913" yMin="583.500243" xMax="566.608530" yMax="592.239019">1,33%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478001" yMin="603.900247" xMax="397.363771" yMax="612.639023">
+        <line xMin="384.478001" yMin="603.900247" xMax="397.363771" yMax="612.639023">
+          <word xMin="384.478001" yMin="603.900247" xMax="397.363771" yMax="612.639023">TRY</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436998" yMin="595.641130" xMax="534.152087" yMax="612.639023">
+        <line xMin="499.439000" yMin="595.641130" xMax="534.152087" yMax="604.406070">
+          <word xMin="499.439000" yMin="595.641130" xMax="534.152087" yMax="604.406070">2.813.325,27</word>
+        </line>
+        <line xMin="499.436998" yMin="603.900247" xMax="534.150085" yMax="612.639023">
+          <word xMin="499.436998" yMin="603.900247" xMax="534.150085" yMax="612.639023">2.813.325,27</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357910" yMin="595.641130" xMax="566.608529" yMax="612.639023">
+        <line xMin="549.359912" yMin="595.641130" xMax="566.608529" yMax="604.406070">
+          <word xMin="549.359912" yMin="595.641130" xMax="566.608529" yMax="604.406070">0,99%</word>
+        </line>
+        <line xMin="549.357910" yMin="603.900247" xMax="566.606527" yMax="612.639023">
+          <word xMin="549.357910" yMin="603.900247" xMax="566.606527" yMax="612.639023">0,99%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="383.759001" yMin="623.819247" xMax="397.835233" yMax="632.558023">
+        <line xMin="383.759001" yMin="623.819247" xMax="397.835233" yMax="632.558023">
+          <word xMin="383.759001" yMin="623.819247" xMax="397.835233" yMax="632.558023">VND</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.439000" yMin="615.562130" xMax="534.152087" yMax="632.558023">
+        <line xMin="499.439000" yMin="615.562130" xMax="534.152087" yMax="624.327070">
+          <word xMin="499.439000" yMin="615.562130" xMax="534.152087" yMax="624.327070">4.383.627,54</word>
+        </line>
+        <line xMin="499.439000" yMin="623.819247" xMax="534.152087" yMax="632.558023">
+          <word xMin="499.439000" yMin="623.819247" xMax="534.152087" yMax="632.558023">4.383.627,54</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.359912" yMin="615.562130" xMax="566.608529" yMax="632.558023">
+        <line xMin="549.359912" yMin="615.562130" xMax="566.608529" yMax="624.327070">
+          <word xMin="549.359912" yMin="615.562130" xMax="566.608529" yMax="624.327070">1,54%</word>
+        </line>
+        <line xMin="549.359912" yMin="623.819247" xMax="566.608529" yMax="632.558023">
+          <word xMin="549.359912" yMin="623.819247" xMax="566.608529" yMax="632.558023">1,54%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="633.968162" xMax="534.193407" yMax="643.511481">
+        <line xMin="496.079000" yMin="633.968162" xMax="534.193407" yMax="643.511481">
+          <word xMin="496.079000" yMin="633.968162" xMax="534.193407" yMax="643.511481">33.173.521,30</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="544.796368" yMin="633.968162" xMax="566.499406" yMax="643.511481">
+        <line xMin="544.796368" yMin="633.968162" xMax="566.499406" yMax="643.511481">
+          <word xMin="544.796368" yMin="633.968162" xMax="566.499406" yMax="643.511481">11,65%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.478002" yMin="654.299247" xMax="397.364766" yMax="681.278019">
+        <line xMin="384.478002" yMin="654.299247" xMax="397.363772" yMax="663.038023">
+          <word xMin="384.478002" yMin="654.299247" xMax="397.363772" yMax="663.038023">USD</word>
+        </line>
+        <line xMin="384.478002" yMin="663.419245" xMax="397.363772" yMax="672.158021">
+          <word xMin="384.478002" yMin="663.419245" xMax="397.363772" yMax="672.158021">USD</word>
+        </line>
+        <line xMin="384.478996" yMin="672.539243" xMax="397.364766" yMax="681.278019">
+          <word xMin="384.478996" yMin="672.539243" xMax="397.364766" yMax="681.278019">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="496.079000" yMin="646.041130" xMax="534.193407" yMax="681.278019">
+        <line xMin="496.079000" yMin="646.041130" xMax="534.193407" yMax="654.806070">
+          <word xMin="496.079000" yMin="646.041130" xMax="534.193407" yMax="654.806070">13.474.991,05</word>
+        </line>
+        <line xMin="499.436999" yMin="654.299247" xMax="534.150086" yMax="663.038023">
+          <word xMin="499.436999" yMin="654.299247" xMax="534.150086" yMax="663.038023">8.021.651,35</word>
+        </line>
+        <line xMin="499.436999" yMin="663.419245" xMax="534.150086" yMax="672.158021">
+          <word xMin="499.436999" yMin="663.419245" xMax="534.150086" yMax="672.158021">3.367.707,89</word>
+        </line>
+        <line xMin="499.437993" yMin="672.539243" xMax="534.151080" yMax="681.278019">
+          <word xMin="499.437993" yMin="672.539243" xMax="534.151080" yMax="681.278019">2.085.631,81</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357911" yMin="646.041130" xMax="566.610603" yMax="681.278019">
+        <line xMin="549.361986" yMin="646.041130" xMax="566.610603" yMax="654.806070">
+          <word xMin="549.361986" yMin="646.041130" xMax="566.610603" yMax="654.806070">4,74%</word>
+        </line>
+        <line xMin="549.357911" yMin="654.299247" xMax="566.606528" yMax="663.038023">
+          <word xMin="549.357911" yMin="654.299247" xMax="566.606528" yMax="663.038023">2,83%</word>
+        </line>
+        <line xMin="549.357911" yMin="663.419245" xMax="566.606528" yMax="672.158021">
+          <word xMin="549.357911" yMin="663.419245" xMax="566.606528" yMax="672.158021">1,18%</word>
+        </line>
+        <line xMin="549.358905" yMin="672.539243" xMax="566.607522" yMax="681.278019">
+          <word xMin="549.358905" yMin="672.539243" xMax="566.607522" yMax="681.278019">0,73%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="384.477995" yMin="692.940247" xMax="397.364765" yMax="710.798021">
+        <line xMin="384.478995" yMin="692.940247" xMax="397.364765" yMax="701.679023">
+          <word xMin="384.478995" yMin="692.940247" xMax="397.364765" yMax="701.679023">USD</word>
+        </line>
+        <line xMin="384.477995" yMin="702.059245" xMax="397.363765" yMax="710.798021">
+          <word xMin="384.477995" yMin="702.059245" xMax="397.363765" yMax="710.798021">USD</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="499.436992" yMin="684.682130" xMax="534.152087" yMax="710.798021">
+        <line xMin="499.439000" yMin="684.682130" xMax="534.152087" yMax="693.447070">
+          <word xMin="499.439000" yMin="684.682130" xMax="534.152087" yMax="693.447070">9.009.149,55</word>
+        </line>
+        <line xMin="499.437993" yMin="692.940247" xMax="534.151080" yMax="701.679023">
+          <word xMin="499.437993" yMin="692.940247" xMax="534.151080" yMax="701.679023">4.651.757,42</word>
+        </line>
+        <line xMin="499.436992" yMin="702.059245" xMax="534.150079" yMax="710.798021">
+          <word xMin="499.436992" yMin="702.059245" xMax="534.150079" yMax="710.798021">4.357.392,13</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="549.357904" yMin="684.682130" xMax="566.608529" yMax="710.798021">
+        <line xMin="549.359912" yMin="684.682130" xMax="566.608529" yMax="693.447070">
+          <word xMin="549.359912" yMin="684.682130" xMax="566.608529" yMax="693.447070">3,16%</word>
+        </line>
+        <line xMin="549.358905" yMin="692.940247" xMax="566.607522" yMax="701.679023">
+          <word xMin="549.358905" yMin="692.940247" xMax="566.607522" yMax="701.679023">1,63%</word>
+        </line>
+        <line xMin="549.357904" yMin="702.059245" xMax="566.606521" yMax="710.798021">
+          <word xMin="549.357904" yMin="702.059245" xMax="566.606521" yMax="710.798021">1,53%</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="86.160000" yMin="634.371040" xMax="195.966305" yMax="643.029575">
+        <line xMin="86.160000" yMin="634.371040" xMax="195.966305" yMax="643.029575">
+          <word xMin="86.160000" yMin="634.371040" xMax="145.377530" yMax="643.029575">Optionsscheine,</word>
+          <word xMin="147.127105" yMin="634.371040" xMax="195.966305" yMax="643.029575">Bezugsrechte</word>
+        </line>
+      </block>
+      <block xMin="119.519000" yMin="646.851040" xMax="207.816700" yMax="655.509575">
+        <line xMin="119.519000" yMin="646.851040" xMax="207.816700" yMax="655.509575">
+          <word xMin="119.519000" yMin="646.851040" xMax="168.350755" yMax="655.509575">Niederländisc</word>
+          <word xMin="169.333495" yMin="646.851040" xMax="178.401505" yMax="655.509575">he</word>
+          <word xMin="180.843465" yMin="646.851040" xMax="207.816700" yMax="655.509575">Antillen</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="489.120003" yMin="74.938244" xMax="531.754241" yMax="83.677020">
+        <line xMin="489.120003" yMin="74.938244" xMax="531.754241" yMax="83.677020">
+          <word xMin="489.120003" yMin="74.938244" xMax="531.754241" yMax="83.677020">Bewertungskurs</word>
+        </line>
+      </block>
+    </flow>
+  </page>
+</doc>
+</body>
+</html>
