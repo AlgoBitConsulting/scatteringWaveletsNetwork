@@ -262,9 +262,19 @@ def getBoxes(box_H, box_V):
 
 
 
+
+
+
+
+
+
+
 ###################  getting column line                ########################################
 ###################                                     ########################################
 ###################      begin                          #######################################
+
+
+################################################################################################
 
 def removeColsWithEntriesInNeighbour(LM, MK):
    for jj in range(len(MK)):
@@ -282,6 +292,25 @@ def removeColsWithEntriesInNeighbour(LM, MK):
 
 ################################################################################################
 
+def sortInCols( KxL, midL):
+    LM                    = []
+    PKxL                  = KxL.copy()
+    for kk in range(1,len(midL)):
+       lm = []
+       zz = 0
+       for jj in range(len(KxL)):
+          x1,y2,x2,y1 = KxL[jj]  
+          if x1 <= midL[kk]:
+             if KxL[jj] in PKxL:
+                lm.append(KxL[jj])
+                PKxL.remove(KxL[jj])
+   
+       LM.append([lm, [ int(midL[kk-1]), int(midL[kk])]])
+
+    return([LM, PKxL])
+
+################################################################################################
+
 def removeEmptyColsFromMK(LM,MK):
 
    for jj in range(len(LM)):
@@ -290,27 +319,6 @@ def removeEmptyColsFromMK(LM,MK):
          MK.remove(lm[1][0])
 
    return(MK)
-
-################################################################################################
-
-def sortInCols( KxL, midL):
-    LM                    = []
-    PKxL                  = KxL.copy()
-    for kk in range(1,len(midL)):
-       lm = []
-       zz = 0
-       for jj in range(len(KxL)):
-          x1,y2,x2,y1 = list( map(lambda x: round(x), KxL[jj]))  # (x1,y1,x2,y2)
-          if midL[kk-1] <= x1 <= midL[kk]:
-             if KxL[jj] in PKxL:
-                #if x2 > midL[kk]:
-                #   zz = zz+1
-                lm.append(KxL[jj])
-                PKxL.remove(KxL[jj])
-       #if zz < len(lm):
-       LM.append([lm, [midL[kk-1], midL[kk]]])
-
-    return([LM, PKxL])
 
 ################################################################################################
 
@@ -374,11 +382,10 @@ def moveBorder(C, y, direction='D'):
    if direction=='D':
       s = 1
       
-   k  = list(C[y, :])
-   zz = 1
-   found = False
+   k         = list(C[y, :])
+   zz, found = 1, False
    while not(found) and zz <= 15:
-      k  = list(C[y+s*zz, :])
+      k  = C[y+s*zz, :].tolist()[0]
       if k.count(white) == len(k):
          found = True
          yn = y+s*zz
@@ -408,9 +415,9 @@ def restrictBoxesJPG(BL, box, colmax, colmin, tol=0.7, p=0.15):
 
    y1, y2, x1, x2   = box[1], box[3], box[0], box[2]
    K                = []
-
    for ii in range(len(BL)):
-      (bx1, by1, bx2, by2, btx) = BL[ii]
+      box, btx           = BL[ii]
+      bx1, by1, bx2, by2 = box
       if ( colmin <= bx1 <= bx2 <= colmax) and ( x1 <= bx1 <= bx2<= x2) and ( y1 <= by1 <= by2<= y2):
          K.append([ [ bx1, by1, bx2, by2],btx,(bx2-bx1)/(colmax-colmin) ])
    
@@ -418,58 +425,112 @@ def restrictBoxesJPG(BL, box, colmax, colmin, tol=0.7, p=0.15):
 
 ###########################################################################
 
-def allColumnsOfTables(C2, img, rL, GEN, page, xmm, white=255):
+def allColumnsOfTables(C2, rL, GEN, page, xmm, dd= 1, white=255):
 
    print("calculating column lines...")
-   GEN.outputFolder  = "/home/markus/anaconda3/python/"
-   GEN.outputFile    = "MOD1"
-   BL                = GEN.groupingInLine(page)
-   C                 = np.array(img).copy()
-   LLL               = []
-   KKK               = []
-   MMM               = []
-   RRR               = []
-   PPP               = []
+   
+   BL,WL             = GEN.groupingInLine(page)
+   IMGL              = []
+   MIDL              = []
+   BOXL              = []
    ERG               = []
+   KL                = []
 
    for ii in range(len(rL)):
-      boxO, col             = rL[ii]
-      K                     = restrictBoxesJPG(BL, boxO, xmm[col][1], xmm[col][0], tol=0.7, p=0.15)
-      erg, erg_MA, box, Ct  = mP(boxO, C2.copy(), 10, white, False)     
-      bx1, by1, bx2, by2    = box[0], box[1], box[2], box[3]
-      Ct                    = C2[by1:by2, bx1:bx2]      
-      jump                  = 0.7*(by2-by1)
-      Ct, R, pR, b, ll      = getColumnsOfTable(Ct, erg, box, jump=jump, d=1) 
+      boxO, col              = rL[ii]
+      boxO                   = list(map(lambda x: int(x), boxO))
+      erg, erg_MA, boxO2, Ct = mP(boxO, C2.copy(), 10, white, False)  
+      bx1, by1, bx2, by2     = boxO2
+      Ct                     = C2[by1:by2, bx1:bx2]      
+      jump                   = 0.7*(by2-by1)
+      Ct, R, pR, b, ll       = getColumnsOfTable(Ct, erg, boxO2, jump=jump, d=1) 
+      midL1                  = [0] + list(map(lambda x: int(round(sum(x[1])*0.5)), pR.copy())) + [bx2-bx1]
+      midL1_big              = list(np.array(midL1) + 1*bx1)
 
-      midL                  = [0] + list(map(lambda x: round(sum(x[1])*0.5), pR.copy())) + [bx2-bx1]
-      midL                  = list(np.array(midL) + 1*bx1)
-      KxL                   = list(map(lambda x: x[0], K))
+      K                      = []
+      x1,y1,x2,y2            = boxO2
+      for jj in range(len(BL)):
+         bl   = BL[jj]
+         bl_f = list(filter(lambda x:    (x1 <= x[0][0] <= x[0][2] <= x2) and (y1 <= x[0][1] <= x[0][3] <= y2) and (xmm[col][0] <= x[0][0] <= x[0][2] <= xmm[col][1]), bl))
+         if len(bl_f)>0:
+            K.append(bl_f)
+
+      KL.append(K)  
+
+      if len(K) > 0:
+         KxL  = list(map(lambda x: list(map(lambda y: y[0] , x)), K))
+         KxL  = np.concatenate(KxL).tolist()
+         KxL.sort(key=lambda x: x[0])
+         
+
+         LM, pKxL              = sortInCols( KxL, midL1_big)
+         LMt                   = list(filter(lambda x: len(x[0])!=0, LM))
                
-      LM, pKxL              = sortInCols( KxL, midL)
-      MK                    = removeEmptyColsFromMK(LM, midL.copy())            
-      LM, pKxL              = sortInCols( KxL, MK)
-      LM                    = removeColsWithEntriesInNeighbour(LM, MK) 
-      MK                    = removeEmptyColsFromMK(LM, MK)  
-               
-      LMT = []
-      for jj in range(len(LM)):
-         if len(LM[jj][0])>0:
-            LMT.append(LM[jj])
-               
-      W = []      
-      for jj in range(len(LMT)):
-         x,y = LMT[jj][1]      
-         C[by1:by2, y-1:y+1] = 0
-                           
-      ERG.append([rL[ii], LMT])
+         I1                    = list(map(lambda x: x[1], LMt))
+         I2                    = list(map(lambda x: [ I1[x][0], I1[x+1][0]], list(range(len(I1)-1))))
+         I2                    = I2 + [I1[-1]]
+         I2                    = list(map(lambda x: [x[0]-bx1, x[1]-bx1 ] , I2))
+
+         midL2                 = list(set(list(np.concatenate(I2))))
+         midL2.sort()
+         #midL2                = midL2[1:-1]
+
+         KxL_small             = []
+         bx1,by1,bx2,by2       = boxO2
+         for jj in range(len(KxL)):
+            box = x1,y1,x2,y2 = KxL[jj]
+            box = x1-bx1, y1-by1, x2-bx1, y2-by1
+            KxL_small.append(box)
+
+         MID_BIG = []
+         for kk in range(len(midL2)):
+            MID_BIG.append( midL2[kk] + boxO2[0])
+
+         KT     = np.concatenate(K)
+         KT     = list(map(lambda x: list(x), KT))
+         COL    = []
+         midL2t = [MID_BIG[0]]
+         for ii in range(1,len(MID_BIG)):
+            mida = MID_BIG[ii-1]
+            midb = MID_BIG[ii]  
+            L = list(filter(lambda x: mida <= x[0][0] <= x[0][2] <= midb , KT)) 
+            L.sort(key=lambda x: x[0][3])
+            COL.append(L)
+            if len(L)>0:
+               midL2t.append(MID_BIG[ii]-boxO2[0])
+         
+         print(midL2t)
+         print("midL2t")
+
+         midL3                 = list(filter(lambda x: len( list(filter(lambda y: y[0] <= x <= y[2] , KxL_small))) <= dd, midL2t))
+         img                   = Image.new(mode="RGB",size=(Ct.shape[1], Ct.shape[0]), color=(255,255,255))
+
+         d                     = ImageDraw.Draw(img)
+         for jj in range(len(KxL_small)):
+            box = KxL_small[jj]
+            d.rectangle(box,width=3, outline="red")
+
+         midL = midL3[1:-1]
+         for jj in range(len(midL)):
+            x=midL[jj]
+            d.line((x,0,x,Ct.shape[0]), fill=0, width=3)
+
+         IMGL.append(img) 
+         MIDL.append(midL3)
+         BOXL.append(boxO2)
 
    print("done...")
 
-   return([C, ERG])
+   return([IMGL, MIDL, BOXL, KL, BL])
+
 
 ###################     getting column line            ########################################
 ###################                                    ########################################
 ###################           end                      ########################################
+
+
+
+
 
 
 ###########################################################################
@@ -673,7 +734,7 @@ def findStartAndEnd(erg, WL,lenErg=3, stin=0, enin=1):
          while ii < len(WL) and not(foundStart):
             if erg[ii] == 1:
                W          = WL[ii]
-               start      = W[1][0]  + int(0.5*(windowSize- 2*stepSize)) 
+               start      = W[1][0]  + 0.8*int(0.5*(windowSize- 2*stepSize)) 
                foundStart = True
             ii = ii+1
          jj = ii
@@ -682,7 +743,7 @@ def findStartAndEnd(erg, WL,lenErg=3, stin=0, enin=1):
             while ii < len(WL) and not(foundEnd):
                if np.sum( erg[ii:ii+lenErg]) == 0: 
                   W          = WL[ii-1]
-                  end        = W[1][1]  - int(0.5*(windowSize- 2*stepSize)) 
+                  end        = W[1][1]  - 1*int(0.5*(windowSize- 2*stepSize)) 
                   foundEnd   = True
                   boxL.append([start, end])
                else:
@@ -738,7 +799,7 @@ def valuationMatrix(INFO, lCL):
 
 ############################################################################
 
-def shiftBoxes(boxLn, m, a,b, size=(840, 596)):
+def shiftBoxes(boxLn, m, a,b, yb = [30,800], size=(840, 596)):
 
    boxL = boxLn.copy()
    l = int(0.5*(m- (b-a)))
@@ -746,12 +807,12 @@ def shiftBoxes(boxLn, m, a,b, size=(840, 596)):
    for ii in range(len(boxL)):
       x1,y1,x2,y2 = boxL[ii]
       boxL[ii]    = max(a+5, x1+d), y1, min( x2+d, b-5, size[1]-20), y2
-
+  
    return(boxL)
  
-############################################################################  
+############################################################################
 
-def allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3): 
+def allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3, yb = [30, 800], size=(840, 596)): 
    
    #rLN_TA = shiftBoxes(rLN_TA, m, a,b)
    INFO.kindOfBox   = kindOfBox
@@ -772,9 +833,10 @@ def allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3):
       rLt, rL, rLn   = getBoxes(boxL_H, boxL_V)
      
       a,b            = xmm[col][0], xmm[col][1]         
-      rLn            = shiftBoxes(rLn, m, a, b)
-
+      rLnt           = shiftBoxes(rLn, m, a, b, yb=yb, size=size)
+      rLn            = list(filter( lambda x: yb[0] <= x[1] <= x[3] <= yb[1], rLnt)) 
       BB             = list(map( lambda x: [x, col], rLn))
+
       BOXES.extend(BB)
    
    return(BOXES)
@@ -931,6 +993,70 @@ def drawErg(C, WL, erg, direction ='H'):
 
 ###########################################################################    
 
+def matrixToRGBImage(M):
+
+   size = ( M.shape[1], M.shape[0])
+   img  = Image.new(mode="RGB",size=size, color=(255,255,255))
+   A    = np.array(img)
+   A[:,:,0] = M
+   A[:,:,1] = M
+   A[:,:,2] = M
+
+   img = Image.fromarray(A)
+
+   return([img, A]) 
+
+###################################################################################################################
+
+def makeRFData(DL, pathSrc = '/home/markus/anaconda3/python/data/SWC-18-04-2022/', pathDest='/home/markus/anaconda3/python/development/rf/'):
+
+   FL  = ['TA-bB-H-PNG' , 'TA-bB-V-PNG' ,  'TA-bBHV-H-PNG',  'TA-bBHV-V-PNG'  , 'HL-bB-H-PNG'      , 'HL-bB-V-PNG'     ,'HL-bBHV-H-PNG'   ,'HL-bBHV-V-PNG'   ]
+   for ii in range(len(FL)):
+      name     = pathSrc + FL[ii]+ DL[ii]
+      DATA     = MISC.loadIt(name)
+      ND       = boxMaster()
+      ND.INFO  = DATA.INFO
+      ND.rf    = DATA.rf
+      MISC.saveIt(ND, pathDest + FL[ii], False)
+
+###################################################################################################################
+
+def getResults(page, nn, generator, KL, MIDL, BOXL):
+
+   pages       = generator.convertPDFToJPG(page, page)      
+   img         = Image.open(pages[0])
+   img         = img.resize( (595, 842))
+  
+   K, MID, BOX = KL[nn], MIDL[nn], BOXL[nn]
+
+   draw   = ImageDraw.Draw(img)
+   for ii in range(len(K)):
+      line = K[ii]
+      for jj in range(len(line)):
+         box, txt = line[jj]
+         draw.rectangle(box, width=1, outline='red')
+         for kk in range(len(MID)):
+            mid = MID[kk]
+            draw.line( (mid+BOX[0], BOX[1], mid+ BOX[0], BOX[3]), width=1, fill='black')  
+
+   MID_BIG = [0]
+   for kk in range(len(MID)):
+      MID_BIG.append( MID[kk] + BOX[0])
+
+   KT = np.concatenate(K)
+   KT = list(map(lambda x: list(x), KT))
+   COL = []
+   for ii in range(1,len(MID_BIG)):
+      mida = MID_BIG[ii-1]
+      midb = MID_BIG[ii]  
+      L = list(filter(lambda x: mida <= x[0][0] <= x[0][2] <= midb , KT)) 
+      L.sort(key=lambda x: x[0][3])
+      COL.append(L)
+
+   return([img, COL])
+
+
+###################################################################################################################
 
 #***
 #*** MAIN PART
@@ -938,6 +1064,12 @@ def drawErg(C, WL, erg, direction ='H'):
 #
 #  exec(open("tableFinder.py").read())
 #
+
+
+# ****************************
+# *** begin init SWC       ***
+# ****************************
+
 
 MAT                  = dOM.matrixGenerator('downsampling')
 MAT.description      = "TEST"
@@ -958,31 +1090,33 @@ SWO_2D.onlyCoef      = True
 SWO_2D.allLevels     = False
 SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
 
+# ****************************
+# *** end init SWC         ***
+# ****************************
+
 white                = 255
 black                = 0 
-
 engine               = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 con                  = engine.connect()
 
-# **********************
-# *** load data      ***
-# **********************
+# ****************************
+# *** begin load data      ***
+# ****************************
 
+DL = ['-18-04-2022-15:47:03','-18-04-2022-16:12:09','-18-04-2022-16:45:52','-18-04-2022-17:13:58', '-18-04-2022-17:42:09','-18-04-2022-18:06:56','-18-04-2022-18:40:05','-18-04-2022-19:07:48']
 try:
-   a = len(INFO.TA.bB.H.WL0.WL)
+   a = len(FL)
 except:
-   print("loading data...")
+   print("loading random forests...")
    INFO              = makeINFO()
-   INFO.path         = '/home/markus/anaconda3/python/data/SWC-18-04-2022/'
+   INFO.path         = '/home/markus/anaconda3/python/development/rf/compressed/'
+   INFO.pathRF       = '/home/markus/anaconda3/python/development/rf/'
    INFO.kindOfImages = 'PNG'  
    INFO.white        = 255
    INFO.black        = 0    
    INFO.copyHL       = True
    INFO.flatten      = True
-   date              = '18-04-2022-'
    FL                = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
-   DL                = [date+'15:47:03'  , date+'16:12:09' , date+ '16:45:52', date+ '17:13:58' ,  date + '17:42:09'  , date + '18:06:56'  , date + '18:40:05' ,date + '19:07:48' ]
-   
    INFO.KBOX         = ['TA','HL']
    INFO.MBOX         = ['bB', 'bBHV']
    INFO.DBOX         = ['H', 'V']
@@ -990,14 +1124,14 @@ except:
    for kindOfBox in INFO.KBOX:
       for method in INFO.MBOX:
          for direction in INFO.DBOX:
-             
-            fname = kindOfBox + '-' + method + '-' + direction + '-' + INFO.kindOfImages + '-'
-            try:
-               date  = DL[ FL.index(fname)]
-            except:
-               print("Cant find date for file " + fname + "!")
-            
-            DATA = MISC.loadIt(INFO.path + fname + date)
+            fname = kindOfBox + '-' + method + '-' + direction + '-' + INFO.kindOfImages
+
+            ss = "unzstd " + INFO.path + fname + ".zst --output-dir-flat="+ INFO.pathRF
+            subprocess.check_output(ss, shell=True,executable='/bin/bash')
+
+            DATA = MISC.loadIt(INFO.pathRF + fname)
+            if DATA.INFO.kindOfImages != INFO.kindOfImages:
+               print("Warning: INFO.kindOfImages = " + INFO.kindOfImages + " is not the same as DATA.INFO.kindOfImages = " + DATA.INFO.kindOfImages + " from " + fname)
             O    = getattr( getattr(INFO,  kindOfBox), method)
             setattr(O, direction,  getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction)) 
             S    = getattr(O, direction)
@@ -1010,15 +1144,22 @@ except:
                INFO.onlyWhiteBlack = False
                INFO.wBB            = 180
 
-   print("...done")
+   print("...loading random forests done")
 
 
 
-### STPE
+# ****************************
+# *** end load data        ***
+# ****************************
 
-STPE                      = dOM.stripe('.png', C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
-STPE.dd                   = 0.20
-STPE.tol                  = 30
+
+# ****************************
+# *** start init INFO      ***
+# ****************************
+
+#STPE                      = dOM.stripe('.png', C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
+#STPE.dd                   = 0.20
+#STPE.tol                  = 30
 
 stepSize_H                = 5
 windowSize_H              = 30
@@ -1035,8 +1176,8 @@ INFO.TA.bBHV.V.windowSize = windowSize_V
 INFO.TA.bBHV.V.stepSize   = stepSize_V  
 
 
-setattr(INFO.TA, 'correction-H', 0.45)  #0.35
-setattr(INFO.TA, 'correction-V', 0.20)
+setattr(INFO.TA, 'correction-H', 0.30)  #0.35
+setattr(INFO.TA, 'correction-V', 0.15)
 setattr(INFO.TA, 'weightbBHV-V', 0.5)
 setattr(INFO.TA, 'weightbB-V'  , 0.5)
 setattr(INFO.TA, 'weightbBHV-H', 0.5)
@@ -1050,13 +1191,16 @@ setattr(INFO.HL, 'weightbBHV-H', 0.5)
 setattr(INFO.HL, 'weightbB-H'  , 0.5)
 
 
+# ****************************
+# *** end init INFO        ***
+# ****************************
 
-ss                        = input("calculate SWCs (Y/N) ?")
-calcSWCs                  = False
-if ss=='Y':
-   calcSWCs = True
-calculateJPGs             = True
-withScalePlot             = True
+
+
+# *****************************
+# *** start init generators ***
+# *****************************
+
 
 np.set_printoptions(suppress=True)
 
@@ -1074,6 +1218,7 @@ pathJPGs2        = '/home/markus/anaconda3/python/pngs/challenge/test/'
 pathPNGs2        = '/home/markus/anaconda3/python/pngs/challenge/word/'
 pathOutput2      = '/home/markus/anaconda3/python/pngs/challenge/test/'
 
+
 trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1, 
                                          pdfFilename     = PDFFilename1, 
                                          outputFolder    = pathPNGs1, 
@@ -1089,52 +1234,130 @@ trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1,
                                          size            = (595, 842) )
 trainPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 trainPNG.con     = trainPNG.engine.connect()
-#trainPNG.generatePNG()
+#trainPNG.generate()
 
-challengePNG         = dOM.imageGeneratorPNG(pathToPDF   = pathPDFFilename2, 
-                                         pdfFilename     = PDFFilename2, 
-                                         outputFolder    = pathPNGs2, 
-                                         output_file     = 'challenge', 
-                                         pageStart       = 1,
-                                         pageEnd         = 0,  
-                                         scanedDocument  = False,
-                                         windowSize      = 450, 
-                                         stepSize        = 50, 
-                                         bound           = 0.99, 
-                                         part            = 8, 
-                                         ub              = 5, 
-                                         size            = (595, 842) )
+challengePNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename2, 
+                                             pdfFilename     = PDFFilename2, 
+                                             outputFolder    = pathPNGs2, 
+                                             output_file     = 'challenge', 
+                                             pageStart       = 1,
+                                             pageEnd         = 0,  
+                                             scanedDocument  = False,
+                                             windowSize      = 450, 
+                                             stepSize        = 50, 
+                                             bound           = 0.99, 
+                                             part            = 8, 
+                                             ub              = 5, 
+                                             size            = (595, 842) )
 challengePNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 challengePNG.con     = challengePNG.engine.connect()
-#challengePNG.generatePNG()
+#challengePNG.generate()
+
+challengeJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename2, 
+                                             pdfFilename     = PDFFilename2, 
+                                             outputFolder    = pathJPGs2, 
+                                             output_file     = 'challenge', 
+                                             pageStart       = 1,
+                                             pageEnd         = 5, 
+                                             scanedDocument  = False, 
+                                             dpi             = 200, 
+                                             generateJPGWith = 'tesseract', 
+                                             windowSize      = 450, 
+                                             stepSize        = 50, 
+                                             bound           = 0.99, 
+                                             part            = 8, 
+                                             ub              = 5, 
+                                             size            = (595, 842) )
+    
+challengeJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+challengeJPG.con     = challengeJPG.engine.connect()
+
+
+# *****************************
+# *** end init generators   ***
+# *****************************
+
 
 P                = [[23,1]]  
-#P                = [[267,1]]
+columns          = dOM.columns()
+ss               = input("calculate SWCs (Y/N) ?")
+calcSWCs         = False
+if ss=='Y':
+   calcSWCs = True
 
-columns         = dOM.columns()
-source           = challengePNG
+INFO.kindOfImagesCustomer = 'PNG'
+
+if INFO.kindOfImagesCustomer != INFO.kindOfImages:
+      print("Warning: kind of images=" + INFO.kindOfImagesCustomer+ " for fitting rf is not the same as the kind of images=" + INFO.kindOfImages+ " for prediction of images!")
+
+
+if INFO.kindOfImagesCustomer == 'PNG':   
+   STPE             = dOM.stripe('.png', C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
+   generator        = challengePNG
+
+if INFO.kindOfImagesCustomer == 'JPG':
+   STPE             = dOM.stripe('.jpg', C1, stepSize=0, windowSize=0, direction='H', SWO_2D=SWO_2D)
+   generator        = challengeJPG
+
+STPE.dd          = 0.20
+STPE.tol         = 30
+generateImageOTF = False
+withScalePlot    = True
+try:
+   a = len(BIGINFO)
+except:
+   print("creating BIGINFO...")
+   BIGINFO = {}
+
+
+
 
 for dd in 1*P:
    page, noc           = dd
    ## noc ist hier nur für den Fall, dass man eine Anzahl von Spalten erzwingen möchte
-   fname               = source.outputFolder + source.outputFile + '-' + str(page) + '-portrait-word' 
+   fname               = generator.outputFolder + generator.outputFile + '-' + str(page) + '-portrait-word' 
    fname_bbm           = fname + '-bbm'
-   Corg                = np.matrix( MAT.generateMatrixFromImage(fname+'.png'), dtype='uint8')
+
+   if generateImageOTF:
+      generator.pageStart = page
+      generator.pageEnd   = page+1
+      generator.generate()
+      fname               = generator.outputFolder + generator.outputFile + '-' + str(page) + '-portrait-word' 
+      fname_bbm           = fname + '-bbm'
+   
+   Corg                = np.matrix( MAT.generateMatrixFromImage(fname+ STPE.typeOfFile), dtype='uint8')
    noc, _,_,_,_        = columns.coltrane2(Corg)
 
    DATA.n, DATA.m      = Corg.shape
-   DATA.CL, DATA.xmm   = STPE.genMat(fname, noc, 'bB',   challengePNG.IMOP, INFO.onlyWhiteBlack, INFO.wBB)  
-   DATA.CL_bbm, _      = STPE.genMat(fname, noc, 'bBHV', challengePNG.IMOP, INFO.onlyWhiteBlack, INFO.wBB)
-  
-   if calcSWCs:
-      INFO       = decomposeMatrices(DATA, STPE, INFO)
-      INFO       = calculateSWCs(DATA, STPE, INFO, des='')
-      INFO       = applyRF(DATA, INFO, des='')
+   DATA.CL, DATA.xmm   = STPE.genMat(fname, noc, 'bB',   generator.IMOP, INFO.onlyWhiteBlack, INFO.wBB)  
+   DATA.CL_bbm, _      = STPE.genMat(fname, noc, 'bBHV', generator.IMOP, INFO.onlyWhiteBlack, INFO.wBB)
    
-   rLN_TA              = allBoxes('TA', noc, INFO, DATA.xmm, DATA.m, 2)
-   rLN_HLt             = allBoxes('HL',noc, INFO, DATA.xmm, DATA.m)
-   rLN_HL              = filterHL(rLN_TA, rLN_HLt, 30)
-  
+   if calcSWCs:
+      INFO           = decomposeMatrices(DATA, STPE, INFO)
+      INFO           = calculateSWCs(DATA, STPE, INFO, des='')
+      INFO           = applyRF(DATA, INFO, des='')
+      BIGINFO[fname+ STPE.typeOfFile] = INFO
+   else:
+      try:
+         INFO = BIGINFO[fname+ STPE.typeOfFile]
+      except: 
+         print("need calculate SWCs ...")
+         INFO           = decomposeMatrices(DATA, STPE, INFO)
+         INFO           = calculateSWCs(DATA, STPE, INFO, des='')
+         INFO           = applyRF(DATA, INFO, des='')
+         BIGINFO[fname + STPE.typeOfFile] = INFO
+
+
+   rLN_TA               = allBoxes('TA', noc, INFO, DATA.xmm, DATA.m, 2)
+   rLN_HLt              = allBoxes('HL',noc, INFO, DATA.xmm, DATA.m)
+   rLN_HL               = filterHL(rLN_TA, rLN_HLt, 30)
+
+   IMGL, MIDL, BOXL, KL, BL = allColumnsOfTables(Corg.copy(), rLN_TA, generator, page, DATA.xmm, 1)
+
+   ###########################
+   ### start display plots ###
+   ###########################
+
    img_TA, draw_TA     = makeImage(Corg)
    img_HL, draw_HL     = makeImage(Corg)
 
@@ -1154,21 +1377,26 @@ for dd in 1*P:
       r = rLN_HLt[ii][0]      
       draw_HL.rectangle(r, outline ="blue",width=3) 
     
-   #C, ERG = allColumnsOfTables(C2=np.array(Corg), img=img, rL=rLN_TA, GEN=source, page=page, xmm=DATA.xmm, white=255)
-
    taWeights           = str( getattr(INFO.TA, 'weightbB-H'))      + '/'        + str( getattr( INFO.TA, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.TA, 'weightbB-V')) + '/' + str(getattr(INFO.TA, 'weightbBHV-V'))
    taCorr              = str( getattr(INFO.TA, 'correction-H'))    + "/"        + str( getattr(INFO.TA, 'correction-V'))
    hlWeights           = str( getattr(INFO.HL, 'weightbB-H'))      + '/'        + str( getattr( INFO.HL, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.HL, 'weightbB-V')) + '/' + str(getattr(INFO.HL, 'weightbBHV-V'))
    hlCorr              = str( getattr(INFO.HL, 'correction-H'))    + "/"        + str( getattr(INFO.HL, 'correction-V'))
    ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  TA-W: " + taWeights + "  Corr:" + taCorr # + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
-   draw_TA.text( (20,0), ss, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
+   draw_TA.text( (20,0), ss + " type:" + STPE.typeOfFile, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
    ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
    draw_HL.text( (20,0), ss, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
-   #Image.fromarray(C).show() 
-   #C = scalePlots(DATA.CL[1][0], 1, [[0, 596]], INFO);  Image.fromarray(C).show()
 
    img_TA.show()
    #img_HL.show()
 
-#WL             = INFO.TA.bB.V.WL0.WL
-#C              = drawErg(np.array(img), WL , INFO.TA.bB.V.erg0, 'V')
+   ###########################
+   ### end display plots   ###
+   ###########################
+
+
+img, COL =getResults(page, 0, challengeJPG, KL, MIDL, BOXL)
+img.show()
+
+
+#Corg        = np.matrix( MAT.generateMatrixFromImage(fname + STPE.typeOfFile), dtype='uint8')
+

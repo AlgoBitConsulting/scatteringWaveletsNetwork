@@ -651,7 +651,7 @@ def usePywt(C, wvname, w, st, en):
 
 #############################################################################  
 
-def makeIt(CL,SWO, des="calculation of SWCs ..."):
+def makeIt(CL,SWO, des="calculation of SWCs ...", withTime = False):
    
    tt = tqdm(CL)
    tt.set_description_str(des)
@@ -659,16 +659,21 @@ def makeIt(CL,SWO, des="calculation of SWCs ..."):
    t1 = timeit.time.time() 
    foo_ = partial(ST.deepScattering, SWO=SWO)
    output = Parallel(mp.cpu_count())(delayed(foo_)(i) for i in tt)
-   t2 = timeit.time.time(); print(t2-t1)
+   if withTime:
+      t2 = timeit.time.time(); print(t2-t1)
+
    return(output)              
 
 #############################################################################  
 
-def saveIt(ERG, fname):
+def saveIt(ERG, fname, withoutDate=False):
    
    a     = datetime.now()
-   dstr  = a.strftime("%d.%m.%Y-%H:%M:%S") 
-   pickle_out = open(fname + '-'+dstr, 'wb')
+   dstr  = a.strftime("%d.%m.%Y-%H:%M:%S")
+   if not(withoutDate): 
+      pickle_out = open(fname + '-'+dstr, 'wb')
+   else:
+      pickle_out = open(fname, 'wb')
    pickle.dump(ERG, pickle_out)
    pickle_out.close()
    return(dstr)

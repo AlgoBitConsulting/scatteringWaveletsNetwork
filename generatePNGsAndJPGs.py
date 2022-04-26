@@ -77,7 +77,7 @@ MAT.description  = "TEST"
 
 trainJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename1, 
                                          pdfFilename     = PDFFilename1, 
-                                         outputFolder    = pathJPGs1, 
+                                         outputFolder    = pathPNGs1, 
                                          output_file     = 'train', 
                                          pageStart       = 1,
                                          pageEnd         = 0, 
@@ -94,12 +94,12 @@ trainJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename1,
 trainJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 trainJPG.con     = trainJPG.engine.connect()
 #trainJPG.L       = [113,115]  
-#trainJPG.generateJPG()
+#trainJPG.generate()
 
 
 lfgbJPG         = dOM.imageGeneratorJPG(pathToPDF        = pathPDFFilename3, 
                                          pdfFilename     = PDFFilename3, 
-                                         outputFolder    = pathJPGs3, 
+                                         outputFolder    = pathPNGs3, 
                                          output_file     = 'lf-gb2019finalg-2-columns-pages-with-at-least-one-table', 
                                          pageStart       = 1,
                                          pageEnd         = 0, 
@@ -116,12 +116,12 @@ lfgbJPG         = dOM.imageGeneratorJPG(pathToPDF        = pathPDFFilename3,
 lfgbJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 lfgbJPG.con     = trainJPG.engine.connect()
 #lfgbJPG.L       = [113,115]  
-#lfgbJPG.generateJPG()
+#lfgbJPG.generate()
 
 
 challengeJPG         = dOM.imageGeneratorJPG(pathToPDF   = pathPDFFilename2, 
                                          pdfFilename     = PDFFilename2, 
-                                         outputFolder    = pathJPGs2, 
+                                         outputFolder    = pathPNGs2, 
                                          output_file     = 'challenge', 
                                          pageStart       = 1,
                                          pageEnd         = 0, 
@@ -138,7 +138,7 @@ challengeJPG         = dOM.imageGeneratorJPG(pathToPDF   = pathPDFFilename2,
 challengeJPG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 challengeJPG.con     = trainJPG.engine.connect()
 #challengeJPG.L       = [113,115]  
-#challengeJPG.generateJPG()
+#challengeJPG.generate()
 
 
 # ****************************
@@ -168,7 +168,7 @@ trainPNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename1,
                                          size            = (595, 842) )
 trainPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 trainPNG.con     = trainPNG.engine.connect()
-#trainPNG.generatePNG()
+#trainPNG.generate()
 
 
 lfgbPNG          = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename3, 
@@ -186,7 +186,7 @@ lfgbPNG          = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename3,
                                          size            = (595, 842) )
 lfgbPNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 lfgbPNG.con     = trainPNG.engine.connect()
-#lfgbPNG.generatePNG()
+#lfgbPNG.generate()
 
 
 
@@ -205,7 +205,7 @@ challengePNG         = dOM.imageGeneratorPNG(pathToPDF   = pathPDFFilename2,
                                          size            = (595, 842) )
 challengePNG.engine  = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
 challengePNG.con     = challengePNG.engine.connect()
-#challengePNG.generatePNG()
+#challengePNG.generate()
 
 
 # ****************************

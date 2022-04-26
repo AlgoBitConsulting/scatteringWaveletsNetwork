@@ -1348,7 +1348,7 @@ class imageGeneratorPNG:
 
    #############################################################################
  
-   def generatePNG(self, getNOCfromDB=True, onlyScanned=False):
+   def generate(self, getNOCfromDB=True, onlyScanned=False):
 
       N          = []
       self.Q     = []
@@ -1432,11 +1432,11 @@ class imageGeneratorPNG:
 
    ################################################################################################
 
-   def groupingInLine(self, pathPDFFilename, PDFFilename, pathOutput, page, worddist=6):
+   def groupingInLine(self, page, worddist=6):
 
-      A, BOXLIST        = self.IMOP.pdfToBlackBlocksAndLines(pathPDFFilename, PDFFilename, pathOutput, page, 'word', 'portrait', withSave=True, useXML = False)
-      outputfname       = PDFFilename + "-pdfToText-p" + str(page) + ".xml"
-      soup_pdfToText    = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
+      A, BOXLIST        = self.IMOP.pdfToBlackBlocksAndLines(self.pathToPDF, self.pdfFilename, self.outputFolder, page, 'word', 'portrait', withSave=True, useXML = False)
+      outputfname       = self.pdfFilename + "-pdfToText-p" + str(page) + ".xml"
+      soup_pdfToText    = BeautifulSoup(open(self.outputFolder + outputfname), "html.parser")
       whatList          = soup_pdfToText.find_all('word')
       WL = []
       for wl in whatList:
@@ -1450,7 +1450,9 @@ class imageGeneratorPNG:
       for ll in lines:
          L = list(filter(lambda x: x[0][3] ==ll , WL))
          L.sort(key=lambda x: x[0])
-         CL = self.wordsInLine(L, WL, worddist)
+         CL =[[0]] 
+         if len(L) >1:
+            CL = self.wordsInLine(L, WL, worddist)
          T  = []
          for ii in range(len(CL)):
             cl, cs = list(map(lambda x: L[x][0], CL[ii])), list(map(lambda x: L[x][1], CL[ii]))
@@ -1460,63 +1462,13 @@ class imageGeneratorPNG:
                T.append( [  cl[0], cs[0] ])
          LINES.append(T)
 
+      LINES = list(filter(lambda x: len(x)>0, LINES))
+
       return([LINES, WL])    
 
 ################################################################################################
 
-"""
-   def groupingInLine(self, pathPDFFilename, PDFFilename, pathOutput, page, worddist=15):
 
-      A, BOXLIST        = self.IMOP.pdfToBlackBlocksAndLines(pathPDFFilename, PDFFilename, pathOutput, page, 'word', 'portrait', withSave=True, useXML = False)
-      outputfname       = PDFFilename + "-pdfToText-p" + str(page) + ".xml"
-      soup_pdfToText    = BeautifulSoup(open(pathOutput + outputfname), "html.parser")
-      whatList          = soup_pdfToText.find_all('word')
-      WL = []
-      for wl in whatList:
-         box1 = [ wl['xmin'], wl['ymin'], wl['xmax'], wl['ymax']]
-         box2 = list(map( lambda x: int(np.round(float(x),0)), box1))
-         WL.append( [box2, wl.text])
-
-      lines = list(set(list(map(lambda x: x[0][3], WL))))
-      lines.sort()
-      LINES = []
-      for ll in lines:
-         L = list(filter(lambda x: x[0][3] ==ll , WL))
-         L.sort(key=lambda x: x[0])
-         T               = [ L[0]]
-         box, tt         = L[0]
-         s1,t1,s2,t2     = box
-
-         if len(L)==1:
-            LINES.append(L[0])
-         else:
-            for ii in range(1, len(L)):
-               box, ss         = L[ii] 
-               x1,y1,x2,y2     = box
-               if x1-s2 <= worddist:
-                  T.append(L[ii])
-                  box, tt         = L[ii]
-                  s1,t1,s2,t2     = box
-               if x1-s2 > worddist or ii ==len(L)-1:
-                  tt = list(map(lambda x: x[1] , T))
-                  ss = ""
-                  for kk in range(len(tt)):
-                     ss = ss + tt[kk] + " "
-                  ss          = ss[0:-1]
-                  box,tt      = T[0]
-                  s1,t1,s2,t2 = box
-                  box, tt     = T[-1]
-                  x1,y1,x2,y2 = box
-                  LINES.append([[s1, t1, x2, y2], ss])
-                  T               = [ L[ii]]
-                  if ii==len(L)-1:
-                     LINES.append(L[ii])      
-
-      return([LINES, WL])    
-
-      #############################################################################
-
-"""
 
 
 
@@ -1692,8 +1644,39 @@ class imageGeneratorJPG:
       return([img1,img2, MttN, boxLOrg])   
 
    #############################################################################     
-   
-   def groupingInLine(self, page, diff=4):
+
+   def wordsInLine(self, L, WL, worddist):
+    
+      CL = []
+      cl = [0] 
+      for ii in range(0,len(L)-1):
+         x1,y2,x2,y2 = box1 = L[ii][0]
+         s1,t1,s2,t2 = box2 = L[ii+1][0]
+         if s1-x2 < worddist:
+            cl.append(ii+1) 
+            if ii+1==len(L)-1:
+               CL.append(cl)
+         else:
+            CL.append(cl) 
+            cl = [ii+1]
+            if ii+1== len(L)-1:
+               CL.append(cl)
+ 
+      return(CL)
+
+   #############################################################################
+
+   def concatString(self, ss):
+      erg = ""
+      for ii in range(len(ss)):
+         erg = erg + ss[ii] + " "
+      erg = erg[0:-1]
+
+      return(erg)     
+
+   ################################################################################################
+
+   def groupingInLine(self, page, worddist=6):
    
       global alpha
    
@@ -1717,62 +1700,68 @@ class imageGeneratorJPG:
       left, top, width, height = list(map( f, [ itd['left'], itd['top'], itd['width'],itd['height'] ]))
       text                     = itd['text']
       
-      level = 5
-      M     = tp([ itd['level'], left, top, width, height, list(range(len(text))) ])
-      P     = np.array( list( filter( lambda x: x[0] == level and len(itd['text'][x[5]].replace(' ','')) >0, M)))
+      WL = []
+      for ii in range(len(text)):
+         if len(text[ii]) >0:
+            x1,y1,x2,y2 = left[ii], top[ii], left[ii] + width[ii], top[ii] + height[ii]
+            WL.append([ [x1,y1,x2,y2], text[ii] ])
 
-      A  = P.copy()
-      A  = A[:, 1:]
-      A = A[ A[:, 1].argsort()]
+      WL.sort(key=lambda x: x[0][1])
+      lines = list(map(lambda x: x[0][1], WL))
+      lines.sort()
+
+      d     = np.diff(lines)
+      G     = []
+      g     = [ WL[0]]
+      for ii in range(len(d)):
+         if d[ii] <= 3:
+            g.append(WL[ii+1])     
+         else:
+            g.sort(key=lambda x: x[0][0])
+            G.append(g)
+            g = [ WL[ii+1]]
+
+      for ii in range(len(G)):
+         g = G[ii]
+         r = list(map(lambda x: x[0][1], g))[0]
+         for jj in range(len(g)):
+            g[jj][0][1] = r
+
+      H= []
+      for ii in range(len(G)):
+         g        = G[ii]
+         lines    = [ g[0]]
+         if len(g)==1:
+            H.append(lines)
+         else: 
+            box1, txt1 = g[0]
+            for jj in range(1,len(g)):
+               box2, txt2 = g[jj]
+               x1,y1,x2,y2 = box1
+               s1,t1,s2,t2 = box2
+               if s1-x2 < worddist:
+                  lines.append(g[jj])
+                  box1, txtx1 = g[jj]
+               else:
+                  H.append(lines)
+                  box1, txtx1 = g[jj]
+                  lines = [ g[jj]]
+               if jj==len(g)-1:
+                  H.append(lines)
+
+      H_GLUE = []
+      for ii in range(len(H)):
+         w, boxList = list(map(lambda x: x[1], H[ii])), list(map(lambda x: x[0], H[ii]))
+         ss         = self.concatString(w)
+         box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
+         H_GLUE.append( [box, ss]) 
 
       LINES = []
-      l     = []
-      R     = list(set( A[:, 1]))
-      R.sort()
-   
-      T = R.copy()
-      d = np.diff(R)
-      r = d.argsort()
-      for ii in range(len(r)):
-         if d[r[ii]] <diff:
-            T.remove(R[r[ii]])
+      lines = list(set(list(map(lambda x: x[0][1] , WL))))
+      lines.sort()
+      LINES = list(map(lambda x: list(filter(lambda y: y[0][1]==x , H_GLUE)) , lines))
 
-      for ii in range(len(T)):
-         y = T[ii]
-         N = np.array( list( filter(lambda x: abs(x[1]-y)<= diff, A) ))       
-         N = N[ N[:, 0].argsort()]
-         LINES.append(N)
-
-      L  = []
-      wg = []
-
-      for ii in range(len(LINES)):
-         wg   = []
-         line = LINES[ii].tolist()
-   
-         wg.append(line[0])
-         for jj in range(len(line)-1):
-            (x, y, w, h, tx1) = line[jj]         
-            (r, s, t, u, tx2) = line[jj+1]        
-            if abs(x + w- r) <= diff:
-               wg.append(line[jj+1])
-            else:
-               L.append(wg)
-               wg = [ line[jj+1] ]
-         L.append(wg)
-   
-      BL = []
-      for ii in range(len(L)):
-         R         = L[ii]
-         x1,y1,w,h,tx1 = R[0]   
-         x, y, w,h,tx2 = R[len(R)-1] 
-         x2,y2     = x+w, y+h
-         tx             = ""
-         for jj in range(len(L[ii])):
-            tx = tx + " " +text[R[jj][4]]
-         BL.append([x1,y1,x2,y2,tx])      
-
-      return(BL)      
+      return([LINES, WL])      
           
    ############################################################################# 
    
@@ -2011,7 +2000,7 @@ class imageGeneratorJPG:
 
    #############################################################################
 
-   def generateJPG(self, getNOCfromDB=True, onlyScanned=False):
+   def generate(self, getNOCfromDB=True, onlyScanned=False):
 
       N          = []
       self.Q     = []
