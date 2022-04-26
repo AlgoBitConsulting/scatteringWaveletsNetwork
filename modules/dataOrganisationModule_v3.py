@@ -1702,7 +1702,7 @@ class imageGeneratorJPG:
       
       WL = []
       for ii in range(len(text)):
-         if len(text[ii]) >0:
+         if len(text[ii].replace(' ', '')) >0:
             x1,y1,x2,y2 = left[ii], top[ii], left[ii] + width[ii], top[ii] + height[ii]
             WL.append([ [x1,y1,x2,y2], text[ii] ])
 
