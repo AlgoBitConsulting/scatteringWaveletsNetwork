@@ -1,0 +1,52 @@
+import sys, subprocess
+from os import system, path
+sys.path.append('/home/markus/anaconda3/python/development/modules')
+import misc as MISC
+import scatteringTransformationModule as ST
+import dataOrganisationModule as dOM
+import morletModule as MM  
+import tableFinder as TF
+
+import pdb
+import timeit
+from tqdm import tqdm
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageOps, ImageTk, ImageFont
+
+import csv
+from datetime import datetime 
+from copy import deepcopy
+import pandas as pd
+from bs4 import BeautifulSoup
+import pickle
+
+from functools import partial
+from joblib import Parallel, delayed
+import multiprocessing as mp
+from multiprocessing import Pool
+
+import pytesseract
+from pytesseract import Output
+import pdf2image
+from pdf2image import convert_from_path
+from wand.image import Image as Wimage
+import cv2 as cv
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+from scipy.stats import multivariate_normal
+from scipy.integrate import simps
+from scipy.interpolate import interpolate
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+
+
+
+
+
+
+
+
+
