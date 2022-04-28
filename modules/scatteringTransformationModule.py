@@ -18,7 +18,7 @@ from copy import deepcopy
 import timeit
 
 
-#import pywt
+
 import multiprocessing as mp
 from multiprocessing import Pool
 import pickle
@@ -245,8 +245,6 @@ def getLevel(K, n):
    return(erg) 
    
 ################################################################################################################################################  
-   
-#pdb.set_trace()  
 
 def scatteringAroundCenterAlt(C, Clog2, SWO, m, FB):
  
@@ -328,7 +326,6 @@ def scatteringAroundCenterAlt(C, Clog2, SWO, m, FB):
    
 ################################################################################################################################################
 
-#pdb.set_trace() 
    
 
 

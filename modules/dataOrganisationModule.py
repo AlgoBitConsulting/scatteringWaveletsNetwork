@@ -1674,6 +1674,70 @@ class imageGeneratorJPG:
 
    ################################################################################################
 
+   def makeG(self, lines, WL):
+ 
+      d     = np.diff(lines)
+      G     = []
+      g     = [ WL[0]]
+      for ii in range(len(d)):
+         if d[ii] <= 3:
+            g.append(WL[ii+1])    
+            if ii == len(d)-1:
+               G.append(g)  
+         else:
+            g.sort(key=lambda x: x[0][0])
+            G.append(g)
+            g = [ WL[ii+1]]
+
+      for ii in range(len(G)):
+         g = G[ii]
+         r = list(map(lambda x: x[0][1], g))[0]
+         for jj in range(len(g)):
+            g[jj][0][1] = r
+
+      return(G)
+
+   ################################################################################################
+
+   def makeH(self, lines, G, worddist):
+      H= []
+      for ii in range(len(G)):
+         g        = G[ii]
+         lines    = [ g[0]]
+         if len(g)==1:
+            H.append(lines)
+         else: 
+            box1, txt1 = g[0]
+            for jj in range(1,len(g)):
+               box2, txt2 = g[jj]
+               x1,y1,x2,y2 = box1
+               s1,t1,s2,t2 = box2
+               if s1-x2 < worddist:
+                  lines.append(g[jj])
+                  box1, txtx1 = g[jj]
+               else:
+                  H.append(lines)
+                  box1, txtx1 = g[jj]
+                  lines = [ g[jj]]
+               if jj==len(g)-1:
+                  H.append(lines)
+      return(H)
+
+   ################################################################################################
+
+   def makeH_GLUE(self, H):
+
+      H_GLUE = []
+      for ii in range(len(H)):
+         w, boxList = list(map(lambda x: x[1], H[ii])), list(map(lambda x: x[0], H[ii]))
+         ss         = self.concatString(w)
+         box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
+         H_GLUE.append( [box, ss]) 
+   
+      return(H_GLUE)
+
+   ################################################################################################
+
    def groupingInLine(self, page, worddist=6):
    
       global alpha
@@ -1706,58 +1770,16 @@ class imageGeneratorJPG:
 
       WL.sort(key=lambda x: x[0][1])
       lines = list(map(lambda x: x[0][1], WL))
+      #lines.sort()
+
+      G      = self.makeG(lines, WL)
+      H      = self.makeH(lines, G, worddist)
+      H_GLUE = self.makeH_GLUE(H)
+      
+      LINES  = []
+      lines  = list(set(list(map(lambda x: x[0][1] , WL))))
       lines.sort()
-
-      d     = np.diff(lines)
-      G     = []
-      g     = [ WL[0]]
-      for ii in range(len(d)):
-         if d[ii] <= 3:
-            g.append(WL[ii+1])     
-         else:
-            g.sort(key=lambda x: x[0][0])
-            G.append(g)
-            g = [ WL[ii+1]]
-
-      for ii in range(len(G)):
-         g = G[ii]
-         r = list(map(lambda x: x[0][1], g))[0]
-         for jj in range(len(g)):
-            g[jj][0][1] = r
-
-      H= []
-      for ii in range(len(G)):
-         g        = G[ii]
-         lines    = [ g[0]]
-         if len(g)==1:
-            H.append(lines)
-         else: 
-            box1, txt1 = g[0]
-            for jj in range(1,len(g)):
-               box2, txt2 = g[jj]
-               x1,y1,x2,y2 = box1
-               s1,t1,s2,t2 = box2
-               if s1-x2 < worddist:
-                  lines.append(g[jj])
-                  box1, txtx1 = g[jj]
-               else:
-                  H.append(lines)
-                  box1, txtx1 = g[jj]
-                  lines = [ g[jj]]
-               if jj==len(g)-1:
-                  H.append(lines)
-
-      H_GLUE = []
-      for ii in range(len(H)):
-         w, boxList = list(map(lambda x: x[1], H[ii])), list(map(lambda x: x[0], H[ii]))
-         ss         = self.concatString(w)
-         box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
-         H_GLUE.append( [box, ss]) 
-
-      LINES = []
-      lines = list(set(list(map(lambda x: x[0][1] , WL))))
-      lines.sort()
-      LINES = list(map(lambda x: list(filter(lambda y: y[0][1]==x , H_GLUE)) , lines))
+      LINES  = list(map(lambda x: list(filter(lambda y: y[0][1]==x , H_GLUE)) , lines))
 
       return([LINES, WL])      
           
