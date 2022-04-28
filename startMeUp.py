@@ -228,7 +228,7 @@ except:
    BIGINFO = {}
 
 
-INFO.kindOfImagesCustomer = 'PNG'
+INFO.kindOfImagesCustomer = 'JPG'
 
 if INFO.kindOfImagesCustomer != INFO.kindOfImages:
       print("Warning: kind of images=" + INFO.kindOfImagesCustomer+ " for fitting rf is not the same as the kind of images=" + INFO.kindOfImages+ " for prediction of images!")
@@ -262,9 +262,26 @@ INFO.page        = page
 
 ### Let's start
 
-RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
-RESULTS.img_TA.show()
-tableNumber   = 0
-img, COL      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
-img.show()
+#RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
+#RESULTS.img_TA.show()
+#tableNumber   = 2
+#img, COL      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
+#img.show()
+
+
+BL,WL             = challengeJPG.groupingInLine(page)
+
+lines = list(map(lambda x: x[0][1], WL))
+
+G      = challengeJPG.makeG(lines, WL)
+H      = challengeJPG.makeH(lines, G, 6)
+H_GLUE = challengeJPG.makeH_GLUE(H)
+
+H_GLUE = []
+for ii in range(len(H)):
+   w, boxList = list(map(lambda x: x[1], H[ii])), list(map(lambda x: x[0], H[ii]))
+   ss         = challengeJPG.concatString(w)
+   box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
+   H_GLUE.append( [box, ss]) 
+
 
