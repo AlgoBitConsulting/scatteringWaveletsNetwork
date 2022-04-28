@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: scatDocWaveNet
+Version: 0.0.1
+Summary: detect and read tables with scattering wavelet networks
+Home-page: https://github.com/AlgoBitConsulting/scatteringWaveletsNetworks.git
+Author: Dr. Markus Wagner
+Author-email: markuswagner@algobitconsulting.de
+License: BSD
+Description: # scatteringWaveletsNetworks
+        table detection in PDF and scaned documents with scattering wavelets
+        
+        comming soon
+        
+Keywords: scattering wavelet network
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: BSD License

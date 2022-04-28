@@ -1,0 +1,13 @@
+README.md
+setup.py
+modules/DFTForSCN.py
+modules/dataOrganisationModule.py
+modules/misc.py
+modules/morletModule.py
+modules/scatteringTransformationModule.py
+modules/tableFinder.py
+scatDocWaveNet.egg-info/PKG-INFO
+scatDocWaveNet.egg-info/SOURCES.txt
+scatDocWaveNet.egg-info/dependency_links.txt
+scatDocWaveNet.egg-info/requires.txt
+scatDocWaveNet.egg-info/top_level.txt
