@@ -12,6 +12,7 @@ from copy import deepcopy
 
 ### eigene Module
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
+sys.path.append('/home/markus/anaconda3/python/development/modules')
 import DFTForSCN as DFT
 import scatteringTransformationModule as ST
 

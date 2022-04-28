@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 ### eigene Module
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
+sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
@@ -133,6 +134,12 @@ black                = 0
 # ****************************
 # *** begin load data      ***
 # ****************************
+
+ss = "rm rf/*"
+try:
+   subprocess.check_output(ss, shell=True,executable='/bin/bash')
+except:
+   print("Problems removing rfs...")
 
 DL = ['-18-04-2022-15:47:03','-18-04-2022-16:12:09','-18-04-2022-16:45:52','-18-04-2022-17:13:58', '-18-04-2022-17:42:09','-18-04-2022-18:06:56','-18-04-2022-18:40:05','-18-04-2022-19:07:48']
 
@@ -267,13 +274,13 @@ INFO.page        = page
 
 ### Let's start
 
-#RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
-#RESULTS.img_TA.show()
-#tableNumber   = 2
-#img, COL      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
-#img.show()
+RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
+RESULTS.img_TA.show()
+tableNumber   = 2
+img, COL      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
+img.show()
 
-
+"""
 BL,WL             = challengeJPG.groupingInLine(page)
 
 lines = list(map(lambda x: x[0][1], WL))
@@ -288,5 +295,5 @@ for ii in range(len(H)):
    ss         = challengeJPG.concatString(w)
    box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
    H_GLUE.append( [box, ss]) 
-
+"""
 

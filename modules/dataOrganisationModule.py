@@ -15,6 +15,8 @@ from functools import partial
 
 ### eigene Module
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
+sys.path.append('/home/markus/anaconda3/python/development/modules')
+
 import scatteringTransformationModule as ST
 import misc as MISC
 

@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 ### eigene Module
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
+sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
