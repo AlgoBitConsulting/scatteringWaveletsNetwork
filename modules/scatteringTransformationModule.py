@@ -1,27 +1,31 @@
 
+
+### standardmäßig in python installiert
 import sys, subprocess
 from os import system
 import os
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+from PIL import Image, ImageDraw, ImageOps
+from copy import deepcopy
+import timeit
+import pickle
 
+
+
+### eigene Module
+sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 import DFTForSCN as DFT
 import morletModule as MM  
 
 
+
+### zu installierende Module
 import numpy as np
 from scipy.stats import multivariate_normal
 from scipy.integrate import simps
 from scipy.interpolate import interpolate
-from PIL import Image, ImageDraw, ImageOps
 import matplotlib.pyplot as plt
-from copy import deepcopy
-import timeit
 
 
-
-import multiprocessing as mp
-from multiprocessing import Pool
-import pickle
 
 
 pi, exp, log, abs, sqrt, fft, mult, mat, tp = np.pi, np.exp, np.log, np.abs, np.sqrt, np.fft.fft, np.multiply, np.matrix, np.transpose

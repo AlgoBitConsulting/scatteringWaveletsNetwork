@@ -1,30 +1,29 @@
-
-
+### standardmäßig in python installiert
 import sys, subprocess
 from os import system
 import os
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+from PIL import Image, ImageDraw
+import pickle
+from functools import partial
+import timeit
+from PIL import Image, ImageDraw, ImageOps, ImageFont
+from datetime import datetime 
+from copy import deepcopy
+
+### eigene Module
+sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 import DFTForSCN as DFT
 import scatteringTransformationModule as ST
 
 
-#import numpy as np
-#from scipy.stats import multivariate_normal
-#from PIL import Image, ImageDraw
-#import matplotlib.pyplot as plt
-#from bs4 import BeautifulSoup
 
-
-#import tkinter
-#from PIL import Image, ImageDraw, ImageOps, ImageTk, ImageFont
-import pickle
-from functools import partial
+### zu installierende Module
+import numpy as np
+from scipy.stats import multivariate_normal
+import matplotlib.pyplot as plt
+from bs4 import BeautifulSoup
+import tkinter
 from joblib import Parallel, delayed
-import multiprocessing as mp
-import timeit
-from datetime import datetime 
-#import pywt
-#from copy import deepcopy
 from tqdm import tqdm
 
 #pi, exp, log, abs, sqrt, fft, mult, mat, tp = np.pi, np.exp, np.log, np.abs, np.sqrt, np.fft.fft, np.multiply, np.matrix, np.transpose

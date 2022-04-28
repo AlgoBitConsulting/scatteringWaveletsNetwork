@@ -1,43 +1,41 @@
 
+
+### standardmäßig in python installiert
 import sys, subprocess
 from os import system
 import os
 import os.path
+from PIL import Image, ImageDraw
+from copy import deepcopy
+import csv
+from datetime import datetime 
+import pickle
+from functools import partial
 
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+
+### eigene Module
+sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 import scatteringTransformationModule as ST
 import misc as MISC
 
-import csv
-from datetime import datetime 
-from copy import deepcopy
+
+
+### zu installierende Module
 from tqdm import tqdm
 import numpy as np
-#import timeit
-from PIL import Image, ImageDraw
 import pandas as pd
-
 from bs4 import BeautifulSoup
-import pickle
-
-from functools import partial
 from joblib import Parallel, delayed
-import multiprocessing as mp
-
-#import pywt
-
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
-#import copy
-
 import pytesseract
 from pytesseract import Output
-
 import pdf2image
 from pdf2image import convert_from_path
-
 from wand.image import Image as Wimage
 import cv2 as cv
+
+
 
 pi, exp, log, abs, sqrt, fft, mult, mat, tp = np.pi, np.exp, np.log, np.abs, np.sqrt, np.fft.fft, np.multiply, np.matrix, np.transpose
 cos,sin = np.cos, np.sin

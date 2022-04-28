@@ -1,17 +1,22 @@
+
+### standardmäßig in python installiert
 import sys, subprocess
 from os import system
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+from PIL import Image, ImageDraw, ImageOps, ImageFont
 
+
+### eigene Module
+sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
 import tableFinder as TF
 
-from tqdm import tqdm
 
+### zu installierende Module
+from tqdm import tqdm
 import numpy as np
-from PIL import Image, ImageDraw, ImageOps, ImageTk, ImageFont
 
 
 ############################################################################# 
