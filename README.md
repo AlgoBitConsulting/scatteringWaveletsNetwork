@@ -1,4 +1,6 @@
 # scatteringWaveletsNetworks
 table detection in PDF and scaned documents with scattering wavelets
 
-comming soon
+python -m pip install --index-url https://test.pypi.org/simple/ --no-deps docScatWaveNet-markus2
+
+
