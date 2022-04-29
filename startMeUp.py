@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 
 ### eigene Module
-
+"""
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
@@ -14,8 +14,8 @@ import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
 import tableFinder as TF
-
-#from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF
+"""
+from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF
 
 
 ### zu installierende Module
