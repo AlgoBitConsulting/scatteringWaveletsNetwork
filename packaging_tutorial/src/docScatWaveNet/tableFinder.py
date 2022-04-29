@@ -1,3 +1,4 @@
+
 ### standardmäßig in python installiert
 import sys, subprocess
 from os import system
@@ -6,12 +7,16 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 
 ### eigene Module
+"""
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
+"""
+
+from docScatWaveNet import misc as MISC, scatteringTransformationModule as ST, dataOrganisationModule as dOM, morletModule as MM  
 
 
 
@@ -29,6 +34,7 @@ matmul  = np.matmul
 inv     = np.linalg.inv
 diag    = np.diag
 imag,real = np.imag, np.real
+
 
 ###########################################################################
 
@@ -1197,6 +1203,4 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
 #  exec(open("tableFinder.py").read())
 #
 
-MAT                  = dOM.matrixGenerator('downsampling')
-MAT.description      = "TEST"
 

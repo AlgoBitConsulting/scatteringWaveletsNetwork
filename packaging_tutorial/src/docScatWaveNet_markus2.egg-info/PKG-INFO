@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: docScatWaveNet-markus2
+Version: 0.0.1
+Summary: detect and read tables with scattering wavelet networks
+Home-page: https://github.com/pypa/sampleproject
+Author: Dr. Markus Wagner
+Author-email: markuswagner@algobitconsulting.de
+License: BSD
+Project-URL: Bug Tracker, https://github.com/pypa/sampleproject/issues
+Keywords: scattering wavelet network
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+License-File: LICENSE
+
+# Example Package
+
+This is a simple example package. You can use
+[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+to write your content.
+
+

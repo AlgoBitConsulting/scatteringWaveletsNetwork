@@ -1,3 +1,4 @@
+
 ### standardmäßig in python installiert
 import sys, subprocess
 from os import system
@@ -12,10 +13,14 @@ from copy import deepcopy
 import multiprocessing as mp
 
 ### eigene Module
+"""
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 sys.path.append('/home/markus/anaconda3/python/development/modules')
 import DFTForSCN as DFT
 import scatteringTransformationModule as ST
+"""
+
+from docScatWaveNet import DFTForSCN as DFT, scatteringTransformationModule as ST
 
 
 
@@ -28,12 +33,6 @@ import tkinter
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
-#pi, exp, log, abs, sqrt, fft, mult, mat, tp = np.pi, np.exp, np.log, np.abs, np.sqrt, np.fft.fft, np.multiply, np.matrix, np.transpose
-#cos,sin = np.cos, np.sin
-
-#matmul  = np.matmul
-#inv     = np.linalg.inv
-#diag    = np.diag
 
 
 #############################################################################  

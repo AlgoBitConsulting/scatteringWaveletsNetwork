@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 
 ### eigene Module
+
 sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
 sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
@@ -13,6 +14,8 @@ import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
 import tableFinder as TF
+
+#from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF
 
 
 ### zu installierende Module
@@ -32,6 +35,8 @@ imag,real = np.imag, np.real
 
 
 ###################################################################################################################
+
+
 
 class boxMaster:
    def __init__(self, name='ka'):
@@ -209,7 +214,7 @@ INFO.TA.bBHV.V.windowSize = windowSize_V
 INFO.TA.bBHV.V.stepSize   = stepSize_V  
 
 
-setattr(INFO.TA, 'correction-H', 0.20)  #0.35
+setattr(INFO.TA, 'correction-H', 0.35)  #0.35
 setattr(INFO.TA, 'correction-V', 0.15)
 setattr(INFO.TA, 'weightbBHV-V', 0.5)
 setattr(INFO.TA, 'weightbB-V'  , 0.5)
@@ -240,7 +245,7 @@ except:
    BIGINFO = {}
 
 
-INFO.kindOfImagesCustomer = 'JPG'
+INFO.kindOfImagesCustomer = 'PNG'
 
 if INFO.kindOfImagesCustomer != INFO.kindOfImages:
       print("Warning: kind of images=" + INFO.kindOfImagesCustomer+ " for fitting rf is not the same as the kind of images=" + INFO.kindOfImages+ " for prediction of images!")
@@ -274,26 +279,16 @@ INFO.page        = page
 
 ### Let's start
 
+
 RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
-tableNumber   = 2
-img, COL      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
-img.show()
 
-"""
-BL,WL             = challengeJPG.groupingInLine(page)
+IMGL, TAB     = [], []
+for ii in range(len(RESULTS.KL)):
+   tableNumber   = ii
+   img, col      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
+   IMGL.append(img)
+   TAB.append(col)
 
-lines = list(map(lambda x: x[0][1], WL))
 
-G      = challengeJPG.makeG(lines, WL)
-H      = challengeJPG.makeH(lines, G, 6)
-H_GLUE = challengeJPG.makeH_GLUE(H)
-
-H_GLUE = []
-for ii in range(len(H)):
-   w, boxList = list(map(lambda x: x[1], H[ii])), list(map(lambda x: x[0], H[ii]))
-   ss         = challengeJPG.concatString(w)
-   box        = [ boxList[0][0], boxList[0][1], boxList[-1][2], boxList[-1][3]] 
-   H_GLUE.append( [box, ss]) 
-"""
 

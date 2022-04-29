@@ -1,0 +1,12 @@
+tqdm
+numpy
+pandas-stubs
+beautifulsoup4
+joblib
+pytesseract
+pdf2image
+Wand
+opencv-python
+matplotlib
+scipy
+scikit-learn
