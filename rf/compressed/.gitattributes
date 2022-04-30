@@ -1,0 +1,8 @@
+TA-bB-H-PNG.zst filter=lfs diff=lfs merge=lfs -text
+TA-bBHV-H-PNG.zst filter=lfs diff=lfs merge=lfs -text
+TA-bBHV-V-PNG.zst filter=lfs diff=lfs merge=lfs -text
+TA-bB-V-PNG.zst filter=lfs diff=lfs merge=lfs -text
+HL-bB-H-PNG.zst filter=lfs diff=lfs merge=lfs -text
+HL-bBHV-H-PNG.zst filter=lfs diff=lfs merge=lfs -text
+HL-bBHV-V-PNG.zst filter=lfs diff=lfs merge=lfs -text
+HL-bB-V-PNG.zst filter=lfs diff=lfs merge=lfs -text
