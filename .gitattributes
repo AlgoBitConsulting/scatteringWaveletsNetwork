@@ -1,1 +1,2 @@
 /rf/compressed/* filter=lfs diff=lfs merge=lfs -text
+*.zst filter=lfs diff=lfs merge=lfs -text
