@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/docScatWaveNet/DFTForSCN.py
+src/docScatWaveNet/__init__.py
+src/docScatWaveNet/dataOrganisationModule.py
+src/docScatWaveNet/misc.py
+src/docScatWaveNet/morletModule.py
+src/docScatWaveNet/scatteringTransformationModule.py
+src/docScatWaveNet/tableFinder.py
+src/docScatWaveNet.egg-info/PKG-INFO
+src/docScatWaveNet.egg-info/SOURCES.txt
+src/docScatWaveNet.egg-info/dependency_links.txt
+src/docScatWaveNet.egg-info/requires.txt
+src/docScatWaveNet.egg-info/top_level.txt

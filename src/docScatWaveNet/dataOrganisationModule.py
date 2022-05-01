@@ -15,8 +15,8 @@ from functools import partial
 
 
 ### eigene Module
-sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+workingPath      = os.getcwd() + '/'
+sys.path.append(workingPath + 'src/docScatWaveNet/')
 
 import scatteringTransformationModule as ST
 import misc as MISC
@@ -462,19 +462,19 @@ class imageOperations:
 
    #############################################################################  
 
-   def calcStartAndEnde(self, B):
+   def calcStartAndEnde(self, B,fak = 0.95):
 
       B      = np.array(B)
       b      = B.sum(axis=0)/(B.shape[0]*self.white)
       #b      = b.tolist()[0]
       zz     = 0
-      while b[zz] == 1 and zz<len(b)-1:
+      while b[zz] >= fak and zz<len(b)-1:
          zz = zz+1
 
       start = zz
 
       xx    = len(b)-1
-      while b[xx] == 1 and xx>0:
+      while b[xx] >= fak and xx>0:
          xx = xx-1
       ende = xx  
 
@@ -570,12 +570,12 @@ class imageOperations:
      
    ########################################################################
    
-   def getColumnsCoordinates(self, C):
+   def getColumnsCoordinates(self, C, fak=0.95):
       n,m           = C.shape
       erg           = []
       BL            = []
       Ct            = C[int(n/self.part):int((self.part-1)*n/self.part), :]
-      start,ende, b = self.calcStartAndEnde(Ct)
+      start,ende, b = self.calcStartAndEnde(Ct, fak)
 
       for ii in range(int(n/self.part), int((self.part-1)*n/self.part)-self.windowSize, self.stepSize):
          B    = np.array(C[ ii: ii + self.windowSize, :])

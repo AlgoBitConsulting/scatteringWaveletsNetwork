@@ -12,8 +12,10 @@ import pickle
 
 
 ### eigene Module
-sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+workingPath      = os.getcwd() + '/'
+sys.path.append(workingPath + 'src/docScatWaveNet/')
+
+
 import DFTForSCN as DFT
 import morletModule as MM  
 

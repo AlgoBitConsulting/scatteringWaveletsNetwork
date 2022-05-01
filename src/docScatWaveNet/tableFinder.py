@@ -6,8 +6,9 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 
 ### eigene Module
-sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
-sys.path.append('/home/markus/anaconda3/python/development/modules')
+workingPath      = os.getcwd() + '/'
+sys.path.append(workingPath + 'src/docScatWaveNet/')
+
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
@@ -231,8 +232,8 @@ def getBoxes(box_H, box_V):
                rLnt.remove(box2)
             r = (x1, y1, v2, w2)            
             rLnt.append(r)
-   
-   L   = list(map(lambda x:  [x] + list(filter(lambda y: y[1] < x[1] < y[3] or y[1] < x[3] < y[3] , rLnt)), rLnt))
+  
+   L   = list(map(lambda x:  [x] + list(filter(lambda y: (y[1] <= x[1] <= y[3] or y[1] <= x[3] <= y[3]) and (x[0] <= y[0] <= y[2] <= x[2]) , rLnt)), rLnt))
    rLn = unique(list(map( lambda x: combineBoxes(x), L)))
    rLn.sort(key=lambda x: x[1])
   
@@ -700,11 +701,13 @@ def calculateSWCs(DATA, STPE, INFO, des=''):
 
 def calculateSWCsForLeaf(DATA, STPE, INFO, des=''):
 
-   O  = getattr( getattr( getattr(INFO,  INFO.kindOfBox), INFO.method), INFO.direction)
+   BOX    = getattr( INFO,  INFO.kindOfBox)
+   O      = getattr( getattr( BOX , INFO.method), INFO.direction)
+   weight = getattr( BOX, 'weight'+ INFO.method + '-' + INFO.direction) 
  
    if INFO.copyHL:
       OC = getattr( getattr( getattr(INFO,  'HL'), INFO.method), INFO.direction)
-
+   
    for ii in range(len(DATA.CL)):
 
       nameWL   = 'WL'+str(ii)
@@ -713,12 +716,15 @@ def calculateSWCsForLeaf(DATA, STPE, INFO, des=''):
       ss       = 'horizontal rf '+ des + ' column ' + str(ii)
       if INFO.direction == 'V':
          ss = 'vertical rf '+ des + ' column ' + str(ii)
+      if weight>0:
+         AL, _   = STPE.prepareData(WL, ss) 
+      else:
+         nn = int( ((STPE.SWO_2D.nang/2)*STPE.SWO_2D.ll+1)**2)
+         AL = np.zeros( (len(WL), nn)).tolist()
 
-      AL, _   = STPE.prepareData(WL, ss) 
-      
       setattr( O, nameAL, AL)
       if INFO.copyHL:
-         setattr(OC, 'AL' + str(ii), AL)
+         setattr(OC, 'AL' + str(ii), AL)      
 
    return(INFO)
 
@@ -1110,6 +1116,12 @@ def getResults(page, nn, generator, KL, MIDL, BOXL):
             L = list(filter(lambda x: mida <= x[0][0] <= x[0][2] <= midb , KT)) 
             L.sort(key=lambda x: x[0][3])
             COL.append(L)
+
+      L = list(filter(lambda x: x[0][0] >= midb , KT))
+      if len(L)>0: 
+         L.sort(key=lambda x: x[0][3])
+         COL.append(L)
+
 
    return([img, COL])
 
