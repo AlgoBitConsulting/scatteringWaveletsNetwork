@@ -2,7 +2,10 @@
 
 table detection in PDF and scaned documents with scattering wavelets
 
-1) clone repository
-2) start with "python startMeUp.py" or open python in same direcory where startMeUp.py is an then type "exec(open("startMeUp.py").read())"
-3) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
+1) OS name/OS Type: Ubuntu 20.04.3 LTS/64-bit
+2) Processor: AMD® Ryzen threadripper 1900x 8-core processor × 16
+3) You need zstd for unpack data: sudo apt install zstd
+4) pip install -r requirements.txt
+5) python setup.py install
+6) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
