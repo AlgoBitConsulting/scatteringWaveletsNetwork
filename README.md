@@ -1,4 +1,4 @@
-# Example Package
+# How to start:
 
 table detection in PDF and scaned documents with scattering wavelets
 
