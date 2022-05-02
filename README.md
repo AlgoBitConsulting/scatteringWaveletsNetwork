@@ -1,9 +1,11 @@
-# Example Package
+# How to start:
 
 table detection in PDF and scaned documents with scattering wavelets
 
-python -m pip install --index-url https://test.pypi.org/simple/ --no-deps docScatWaveNet-markus2
+1) OS name/OS Type: Ubuntu 20.04.3 LTS/64-bit
+2) Processor: AMD® Ryzen threadripper 1900x 8-core processor × 16
+3) You need zstd for unpack data: sudo apt install zstd
+4) pip install -r requirements.txt
+5) python setup.py install
+6) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
-python -m pip install --no-index packaging_tutorial/dist/docScatWaveNet_markus2-0.0.1-py3-none-any.whl
-
-https://github.com/lrothack/dev-ops
