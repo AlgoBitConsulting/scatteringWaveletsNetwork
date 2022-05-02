@@ -1,4 +1,7 @@
 
+from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
+
+
 import os, numpy as np
 import sys, subprocess, os,glob
 from PIL import Image, ImageDraw, ImageOps, ImageFont
@@ -39,7 +42,6 @@ import tableFinder as TF
 
 #ss = "python -m pip install --no-index " + workingPath + "dist/docScatWaveNet2-0.0.1-py3-none-any.whl"
 #subprocess.check_output(ss, shell=True,executable='/bin/bash')
-from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
 
 
 generatePNGsAndJPgs = False
@@ -173,7 +175,7 @@ except:
          for direction in INFO.DBOX:
             fname = kindOfBox + '-' + method + '-' + direction + '-' + INFO.kindOfImages
 
-            ss = "unzstd " + INFO.path + fname + ".zst --output-dir-flat="+ INFO.pathRF
+            ss = "unzstd " + INFO.path + fname + ".zst -o "+ INFO.pathRF + fname
             subprocess.check_output(ss, shell=True, executable='/bin/bash')
 
             DATA = MISC.loadIt(INFO.pathRF + fname)

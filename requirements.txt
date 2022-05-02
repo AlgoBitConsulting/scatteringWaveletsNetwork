@@ -1,40 +1,12 @@
-import sys, subprocess                    ## standardmässig installiert
-import timeit                             ## standardmässig installiert
-from os import system, path               ## standardmässig installiert
-import csv                                ## standardmässig installiert
-from datetime import datetime             ## standardmässig installiert
-from copy import deepcopy                 ## standardmässig installiert
-import pickle                             ## standardmässig installiert
-from functools import partial             ## standardmässig installiert
-
-from PIL import Image, ImageDraw, ImageOps, ImageFont ## standardmässig installiert
-
-
-import misc as MISC
-import scatteringTransformationModule as ST
-import dataOrganisationModule as dOM
-import morletModule as MM  
-import tableFinder as TF
-
-
-from tqdm
-import numpy
-import pandas-stubs
-beautifulsoup4
-from joblib 
-import pytesseract
-import pdf2image
-from Wand
-import opencv-python
-import matplotlib
-from scipy
-from scikit-learn
-
-
-
-
-
-
-
-
-
+tqdm >= 4.56.2
+numpy >= 1.16.6    
+pandas-stubs >= 1.2.0.58
+beautifulsoup4 >= 4.8.2
+joblib >= 0.15.1
+pytesseract >= 0.3.8
+pdf2image >= 1.16.0
+wand >= 0.6.7
+opencv-python >= 4.5.5.64
+matplotlib >= 3.3.4
+scipy >= 1.4.1
+scikit-learn >= 0.23.1
