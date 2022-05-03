@@ -1074,34 +1074,35 @@ def makeRFData(DL, pathSrc = '/home/markus/anaconda3/python/data/SWC-18-04-2022/
 
 ###################################################################################################################
 
-def getResults(page, nn, generator, KL, MIDL, BOXL):
+def getResults(page, generator, KL, MIDL, BOXL, rLN_TAt):
 
-   img = []
-   COL = []
-   if len(KL[nn])>0:
+   img         = []
+   COL         = []
+   directory   = generator.outputFolder+ "tmp/"
+   files       = os.listdir(directory)
+   for f in files:
+      os.remove(directory + f)
+   pages       = generator.convertPDFToJPG(page, page)       
+   img         = Image.open(pages[0])
+   img         = img.resize( (595, 842))
+   draw        = ImageDraw.Draw(img)
+   TABCOLLIST  = [] 
+   zz          = 0
 
-      directory   = generator.outputFolder+ "tmp/"
-      files       = os.listdir(directory)
-      for f in files:
-         os.remove(directory + f)
-
-      pages       = generator.convertPDFToJPG(page, page)      
-   
-      img         = Image.open(pages[0])
-      img         = img.resize( (595, 842))
-  
-      K, MID, BOX = KL[nn], MIDL[nn], BOXL[nn]
-
-      draw   = ImageDraw.Draw(img)
-      for ii in range(len(K)):
-         line = K[ii]
-         for jj in range(len(line)):
-            box, txt = line[jj]
-            draw.rectangle(box, width=1, outline='red')
-            for kk in range(len(MID)):
-               mid = MID[kk]
-               draw.line( (mid+BOX[0], BOX[1], mid+ BOX[0], BOX[3]), width=1, fill='black')  
-
+   for nn in range(len(KL)):
+      K, MID, BOX, RBOX = KL[nn], MIDL[nn], BOXL[nn], rLN_TAt[nn][0]
+      if len(KL[nn])>0:
+         zz = zz+1      
+         for ii in range(len(K)):
+            line = K[ii]
+            for jj in range(len(line)):
+               box, txt = line[jj]
+               draw.rectangle(box, width=1, outline='red')
+               for kk in range(len(MID)):
+                  mid = MID[kk]
+                  draw.line( (mid+BOX[0], BOX[1], mid+ BOX[0], BOX[3]), width=1, fill='black')  
+         draw.rectangle(RBOX, outline="red", width=3)
+         draw.text( (RBOX[2], RBOX[3]), "T"+str(zz) , (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
       MID_BIG = []
       for kk in range(len(MID)):
          MID_BIG.append( MID[kk] + BOX[0])
@@ -1122,8 +1123,9 @@ def getResults(page, nn, generator, KL, MIDL, BOXL):
          L.sort(key=lambda x: x[0][3])
          COL.append(L)
 
-
-   return([img, COL])
+      TABCOLLIST.append(COL)
+ 
+   return([img, TABCOLLIST])
 
 
 ###################################################################################################################
@@ -1192,6 +1194,7 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    for ii in range(len(rLN_TA)):
       r = rLN_TA[ii][0]       
       draw_TA.rectangle(r, outline ="red",width=3)
+      draw_TA.text( (r[2], r[3]), "T"+str(ii+1) , (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
      
    for ii in range(len(rLN_HL)):
       r = rLN_HL[ii][0]      

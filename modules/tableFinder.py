@@ -6,14 +6,14 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 
 ### eigene Module
-sys.path.append('/home/markus/python/scatteringWaveletsNetworks/modules')
+
 sys.path.append('/home/markus/anaconda3/python/development/modules')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
 
-#from docScatWaveNet import misc as MISC, scatteringTransformationModule as ST, dataOrganisationModule as dOM, morletModule as MM
+
 
 ### zu installierende Module
 from tqdm import tqdm
@@ -1068,48 +1068,51 @@ def makeRFData(DL, pathSrc = '/home/markus/anaconda3/python/data/SWC-18-04-2022/
 
 ###################################################################################################################
 
-def getResults(page, nn, generator, KL, MIDL, BOXL):
+def getResults(page, nn, generator, KL, MIDL, BOXL, rLN_TAt):
 
-   img = []
-   COL = []
-   if len(KL[nn])>0:
+   img         = []
+   COL         = []
+   directory   = generator.outputFolder+ "tmp/"
+   files       = os.listdir(directory)
+   for f in files:
+      os.remove(directory + f)
 
-      directory   = generator.outputFolder+ "tmp/"
-      files       = os.listdir(directory)
-      for f in files:
-         os.remove(directory + f)
+   pages       = generator.convertPDFToJPG(page, page)        
+   img         = Image.open(pages[0])
+   img         = img.resize( (595, 842))
+   draw        = ImageDraw.Draw(img)
+   zz          = 0
 
-      pages       = generator.convertPDFToJPG(page, page)      
-   
-      img         = Image.open(pages[0])
-      img         = img.resize( (595, 842))
-  
-      K, MID, BOX = KL[nn], MIDL[nn], BOXL[nn]
+   for nn in range(len(KL)):  
+      if len(KL[nn])>0:  
+         zz               = zz+1  
+         K, MID, BOX, rLN = KL[nn], MIDL[nn], BOXL[nn], rLN_TAt[nn][0]
+         for ii in range(len(K)):
+            line = K[ii]
+            for jj in range(len(line)):
+               box, txt = line[jj]
+               draw.rectangle(box, width=1, outline='red')
+               for kk in range(len(MID)):
+                  mid = MID[kk]
+                  draw.line( (mid+BOX[0], BOX[1], mid+ BOX[0], BOX[3]), width=1, fill='black')  
 
-      draw   = ImageDraw.Draw(img)
-      for ii in range(len(K)):
-         line = K[ii]
-         for jj in range(len(line)):
-            box, txt = line[jj]
-            draw.rectangle(box, width=1, outline='red')
-            for kk in range(len(MID)):
-               mid = MID[kk]
-               draw.line( (mid+BOX[0], BOX[1], mid+ BOX[0], BOX[3]), width=1, fill='black')  
+         draw.rectangle( rLN, width=3, outline ="red")
+         draw.text( (rLN[0], rLN[1]), "T_" + tr(zz), (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))            
 
-      MID_BIG = []
-      for kk in range(len(MID)):
-         MID_BIG.append( MID[kk] + BOX[0])
+         MID_BIG = []
+         for kk in range(len(MID)):
+            MID_BIG.append( MID[kk] + BOX[0])
 
-      COL = []
-      if len(K)>0:
-         KT = np.concatenate(K)
-         KT = list(map(lambda x: list(x), KT))
-         for ii in range(1,len(MID_BIG)):
-            mida = MID_BIG[ii-1]
-            midb = MID_BIG[ii]  
-            L = list(filter(lambda x: mida <= x[0][0] <= x[0][2] <= midb , KT)) 
-            L.sort(key=lambda x: x[0][3])
-            COL.append(L)
+         COL = []
+         if len(K)>0:
+            KT = np.concatenate(K)
+            KT = list(map(lambda x: list(x), KT))
+            for ii in range(1,len(MID_BIG)):
+               mida = MID_BIG[ii-1]
+               midb = MID_BIG[ii]  
+               L = list(filter(lambda x: mida <= x[0][0] <= x[0][2] <= midb , KT)) 
+               L.sort(key=lambda x: x[0][3])
+               COL.append(L)
 
    return([img, COL])
 
@@ -1118,6 +1121,7 @@ def getResults(page, nn, generator, KL, MIDL, BOXL):
 
 def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, calcSWCs=True, withScalePlot=False):
  
+   print("Here")
    MAT, columns, DATA  = INFO.MAT, INFO.columns, INFO.DATA 
    STPE                = INFO.STPE
 
@@ -1180,7 +1184,7 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    for ii in range(len(rLN_TA)):
       r = rLN_TA[ii][0]       
       draw_TA.rectangle(r, outline ="red",width=3)
-     
+      draw_TA.text( (r[0], r[1]), "T_" + str(ii), (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
    for ii in range(len(rLN_HL)):
       r = rLN_HL[ii][0]      
       #draw_TA.rectangle(r, outline ="blue",width=3)    

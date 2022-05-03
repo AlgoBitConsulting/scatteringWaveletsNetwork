@@ -12,6 +12,7 @@ from datetime import datetime
 import pickle
 from functools import partial
 
+#exec(open("startMeUp.py").read())
 
 
 ### eigene Module

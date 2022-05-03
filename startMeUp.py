@@ -1,5 +1,5 @@
 
-from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
+#from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
 
 
 import os, numpy as np
@@ -31,14 +31,13 @@ def deleteFiles(FL, dir):
 
 workingPath      = os.getcwd() + '/'
 
-"""
 sys.path.append(workingPath + 'src/docScatWaveNet/')
 import misc as MISC
 import scatteringTransformationModule as ST
 import dataOrganisationModule as dOM
 import morletModule as MM  
 import tableFinder as TF
-"""
+
 
 #ss = "python -m pip install --no-index " + workingPath + "dist/docScatWaveNet2-0.0.1-py3-none-any.whl"
 #subprocess.check_output(ss, shell=True,executable='/bin/bash')
@@ -284,20 +283,17 @@ INFO.STPE        = STPE
 
 ### Let's start
 
-page          = 31
+page          = 34
 INFO.page     = page
 RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
 
-IMGL, TAB     = [], []
-for ii in range(len(RESULTS.KL)):
-   if len(RESULTS.KL[ii])>0:
-      tableNumber   = ii
-      img, col      = TF.getResults(page, tableNumber, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL)
-      IMGL.append(img)
-      TAB.append(col)
-   
-IMGL[0].show()
-print(TAB[0])
+
+img, TCL      = TF.getResults(page, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL, RESULTS.rLN_TAt)
+img.show()
+print(TCL[0])
+
+#import importlib
+#importlib.reload('src/docScatWaveNet/tableFinder.py')
 
 
