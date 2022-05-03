@@ -10,3 +10,6 @@ table detection in PDF and scaned documents with scattering wavelets
 6) `python startMeUp.py`
 7) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
+# Intention of this project
+
+This project uses scattering wavelet networks for image classification which is so far typically done with convolutional neuronal networks (CNNs). 
