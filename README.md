@@ -14,4 +14,12 @@ table detection in PDF and scaned documents with scattering wavelets
 
 This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs). The theory is due to S. Mallat, I. Daubechies and many others which set the basic theory for wavelets. Later on Mallat started to investigate on  the very popular deep convolutional neuronal networks in order to bring light in the black box. 
 
-A good introduction to this topic is the paper [Understanding Deep Convolutional Networks](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/understandingDeepConvolutionalNetworks.pdf) from S. Mallat.
+A good introduction to this topic is the paper 
+
+- [Understanding Deep Convolutional Networks](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/understandingDeepConvolutionalNetworks.pdf) 
+
+from S. Mallat. The basics for the theory of wavelets, multiresolution signal decompositions with wavelets and scattering wavelets can be found in 
+
+- [A Theory for Multiresolution Signal Decomposition: The Wavelet Representation](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/multiresolutionApproximationsAndWaveletsOrthonormalBasesOfL2R.pdf),
+- [Group Invariant Scattering](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/groupInvariantScattering.pdf)
+- [Invariant Scattering Convolutional Networks](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/invariantScatteringConvolutionNetworks.pdf)
