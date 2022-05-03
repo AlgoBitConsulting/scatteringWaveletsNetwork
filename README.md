@@ -12,4 +12,4 @@ table detection in PDF and scaned documents with scattering wavelets
 
 # Intention of this project
 
-This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs). The theory is due to St´ephane 
+This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs). The theory is due to St´ephane &#233;
