@@ -7,5 +7,6 @@ table detection in PDF and scaned documents with scattering wavelets
 3) You need zstd for unpack data: sudo apt install zstd
 4) pip install -r requirements.txt
 5) python setup.py install
-6) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
+6) python startMeUp.py
+7) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
