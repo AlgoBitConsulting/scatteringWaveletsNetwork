@@ -25,6 +25,6 @@ from S. Mallat. The basics for the theory of wavelets, multiresolution signal de
 - [Invariant Scattering Convolutional Networks](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/invariantScatteringConvolutionNetworks.pdf) (Together with Joan Bruna)
 - [Classification with Wavelet Operators](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/classificationWithWaveletOperators.pdf) (Together with Joan Bruna)
 
-The Algorithm presented here uses Morlet Wavelets because in the frequency area they are just two dimensional multivariate normal distributions. By scaling and rotation the wavelets in the frequency area we get a covering of the frequency area which is in combination with the absolute value function and several repititions nothing else than the conventional convolutional neuronal network.
+The Algorithm presented here uses Morlet Wavelets because in the frequency area they are just two dimensional multivariate normal distributions. By scaling and rotation the wavelets in the frequency area we get a covering of the frequency area which is in combination with the absolute value function and several repititions nothing else than the conventional convolutional neuronal network operation. Of course this is not easy to see and we will try to work out the single steps needed in order to understand the big picture.
 
 
