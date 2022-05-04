@@ -18,7 +18,7 @@ A good introduction to this topic is the paper
 
 - [Understanding Deep Convolutional Networks](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/understandingDeepConvolutionalNetworks.pdf) 
 
-from S. Mallat. The basics for the theory of wavelets, multiresolution signal decompositions with wavelets and scattering wavelets can be found in 
+from S. Mallat. The basics for the theory of wavelets, multiresolution signal decompositions with wavelets and scattering convolutional networks can be found in 
 
 - [A Theory for Multiresolution Signal Decomposition: The Wavelet Representation](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/multiresolutionApproximationsAndWaveletsOrthonormalBasesOfL2R.pdf),
 - [Group Invariant Scattering](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/blob/PDF-Table-Extractor/papers/groupInvariantScattering.pdf)
@@ -27,6 +27,6 @@ from S. Mallat. The basics for the theory of wavelets, multiresolution signal de
 
 The Algorithm presented here uses Morlet Wavelets because in the frequency area they are just two dimensional multivariate normal distributions. By scaling and rotation the wavelets in the frequency area we get a covering of the frequency area which is in combination with the absolute value function and several repititions nothing else than the conventional convolutional neuronal network operation. Of course this is not easy to see and we will check the single steps needed in order to understand the big picture.
 
-
+# 
 
 
