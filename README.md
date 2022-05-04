@@ -2,7 +2,7 @@
 
 This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs) or related models. This technique is used in order to detect tables and extract their content from scaned documents. 
 
-## Kalibration or Training
+## Calibration or Training
 
 For given jpg-file `img.jpg` which should use for the training the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
 
@@ -10,23 +10,23 @@ For given jpg-file `img.jpg` which should use for the training the algorithm mak
 - annotate `img_bb.jpg` with bounding boxes which contain eventually tables 
 - for a given window size cut this jpg in horizontally pieces H and vertically pieces V 
 - by a given rule annotate this stripes to "0": contains no table and "1": contains table
-- use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients SWC_H and SWC_V for all stripes
-- generate a random forest R_H for the horizontally and R_V vertically stripes using the scattering wavelet coefficients SWC_H and SWC_V
+- use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients `SWC_H` and `SWC_V` for all stripes
+- generate a random forest `R_H` for the horizontally and `R_V` vertically stripes using the scattering wavelet coefficients `SWC_H` and `SWC_V`
 
-The random forest R_H and R_V are later used for the prediction (detection) of tables.
+The random forest `R_H` and `R_V` are later used for the prediction (detection) of tables.
 
 ## Detection of tables
 
 For given jpg-file `img.jpg` for which we want detect tables the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
 
 - generate from `img.jpg` a new jpg `img_bb.jpg` which consist only of black filled bounding boxes and remove eventually lines
-- for the same given window size as used in the random forest R_H and R_V cut this jpg in horizontally pieces H and vertically pieces V 
-- calculate for all pieces H and V scattering wavelet coefficients SWC_H and SWC_V
-- use the calculated scattering wavelet coefficiens SWC_C and SWC_V in order to detect tables 
+- for the same given window size as used in the random forest `R_H` and `R_V` cut `img_bb.jpg` in horizontally pieces `H` and vertically pieces `V` 
+- calculate for all pieces `H` and `V` scattering wavelet coefficients `SWC_H` and `SWC_V`
+- use the calculated scattering wavelet coefficiens `SWC_C` and `SWC_V` in order to detect tables 
 
 # Quickstart:
 
-table detection in PDF and scaned documents with scattering wavelets
+Table detection in PDF and scaned documents with scattering wavelets
 
 1) OS name/OS Type: `Ubuntu 20.04.3 LTS/64-bit`
 2) Processor: AMD® Ryzen threadripper 1900x 8-core processor × 16
