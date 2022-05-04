@@ -8,7 +8,7 @@ For given jpg-file `img.jpg` which should use for the training the algorithm mak
 
 - generate from `img.jpg` a new jpg `img_bb.jpg` which consist only of black filled bounding boxes and remove eventually lines
 - annotate `img_bb.jpg` with bounding boxes which contain eventually tables 
-- for a given window size cut this jpg in horizontally pieces H and vertically pieces V 
+- for a given window size cut this jpg in horizontally pieces `H` and vertically pieces `V` 
 - by a given rule annotate this stripes to `0`: contains no table and `1`: contains table
 - use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients `SWC_H` and `SWC_V` for all stripes
 - generate a random forest `R_H` for the horizontally and `R_V` vertically stripes using the scattering wavelet coefficients `SWC_H` and `SWC_V`
