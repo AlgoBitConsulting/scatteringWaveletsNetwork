@@ -19,7 +19,7 @@ Table detection in PDF and scaned documents with scattering wavelets:
 For given jpg-file `img.jpg` which should use for the training the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
 
 - generate from `img.jpg` a new jpg `img_bb.jpg` which consist only of black filled bounding boxes and remove eventually lines
-- annotate `img_bb.jpg` with bounding boxes which contain eventually tables 
+- annotate `img_bb.jpg` with bounding boxes if contains tables 
 - for a given window size cut this jpg in horizontally stripes `H` and vertically stripes `V` 
 - by a given rule annotate this stripes to `0`: contains no table and `1`: contains table
 - use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients `SWC_H` and `SWC_V` for all stripes
