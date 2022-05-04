@@ -1,6 +1,6 @@
 # Intention of this project
 
-This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs) or related models. This technique is used in order to detect tables and extract their content from scaned documents. For given jpg-file img.jpg which should use for the training the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
+This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs) or related models. This technique is used in order to detect tables and extract their content from scaned documents. For given jpg-file `img.jpg` ´a´ which should use for the training the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
 
 - generate from a given jpg a new jpg which consist only of black filled bounding boxes and remove eventually lines
 - annotate this jpg with bounding boxes which contain eventually tables 
