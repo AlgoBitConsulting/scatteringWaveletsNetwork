@@ -8,7 +8,7 @@ For given jpg-file `img.jpg` which should use for the training the algorithm mak
 
 - generate from `img.jpg` a new jpg `img_bb.jpg` which consist only of black filled bounding boxes and remove eventually lines
 - annotate `img_bb.jpg` with bounding boxes which contain eventually tables 
-- for a given window size cut this jpg in horizontally pieces `H` and vertically pieces `V` 
+- for a given window size cut this jpg in horizontally stripes `H` and vertically stripes `V` 
 - by a given rule annotate this stripes to `0`: contains no table and `1`: contains table
 - use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients `SWC_H` and `SWC_V` for all stripes
 - generate a random forest `R_H` for the horizontally and `R_V` vertically stripes using the scattering wavelet coefficients `SWC_H` and `SWC_V`
@@ -20,8 +20,8 @@ The random forest `R_H` and `R_V` are later used for the prediction (detection) 
 For given jpg-file `img.jpg` for which we want detect tables the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
 
 - generate from `img.jpg` a new jpg `img_bb.jpg` which consist only of black filled bounding boxes and remove eventually lines
-- for the same given window size as used in the random forest `R_H` and `R_V` cut `img_bb.jpg` in horizontally pieces `H` and vertically pieces `V` 
-- calculate for all pieces `H` and `V` scattering wavelet coefficients `SWC_H` and `SWC_V`
+- for the same given window size as used in the random forest `R_H` and `R_V` cut `img_bb.jpg` in horizontally stripes `H` and vertically stripes `V` 
+- calculate for all stripes in `H` and `V` scattering wavelet coefficients `SWC_H` and `SWC_V`
 - use the calculated scattering wavelet coefficiens `SWC_C` and `SWC_V` in order to detect tables 
 
 # Quickstart:
