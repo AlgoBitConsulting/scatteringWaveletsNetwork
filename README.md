@@ -1,3 +1,15 @@
+# Intention of this project
+
+This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs) or related models. This technique is used in order to detect tables and extract their content from scaned documents. For given jpg-file img.jpg which should use for the training the algorithm makes the following steps (this discription is very crude description, details will follow later in this readme file):
+
+- generate from a given jpg a new jpg which consist only of black filled bounding boxes and remove eventually lines
+- annotate this jpg with bounding boxes which contain eventually tables 
+- for a given window size cut this jpg in horizontally pieces H and vertically pieces V 
+- by a given rule annotate this stripes to "0": contains no table and "1": contains table
+- use now the scattering wavelet algorithm in order to calculate scattering wavelets coefficients for all stripes
+- generate a random forest R_H for the horizontally and R_V vertically stripes
+-  
+
 # Quickstart:
 
 table detection in PDF and scaned documents with scattering wavelets
@@ -10,7 +22,7 @@ table detection in PDF and scaned documents with scattering wavelets
 6) `python startMeUp.py`
 7) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
-# Intention of this project
+# Introduction
 
 This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs). The theory is due to S. Mallat, I. Daubechies and many others which set the basic theory for wavelets. Later on Mallat started to investigate on  the very popular deep convolutional neuronal networks in order to bring light in the black box. 
 
