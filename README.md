@@ -14,7 +14,8 @@ Table detection in PDF and scaned documents with scattering wavelets:
 6) run `python startMeUp.py`
 7) if you are asked "calculate SWCs (Y/N) ?" then type "Y"
 
-For more information see [DocScatWaveNet](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork.wiki.git)
+For more information see [DocScatWaveNet](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/wiki)
+
 
 ## Calibration or Training
 
