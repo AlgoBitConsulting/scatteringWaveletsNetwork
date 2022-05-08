@@ -35,7 +35,6 @@ import pytesseract
 from pytesseract import Output
 import pdf2image
 from pdf2image import convert_from_path
-from wand.image import Image as Wimage
 import cv2 as cv
 
 

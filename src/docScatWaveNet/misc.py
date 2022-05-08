@@ -25,7 +25,6 @@ import numpy as np
 from scipy.stats import multivariate_normal
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
-import tkinter
 from joblib import Parallel, delayed
 from tqdm import tqdm
 

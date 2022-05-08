@@ -1,5 +1,5 @@
 
-#from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
+from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
 
 
 import os, numpy as np
@@ -31,12 +31,12 @@ def deleteFiles(FL, dir):
 
 workingPath      = os.getcwd() + '/'
 
-sys.path.append(workingPath + 'src/docScatWaveNet/')
-import misc as MISC
-import scatteringTransformationModule as ST
-import dataOrganisationModule as dOM
-import morletModule as MM  
-import tableFinder as TF
+#sys.path.append(workingPath + 'src/docScatWaveNet/')
+#import misc as MISC
+#import scatteringTransformationModule as ST
+#import dataOrganisationModule as dOM
+#import morletModule as MM  
+#import tableFinder as TF
 
 
 #ss = "python -m pip install --no-index " + workingPath + "dist/docScatWaveNet2-0.0.1-py3-none-any.whl"
@@ -242,6 +242,15 @@ setattr(INFO.HL, 'weightbB-H'  , 0.5)
 # *****************************
 
 
+#***
+#*** MAIN PART
+#***
+#
+#  exec(open("startMeUp.py").read())
+#
+##   
+
+
 try:
    a = len(BIGINFO)
 except:
@@ -295,5 +304,7 @@ print(TCL[0])
 
 #import importlib
 #importlib.reload('src/docScatWaveNet/tableFinder.py')
+
+
 
 
