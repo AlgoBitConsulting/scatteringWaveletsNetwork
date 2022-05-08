@@ -11,7 +11,7 @@ Table detection in PDF and scaned documents with scattering wavelets:
 1) OS name/OS Type: `Ubuntu 20.04.3 LTS/64-bit`
 2) Processor: AMD® Ryzen threadripper 1900x 8-core processor × 16
 3) You need `zstd` for unpack data: `sudo apt install zstd`
-4) Install `git lfs` and then add information about the compressed files via `git lfs track "*.zst"` 
+4) Install `git lfs` (https://git-lfs.github.com/) and then add information about the compressed files via `git lfs track "*.zst"` 
 5) run `pip install -r requirements.txt`
 6) run `python setup.py install`
 7) run `python startMeUp.py`
