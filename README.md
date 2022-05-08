@@ -2,6 +2,8 @@
 
 This project uses scattering wavelet networks for image processing and classification which is so far typically done with convolutional neuronal networks (CNNs) or related models. This technique is used in order to detect tables and extract their content from scaned documents. 
 
+For more information see [DocScatWaveNet](https://github.com/AlgoBitConsulting/scatteringWaveletsNetwork/wiki)
+
 # Quickstart:
 
 Table detection in PDF and scaned documents with scattering wavelets:
