@@ -1,5 +1,5 @@
 
-from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
+#from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
 
 
 import os, numpy as np
@@ -31,12 +31,12 @@ def deleteFiles(FL, dir):
 
 workingPath      = os.getcwd() + '/'
 
-#sys.path.append(workingPath + 'src/docScatWaveNet/')
-#import misc as MISC
-#import scatteringTransformationModule as ST
-#import dataOrganisationModule as dOM
-#import morletModule as MM  
-#import tableFinder as TF
+sys.path.append(workingPath + 'src/docScatWaveNet/')
+import misc as MISC
+import scatteringTransformationModule as ST
+import dataOrganisationModule as dOM
+import morletModule as MM  
+import tableFinder as TF
 
 
 #ss = "python -m pip install --no-index " + workingPath + "dist/docScatWaveNet2-0.0.1-py3-none-any.whl"
@@ -129,18 +129,6 @@ SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
 white                = 255
 black                = 0 
 
-# ****************************
-# *** begin load data      ***
-# ****************************
-
-FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
-
-# ****************************
-# *** end load data        ***
-# ****************************
-
-
-
 
 #white                = 255
 #black                = 0 
@@ -149,23 +137,23 @@ FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-P
 # *** begin load data      ***
 # ****************************
 
-FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+FL         = ['TA-bB-H-JPG-' , 'TA-bB-V-JPG-' ,  'TA-bBHV-H-JPG-',  'TA-bBHV-V-JPG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
 L          = deleteFiles(list(map(lambda x: x[0:-1], FL)), workingPath + "rf/")
 
 try:
-   a = len(DL)
+   a = len(INFO.DBOX)
 except:
    print("loading random forests...")
-   DL                = ['-18-04-2022-15:47:03','-18-04-2022-16:12:09','-18-04-2022-16:45:52','-18-04-2022-17:13:58', '-18-04-2022-17:42:09','-18-04-2022-18:06:56','-18-04-2022-18:40:05','-18-04-2022-19:07:48']
+   DL                = []
    INFO              = TF.makeINFO()
    INFO.path         = workingPath + 'rf/compressed/'
    INFO.pathRF       = workingPath + 'rf/'
-   INFO.kindOfImages = 'PNG'  
+   INFO.kindOfImages = 'JPG'  
    INFO.white        = 255
    INFO.black        = 0    
    INFO.copyHL       = True
    INFO.flatten      = True
-   INFO.KBOX         = ['TA','HL']
+   INFO.KBOX         = ['TA']
    INFO.MBOX         = ['bB', 'bBHV']
    INFO.DBOX         = ['H', 'V']
 
@@ -204,13 +192,13 @@ except:
 # ****************************
 
 stepSize_H                = 5
-windowSize_H              = 30
+windowSize_H              = 70
 INFO.TA.bB.H.stepSize     = stepSize_H 
 INFO.TA.bB.H.windowSize   = windowSize_H 
 INFO.TA.bBHV.H.stepSize   = stepSize_H 
 INFO.TA.bBHV.H.windowSize = windowSize_H 
  
-windowSize_V              = 80
+windowSize_V              = 40
 stepSize_V                = 5
 INFO.TA.bB.V.windowSize   = windowSize_V 
 INFO.TA.bB.V.stepSize     = stepSize_V 
@@ -225,12 +213,12 @@ setattr(INFO.TA, 'weightbB-V'  , 1)
 setattr(INFO.TA, 'weightbBHV-H', 0)
 setattr(INFO.TA, 'weightbB-H'  , 1)
 
-setattr(INFO.HL, 'correction-H', 0.1)
-setattr(INFO.HL, 'correction-V', 0.2)
-setattr(INFO.HL, 'weightbBHV-V', 0.5)
-setattr(INFO.HL, 'weightbB-V'  , 0.5)
-setattr(INFO.HL, 'weightbBHV-H', 0.5)
-setattr(INFO.HL, 'weightbB-H'  , 0.5)
+#setattr(INFO.HL, 'correction-H', 0.1)
+#setattr(INFO.HL, 'correction-V', 0.2)
+#setattr(INFO.HL, 'weightbBHV-V', 0.5)
+#setattr(INFO.HL, 'weightbB-V'  , 0.5)
+#setattr(INFO.HL, 'weightbBHV-H', 0.5)
+#setattr(INFO.HL, 'weightbB-H'  , 0.5)
 
 
 # ****************************
@@ -292,7 +280,7 @@ INFO.STPE        = STPE
 
 ### Let's start
 
-page          = 34
+page          = 18
 INFO.page     = page
 RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
