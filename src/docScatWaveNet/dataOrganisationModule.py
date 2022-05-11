@@ -122,12 +122,18 @@ class matrixGenerator:
       
    #############################################################################
 
-   def downSampling(self, C, level, padding=True):
+   def downSampling(self, C, level, padding=True, direction=''):
       Ct = C.copy()
       if level >= 1:
          zz = 0
          while zz < level:
-            Ct = Ct[::2, ::2]
+            if direction != '':
+               if direction == 'H':
+                  Ct = Ct[:, ::2]    
+               if direction == 'V':
+                  Ct = Ct[::2, :]
+            else: 
+               Ct = Ct[::2, ::2]
             zz = zz+1
          if padding:   
             Ct    = self.padding(np.asarray(Ct))
@@ -1032,12 +1038,13 @@ class columns:
 
 class stripe:
    def __init__(self, typeOfFile, C, stepSize, windowSize, direction, SWO_2D):
-      self.stepSize   = stepSize
-      self.windowSize = windowSize
-      self.direction  = direction
-      self.SWO_2D     = SWO_2D
-      self.C          = C
-      self.typeOfFile = typeOfFile       
+      self.stepSize        = stepSize
+      self.windowSize      = windowSize
+      self.direction       = direction
+      self.SWO_2D          = SWO_2D
+      self.C               = C
+      self.typeOfFile      = typeOfFile       
+      self.adaptMatrixCoef = (106,76)
 
    ########################################################################### 
             
@@ -1081,6 +1088,7 @@ class stripe:
  
          WL, ergLabel = self.labelSS(Kt, SS, hashValue, noc, col, page) 
          WL_B.extend(WL)  
+
          boxL           = list(map(lambda x: [x[1], x[2], x[3], x[4]], Kt))
          img            = self.displayBoxes(Image.fromarray(C.copy()), boxL)
          IMGL.append(img)
@@ -1129,13 +1137,17 @@ class stripe:
 
       if self.direction=='H':      
          while ii+ self.windowSize < n:   
-            W = C[ii:(ii+ self.windowSize), :]
+            #r = int(0.5*( self.adaptMatrixCoef[0]-self.windowSize))
+            #s = 2**self.downSamplingRate
+            W = C[ii:(ii+ self.windowSize), : ]
             SS.append([W, ii, ii+self.windowSize])
             ii = ii+self.stepSize
    
       if self.direction=='V':
          while ii+ self.windowSize < m:
-            W = C[:, ii:(ii+ self.windowSize)]
+            r = int(0.5*( self.adaptMatrixCoef[1]-self.windowSize))
+            s = 4 #2**self.downSamplingRate
+            W = C[r*s: -r*s, ii:(ii+ self.windowSize)]
             SS.append([W, ii, ii+ self.windowSize])
             ii = ii+ self.stepSize
          
@@ -1226,7 +1238,7 @@ class stripe:
       MAT = matrixGenerator("downsampling")
 
       for cl in CLt:
-         A = MAT.downSampling(cl, self.downSamplingRate )
+         A = MAT.downSampling(cl, self.downSamplingRate, padding=False, direction=self.direction )
          B = MAT.adaptMatrix(A, self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
          CL.append(B)
    

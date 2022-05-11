@@ -5,7 +5,7 @@ beautifulsoup4
 joblib
 pytesseract
 pdf2image
-Wand
+wand
 opencv-python
 matplotlib
 scipy

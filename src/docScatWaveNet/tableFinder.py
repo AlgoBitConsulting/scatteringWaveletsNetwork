@@ -648,7 +648,8 @@ def decomposeMatricesForLeaf(DATA, STPE, INFO):
    if INFO.method == 'bBHV':
       CL = DATA.CL_bbm
 
-   O  = getattr( getattr( getattr(INFO,  INFO.kindOfBox), INFO.method), INFO.direction)
+   O                    = getattr( getattr( getattr(INFO,  INFO.kindOfBox), INFO.method), INFO.direction)
+   STPE.adaptMatrixCoef = O.adaptMatrixCoef
 
    if INFO.copyHL:
       OC = getattr( getattr( getattr(INFO,  'HL'), INFO.method), INFO.direction)
@@ -1170,8 +1171,8 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
          BIGINFO[fname + STPE.typeOfFile] = INFO
 
    rLN_TAt              = allBoxes('TA', noc, INFO, DATA.xmm, DATA.m, 2)
-   rLN_HLt              = allBoxes('HL',noc, INFO, DATA.xmm, DATA.m)
-   rLN_HL               = filterHL(rLN_TAt, rLN_HLt, 30)
+   #rLN_HLt              = allBoxes('HL',noc, INFO, DATA.xmm, DATA.m)
+   #rLN_HL               = filterHL(rLN_TAt, rLN_HLt, 30)
 
    IMGL, MIDL3, BOXL, KL, BL, KxLL_small, KxLL, MIDL2 = allColumnsOfTables(Corg.copy(), rLN_TAt, generator, page, DATA.xmm, 1)
 
@@ -1185,33 +1186,33 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    ###########################
 
    img_TA, draw_TA  = makeImage(Corg)
-   img_HL, draw_HL  = makeImage(Corg)
+   #img_HL, draw_HL  = makeImage(Corg)
 
    if withScalePlot:
       draw_TA = scalePlots(draw_TA, noc, DATA.xmm, INFO, DATA.m, kindOfBox='TA', mm=5 )
-      draw_HL = scalePlots(draw_HL, noc, DATA.xmm, INFO, DATA.m, kindOfBox='HL', mm=5 )
+      #draw_HL = scalePlots(draw_HL, noc, DATA.xmm, INFO, DATA.m, kindOfBox='HL', mm=5 )
 
    for ii in range(len(rLN_TA)):
       r = rLN_TA[ii][0]       
       draw_TA.rectangle(r, outline ="red",width=3)
       draw_TA.text( (r[2], r[3]), "T"+str(ii+1) , (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
      
-   for ii in range(len(rLN_HL)):
-      r = rLN_HL[ii][0]      
+   #for ii in range(len(rLN_HL)):
+   #   r = rLN_HL[ii][0]      
       #draw_TA.rectangle(r, outline ="blue",width=3)    
 
-   for ii in range(len(rLN_HLt)):
-      r = rLN_HLt[ii][0]      
-      draw_HL.rectangle(r, outline ="blue",width=3) 
+   #for ii in range(len(rLN_HLt)):
+   #   r = rLN_HLt[ii][0]      
+    #  draw_HL.rectangle(r, outline ="blue",width=3) 
     
    taWeights           = str( getattr(INFO.TA, 'weightbB-H'))      + '/'        + str( getattr( INFO.TA, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.TA, 'weightbB-V')) + '/' + str(getattr(INFO.TA, 'weightbBHV-V'))
    taCorr              = str( getattr(INFO.TA, 'correction-H'))    + "/"        + str( getattr(INFO.TA, 'correction-V'))
-   hlWeights           = str( getattr(INFO.HL, 'weightbB-H'))      + '/'        + str( getattr( INFO.HL, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.HL, 'weightbB-V')) + '/' + str(getattr(INFO.HL, 'weightbBHV-V'))
-   hlCorr              = str( getattr(INFO.HL, 'correction-H'))    + "/"        + str( getattr(INFO.HL, 'correction-V'))
+   #hlWeights           = str( getattr(INFO.HL, 'weightbB-H'))      + '/'        + str( getattr( INFO.HL, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.HL, 'weightbB-V')) + '/' + str(getattr(INFO.HL, 'weightbBHV-V'))
+   #hlCorr              = str( getattr(INFO.HL, 'correction-H'))    + "/"        + str( getattr(INFO.HL, 'correction-V'))
    ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  TA-W: " + taWeights + "  Corr:" + taCorr # + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
    draw_TA.text( (20,0), ss + " type:" + STPE.typeOfFile, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
-   ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
-   draw_HL.text( (20,0), ss, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
+   #ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
+   #draw_HL.text( (20,0), ss, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
 
    #img_TA.show()
    #img_HL.show()
@@ -1223,9 +1224,9 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    R = boxMaster()
    R.rLN_TA     = rLN_TA
    R.rLN_TAt    = rLN_TAt
-   R.rLN_HL     = rLN_HL
+   #R.rLN_HL     = rLN_HL
    R.img_TA     = img_TA
-   R.img_HL     = img_HL
+   #R.img_HL     = img_HL
    R.IMGL       = IMGL
    R.MIDL2      = MIDL2
    R.MIDL3      = MIDL3

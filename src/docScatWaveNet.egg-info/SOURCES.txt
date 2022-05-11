@@ -1,6 +1,5 @@
 LICENSE
 README.md
-pyproject.toml
 setup.py
 src/docScatWaveNet/DFTForSCN.py
 src/docScatWaveNet/__init__.py
