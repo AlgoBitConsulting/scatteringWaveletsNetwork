@@ -883,15 +883,18 @@ def allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3, yb = [30, 800], size=(840, 
    BOXES            = []
 
    for col in range(noc):
-      M_H, M_V       = getattr(OM,  'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
+      M_H, M_V       = getattr(OM, 'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
       WLH, WLV       = getattr(OH, 'WL'+ str(col)).WL, getattr(OV, 'WL'+ str(col)).WL
       boxL_H, boxL_V = findStartAndEnd(M_H[:, 3], WLH, lenErg), findStartAndEnd(M_V[:, 3], WLV, lenErg)   
-      rLt, rL, rLn   = getBoxes(boxL_H, boxL_V)
-     
+      rLt, rL, rLn   = getBoxes(boxL_H, boxL_V)    
+
+      print(rLt)
+      print(rL)
+      print(rLn)
+
       a,b            = xmm[col][0], xmm[col][1]         
       rLnt           = shiftBoxes(rLn, m, a, b, yb=yb, size=size)
-      rLn            = list(filter( lambda x: yb[0] <= x[1] <= x[3] <= yb[1], rLnt)) 
-
+      rLn            = list(map( lambda x: [ x[0], max(yb[0], x[1]), x[2], min(yb[1], x[3])], rLnt)) 
       BB             = list(map( lambda x: [x, col], rLn))
 
       BOXES.extend(BB)
@@ -952,7 +955,8 @@ def makeTS(draw, SS, l, dir, mm=2, c=250, xmax=570, ymax=820):
       draw.rectangle( (x-2, y-2, x+2, y+2), fill=( p,p,p ) )
       if ii%mm==0 and mm<100:         
          if dir=='V':
-            draw.text( (x-4,y+10), str(ii) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
+            draw.text( (x-4,y-10), str(ii) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
+            draw.text( (x-4,y+10), str(np.round(l[ii],2)) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
          if dir=='H':
             draw.text( (x-15,y-4), str(ii) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
             draw.text( (x+5,y-4), str(np.round(l[ii],2)) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
@@ -1109,6 +1113,7 @@ def getResults(page, generator, KL, MIDL, BOXL, rLN_TAt):
          MID_BIG.append( MID[kk] + BOX[0])
 
       COL = []
+      KT  = []
       if len(K)>0:
          KT = np.concatenate(K)
          KT = list(map(lambda x: list(x), KT))
