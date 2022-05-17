@@ -179,10 +179,10 @@ INFO.TA.bBHV.V.windowSize = windowSize_V
 INFO.TA.bBHV.V.stepSize   = stepSize_V  
 
 
-setattr(INFO.TA, 'correction-H', 0.2)  #0.35
+setattr(INFO.TA, 'correction-H', 0.35)  #0.35
 setattr(INFO.TA, 'correction-V', 0.2)
-setattr(INFO.TA, 'weightbBHV-V', 0.5)
-setattr(INFO.TA, 'weightbB-V'  , 0.5)
+setattr(INFO.TA, 'weightbBHV-V', 1)
+setattr(INFO.TA, 'weightbB-V'  , 0)
 setattr(INFO.TA, 'weightbBHV-H', 0.5)
 setattr(INFO.TA, 'weightbB-H'  , 0.5)
 

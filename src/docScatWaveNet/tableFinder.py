@@ -888,14 +888,16 @@ def allBoxes(kindOfBox, noc, INFO, xmm, m, lenErg=3, yb = [30, 800], size=(840, 
       boxL_H, boxL_V = findStartAndEnd(M_H[:, 3], WLH, lenErg), findStartAndEnd(M_V[:, 3], WLV, lenErg)   
       rLt, rL, rLn   = getBoxes(boxL_H, boxL_V)    
 
-      print(rLt)
-      print(rL)
-      print(rLn)
+      #print(rLt)
+      #print(rL)
+      #print(rLn)
 
       a,b            = xmm[col][0], xmm[col][1]         
       rLnt           = shiftBoxes(rLn, m, a, b, yb=yb, size=size)
       rLn            = list(map( lambda x: [ x[0], max(yb[0], x[1]), x[2], min(yb[1], x[3])], rLnt)) 
       BB             = list(map( lambda x: [x, col], rLn))
+
+      print(BB)
 
       BOXES.extend(BB)
    
@@ -1181,10 +1183,11 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
 
    IMGL, MIDL3, BOXL, KL, BL, KxLL_small, KxLL, MIDL2 = allColumnsOfTables(Corg.copy(), rLN_TAt, generator, page, DATA.xmm, 1)
 
-   rLN_TA = []
-   for ii in range(len(KxLL)):
-      if len(KxLL[ii])>0:
-         rLN_TA.append(rLN_TAt[ii])
+   rLN_TA = rLN_TAt
+   #rLN_TA = []
+   #for ii in range(len(KxLL)):
+   #   if len(KxLL[ii])>0:
+   #      rLN_TA.append(rLN_TAt[ii])
 
    ###########################
    ### start display plots ###
