@@ -122,22 +122,50 @@ class matrixGenerator:
       
    #############################################################################
 
-   def downSampling(self, C, level, padding=True, direction=''):
-      Ct = C.copy()
-      if level >= 1:
-         zz = 0
-         while zz < level:
-            if direction != '':
-               if direction == 'H':
-                  Ct = Ct[:, ::2]    
-               if direction == 'V':
-                  Ct = Ct[::2, :]
-            else: 
-               Ct = Ct[::2, ::2]
+   #def downSampling(self, C, level, padding=True, direction=''):
+   #   Ct = C.copy()
+   #   if level >= 1:
+   #      zz = 0
+   #      while zz < level:
+   #         if direction != '':
+   #            if direction == 'H':
+   #               Ct = Ct[:, ::2]    
+   #            if direction == 'V':
+   #               Ct = Ct[::2, :]
+   #         else: 
+   #            Ct = Ct[::2, ::2]
+   #         zz = zz+1
+   #      if padding:   
+   #         Ct    = self.padding(np.asarray(Ct))
+   #      
+   #   return(Ct)
+
+   def downSampling(self, C, adaptMatrixCoef ):
+      Ct           = C.copy()
+      n,m          = Ct.shape
+      nlog2, mlog2 = log(n)/log(2), log(m)/log(2)
+      a,b          = adaptMatrixCoef
+      alog2, blog2 = log(a)/log(2), log(b)/log(2)
+
+      h = 0
+      if n >a:
+         h  = int( np.ceil( nlog2 -alog2))
+         zz = 0     
+         while zz < h:
+            Ct = Ct[::2, :]     
             zz = zz+1
-         if padding:   
-            Ct    = self.padding(np.asarray(Ct))
-         
+      v = 0
+      if m >b:
+         v = int( np.ceil( mlog2 - blog2))
+         zz = 0    
+         while zz < v:
+            Ct = Ct[:, ::2]     
+            zz = zz+1
+   
+      nt, mt  = Ct.shape 
+      fh,fv   = int(0.5*max(0, a-nt)), int(0.5*max(0,b-mt))  
+      Ct      = self.padding(np.asarray(Ct), makeEven=True, plist=[fh,fh,fv,fv])
+      
       return(Ct)
 
    #############################################################################
@@ -1145,9 +1173,9 @@ class stripe:
    
       if self.direction=='V':
          while ii+ self.windowSize < m:
-            r = int(0.5*( self.adaptMatrixCoef[1]-self.windowSize))
-            s = 4 #2**self.downSamplingRate
-            W = C[r*s: -r*s, ii:(ii+ self.windowSize)]
+            #r = int(0.5*( self.adaptMatrixCoef[1]-self.windowSize))
+            #s = 4 #2**self.downSamplingRate
+            W = C[:, ii:(ii+ self.windowSize)]
             SS.append([W, ii, ii+ self.windowSize])
             ii = ii+ self.stepSize
          
@@ -1189,11 +1217,13 @@ class stripe:
       WL     = []
       for ss in SS:
          erg    = 0
+         
          for box in K:
-            erg = self.ergForBox(ss, box, erg)            
-
+            erg = self.ergForBox(ss, box, erg)    
+        
          WL.append([ss[0], [ss[1], ss[2]], hashValue, page, col, noc, erg])
-
+       
+     
       ergLabel = list(map(lambda x: x[6], WL))
    
       return([WL, ergLabel])
@@ -1238,8 +1268,8 @@ class stripe:
       MAT = matrixGenerator("downsampling")
 
       for cl in CLt:
-         A = MAT.downSampling(cl, self.downSamplingRate, padding=False, direction=self.direction )
-         B = MAT.adaptMatrix(A, self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
+         A = MAT.downSampling(cl, self.adaptMatrixCoef )
+         B = MAT.adaptMatrix(A,   self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
          CL.append(B)
    
       ERG = MISC.makeIt(CL, self.SWO_2D, des)   

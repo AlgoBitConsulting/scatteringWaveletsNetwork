@@ -99,33 +99,6 @@ if generatePNGsAndJPgs:
 # *****************************
 
 
-# ****************************
-# *** begin init SWC       ***
-# ****************************
-
-
-MAT                  = dOM.matrixGenerator('downsampling')
-MAT.description      = "TEST"
-C1                   = MAT.generateMatrixFromImage(workingPath + 'C1.png')
-Ct                   = MAT.downSampling(C1, 3)                
-dx,dy                = 0.15, 0.15
-SWO_2D               = MM.SWO_2D(Ct, round(Ct.shape[1]*0.5*dx,3), round(Ct.shape[0]*0.5*dy,3))
-SWO_2D.init_eta      = 2
-SWO_2D.kk            = 1
-SWO_2D.sigma         = mat([[SWO_2D.kk,0],[0,SWO_2D.kk]])
-SWO_2D.J             = 0   
-SWO_2D.nang          = 8
-SWO_2D.ll            = 2
-SWO_2D.jmax          = SWO_2D.J
-SWO_2D.m             = 2   
-SWO_2D.outer         = False
-SWO_2D.onlyCoef      = True
-SWO_2D.allLevels     = False
-SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
-
-# ****************************
-# *** end init SWC         ***
-
 white                = 255
 black                = 0 
 
@@ -207,11 +180,11 @@ INFO.TA.bBHV.V.stepSize   = stepSize_V
 
 
 setattr(INFO.TA, 'correction-H', 0.35)  #0.35
-setattr(INFO.TA, 'correction-V', 0.20)
-setattr(INFO.TA, 'weightbBHV-V', 0)
-setattr(INFO.TA, 'weightbB-V'  , 1)
-setattr(INFO.TA, 'weightbBHV-H', 0)
-setattr(INFO.TA, 'weightbB-H'  , 1)
+setattr(INFO.TA, 'correction-V', 0.2)
+setattr(INFO.TA, 'weightbBHV-V', 1)
+setattr(INFO.TA, 'weightbB-V'  , 0)
+setattr(INFO.TA, 'weightbBHV-H', 0.5)
+setattr(INFO.TA, 'weightbB-H'  , 0.5)
 
 #setattr(INFO.HL, 'correction-H', 0.1)
 #setattr(INFO.HL, 'correction-V', 0.2)
@@ -223,6 +196,36 @@ setattr(INFO.TA, 'weightbB-H'  , 1)
 
 # ****************************
 # *** end INFO             ***
+# ****************************
+
+
+# ****************************
+# *** begin init SWC       ***
+# ****************************
+
+adaptMatrixCoef      = INFO.TA.bB.H.adaptMatrixCoef
+
+MAT                  = dOM.matrixGenerator('downsampling')
+MAT.description      = "TEST"
+C1                   = MAT.generateMatrixFromImage(workingPath + 'C1.png')
+Ct                   = MAT.downSampling(C1, adaptMatrixCoef)                
+dx,dy                = 0.15, 0.15
+SWO_2D               = MM.SWO_2D(Ct, round(Ct.shape[1]*0.5*dx,3), round(Ct.shape[0]*0.5*dy,3))
+SWO_2D.init_eta      = 2
+SWO_2D.kk            = 1
+SWO_2D.sigma         = mat([[SWO_2D.kk,0],[0,SWO_2D.kk]])
+SWO_2D.J             = 0   
+SWO_2D.nang          = 8
+SWO_2D.ll            = 2
+SWO_2D.jmax          = SWO_2D.J
+SWO_2D.m             = 2   
+SWO_2D.outer         = False
+SWO_2D.onlyCoef      = True
+SWO_2D.allLevels     = False
+SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
+
+# ****************************
+# *** end init SWC         ***
 # ****************************
 
 # *****************************
@@ -280,7 +283,7 @@ INFO.STPE        = STPE
 
 ### Let's start
 
-page          = 18
+page          = 31
 INFO.page     = page
 RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
@@ -288,11 +291,20 @@ RESULTS.img_TA.show()
 
 img, TCL      = TF.getResults(page, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL, RESULTS.rLN_TAt)
 img.show()
-print(TCL[0])
+try:
+   print(TCL[0])
+except:
+   print("no tables found")
 
 #import importlib
 #importlib.reload('src/docScatWaveNet/tableFinder.py')
 
-
+OM               = getattr(INFO, kindOfBox)
+OH               = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'H')  
+OV               = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'V')  
+col=0
+M_H, M_V       = getattr(OM, 'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
+WLH, WLV       = getattr(OH, 'WL'+ str(col)).WL, getattr(OV, 'WL'+ str(col)).WL
+boxL_H, boxL_V = TF.findStartAndEnd(M_H[:, 3], WLH, 3), TF.findStartAndEnd(M_V[:, 3], WLV, 3)
 
 
