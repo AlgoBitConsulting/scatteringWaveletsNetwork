@@ -65,16 +65,28 @@ class matrixGenerator:
    
    #############################################################################   
       
-   def padding(self, Ct, makeEven=True, plist=[0,0,0,0], cont=255):
+   #def padding(self, Ct, makeEven=True, plist=[0,0,0,0], cont=255):
+
+   def padding(self, Ct,  makeEven=True, plist=[0,0,0,0], cont=255, addOnlyMissing = False):
       o,u,l,r         = plist
       n,m             = Ct.shape
+
+      ot,ut,lt,rt     = o,u,l,r
+
+      if addOnlyMissing:
+         O, U, L, R      = Ct[0:o, :], Ct[n-u:n, :], Ct[:, 0:l], Ct[:, m-r:m]
+         ot              = max(0, o- list(O.sum(axis=1)).count(cont*O.shape[1]))
+         ut              = max(0, u- list(U.sum(axis=1)).count(cont*U.shape[1]))
+         lt              = max(0, l- list(L.sum(axis=0)).count(cont*L.shape[0]))
+         rt              = max(0, r- list(R.sum(axis=0)).count(cont*R.shape[0]))
+
       if makeEven:
-         if (n + o + u)%2==1:
-            o = o+1  
-         if (m + l + r)%2==1:
-            l = l+1
-      C               = np.ones((n+o+u, m+l+r))*cont
-      C[o:n+o, l:l+m] = Ct
+         if (n + ot + ut)%2==1:
+            ot = ot+1  
+         if (m + lt + rt)%2==1:
+            lt = lt+1
+      C                   = np.ones((n+ot+ut, m+lt+rt))*cont
+      C[ot:n+ot, lt:lt+m] = Ct
       
       return(C)
 
@@ -113,34 +125,8 @@ class matrixGenerator:
       return(self.padding(np.asarray(Image.open(fname).convert('L'))))
 
    #############################################################################
-   
-   #def compressMatrix(self, C): 
-   #   C1 = self.downSampling(C, self.level)
-   #   C2 = self.adaptMatrix(C1, self.mm, self.nn)
-   #   
-   #   return(C2)
-      
-   #############################################################################
 
-   #def downSampling(self, C, level, padding=True, direction=''):
-   #   Ct = C.copy()
-   #   if level >= 1:
-   #      zz = 0
-   #      while zz < level:
-   #         if direction != '':
-   #            if direction == 'H':
-   #               Ct = Ct[:, ::2]    
-   #            if direction == 'V':
-   #               Ct = Ct[::2, :]
-   #         else: 
-   #            Ct = Ct[::2, ::2]
-   #         zz = zz+1
-   #      if padding:   
-   #         Ct    = self.padding(np.asarray(Ct))
-   #      
-   #   return(Ct)
-
-   def downSampling(self, C, adaptMatrixCoef ):
+   def downSampling(self, C, adaptMatrixCoef ):   # downsampling C down to an array D with D.shape = a,b = adaptMatrixCoef 
       Ct           = C.copy()
       n,m          = Ct.shape
       nlog2, mlog2 = log(n)/log(2), log(m)/log(2)
@@ -149,14 +135,14 @@ class matrixGenerator:
 
       h = 0
       if n >a:
-         h  = int( np.ceil( nlog2 -alog2))
+         h  = int( np.ceil( np.round( nlog2 -alog2, 3)))
          zz = 0     
          while zz < h:
             Ct = Ct[::2, :]     
             zz = zz+1
       v = 0
       if m >b:
-         v = int( np.ceil( mlog2 - blog2))
+         v = int( np.ceil( np.round( mlog2 - blog2, 3)))
          zz = 0    
          while zz < v:
             Ct = Ct[:, ::2]     
@@ -1161,20 +1147,15 @@ class stripe:
        
       n,m        = C.shape
       ii, SS     = 0, []
-      #print("windowsize:" + str(self.windowSize))
 
       if self.direction=='H':      
          while ii+ self.windowSize < n:   
-            #r = int(0.5*( self.adaptMatrixCoef[0]-self.windowSize))
-            #s = 2**self.downSamplingRate
             W = C[ii:(ii+ self.windowSize), : ]
             SS.append([W, ii, ii+self.windowSize])
             ii = ii+self.stepSize
    
       if self.direction=='V':
          while ii+ self.windowSize < m:
-            #r = int(0.5*( self.adaptMatrixCoef[1]-self.windowSize))
-            #s = 4 #2**self.downSamplingRate
             W = C[:, ii:(ii+ self.windowSize)]
             SS.append([W, ii, ii+ self.windowSize])
             ii = ii+ self.stepSize
@@ -1215,13 +1196,24 @@ class stripe:
          
    def labelSS(self, K, SS, hashValue, noc, col, page):
       WL     = []
+      MAT    = matrixGenerator("downsampling")
+
       for ss in SS:
          erg    = 0
          
          for box in K:
             erg = self.ergForBox(ss, box, erg)    
         
-         WL.append([ss[0], [ss[1], ss[2]], hashValue, page, col, noc, erg])
+         M1  = ss[0]
+         n,m = M1.shape
+         if n>m:
+            M2 = MAT.downSampling(tp(M1), self.adaptMatrixCoef )
+         else:
+            M2 = MAT.downSampling(M1, self.adaptMatrixCoef )
+
+         M3 = MAT.adaptMatrix(M2,  self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
+     
+         WL.append([M3, [ss[1], ss[2]], hashValue, page, col, noc, erg])
        
      
       ergLabel = list(map(lambda x: x[6], WL))
@@ -1262,16 +1254,9 @@ class stripe:
    ###########################################################################
 
    def prepareData(self, WL, des):
-      CLt = list(map(lambda x: x[0], WL))
+      CL  = list(map(lambda x: x[0], WL))
       la  = list(map(lambda x: x[6], WL))
-      CL  = []
-      MAT = matrixGenerator("downsampling")
-
-      for cl in CLt:
-         A = MAT.downSampling(cl, self.adaptMatrixCoef )
-         B = MAT.adaptMatrix(A,   self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
-         CL.append(B)
-   
+      
       ERG = MISC.makeIt(CL, self.SWO_2D, des)   
       
       return([ERG, la])  
