@@ -945,6 +945,8 @@ def makeTSNew(kindOfBox, noc, xmm, m, ML, ergL, ML_bbm, ergL_bbm, correction_H, 
 def makeTS(draw, SS, l, dir, mm=2, c=250, xmax=570, ymax=820):
 
    l = tp(l).tolist()[0]
+   font = ImageFont.load_default()  #ImageFont.truetype('Roboto-Bold.ttf'
+
    for ii in range(len(SS)):
       a,b = SS[ii]
       ts  = (a+b)/2
@@ -957,11 +959,11 @@ def makeTS(draw, SS, l, dir, mm=2, c=250, xmax=570, ymax=820):
       draw.rectangle( (x-2, y-2, x+2, y+2), fill=( p,p,p ) )
       if ii%mm==0 and mm<100:         
          if dir=='V':
-            draw.text( (x-4,y-10), str(ii) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
-            draw.text( (x-4,y+10), str(np.round(l[ii],2)) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
+            draw.text( (x-4,y-10), str(ii) ,(100), size=5)
+            draw.text( (x-4,y+10), str(np.round(l[ii],2)) ,(100), font=font, size=5)  
          if dir=='H':
-            draw.text( (x-15,y-4), str(ii) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
-            draw.text( (x+5,y-4), str(np.round(l[ii],2)) ,(100), font=ImageFont.truetype('Roboto-Bold.ttf', size=9))
+            draw.text( (x-15,y-4), str(ii) ,(100), font=font, size=5)
+            draw.text( (x+5,y-4), str(np.round(l[ii],2)) ,(100), font=font, size=5)
             
    
    return(draw)     
@@ -1140,6 +1142,7 @@ def getResults(page, generator, KL, MIDL, BOXL, rLN_TAt):
 
 def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, calcSWCs=True, withScalePlot=False):
  
+   font                = ImageFont.load_default()  #ImageFont.truetype('Roboto-Bold.ttf'
    MAT, columns, DATA  = INFO.MAT, INFO.columns, INFO.DATA 
    STPE                = INFO.STPE
 
@@ -1203,7 +1206,7 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    for ii in range(len(rLN_TA)):
       r = rLN_TA[ii][0]       
       draw_TA.rectangle(r, outline ="red",width=3)
-      draw_TA.text( (r[2], r[3]), "T"+str(ii+1) , (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
+      draw_TA.text( (r[2], r[3]), "T"+str(ii+1) , (255,0,255),font=font, size=12)
      
    #for ii in range(len(rLN_HL)):
    #   r = rLN_HL[ii][0]      
@@ -1218,7 +1221,7 @@ def pageTablesAndCols(page, generator, BIGINFO, INFO, generateImageOTF=False, ca
    #hlWeights           = str( getattr(INFO.HL, 'weightbB-H'))      + '/'        + str( getattr( INFO.HL, 'weightbBHV-H')) + ' - ' + str(getattr( INFO.HL, 'weightbB-V')) + '/' + str(getattr(INFO.HL, 'weightbBHV-V'))
    #hlCorr              = str( getattr(INFO.HL, 'correction-H'))    + "/"        + str( getattr(INFO.HL, 'correction-V'))
    ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  TA-W: " + taWeights + "  Corr:" + taCorr # + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
-   draw_TA.text( (20,0), ss + " type:" + STPE.typeOfFile, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
+   draw_TA.text( (20,0), ss + " type:" + STPE.typeOfFile, (255,0,255),font=font, size=12)
    #ss                  = "page:" + str(page) + "  noc:" + str(noc) + "  HL-W:" + hlWeights + "  Corr:" + hlCorr 
    #draw_HL.text( (20,0), ss, (255,0,255),font=ImageFont.truetype('Roboto-Bold.ttf', size=12))
 

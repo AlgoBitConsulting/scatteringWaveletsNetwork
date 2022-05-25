@@ -71,7 +71,7 @@ challengePNG         = dOM.imageGeneratorPNG(pathToPDF       = pathPDFFilename,
                                              bound           = 0.99, 
                                              part            = 8, 
                                              ub              = 5, 
-                                             size            = (595, 842) )
+                                             size            = (596, 842) )
 
 
 challengeJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename, 
@@ -88,7 +88,7 @@ challengeJPG         = dOM.imageGeneratorJPG(pathToPDF       = pathPDFFilename,
                                              bound           = 0.99, 
                                              part            = 8, 
                                              ub              = 5, 
-                                             size            = (595, 842) )
+                                             size            = (596, 842) )
 
 if generatePNGsAndJPgs:
    challengePNG.generate(getNOCfromDB=False)
@@ -110,7 +110,8 @@ black                = 0
 # *** begin load data      ***
 # ****************************
 
-FL         = ['TA-bB-H-JPG-' , 'TA-bB-V-JPG-' ,  'TA-bBHV-H-JPG-',  'TA-bBHV-V-JPG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+
 L          = deleteFiles(list(map(lambda x: x[0:-1], FL)), workingPath + "rf/")
 
 try:
@@ -121,7 +122,7 @@ except:
    INFO              = TF.makeINFO()
    INFO.path         = workingPath + 'rf/compressed/'
    INFO.pathRF       = workingPath + 'rf/'
-   INFO.kindOfImages = 'JPG'  
+   INFO.kindOfImages = 'PNG'  
    INFO.white        = 255
    INFO.black        = 0    
    INFO.copyHL       = True
@@ -180,7 +181,7 @@ INFO.TA.bBHV.V.stepSize   = stepSize_V
 
 
 setattr(INFO.TA, 'correction-H', 0.35)  #0.35
-setattr(INFO.TA, 'correction-V', 0.2)
+setattr(INFO.TA, 'correction-V', 0.20)
 setattr(INFO.TA, 'weightbBHV-V', 1)
 setattr(INFO.TA, 'weightbB-V'  , 0)
 setattr(INFO.TA, 'weightbBHV-H', 0.5)
@@ -283,7 +284,7 @@ INFO.STPE        = STPE
 
 ### Let's start
 
-page          = 31
+page          = 33
 INFO.page     = page
 RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()

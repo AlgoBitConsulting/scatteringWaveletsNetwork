@@ -3,7 +3,7 @@ import sys, subprocess
 from os import system
 
 sys.path.append('/home/markus/anaconda3/python/modules')
-
+sys.path.append('/home/markus/GIT/scatteringWaveletsNetwork/src/docScatWaveNet/')
 import numpy as np
 import scipy.integrate as integrate
 import scipy.interpolate
@@ -17,10 +17,10 @@ from PIL import Image, ImageDraw, ImageOps, ImageTk
 import timeit
 import copy
 
-import DFTForSCN_v7 as DFT
-import morletModule_v2 as MM  
-import misc_v9 as MISC
-import scatteringTransformationModule_2D_v9 as ST
+import DFTForSCN as DFT
+import morletModule as MM  
+import misc as MISC
+import scatteringTransformationModule as ST
 
 
 import sklearn
@@ -43,9 +43,9 @@ from joblib import Parallel, delayed
 from functools import partial
 
 
-from pynput import mouse
-import tkinter
-import pdb
+#from pynput import mouse
+#import tkinter
+#import pdb
 
 from sys import argv
 from sklearn.metrics import auc
