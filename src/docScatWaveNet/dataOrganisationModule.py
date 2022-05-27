@@ -1060,6 +1060,7 @@ class stripe:
       self.C               = C
       self.typeOfFile      = typeOfFile       
       self.adaptMatrixCoef = (106,76)
+      self.size            = (842,596)
       self.old             = True
 
    ########################################################################### 
@@ -1208,17 +1209,13 @@ class stripe:
         
          M1  = ss[0]
          n,m = M1.shape
-         if not(self.old):
-            if n>m:
-               M2 = MAT.downSampling(tp(M1), self.adaptMatrixCoef )
-            else:
-               M2 = MAT.downSampling(M1, self.adaptMatrixCoef )
-         else:
-            v  = int(np.ceil( (842 - n)/2))
-            h  = int(np.ceil( (596 - m)/2))
-            M1 = MAT.padding(M1,  makeEven=True, plist=[v,v,h,h])
-            M2 = MAT.downSampling(M1, self.adaptMatrixCoef )
-            
+         a,b = self.adaptMatrixCoef
+
+         v   = max(0, int(np.ceil( (a - n)/2)))
+         h   = max(0, int(np.ceil( (b - m)/2)))
+         plist = [h,h,v,v]
+         M1  = MAT.padding(M1,  makeEven=True, plist=plist)
+         M2 = MAT.downSampling(M1, self.adaptMatrixCoef )   
          M3 = MAT.adaptMatrix(M2,  self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
      
          WL.append([M3, [ss[1], ss[2]], hashValue, page, col, noc, erg])
