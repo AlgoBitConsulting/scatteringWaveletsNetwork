@@ -691,7 +691,7 @@ def calculateSWCs(DATA, STPE, INFO, des=''):
             STPE.direction        = direction
             STPE.windowSize       = O.windowSize
             STPE.stepSize         = O.stepSize
-            STPE.downSamplingRate = O.downSamplingRate
+            #STPE.downSamplingRate = O.downSamplingRate
             STPE.adaptMatrixCoef  = O.adaptMatrixCoef
 
             INFO                  = calculateSWCsForLeaf( DATA, STPE, INFO, des='calculate SWC for '+ kindOfBox + '-' + method + '-' + direction)   
@@ -959,11 +959,11 @@ def makeTS(draw, SS, l, dir, mm=2, c=250, xmax=570, ymax=820):
       draw.rectangle( (x-2, y-2, x+2, y+2), fill=( p,p,p ) )
       if ii%mm==0 and mm<100:         
          if dir=='V':
-            draw.text( (x-4,y-10), str(ii) ,(100), size=5)
-            draw.text( (x-4,y+10), str(np.round(l[ii],2)) ,(100), font=font, size=5)  
+            draw.text( (x-4,y-10), str(ii) ,(100), size=3)
+            draw.text( (x-4,y+10), str(np.round(l[ii],2)) ,(100), font=font, size=3)  
          if dir=='H':
-            draw.text( (x-15,y-4), str(ii) ,(100), font=font, size=5)
-            draw.text( (x+5,y-4), str(np.round(l[ii],2)) ,(100), font=font, size=5)
+            draw.text( (x-20,y-4), str(ii) ,(100), font=font, size=3)
+            draw.text( (x+0,y-4), str(np.round(l[ii],2)) ,(100), font=font, size=3)
             
    
    return(draw)     

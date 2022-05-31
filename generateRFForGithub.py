@@ -21,10 +21,10 @@ imag,real = np.imag, np.real
 #
 ##   
 
-fname1 = '/home/markus/anaconda3/python/data/TA-bB-H-PNG-18-04-2022-15:47:03'
-fname2 = '/home/markus/anaconda3/python/data/TA-bB-V-PNG-18-04-2022-16:12:09'
-fname3 = '/home/markus/anaconda3/python/data/TA-bBHV-H-PNG-18-04-2022-16:45:52'
-fname4 = '/home/markus/anaconda3/python/data/TA-bBHV-V-PNG-18-04-2022-17:13:58'
+#fname1 = '/home/markus/anaconda3/python/data/TA-bB-H-PNG-18-04-2022-15:47:03'
+#fname2 = '/home/markus/anaconda3/python/data/TA-bB-V-PNG-18-04-2022-16:12:09'
+#fname3 = '/home/markus/anaconda3/python/data/TA-bBHV-H-PNG-18-04-2022-16:45:52'
+#fname4 = '/home/markus/anaconda3/python/data/TA-bBHV-V-PNG-18-04-2022-17:13:58'
 
 #fname1 = '/home/markus/anaconda3/python/data/TA-bB-H-JPG-12.05.2022-12:58:18'
 #fname2 = '/home/markus/anaconda3/python/data/TA-bB-V-JPG-12.05.2022-13:20:45'
@@ -43,31 +43,54 @@ fname4 = '/home/markus/anaconda3/python/data/TA-bBHV-V-PNG-18-04-2022-17:13:58'
 #fname3 = '/home/markus/anaconda3/python/data/TA-bBHV-H-JPG-17.05.2022-02:14:45'
 #fname4 = '/home/markus/anaconda3/python/data/TA-bBHV-V-JPG-17.05.2022-02:55:41'
 
+pathModels = '/home/markus/anaconda3/python/data/'
+fname1 = pathModels + 'TA-bB-H-JPG-29.05.2022-00:43:55'
+fname2 = pathModels + 'TA-bB-V-JPG-29.05.2022-01:55:49'
+fname3 = pathModels + 'TA-bBHV-H-JPG-29.05.2022-03:39:34'
+fname4 = pathModels + 'TA-bBHV-V-JPG-29.05.2022-04:50:17'
 
+
+# workflow: 1) copy /data/fname ---> development/fname 
+#           2) fname ---> fname.zst
+#           3) rm development/fname
+#           4) development/rf/* delete 
+#           5) development/fname.zst ---> development/rf/compressed/fname.zst 
 
 class boxMaster:
    def __init__(self, name='ka'):
       self.name = name  
 
-#workingPath      = os.getcwd() + '/alt/'
+#workingPath     = os.getcwd() + '/alt/'
 workingPath      = '/home/markus/anaconda3/python/data/'
+NL               = [fname1, fname2, fname3, fname4  ]
+SL               = []
 
-FL               = ['TA-bB-H-JPG'   , 'TA-bB-V-JPG'   ,  'TA-bBHV-H-JPG',  'TA-bBHV-V-JPG'  ]
-DL               = ['-16.05.2022-00:24:53' , '-16.05.2022-00:51:15' ,  '-16.05.2022-01:07:20',  '-16.05.2022-01:22:35'  ]
-for ii in range(len(FL)):
-   DATAt     = MISC.loadIt(workingPath + FL[ii] + DL[ii])
+for ii in range(len(NL)):
+   DATAt     = MISC.loadIt(NL[ii])
    DATA      = boxMaster()
    DATA.rf   = DATAt.rf
    DATA.INFO = DATAt.INFO
-   MISC.saveIt(DATA, os.getcwd()  +FL[ii], True)
-   ss = "zstd " + os.getcwd()  + FL[ii] + " -o " + FL[ii].replace('-onlyTA', '')+ '.zst'
+   fname     = NL[ii].split('-')[1:4]
+   tt        = "TA-"
+   for jj in range(len(fname)):
+      tt = tt + fname[jj] + '-'
+   tt = tt[0:-1]
+   SL.append(tt)
+
+   totalName = os.getcwd()  +'/'  + tt
+   MISC.saveIt(DATA, totalName, True)
+   ss = "zstd " + totalName + " -o " + totalName+ '.zst'
+   subprocess.check_output(ss, shell=True, executable='/bin/bash')
+   ss = "rm " + totalName
    subprocess.check_output(ss, shell=True, executable='/bin/bash')
 
+
 workingPath      = os.getcwd() + '/rf/compressed/'
-for fl in FL:
+for fl in SL:
    fname = workingPath + fl + '.zst' 
    if os.path.exists(fname): 
       os.remove(fname)
 
 ss = "mv " + os.getcwd() + '/*.zst rf/compressed/'
 subprocess.check_output(ss, shell=True, executable='/bin/bash')
+

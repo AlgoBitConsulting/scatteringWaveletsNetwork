@@ -1062,9 +1062,16 @@ class stripe:
       self.adaptMatrixCoef = (106,76)
       self.size            = (842,596)
       self.old             = True
+      self.TT              = []
 
    ########################################################################### 
             
+   def numberOfWhitePixel(self, M):
+      a,b = np.histogram(M, bins=list(range(257)))   
+      return(a[-1])
+
+   ###########################################################################    
+
    def displayBoxes(self, img, boxL):
 
       draw = ImageDraw.Draw(img)
@@ -1200,27 +1207,32 @@ class stripe:
    def labelSS(self, K, SS, hashValue, noc, col, page):
       WL     = []
       MAT    = matrixGenerator("downsampling")
-
       for ss in SS:
          erg    = 0
-         
          for box in K:
             erg = self.ergForBox(ss, box, erg)    
         
-         M1  = ss[0]
-         n,m = M1.shape
-         a,b = self.adaptMatrixCoef
-
-         v   = max(0, int(np.ceil( (a - n)/2)))
-         h   = max(0, int(np.ceil( (b - m)/2)))
+         M1    = ss[0].copy()
+         n,m   = M1.shape
+         a,b   = self.adaptMatrixCoef
+         v     = max(0, int(np.ceil( (a - n)/2)))
+         h     = max(0, int(np.ceil( (b - m)/2)))
          plist = [h,h,v,v]
-         M1  = MAT.padding(M1,  makeEven=True, plist=plist)
-         M2 = MAT.downSampling(M1, self.adaptMatrixCoef )   
-         M3 = MAT.adaptMatrix(M2,  self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
-     
+         M1    = MAT.padding(M1,  makeEven=True, plist=plist)
+         M2    = MAT.downSampling(M1, self.adaptMatrixCoef )   
+         M3    = MAT.adaptMatrix(M2,  self.adaptMatrixCoef[0], self.adaptMatrixCoef[1])
+         nw1   = self.numberOfWhitePixel(M3)
+         if nw1 == np.prod(M3.shape):
+            if self.numberOfWhitePixel(ss[0]) < np.prod(ss[0].shape):
+               #self.TT.append([ss[0], M3])
+               erg = -1
+
+            #nw2 = self.numberOfWhitePixel(ss[0])
+            #if nw2 < np.prod(ss[0].shape):
+            #   erg = -1
+         
          WL.append([M3, [ss[1], ss[2]], hashValue, page, col, noc, erg])
        
-     
       ergLabel = list(map(lambda x: x[6], WL))
    
       return([WL, ergLabel])

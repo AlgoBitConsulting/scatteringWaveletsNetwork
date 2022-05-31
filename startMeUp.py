@@ -1,7 +1,7 @@
 
 #from docScatWaveNet import dataOrganisationModule as dOM, misc as MISC, morletModule as MM, scatteringTransformationModule as ST, tableFinder as TF, DFTForSCN as DFT
 
-
+import socket
 import os, numpy as np
 import sys, subprocess, os,glob
 from PIL import Image, ImageDraw, ImageOps, ImageFont
@@ -49,7 +49,39 @@ generatePNGsAndJPgs = False
 # *** start init generators ***
 # *****************************
 
+
+
 np.set_printoptions(suppress=True)
+
+
+if socket.gethostname() == 'home':
+   pathPDFFilename      = '/home/markus/anaconda3/python/pngs/train/'
+   pathPNGs             = '/home/markus/anaconda3/python/pngs/train/word/'
+   PDFFilename          = 'train'
+   pathModels           = '/home/markus/anaconda3/python/data/'
+   namePDFL             = ['/home/markus/anaconda3/python/pngs/train/train', '/home/markus/anaconda3/python/pngs/train/lf-gb2019finalg-2-columns-pages-with-at-least-one-table']
+
+else:
+   pathModels           = '/home/markus/GIT/scatteringWaveletsNetwork/train/models/'
+   PDFFilename          = 'train_hochkant'
+   namePDFL             = ['/home/markus/GIT/scatteringWaveletsNetwork/train_hochkant']
+
+
+trainPNG             = dOM.imageGeneratorPNG(pathToPDF   = pathPDFFilename, 
+                                         pdfFilename     = PDFFilename, 
+                                         outputFolder    = pathPNGs, 
+                                         output_file     = 'train', 
+                                         pageStart       = 1,
+                                         pageEnd         = 0,  
+                                         scanedDocument  = False,
+                                         windowSize      = 450, 
+                                         stepSize        = 50, 
+                                         bound           = 0.99, 
+                                         part            = 8, 
+                                         ub              = 5, 
+                                         size            = (595, 842) )
+#trainPNG.engine      = create_engine('mysql+pymysql://markus:venTer4hh@localhost/TAO')
+#trainPNG.con         = trainPNG.engine.connect()
 
 
 pathPDFFilename  = workingPath
@@ -110,7 +142,8 @@ black                = 0
 # *** begin load data      ***
 # ****************************
 
-FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+#FL         = ['TA-bB-H-PNG-' , 'TA-bB-V-PNG-' ,  'TA-bBHV-H-PNG-',  'TA-bBHV-V-PNG-'  , 'HL-bB-H-PNG-'      , 'HL-bB-V-PNG-'     ,'HL-bBHV-H-PNG-'   ,'HL-bBHV-V-PNG-'   ]
+FL         = ['TA-bB-H-JPG-' , 'TA-bB-V-JPG-' ,  'TA-bBHV-H-JPG-',  'TA-bBHV-V-JPG-'  , 'HL-bB-H-JPG-'      , 'HL-bB-V-JPG-'     ,'HL-bBHV-H-JPG-'   ,'HL-bBHV-V-JPG-'   ]
 
 L          = deleteFiles(list(map(lambda x: x[0:-1], FL)), workingPath + "rf/")
 
@@ -122,7 +155,7 @@ except:
    INFO              = TF.makeINFO()
    INFO.path         = workingPath + 'rf/compressed/'
    INFO.pathRF       = workingPath + 'rf/'
-   INFO.kindOfImages = 'PNG'  
+   INFO.kindOfImages = 'JPG'  
    INFO.white        = 255
    INFO.black        = 0    
    INFO.copyHL       = True
@@ -146,6 +179,9 @@ except:
             setattr(O, direction,  getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction)) 
             S    = getattr(O, direction)
             setattr(S, 'rf', DATA.rf)
+            setattr(S, 'windowSize', getattr( getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction), 'windowSize'))
+            setattr(S, 'stepSize', getattr( getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction), 'stepSize'))
+
             try:
                INFO.onlyWhiteBlack  = DATA.INFO.onlyWhiteBlack
                INFO.wBB             = DATA.INFO.wBB
@@ -165,25 +201,19 @@ except:
 # *** start INFO           ***
 # ****************************
 
-stepSize_H                = 5
-windowSize_H              = 70
-INFO.TA.bB.H.stepSize     = stepSize_H 
-INFO.TA.bB.H.windowSize   = windowSize_H 
-INFO.TA.bBHV.H.stepSize   = stepSize_H 
-INFO.TA.bBHV.H.windowSize = windowSize_H 
- 
-windowSize_V              = 40
-stepSize_V                = 5
-INFO.TA.bB.V.windowSize   = windowSize_V 
-INFO.TA.bB.V.stepSize     = stepSize_V 
-INFO.TA.bBHV.V.windowSize = windowSize_V  
-INFO.TA.bBHV.V.stepSize   = stepSize_V  
+INFO.TA.bB.V.windowSize = 20
+INFO.TA.bBHV.V.windowSize = 20
+
+print("bB-H stepSize/windowSize:   " + str(INFO.TA.bB.H.stepSize ) + "/" + str(INFO.TA.bB.H.windowSize ) )
+print("bB-V stepSize/windowSize:   " + str(INFO.TA.bB.V.stepSize ) + "/" + str(INFO.TA.bB.V.windowSize ) )
+print("bBHV-H stepSize/windowSize:   " + str(INFO.TA.bBHV.H.stepSize ) + "/" + str(INFO.TA.bBHV.H.windowSize ) )
+print("bBHV-V stepSize/windowSize:   " + str(INFO.TA.bBHV.V.stepSize ) + "/" + str(INFO.TA.bBHV.V.windowSize ) )
 
 
-setattr(INFO.TA, 'correction-H', 0.35)  #0.35
-setattr(INFO.TA, 'correction-V', 0.20)
-setattr(INFO.TA, 'weightbBHV-V', 1)
-setattr(INFO.TA, 'weightbB-V'  , 0)
+setattr(INFO.TA, 'correction-H', 0.30)  #0.35
+setattr(INFO.TA, 'correction-V', 0.15)
+setattr(INFO.TA, 'weightbBHV-V', 0.5)
+setattr(INFO.TA, 'weightbB-V'  , 0.5)
 setattr(INFO.TA, 'weightbBHV-H', 0.5)
 setattr(INFO.TA, 'weightbB-H'  , 0.5)
 
@@ -233,7 +263,6 @@ SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
 # *** main                  ***
 # *****************************
 
-
 #***
 #*** MAIN PART
 #***
@@ -241,7 +270,6 @@ SWO_2D.normalization = False    # (m=2 wird mit m=1-Wert normalisiert)
 #  exec(open("startMeUp.py").read())
 #
 ##   
-
 
 try:
    a = len(BIGINFO)
@@ -280,32 +308,82 @@ INFO.DATA        = DATA
 INFO.columns     = columns
 INFO.STPE        = STPE
 
+###########################################################################
+
+def findStartAndEnd(erg, WL,lenErg=3, stin=0, enin=1):
+
+      foundStart = False
+      foundEnd   = False
+      start      = 0
+      end        = 0
+      ii         = 0
+      jj         = 0
+      boxL       = []
+      
+      windowSize = WL[0][1][1] - WL[0][1][0]
+      stepSize   = WL[1][1][1] - WL[0][1][1]
+     
+      while ii < len(WL):
+         if erg[ii] == 1:
+            W          = WL[ii]
+            start      = W[1][0]                #+ 0*int(0.5*(windowSize- 2*stepSize)) 
+            foundStart = True
+                 
+         if foundStart:
+            while ii < len(WL) and not(foundEnd):
+               if np.sum( erg[ii:ii+lenErg]) == 0: 
+                  W          = WL[ii]
+                  end        = W[1][1]                 #- 0*int(0.5*(windowSize- 2*stepSize)) 
+                  foundEnd   = True
+                  boxL.append([start, end])
+                  
+               else:
+                  ii = ii+1       
+         if foundEnd:
+            foundStart = False
+            foundEnd   = False  
+
+         ii = ii+1
+         
+      return(boxL)
+
+###########################################################################
 
 
 ### Let's start
 
-page          = 33
+page          = 28
 INFO.page     = page
-RESULTS       = TF.pageTablesAndCols(page=page, generator=generator, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
+RESULTS       = TF.pageTablesAndCols(page=page, generator=trainPNG, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
 
 
-img, TCL      = TF.getResults(page, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL, RESULTS.rLN_TAt)
-img.show()
-try:
-   print(TCL[0])
-except:
-   print("no tables found")
+#img, TCL      = TF.getResults(page, challengeJPG, RESULTS.KL, RESULTS.MIDL3, RESULTS.BOXL, RESULTS.rLN_TAt)
+#img.show()
+#try:
+#   print(TCL[0])
+#except:
+#   print("no tables found")
 
 #import importlib
 #importlib.reload('src/docScatWaveNet/tableFinder.py')
 
-OM               = getattr(INFO, kindOfBox)
-OH               = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'H')  
-OV               = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'V')  
-col=0
+OM             = getattr(INFO, kindOfBox)
+OH             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'H')  
+OV             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'V')  
+col            = 0
 M_H, M_V       = getattr(OM, 'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
 WLH, WLV       = getattr(OH, 'WL'+ str(col)).WL, getattr(OV, 'WL'+ str(col)).WL
 boxL_H, boxL_V = TF.findStartAndEnd(M_H[:, 3], WLH, 3), TF.findStartAndEnd(M_V[:, 3], WLV, 3)
+
+#boxL_H, boxL_V = [], []
+
+#for ii in range(len(M_H)):
+#   if M_H[ii][2]   
+
+
+rLt, rL, rLn   = TF.getBoxes(boxL_H, boxL_V)    
+
+
 
 
