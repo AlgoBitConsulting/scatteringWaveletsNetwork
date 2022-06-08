@@ -705,12 +705,13 @@ def calculateSWCsForLeaf(DATA, STPE, INFO, des=''):
    BOX    = getattr( INFO,  INFO.kindOfBox)
    O      = getattr( getattr( BOX , INFO.method), INFO.direction)
    weight = getattr( BOX, 'weight'+ INFO.method + '-' + INFO.direction) 
- 
+
+   STPE.SWO_2D = O.SWO_2D 
+
    if INFO.copyHL:
       OC = getattr( getattr( getattr(INFO,  'HL'), INFO.method), INFO.direction)
    
    for ii in range(len(DATA.CL)):
-
       nameWL   = 'WL'+str(ii)
       WL       = getattr(O, nameWL).WL
       nameAL   = 'AL'+str(ii)

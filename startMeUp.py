@@ -3,7 +3,7 @@
 
 import socket
 import os, numpy as np
-import sys, subprocess, os,glob
+import sys, subprocess, glob
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 
 pi, exp, log, abs, sqrt, fft, mult, mat, tp = np.pi, np.exp, np.log, np.abs, np.sqrt, np.fft.fft, np.multiply, np.matrix, np.transpose
@@ -179,8 +179,9 @@ except:
             setattr(O, direction,  getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction)) 
             S    = getattr(O, direction)
             setattr(S, 'rf', DATA.rf)
-            setattr(S, 'windowSize', getattr( getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction), 'windowSize'))
-            setattr(S, 'stepSize', getattr( getattr( getattr( getattr(DATA.INFO,  kindOfBox), method), direction), 'stepSize'))
+            setattr(S, 'windowSize', getattr(DATA.INFO.P, 'windowSize'))
+            setattr(S, 'stepSize',   getattr(DATA.INFO.P,  'stepSize'))
+            setattr(S, 'SWO_2D', getattr(DATA.INFO, 'SWO_2D'))       
 
             try:
                INFO.onlyWhiteBlack  = DATA.INFO.onlyWhiteBlack
@@ -201,8 +202,8 @@ except:
 # *** start INFO           ***
 # ****************************
 
-INFO.TA.bB.V.windowSize = 20
-INFO.TA.bBHV.V.windowSize = 20
+#INFO.TA.bB.V.windowSize = 20
+#INFO.TA.bBHV.V.windowSize = 20
 
 print("bB-H stepSize/windowSize:   " + str(INFO.TA.bB.H.stepSize ) + "/" + str(INFO.TA.bB.H.windowSize ) )
 print("bB-V stepSize/windowSize:   " + str(INFO.TA.bB.V.stepSize ) + "/" + str(INFO.TA.bB.V.windowSize ) )
@@ -210,12 +211,12 @@ print("bBHV-H stepSize/windowSize:   " + str(INFO.TA.bBHV.H.stepSize ) + "/" + s
 print("bBHV-V stepSize/windowSize:   " + str(INFO.TA.bBHV.V.stepSize ) + "/" + str(INFO.TA.bBHV.V.windowSize ) )
 
 
-setattr(INFO.TA, 'correction-H', 0.30)  #0.35
+setattr(INFO.TA, 'correction-H', 0.3)  #0.35
 setattr(INFO.TA, 'correction-V', 0.15)
 setattr(INFO.TA, 'weightbBHV-V', 0.5)
 setattr(INFO.TA, 'weightbB-V'  , 0.5)
-setattr(INFO.TA, 'weightbBHV-H', 0.5)
-setattr(INFO.TA, 'weightbB-H'  , 0.5)
+setattr(INFO.TA, 'weightbBHV-H', 1)
+setattr(INFO.TA, 'weightbB-H'  , 0)
 
 #setattr(INFO.HL, 'correction-H', 0.1)
 #setattr(INFO.HL, 'correction-V', 0.2)
@@ -309,7 +310,7 @@ INFO.columns     = columns
 INFO.STPE        = STPE
 
 ###########################################################################
-
+"""
 def findStartAndEnd(erg, WL,lenErg=3, stin=0, enin=1):
 
       foundStart = False
@@ -346,15 +347,15 @@ def findStartAndEnd(erg, WL,lenErg=3, stin=0, enin=1):
          ii = ii+1
          
       return(boxL)
-
+"""
 ###########################################################################
 
 
 ### Let's start
 
-page          = 28
+page          = 31
 INFO.page     = page
-RESULTS       = TF.pageTablesAndCols(page=page, generator=trainPNG, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
+RESULTS       = TF.pageTablesAndCols(page=page, generator=challengeJPG, BIGINFO = BIGINFO, INFO=INFO, generateImageOTF=generateImageOTF, calcSWCs=calcSWCs, withScalePlot=withScalePlot)
 RESULTS.img_TA.show()
 
 
@@ -368,13 +369,13 @@ RESULTS.img_TA.show()
 #import importlib
 #importlib.reload('src/docScatWaveNet/tableFinder.py')
 
-OM             = getattr(INFO, kindOfBox)
-OH             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'H')  
-OV             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'V')  
-col            = 0
-M_H, M_V       = getattr(OM, 'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
-WLH, WLV       = getattr(OH, 'WL'+ str(col)).WL, getattr(OV, 'WL'+ str(col)).WL
-boxL_H, boxL_V = TF.findStartAndEnd(M_H[:, 3], WLH, 3), TF.findStartAndEnd(M_V[:, 3], WLV, 3)
+#OM             = getattr(INFO, kindOfBox)
+#OH             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'H')  
+#OV             = getattr( getattr( getattr(INFO, kindOfBox), INFO.method), 'V')  
+#col            = 0
+#M_H, M_V       = getattr(OM, 'MH'+ str(col)), getattr( OM, 'MV'+ str(col))
+#WLH, WLV       = getattr(OH, 'WL'+ str(col)).WL, getattr(OV, 'WL'+ str(col)).WL
+#boxL_H, boxL_V = TF.findStartAndEnd(M_H[:, 3], WLH, 3), TF.findStartAndEnd(M_V[:, 3], WLV, 3)
 
 #boxL_H, boxL_V = [], []
 
@@ -382,7 +383,7 @@ boxL_H, boxL_V = TF.findStartAndEnd(M_H[:, 3], WLH, 3), TF.findStartAndEnd(M_V[:
 #   if M_H[ii][2]   
 
 
-rLt, rL, rLn   = TF.getBoxes(boxL_H, boxL_V)    
+#rLt, rL, rLn   = TF.getBoxes(boxL_H, boxL_V)    
 
 
 
